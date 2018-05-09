@@ -1,0 +1,27 @@
+<ion-content padding>
+    <h6 text-uppercase>Gemmes</h6>
+    <div class="hint">U.G. : Unité Goltor</div>
+    <br>
+    <form [formGroup]="gemsForm">
+      <div class="row" *ngFor="let gem of gemsForm.controls; let i = index" [formGroupName]="i" margin-bottom>
+        <label for="nom{{i}}">Nom :</label>
+        <input
+          id="nom{{i}}"
+          text-capitalize
+          class="name-input"
+          type="text"
+          formControlName="nom"
+          (blur)="saveData()"
+          (keydown.enter)="saveData()">
+        <label for ="ug{{i}}">U.G. :</label>
+        <input
+          id="ug{{i}}"
+          text-center
+          class="num-input"
+          type="number"
+          formControlName="ug"
+          (blur)="saveData()"
+          (keydown.enter)="saveData()">
+      </div>
+    </form>
+</ion-content>

@@ -1,0 +1,45 @@
+camp {
+    label {
+        font-weight: bold;
+    }
+    
+    input {
+        border-bottom: 1px solid black;
+    }
+
+    .label-row {
+        display: flex;
+        justify-content: space-between;
+
+        label:first-child {
+            // Fix this (check different display)
+            width: 32%;
+        }
+    }
+
+    .row {
+        display: flex;
+        justify-content: space-between;
+
+        input {
+            &:nth-child(2), &:nth-child(4), &:nth-child(6) {
+                width: 10%;
+            }
+        }
+    }
+
+    .last-row {
+        display: flex;
+        justify-content: space-between;
+
+        input {
+            &:first-child {
+                width: 80%;
+            }
+
+            &:nth-child(2) {
+                width: 10%;
+            }
+        }
+    }
+}

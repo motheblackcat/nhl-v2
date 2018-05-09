@@ -1,0 +1,8 @@
+{
+  "name": "Nhl-v2-io",
+  "app_id": "",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}

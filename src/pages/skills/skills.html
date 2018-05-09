@@ -1,0 +1,29 @@
+<!-- Should the skill be a list instead of an input? -->
+<ion-content padding>
+  <h6 text-uppercase>compétences</h6>
+  <br>
+  <div>
+    <ion-icon name="add-circle" margin-right (click)="skill.focus()"></ion-icon>
+    <input
+      #skill
+      text-capitalize
+      margin-bottom      
+      id="add-input"
+      type="text"
+      placeholder="Ajouter une compétence"
+      [(ngModel)]="dataStorage.input"
+      (blur)="addItem(skill.value)"
+      (keydown.enter)="addItem(skill.value)">
+  </div>
+  <div *ngFor="let skill of skills">
+    <ion-icon name="trash" margin-right (click)="deleteItem(skill)"></ion-icon>
+    <input
+      #skillInput
+      text-capitalize
+      margin-bottom
+      type="text"
+      [value]="skill"
+      (blur)="updateItem(skill, skillInput.value)"
+      (keydown.enter)="updateItem(skill, skillInput.value)">
+  </div>
+</ion-content>

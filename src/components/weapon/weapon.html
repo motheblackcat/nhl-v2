@@ -1,0 +1,31 @@
+<ion-content padding>
+    <h6 text-uppercase>armement et baston</h6>
+    <br>
+    <form [formGroup]="weaponsForm">
+        <!-- DRY, should use *ngFor -->
+        <h6>Arme Principale :</h6>
+        <div class="line" formGroupName="weapon1">
+            <input formControlName="name" placeholder="Nom" (blur)="addWeapon()" text-capitalize>
+            <input formControlName="pi" placeholder="P.I." (blur)="addWeapon()" text-uppercase>
+            <input formControlName="rup" placeholder="RUP" (blur)="addWeapon()">
+        </div>
+        <br>
+        <h6>Arme Secondaire :</h6>
+        <div class="line" formGroupName="weapon2">
+            <input formControlName="name" placeholder="Nom" (blur)="addWeapon()" text-capitalize>
+            <input formControlName="pi" placeholder="P.I." (blur)="addWeapon()" text-uppercase>
+            <input formControlName="rup" placeholder="RUP" (blur)="addWeapon()">
+        </div>
+        <br>
+        <h6>Arme Supplémentaire :</h6>
+        <div class="line" formGroupName="weapon3">
+            <input formControlName="name" placeholder="Nom" (blur)="addWeapon()" text-capitalize>
+            <input formControlName="pi" placeholder="P.I." (blur)="addWeapon()" text-uppercase>
+            <input formControlName="rup" placeholder="RUP" (blur)="addWeapon()">
+        </div>
+        <br>
+    </form>
+    <br>
+    <div class="hint">P.I. : Points d'impacts, dégâts infligés.</div>
+    <div class="hint">RUP. : Points de rupture.</div>
+</ion-content>

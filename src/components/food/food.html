@@ -1,0 +1,27 @@
+<ion-content padding>
+	<h6 text-uppercase>Bouffe et boisson</h6>
+	<br>
+	<div>
+	<ion-icon name="add-circle" margin-right class="add-icon" (click)="item.focus()"></ion-icon>
+	<input
+		#item
+		text-capitalize
+		margin-bottom
+		type="text"
+		placeholder="Ajouter un aliment ou une boisson"
+		[(ngModel)]="dataStorage.input"
+		(blur)="addItem(item.value)"
+		(keydown.enter)="addItem(item.value)">
+	</div>
+	<div *ngFor="let item of food">
+	<ion-icon name="trash" margin-right (click)="deleteItem(item)"></ion-icon>
+	<input
+		#itemInput
+		text-capitalize
+		margin-bottom
+		type="text"
+		[value]="item"
+		(blur)="updateItem(item, itemInput.value)"
+		(keydown.enter)="updateItem(item, itemInput.value)">
+	</div>
+</ion-content>

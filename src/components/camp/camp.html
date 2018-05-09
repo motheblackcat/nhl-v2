@@ -1,0 +1,47 @@
+<ion-content padding>
+    <h6 text-uppercase>Matériel de Bivouac et Camping</h6>
+    <div class="hint" margin-bottom>Récup.: Récupération PV</div>
+    <br>
+    <div [formGroup]="campForm">
+      <div formArrayName="material">
+        <div *ngFor="let item of material.controls; let i = index">
+          <div [formGroupName]="i">
+            <div class="label-row">
+              <label>{{ labels[i] }}</label>
+              <label>Récup.</label>
+              <label>Poids</label>
+            </div>
+            <br>
+            <div class="row">
+              <input margin-right text-capitalize type="text" formControlName="name" (blur)="saveData()" (keydown.enter)="saveData()">
+              <input text-center type="number" formControlName="pv" (blur)="saveData()" (keydown.enter)="saveData()">
+              <span text-center>PV /</span>
+              <input text-center type="number" formControlName="hour" (blur)="saveData()" (keydown.enter)="saveData()">
+              <span margin-right text-center>H</span>
+              <input text-center type="text" formControlName="weight" (blur)="saveData()" (keydown.enter)="saveData()">
+            </div>
+          </div>
+          <br>
+        </div>
+      </div>
+      <br>
+      <div class="label-row">
+        <label class="col-xs-4 item">Nom</label>
+        <label class="col-xs-8 text-right weight">Poids</label>
+      </div>
+      <br>
+      <div formArrayName="list">
+        <div *ngFor="let item of list.controls; let i = index">
+          <div [formGroupName]="i" class="last-row">
+            <input text-capitalize type="text" formControlName="name" (blur)="saveData()" (keydown.enter)="saveData()">
+            <input text-center type="number" formControlName="weight" (blur)="saveData()" (keydown.enter)="saveData()">
+          </div>
+          <br>
+        </div>
+      </div>
+      <br>
+      <div text-right>
+        <label>Poids Total: {{ total }} Kg</label>
+      </div>
+    </div>
+</ion-content>

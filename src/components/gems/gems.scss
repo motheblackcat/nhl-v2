@@ -1,0 +1,18 @@
+gems {
+    input {
+        border-bottom: 1px solid black;
+    }
+
+    .row {
+        display: flex;
+        justify-content: space-between;
+
+        .name-input {
+            width: 55%;
+        }
+
+        .num-input {
+            width: 15%;
+        }
+    }
+}

@@ -1,0 +1,16 @@
+special {
+    .row {
+        margin-bottom: 5px;
+    }
+    
+    label {
+        display: inline-block;
+        width: 30%;
+        font-weight: 450;
+    }
+
+    input {
+        width: 65%;
+        border-bottom: 1px solid black;
+    }
+}

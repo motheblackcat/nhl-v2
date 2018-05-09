@@ -1,0 +1,51 @@
+page-char {
+    .container {
+        display: flex;
+        flex-direction: column;
+
+        .stats {
+            display: flex;
+
+            label {
+                width: 50%;
+            }
+
+            label, input {
+                margin-bottom: 15px;
+            }
+        }
+
+        .gender {
+            display: flex;
+            order: 4;
+
+            label:first-child {
+                width: 50%;
+                margin-bottom: 15px;
+            }
+
+            label:nth-child(n + 2) {
+                width: 25%;                
+            }
+
+            ion-icon {
+                color: rgba(60, 60, 60, 0.7);
+                font-size: 1.5em;
+            }
+
+            input {
+                display: none;
+            }
+
+            .selected {
+                color: black;
+            }
+        }
+
+        .gold {
+            order: 8;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+    }
+}

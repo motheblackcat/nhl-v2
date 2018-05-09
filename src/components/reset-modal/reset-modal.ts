@@ -7,6 +7,6 @@ import { ViewController } from 'ionic-angular';
   templateUrl: 'reset-modal.html'
 })
 export class ResetModalComponent {
-  constructor(private dataService: DataProvider, private viewCtrl: ViewController) { }
+  constructor(public dataService: DataProvider, public viewCtrl: ViewController) { }
 
 }

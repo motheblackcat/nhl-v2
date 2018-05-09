@@ -27,6 +27,8 @@ import { SpecialComponent } from '../components/special/special';
 import { ResetPage } from '../pages/reset/reset';
 import { ResetModalComponent } from '../components/reset-modal/reset-modal';
 
+import { Vibration } from '@ionic-native/vibration';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -81,7 +83,8 @@ import { ResetModalComponent } from '../components/reset-modal/reset-modal';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    DataProvider
+    DataProvider,
+    Vibration
   ]
 })
 export class AppModule {}

@@ -12,6 +12,6 @@ export class ResetPage {
 
   openModal() {
     this.pop.create(ResetModalComponent).present();
-    this.vibration.vibrate(1000);
+    this.vibration.vibrate(500);
   }
 }

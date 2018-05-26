@@ -13,14 +13,13 @@
         (blur)="saveData()"
         (keydown.enter)="saveData()">
     </div>
-    <!-- Only icon for selection can be used. -->
     <div class="gender">
-      <label>Sexe:</label>
+      <label>Sexe :</label>
       <label for="gen2"><ion-icon name="male" [class.selected]="gen2.checked"></ion-icon></label>
       <input #gen2 id="gen2" type="radio" value="male" name="gen" formControlName="gen" (change)="saveData()">
       <label for="gen1"><ion-icon name="female" [class.selected]="gen1.checked"></ion-icon></label>
       <input #gen1 id="gen1" type="radio" value="female" name="gen" formControlName="gen" (change)="saveData()">
     </div>
-    <span class="gold">Mes richesses à moi que j'ai:</span>
+    <span class="gold">Mes richesses à moi que j'ai :</span>
   </div>
 </ion-content>

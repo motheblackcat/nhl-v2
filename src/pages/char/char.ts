@@ -9,17 +9,17 @@ import { DataProvider } from '../../providers/data/data';
 export class CharPage {
   charForm: FormGroup;
   charControls: Array<Object> = [
-    { label: 'Nom:', placeholder: 'Nom', control: 'name', type: 'text', order: '1' },
-    { label: 'Origine:', placeholder: 'Origine', control: 'ori', type: 'text', order: '2' },
-    { label: 'Métier(s):', placeholder: 'Métiers', control: 'job', type: 'text', order: '3' },
-    { label: 'Niveau:', placeholder: '0', control: 'niv', type: 'number', order: '5' },
-    { label: 'Expérience (XP):', placeholder: '0', control: 'xp', type: 'number', order: '6' },
-    { label: 'Point de Destin:', placeholder: '0', control: 'dp', type: 'number', order: '7' },
-    { label: 'Berylium:', placeholder: '0', control: 'ber', type: 'number', order: '9'},
-    { label: 'Thritil:', placeholder: '0', control: 'thi', type: 'number', order: '10' },
-    { label: 'Or:', placeholder: '0', control: 'gol', type: 'number', order: '11' },
-    { label: 'Argent:', placeholder: '0', control: 'sil', type: 'number', order: '12' },
-    { label: 'Cuivre:', placeholder: '0', control: 'cop', type: 'number', order: '13' }
+    { label: 'Nom :', placeholder: 'Nom', control: 'name', type: 'text', order: '1' },
+    { label: 'Origine :', placeholder: 'Origine', control: 'ori', type: 'text', order: '2' },
+    { label: 'Métier(s) :', placeholder: 'Métiers', control: 'job', type: 'text', order: '3' },
+    { label: 'Niveau :', placeholder: '0', control: 'niv', type: 'number', order: '5' },
+    { label: 'Expérience (XP) :', placeholder: '0', control: 'xp', type: 'number', order: '6' },
+    { label: 'Point de Destin :', placeholder: '0', control: 'dp', type: 'number', order: '7' },
+    { label: 'Berylium :', placeholder: '0', control: 'ber', type: 'number', order: '9'},
+    { label: 'Thritil :', placeholder: '0', control: 'thi', type: 'number', order: '10' },
+    { label: 'Or :', placeholder: '0', control: 'gol', type: 'number', order: '11' },
+    { label: 'Argent :', placeholder: '0', control: 'sil', type: 'number', order: '12' },
+    { label: 'Cuivre :', placeholder: '0', control: 'cop', type: 'number', order: '13' }
   ];
 
   constructor(private fb: FormBuilder, private dataStorage: DataProvider) {

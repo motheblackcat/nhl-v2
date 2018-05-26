@@ -15,8 +15,32 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
+@font-face {
+    font-family: 'folkard';
+    src: url('../assets/fonts/folkard.ttf');
+}
+
+@font-face {
+    font-family: 'dauphin';
+    src: url('../assets/fonts/dauphin.ttf');
+}
+
+.content {
+    background-color: #efeee6;
+}
+
+h6 {
+    font-family: 'foldkard';
+}
+
+div {
+    font-family: 'dauphin';
+    font-weight: 600;
+}
+
 input {
     border: 0;
+    background: none;
 }
 
 .hint {

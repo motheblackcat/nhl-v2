@@ -1,7 +1,7 @@
 <ion-content padding>
 	<ion-grid no-padding>
 		<ion-row text-center>
-			<ion-col col-12><h6>Hey mollo !</h6></ion-col>
+			<ion-col col-12><div class="title">Hey mollo !</div></ion-col>
 	</ion-row>
 		<ion-row text-center>
 			<ion-col col-12>T'es vraiment sûre de vouloir tout effacer ?</ion-col>
@@ -12,7 +12,7 @@
 				<button ion-button color="danger" (click)="dataService.clearData(); viewCtrl.dismiss()">OUAI !</button>
 			</ion-col>
 			<ion-col col-6>
-				<button ion-button color="light" (click)="viewCtrl.dismiss()">NAN !</button>
+				<button ion-button color="grey" (click)="viewCtrl.dismiss()">NAN !</button>
 			</ion-col>
 		</ion-row>
 	</ion-grid>

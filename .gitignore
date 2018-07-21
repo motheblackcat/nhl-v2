@@ -30,6 +30,7 @@ plugins/ios.json
 www/
 $RECYCLE.BIN/
 resources/
+*.apk
 *.jks
 
 .DS_Store

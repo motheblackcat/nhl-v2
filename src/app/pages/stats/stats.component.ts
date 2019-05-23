@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
+import { labels, magLabels } from '../../models/labels';
 import { NotifierService } from 'src/app/services/notifier.service';
 
 @Component({
@@ -10,25 +11,11 @@ import { NotifierService } from 'src/app/services/notifier.service';
 })
 export class StatsComponent implements OnInit {
   statsForm: FormGroup;
-  labels: Array<any> = [
-    { control: 'ev', label: 'Energie Vitale (EV)', placeholder: '0', effect: '' },
-    { control: 'ea', label: 'Energie Astrale (EA)', placeholder: '0', effect: '' },
-    { control: 'cou', label: 'Courage (COU)', placeholder: '0', effect: '' },
-    { control: 'int', label: 'Intelligence (INT)', placeholder: '0', effect: '' },
-    { control: 'cha', label: 'Charisme (CHA)', placeholder: '0', effect: '' },
-    { control: 'ad', label: 'Adresse (AD)', placeholder: '0', effect: '' },
-    { control: 'fo', label: 'Force (FO)', placeholder: '0', effect: '' },
-    { control: 'atq', label: 'ATTAQUE (ATQ)', placeholder: '0', effect: '' },
-    { control: 'prd', label: 'PARADE (PRD)', placeholder: '0', effect: '' }
-  ];
-  magLabels: Array<any> = [
-    { label: 'Magie Phy.', hint: 'Moyenne INT et AD', value: 0 },
-    { label: 'Magie Psy.', hint: 'Moyenne INT et CHA', value: 0 },
-    { label: 'Résist. Mag.', hint: 'Moyenne COU, INT et FO', value: 0 }
-  ];
-  
+  labels = labels;
+  magLabels = magLabels;
+
   constructor(private fb: FormBuilder, private notify: NotifierService) {}
-  
+
   ngOnInit(): void {
     this.createForm();
     if (localStorage.getItem('statsData')) {
@@ -40,17 +27,15 @@ export class StatsComponent implements OnInit {
       this.checkStats();
     });
 
-    this.notify.reset.subscribe((res) => {
+    this.notify.reset.subscribe(res => {
       if (res) {
         this.statsForm.reset();
         // Labels are not cleared on the first reset
-        this.labels.forEach(stat => {
+        labels.forEach(stat => {
           stat.effect = '';
         });
         this.checkStats();
-        console.log(this.labels, res)
         this.notify.reset.next(false);
-        console.log(res)
       }
     });
   }
@@ -82,7 +67,7 @@ export class StatsComponent implements OnInit {
     let ad = this.statsForm.get('ad').value;
     let fo = this.statsForm.get('fo').value;
 
-    const effects = this.labels.filter(label => label.effect);
+    const effects = labels.filter(label => label.effect);
     effects.forEach(effect => {
       switch (effect.control) {
         case 'cou':
@@ -103,7 +88,7 @@ export class StatsComponent implements OnInit {
       }
     });
 
-    this.magLabels.forEach(stat => {
+    magLabels.forEach(stat => {
       switch (stat.label) {
         case 'Magie Phy.':
           stat.value = Math.ceil((int + ad) / 2);
@@ -125,25 +110,33 @@ export class StatsComponent implements OnInit {
     let weapons;
     const effectsArray = [];
 
-    this.labels.forEach(stat => {
+    labels.forEach(stat => {
       stat.effect = '';
     });
-    
+
     if (localStorage.getItem('weaponData')) {
-      weapons = ((Object.values(JSON.parse(localStorage.getItem('weaponData')))) as Array<any>).filter(weapon => weapon.check);
+      weapons = (Object.values(
+        JSON.parse(localStorage.getItem('weaponData'))
+      ) as Array<any>).filter(weapon => weapon.equ);
     }
 
     if (weapons) {
       weapons.forEach(weapon => {
-        weapon.ef.forEach(effect => {          
-          effectsArray.push({control: effect.split(' ')[0], val: `${effect.split(' ')[1]} ${effect.split(' ')[2]}` })
+        weapon.ef.forEach(effect => {
+          effectsArray.push({
+            control: effect.split(' ')[0],
+            val: `${effect.split(' ')[1]} ${effect.split(' ')[2]}`
+          });
         });
       });
 
-      for (let label of this.labels) {
+      for (let label of labels) {
         for (let effect of effectsArray) {
           if (label.control.toUpperCase() === effect.control.toUpperCase()) {
-            label.effect = label.effect === '' ? effect.val : eval(label.effect + effect.val);
+            label.effect =
+              label.effect === ''
+                ? effect.val
+                : eval(label.effect + effect.val);
           }
         }
       }

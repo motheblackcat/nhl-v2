@@ -1,0 +1,13 @@
+<!-- MAKE IT SO ITEMS CAN BE ADDED REMOVED -->
+<ion-content>
+  <ion-grid padding [formGroup]="gemsForm">
+    <ion-row><ion-col><h6 text-uppercase>gemmes et pierres précieuses</h6></ion-col></ion-row>
+    <ion-row margin-bottom ><ion-col><label class="hint">u. g. : unité goltor</label></ion-col></ion-row>
+    <ion-row margin-bottom *ngFor="let gem of gemsForm.controls; let i = index" [formGroupName]="i">
+      <ion-col size="2"><label for="nom{{i}}">nom :</label></ion-col>
+      <ion-col size ="6"><input id="nom{{i}}" type="text" formControlName="nom" (blur)="saveData()" (keydown.enter)="saveData()"></ion-col>
+      <ion-col size="2"><label for ="ug{{i}}">u.g. :</label></ion-col>
+      <ion-col size="2"><input id="ug{{i}}" type="number" formControlName="ug" (blur)="saveData()" (keydown.enter)="saveData()"></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

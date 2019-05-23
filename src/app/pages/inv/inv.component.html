@@ -1,0 +1,8 @@
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button no-padding *ngFor="let button of config" [tab]=button.tab>
+      <ion-icon [name]=button.icon></ion-icon>
+      <ion-label>{{ button.label }}</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

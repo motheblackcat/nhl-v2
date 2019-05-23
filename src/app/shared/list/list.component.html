@@ -1,0 +1,28 @@
+<ion-content>
+  <ion-grid padding>
+    <ion-row>
+      <ion-col><h6 text-uppercase>{{ config.title }}</h6></ion-col>
+    </ion-row>
+    <ion-row *ngIf="config.subtitle" padding-bottom>
+        <ion-col><label class="hint">{{ config.subtitle }}</label></ion-col>
+      </ion-row>
+    <ion-row>
+      <ion-col size="1"><ion-icon name="add-circle-outline" margin-right (click)="item.focus()"></ion-icon></ion-col>
+      <ion-col>
+          <input
+              #item
+              text-capitalize
+              margin-bottom      
+              type="text"
+              placeholder="{{ config.placeholder }}"
+              (blur)="addSkill(item)"
+              (keydown.enter)="addSkill(item)">
+      </ion-col>
+    </ion-row>
+    <!-- CHANGE WITH INPUT TO MODIFY ITEM -->
+    <ion-row *ngFor="let item of items">
+      <ion-col size="1"><ion-icon name="close" margin-right (click)="deleteSkill(item)"></ion-icon></ion-col>
+      <ion-col><label text-capitalize>{{ item }}</label></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

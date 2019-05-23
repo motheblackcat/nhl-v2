@@ -1,0 +1,12 @@
+<!-- MAKE IT SO ITEMS CAN BE ADDED REMOVED -->
+<ion-content>
+  <ion-grid padding [formGroup]="potionsForm">
+    <ion-row><ion-col><h6 text-uppercase>Potions, poisons, antidotes et ingredients magiques</h6></ion-col></ion-row>
+    <ion-row margin-bottom *ngFor="let potion of potionsForm.controls; let i = index" [formGroupName]="i">
+      <ion-col size="2"><label for="nb{{i}}">doses:</label></ion-col>
+      <ion-col size="2"><input id="nb{{i}}" type="number" formControlName="dose" (blur)="saveData()" (keydown.enter)="saveData()"></ion-col>
+      <ion-col size="2"><label  for ="ef{{i}}">effets:</label></ion-col>
+      <ion-col size="6"><input id="ef{{i}}" type="text" formControlName="effet" (blur)="saveData()" (keydown.enter)="saveData()"></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

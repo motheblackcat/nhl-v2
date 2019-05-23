@@ -1,0 +1,33 @@
+<ion-content>
+  <ion-grid padding [formGroup]="bagsForm">
+    <ion-row>
+      <ion-col><h6 text-uppercase>sacs et transport</h6></ion-col>
+    </ion-row>
+    <ion-row padding-bottom>
+      <ion-col size="8"><label class="hint">charge max. origine / métier :</label></ion-col>
+      <ion-col size="2"><input type="number" formControlName="poidsmax" (blur)="saveData()" (keydown.enter)="saveData()"></ion-col>
+      <ion-col size="2"><label>Kg</label></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="8"><h6 text-capitalize>sac</h6></ion-col>
+      <ion-col size="4"><h6 text-capitalize>poids Max.</h6></ion-col>
+    </ion-row>
+    <ng-container formArrayName="sacs">
+      <ion-row *ngFor="let sac of sacs.controls; let i = index" [formGroupName]="i">
+        <ion-col size="8"><input type="text" formControlName="nom" (blur)="saveData()" (keydown.enter)="saveData()"></ion-col>
+        <ion-col size="3"><input type="number" formControlName="chargemax" (blur)="saveData()" (keydown.enter)="saveData()"></ion-col>
+        <ion-col size="1"><label>kg</label></ion-col>
+      </ion-row>
+    </ng-container>
+    <ion-row padding-top>
+      <ion-col size="8"><h6 text-capitalize>bourses</h6></ion-col>
+      <ion-col size="4"><h6 text-capitalize>p. o. max.</h6></ion-col>
+    </ion-row>
+    <ng-container formArrayName="bourses">
+      <ion-row [formGroupName]="i" *ngFor="let sac of sacs.controls; let i = index">
+        <ion-col size="8"><input type="text" formControlName="nom" (blur)="saveData()" (keydown.enter)="saveData()"></ion-col>
+        <ion-col size="3"><input type="number" formControlName="chargemax" (blur)="saveData()" (keydown.enter)="saveData()"></ion-col>
+      </ion-row>
+    </ng-container>
+  </ion-grid>
+</ion-content>

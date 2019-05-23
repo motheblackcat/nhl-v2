@@ -1,7 +1,5 @@
 {
-  "name": "Nhl-v2-io",
-  "integrations": {
-    "cordova": {}
-  },
-  "type": "ionic-angular"
+  "name": "Nhl-v2.1",
+  "integrations": {},
+  "type": "angular"
 }

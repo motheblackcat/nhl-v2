@@ -1,0 +1,36 @@
+<ion-content>
+  <ion-grid padding [formGroup]="campForm">
+    <ion-row><ion-col><h6 text-uppercase>Materiel de Bivouac et Camping</h6></ion-col></ion-row>
+    <ion-row padding-bottom><ion-col><label class="hint">Récup. : Récupération PV</label></ion-col></ion-row>
+    <ng-container formArrayName="material">
+      <ng-container *ngFor="let item of material.controls; let i = index" [formGroupName]="i">
+          <ion-row>
+            <ion-col size="5"><h6 text-capitalize>{{ labels[i] }}</h6></ion-col>
+            <ion-col size="5"><h6 text-capitalize>Récup.</h6></ion-col>
+            <ion-col size="2"><h6 text-capitalize>Poids</h6></ion-col>
+          </ion-row>
+          <ion-row padding-bottom>
+            <ion-col size="5"><input type="text" formControlName="name" (blur)="saveData()" (keydown.enter)="saveData()"></ion-col>
+            <ion-col size="1"><input type="number" formControlName="pv" (blur)="saveData()" (keydown.enter)="saveData()"></ion-col>
+            <ion-col size="2"><label>PV/</label></ion-col>
+            <ion-col size="1"><input type="number" formControlName="hour" (blur)="saveData()" (keydown.enter)="saveData()"></ion-col>
+            <ion-col size="1"><label>h</label></ion-col>
+            <ion-col size="1"><input type="text" formControlName="weight" (blur)="saveData()" (keydown.enter)="saveData()"></ion-col>
+            <ion-col size="1"><label>kg</label></ion-col>
+          </ion-row>
+        </ng-container>
+        </ng-container>
+        <ion-row>
+          <ion-col size="8"><h6 text-capitalize>nom</h6></ion-col>
+          <ion-col size="4"><h6 text-capitalize>poids</h6></ion-col>
+        </ion-row>
+        <ng-container formArrayName="list">
+          <ion-row *ngFor="let item of list.controls; let i = index" [formGroupName]="i">
+            <ion-col size="8"><input type="text" formControlName="name" (blur)="saveData()" (keydown.enter)="saveData()"></ion-col>
+            <ion-col size="3"><input type="number" formControlName="weight" (blur)="saveData()" (keydown.enter)="saveData()"></ion-col>
+            <ion-col size="1"><label>kg</label></ion-col>
+          </ion-row>
+        </ng-container>
+        <ion-row padding-top><ion-col text-right><label>poids total: {{ total }} kg</label></ion-col></ion-row>
+  </ion-grid>
+</ion-content>

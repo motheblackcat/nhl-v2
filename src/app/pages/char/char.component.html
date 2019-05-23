@@ -1,0 +1,27 @@
+<ion-content>
+  <ion-grid [formGroup]="charForm" padding fxLayout="column">
+    <ion-row><ion-col><h6 text-uppercase>personnage</h6></ion-col></ion-row>
+    <ion-row *ngFor="let control of charControls" fxFlexOrder="{{ control.order }}">
+      <ion-col [class.subtitle]="control.control === 'none'"><label for="{{ control.control }}">{{ control.label }}</label></ion-col>
+      <ion-col *ngIf="control.control !== 'none'">
+        <input  [id]="control.control"
+                [type]="control.type"
+                [placeholder]="control.placeholder"
+                [formControlName]="control.control"
+                (blur)="saveData()"
+                (keydown.enter)="saveData()">
+      </ion-col>
+    </ion-row>
+    <ion-row fxFlexOrder="4">
+      <ion-col size="6"><label>sexe :</label></ion-col>
+      <ion-col size="3">
+        <label for="gen2"><ion-icon name="male" [class.selected]="gen2.checked"></ion-icon></label>
+        <input fxHide #gen2 id="gen2" type="radio" value="male" name="gen" formControlName="gen" (change)="saveData()">
+      </ion-col>
+      <ion-col size="3">
+        <label for="gen1"><ion-icon name="female" [class.selected]="gen1.checked"></ion-icon></label>
+        <input fxHide #gen1 id="gen1" type="radio" value="female" name="gen" formControlName="gen" (change)="saveData()">
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

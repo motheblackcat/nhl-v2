@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
-import { labels, magLabels } from '../../models/labels';
+import { statsLabels, magLabels } from '../../models/labels';
 import { NotifierService } from 'src/app/services/notifier.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { NotifierService } from 'src/app/services/notifier.service';
 })
 export class StatsComponent implements OnInit {
   statsForm: FormGroup;
-  labels = labels;
+  statsLabels = statsLabels;
   magLabels = magLabels;
 
   constructor(private fb: FormBuilder, private notify: NotifierService) {}
@@ -31,7 +31,7 @@ export class StatsComponent implements OnInit {
       if (res) {
         this.statsForm.reset();
         // Labels are not cleared on the first reset
-        labels.forEach(stat => {
+        statsLabels.forEach(stat => {
           stat.effect = '';
         });
         this.checkStats();
@@ -67,7 +67,7 @@ export class StatsComponent implements OnInit {
     let ad = this.statsForm.get('ad').value;
     let fo = this.statsForm.get('fo').value;
 
-    const effects = labels.filter(label => label.effect);
+    const effects = statsLabels.filter(label => label.effect);
     effects.forEach(effect => {
       switch (effect.control) {
         case 'cou':
@@ -110,7 +110,7 @@ export class StatsComponent implements OnInit {
     let weapons;
     const effectsArray = [];
 
-    labels.forEach(stat => {
+    statsLabels.forEach(stat => {
       stat.effect = '';
     });
 
@@ -130,8 +130,8 @@ export class StatsComponent implements OnInit {
         });
       });
 
-      for (let label of labels) {
-        for (let effect of effectsArray) {
+      for (const label of statsLabels) {
+        for (const effect of effectsArray) {
           if (label.control.toUpperCase() === effect.control.toUpperCase()) {
             label.effect =
               label.effect === ''

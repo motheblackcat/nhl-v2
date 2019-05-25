@@ -10,13 +10,17 @@ import { NotifierService } from 'src/app/services/notifier.service';
   styleUrls: ['./reset.component.scss']
 })
 export class ResetComponent {
-
-  constructor(public modal: ModalController, private toast: ToastController, private notify: NotifierService) { }
+  constructor(
+    public modal: ModalController,
+    private toast: ToastController,
+    private notify: NotifierService
+  ) {}
 
   async presentToast(): Promise<any> {
     const toast = await this.toast.create({
       message: 'Toutes les données ont été effacées !',
-      duration: 2000
+      duration: 2000,
+      position: 'top'
     });
     toast.present();
   }

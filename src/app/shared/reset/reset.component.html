@@ -1,10 +1,24 @@
 <ion-content>
   <ion-grid padding>
-    <ion-row><ion-col><h6 text-uppercase>remise a zéro</h6></ion-col></ion-row>
-    <ion-row padding-bottom><ion-col><span>Hey mollo ! T'es sûre que tu veux tout effacer ?</span></ion-col></ion-row>
+    <ion-row
+      ><ion-col><h6 text-uppercase>remise a zéro</h6></ion-col></ion-row
+    >
+    <ion-row padding-bottom
+      ><ion-col
+        ><span>Hey mollo ! T'es sûre que tu veux tout effacer ?</span></ion-col
+      ></ion-row
+    >
     <ion-row>
-      <ion-col><ion-button text-uppercase color="danger" (click)="reset()">ouai !</ion-button></ion-col>
-      <ion-col text-right><ion-button text-uppercase color="medium" (click)="modal.dismiss()">nan !</ion-button></ion-col>
+      <ion-col
+        ><ion-button text-uppercase color="medium" (click)="modal.dismiss()"
+          >nan !</ion-button
+        ></ion-col
+      >
+      <ion-col text-right
+        ><ion-button text-uppercase color="danger" (click)="reset()"
+          >ouai !</ion-button
+        ></ion-col
+      >
     </ion-row>
   </ion-grid>
 </ion-content>

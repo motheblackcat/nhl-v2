@@ -11,43 +11,34 @@
 @import '~@ionic/angular/css/flex-utils.css';
 
 @font-face {
-    font-family: 'folkard';
-    src: url('assets/fonts/folkard.ttf');
+  font-family: 'dauphin';
+  src: url('assets/fonts/dauphin.ttf');
 }
 
-@font-face {
-    font-family: 'dauphin';
-    src: url('assets/fonts/dauphin.ttf');
-}
-
+body,
 ion-content {
-    // Not working on content, need to use themeing
-    background-color: #efeee6;
+  font-family: 'dauphin';
+  font-weight: bold;
 }
 
 h6 {
-    font-family: 'folkard';
-    font-weight: bold;
+  font-size: 1.3em;
+  font-weight: bold;
 }
 
-label, input, ion-label {
-    border: 0;
-    background: none;
-    font-family: 'dauphin';
-    text-transform: capitalize;
-    font-weight: 600;
-}
-
-span {
-    font-family: 'dauphin';
-    font-weight: 600;
+label,
+input,
+ion-label {
+  border: 0;
+  background: none;
+  text-transform: capitalize;
 }
 
 input {
-    width: 100%;
+  width: 100%;
 }
 
 .hint {
-    font-size: 0.9em;
-    font-style: italic;
+  font-size: 0.9em;
+  font-style: italic;
 }

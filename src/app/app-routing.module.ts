@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { TabsComponent } from './shared/tabs/tabs.component';
+import { FabComponent } from './shared/fab/fab.component';
 
 import { CharComponent } from './pages/char/char.component';
 import { StatsComponent } from './pages/stats/stats.component';
@@ -17,146 +18,141 @@ import { GemsComponent } from './pages/inv/gems/gems.component';
 import { PotionsComponent } from './pages/inv/potions/potions.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'tabs/char', pathMatch: 'full' },
+  { path: '', redirectTo: 'char', pathMatch: 'full' },
   {
-    path: 'tabs',
-    component: TabsComponent,
+    path: 'char',
+    component: CharComponent,
+    data: {
+      title: 'personnage',
+      targetForm: 'charForm'
+    }
+  },
+  {
+    path: 'stats',
+    component: StatsComponent,
+    data: {
+      title: 'statistiques',
+      targetForm: 'statsForm'
+    }
+  },
+  {
+    path: 'skills',
+    component: ListComponent,
+    data: {
+      title: 'compétences',
+      placeholder: 'Ajouter une compétence.',
+      targetForm: 'skillsForm'
+    }
+  },
+  {
+    path: 'equip',
+    component: EquipComponent,
     children: [
+      { path: '', redirectTo: 'weapon', pathMatch: 'full' },
       {
-        path: 'char',
-        component: CharComponent,
+        path: 'weapon',
+        component: WeaponComponent,
         data: {
-          title: 'personnage',
-          targetForm: 'charForm'
+          title: 'armement et baston',
+          targetForm: 'weaponsForm'
         }
       },
       {
-        path: 'stats',
-        component: StatsComponent,
+        path: 'armor',
+        component: ArmorComponent,
         data: {
-          title: 'statistiques',
-          targetForm: 'statsForm'
+          title: 'armure et protection',
+          targetForm: 'armorsForm'
         }
-      },
-      {
-        path: 'skills',
-        component: ListComponent,
-        data: {
-          title: 'compétences',
-          placeholder: 'Ajouter une compétence.',
-          targetForm: 'skillsForm'
-        }
-      },
-      {
-        path: 'equip',
-        component: EquipComponent,
-        children: [
-          { path: '', redirectTo: 'weapon', pathMatch: 'full' },
-          {
-            path: 'weapon',
-            component: WeaponComponent,
-            data: {
-              title: 'armement et baston',
-              targetForm: 'weaponsForm'
-            }
-          },
-          {
-            path: 'armor',
-            component: ArmorComponent,
-            data: {
-              title: 'armure et protection',
-              targetForm: 'armorsForm'
-            }
-          }
-        ]
-      },
-      {
-        path: 'inv',
-        component: InvComponent,
-        children: [
-          { path: '', redirectTo: 'quest', pathMatch: 'full' },
-          {
-            path: 'quest',
-            component: ListComponent,
-            data: {
-              title: 'objets de quete',
-              placeholder: 'Ajouter un objet de quête.',
-              targetForm: 'questForm'
-            }
-          },
-          {
-            path: 'loot',
-            component: ListComponent,
-            data: {
-              title: 'butin a revendre (ou pas)',
-              subtitle: 'tout ces machins volés sur les innocents, ou récupérés dans des coffres...',
-              placeholder: 'Ajouter du butin.',
-              targetForm: 'lootForm'
-            }
-          },
-          {
-            path: 'bags',
-            component: BagsComponent,
-            data: {
-              title: 'sac et transport',
-              targetForm: 'bagsForm'
-            }
-          },
-          {
-            path: 'camp',
-            component: CampComponent,
-            data: {
-              title: 'materiel de bivouac et camping',
-              targetForm: 'campForm'
-            }
-          },
-          {
-            path: 'food',
-            component: ListComponent,
-            data: {
-              title: 'bouffe et boisson',
-              placeholder: 'Ajouter un aliment / boisson.',
-              targetForm: 'foodForm'
-            }
-          },
-          {
-            path: 'special',
-            component: SpecialComponent,
-            data: {
-              title: 'objets speciaux et reliques',
-              targetForm: 'specialForm'
-            }
-          },
-          {
-            path: 'gems',
-            component: GemsComponent,
-            data: {
-              title: 'gemmes et pierres précieuses',
-              targetForm: 'gemsForm'
-            }
-          },
-          {
-            path: 'potions',
-            component: PotionsComponent,
-            data: {
-              title: 'potions, poisons, antidotes et ingrédients magiques',
-              targetForm: 'potionsForm'
-            }
-          },
-          {
-            path: 'precious',
-            component: ListComponent,
-            data: {
-              title: 'machin precieux',
-              subtitle: 'titres particuliers, montures, habitations, héritages et autre souvenirs...',
-              placeholder: 'Ajouter un objet précieux.',
-              targetForm: 'preciousForm'
-            }
-          }
-        ]
       }
     ]
-  }
+  },
+  {
+    path: 'inv',
+    component: InvComponent,
+    children: [
+      { path: '', redirectTo: 'quest', pathMatch: 'full' },
+      {
+        path: 'quest',
+        component: ListComponent,
+        data: {
+          title: 'objets de quete',
+          placeholder: 'Ajouter un objet de quête.',
+          targetForm: 'questForm'
+        }
+      },
+      {
+        path: 'loot',
+        component: ListComponent,
+        data: {
+          title: 'butin a revendre (ou pas)',
+          subtitle: 'tout ces machins volés sur les innocents, ou récupérés dans des coffres...',
+          placeholder: 'Ajouter du butin.',
+          targetForm: 'lootForm'
+        }
+      },
+      {
+        path: 'bags',
+        component: BagsComponent,
+        data: {
+          title: 'sac et transport',
+          targetForm: 'bagsForm'
+        }
+      },
+      {
+        path: 'camp',
+        component: CampComponent,
+        data: {
+          title: 'materiel de bivouac et camping',
+          targetForm: 'campForm'
+        }
+      },
+      {
+        path: 'food',
+        component: ListComponent,
+        data: {
+          title: 'bouffe et boisson',
+          placeholder: 'Ajouter un aliment / boisson.',
+          targetForm: 'foodForm'
+        }
+      },
+      {
+        path: 'special',
+        component: SpecialComponent,
+        data: {
+          title: 'objets speciaux et reliques',
+          targetForm: 'specialForm'
+        }
+      },
+      {
+        path: 'gems',
+        component: GemsComponent,
+        data: {
+          title: 'gemmes et pierres précieuses',
+          targetForm: 'gemsForm'
+        }
+      },
+      {
+        path: 'potions',
+        component: PotionsComponent,
+        data: {
+          title: 'potions, poisons, antidotes et ingrédients magiques',
+          targetForm: 'potionsForm'
+        }
+      },
+      {
+        path: 'precious',
+        component: ListComponent,
+        data: {
+          title: 'machin precieux',
+          subtitle: 'titres particuliers, montures, habitations, héritages et autre souvenirs...',
+          placeholder: 'Ajouter un objet précieux.',
+          targetForm: 'preciousForm'
+        }
+      }
+    ]
+  },
+  { path: '**', redirectTo: 'char' }
 ];
 
 @NgModule({

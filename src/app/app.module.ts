@@ -11,7 +11,6 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { TabsComponent } from './shared/tabs/tabs.component';
 import { ListComponent } from './shared/list/list.component';
 import { ResetComponent } from './shared/reset/reset.component';
 
@@ -26,11 +25,11 @@ import { CampComponent } from './pages/inv/camp/camp.component';
 import { SpecialComponent } from './pages/inv/special/special.component';
 import { GemsComponent } from './pages/inv/gems/gems.component';
 import { PotionsComponent } from './pages/inv/potions/potions.component';
+import { FabComponent } from './shared/fab/fab.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TabsComponent,
     ListComponent,
     CharComponent,
     StatsComponent,
@@ -43,15 +42,12 @@ import { PotionsComponent } from './pages/inv/potions/potions.component';
     CampComponent,
     SpecialComponent,
     GemsComponent,
-    PotionsComponent
+    PotionsComponent,
+    FabComponent
   ],
   entryComponents: [ResetComponent],
   imports: [BrowserModule, ReactiveFormsModule, FlexLayoutModule, IonicModule.forRoot(), AppRoutingModule],
-  providers: [
-    StatusBar,
-    SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
-  ],
+  providers: [StatusBar, SplashScreen, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -1,8 +1,12 @@
-<ion-tabs>
-  <ion-tab-bar slot="bottom">
-    <ion-tab-button no-padding *ngFor="let button of config" [tab]=button.tab>
-      <ion-icon [name]=button.icon></ion-icon>
-      <ion-label>{{ button.label }}</ion-label>
-    </ion-tab-button>
-  </ion-tab-bar>
-</ion-tabs>
+<ion-fab vertical="bottom" horizontal="start" slot="fixed">
+  <ion-fab-button color="dark">
+    <ion-icon name="cube"></ion-icon>
+  </ion-fab-button>
+
+  <ion-fab-list side="top" id="inv">
+    <ion-fab-button *ngFor="let button of config" routerLink="{{ button.link }}">
+      <ion-icon [name]="button.icon"></ion-icon>
+    </ion-fab-button>
+  </ion-fab-list>
+</ion-fab>
+<ion-router-outlet></ion-router-outlet>

@@ -1,4 +1,4 @@
-<form [formGroup]="mainForm">
+<ion-content padding [formGroup]="mainForm">
   <h3>{{ title }}</h3>
   <label class="hint" *ngIf="subtitle !== ''">{{ subtitle }}</label>
   <br *ngIf="subtitle !== ''" />
@@ -16,4 +16,4 @@
       <input #update type="text" [id]="i" [formControlName]="i" (change)="updateForm(update, i)" />
     </div>
   </ng-container>
-</form>
+</ion-content>

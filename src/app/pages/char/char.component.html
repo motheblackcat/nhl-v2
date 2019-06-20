@@ -1,4 +1,4 @@
-<form [formGroup]="targetForm" (change)="updateForm()">
+<ion-content padding [formGroup]="targetForm" (change)="updateForm()">
   <h3>{{ title }}</h3>
   <div *ngFor="let control of targetForm.controls | keyvalue: defaultOrder" [ngSwitch]="control.key">
     <div *ngIf="control.key === 'berylium'">Mes richesses à moi que j'ai:</div>
@@ -22,4 +22,4 @@
       <input type="radio" id="female" value="female" [formControlName]="control.key" />
     </ng-container>
   </div>
-</form>
+</ion-content>

@@ -1,8 +1,8 @@
 {
   "name": "Nhl-v2.1",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "version": "0.0.2",
+  "author": "Morad EL HAMDOUNI",
+  "homepage": "https://motheblackcat.github.io/home",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

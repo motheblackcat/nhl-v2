@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
-
 import { ModalController } from '@ionic/angular';
 
-import { ResetComponent } from 'src/app/shared/reset/reset.component';
+import { ResetComponent } from '../reset/reset.component';
 
 @Component({
-  selector: 'app-tabs',
-  templateUrl: './tabs.component.html',
-  styleUrls: ['./tabs.component.scss']
+  selector: 'app-fab',
+  templateUrl: './fab.component.html',
+  styleUrls: ['./fab.component.scss']
 })
-export class TabsComponent {
+export class FabComponent {
   constructor(public modalController: ModalController) {}
 
   async presentModal(): Promise<void> {

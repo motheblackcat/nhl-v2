@@ -1,4 +1,4 @@
-<form [formGroup]="targetForm" (change)="updateForm()">
+<ion-content padding [formGroup]="targetForm" (change)="updateForm()">
   <h3>{{ title }}</h3>
   <div *ngFor="let control of targetForm.controls | keyvalue: defaultOrder" [ngSwitch]="control.key">
     <label [for]="control.key" *ngSwitchCase="'ev'">Energie Vitale (EV)</label>
@@ -30,4 +30,4 @@
     <div class="hint" *ngSwitchCase="'magpsy'" margin-bottom>Moyenne INT et CHA</div>
     <div class="hint" *ngSwitchCase="'resmag'">Moyenne COU, INT et FO</div>
   </div>
-</form>
+</ion-content>

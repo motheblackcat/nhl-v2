@@ -1,11 +1,17 @@
-<ion-tabs>
-  <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="equip/weapon">
-      <ion-label>armement et baston</ion-label>
-    </ion-tab-button>
+<ion-fab vertical="bottom" horizontal="start" slot="fixed">
+  <ion-fab-button color="dark">
+    <ion-icon name="flash"></ion-icon>
+  </ion-fab-button>
 
-    <ion-tab-button tab="equip/armor">
-      <ion-label>armure et protection</ion-label>
-    </ion-tab-button>
-  </ion-tab-bar>
-</ion-tabs>
+  <ion-fab-list side="top">
+    <ion-fab-button routerLink="/equip/weapon">
+      <ion-icon name="flash"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-button routerLink="/equip/armor">
+      <ion-icon name="shirt"></ion-icon>
+    </ion-fab-button>
+  </ion-fab-list>
+</ion-fab>
+
+<ion-router-outlet></ion-router-outlet>

@@ -1,0 +1,31 @@
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button color="dark">
+    <ion-icon name="arrow-dropup"></ion-icon>
+  </ion-fab-button>
+
+  <ion-fab-list side="top">
+    <ion-fab-button (click)="presentModal()">
+      <ion-icon name="warning"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-button routerLink="/equip">
+      <ion-icon name="shirt"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-button routerLink="/inv">
+      <ion-icon name="cube"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-button routerLink="/skills">
+      <ion-icon name="hand"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-button routerLink="/stats">
+      <ion-icon name="stats"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-button routerLink="/char">
+      <ion-icon name="body"></ion-icon>
+    </ion-fab-button>
+  </ion-fab-list>
+</ion-fab>

@@ -1,6 +1,10 @@
-label,
 input,
 span {
+  display: inline-flex;
+  width: 25%;
+}
+
+label {
   display: inline-flex;
   width: 50%;
 }

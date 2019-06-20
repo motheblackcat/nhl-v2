@@ -25,6 +25,7 @@
     <span *ngIf="control.key === 'magphy' || control.key === 'magpsy' || control.key === 'resmag'" justify-content-center>{{
       targetForm.get(control.key).value
     }}</span>
+    <span justify-content-center>0</span>
     <div class="hint" *ngSwitchCase="'magphy'" margin-bottom>Moyenne INT et AD</div>
     <div class="hint" *ngSwitchCase="'magpsy'" margin-bottom>Moyenne INT et CHA</div>
     <div class="hint" *ngSwitchCase="'resmag'">Moyenne COU, INT et FO</div>

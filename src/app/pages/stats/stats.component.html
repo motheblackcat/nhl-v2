@@ -1,20 +1,32 @@
-<ion-content>
-	<ion-grid padding [formGroup]="statsForm" (equiped)="checkEffects()">
-		<ion-row><ion-col><h6 text-uppercase>statistiques</h6></ion-col></ion-row>
-		<ion-row *ngFor="let stat of labels">
-			<ion-col size="8"><label [for]="stat.control">{{ stat.label }}</label></ion-col>
-			<ion-col size="2">
-				<input [id]="stat.control" type="number" [placeholder]="stat.placeholder" [formControlName]="stat.control" (blur)="saveData()" (keydown.enter)="saveData()">
-			</ion-col>
-			<ion-col size="2"><label>{{ stat.effect }}</label></ion-col>
-    </ion-row>
-    <br>
-		<ng-container *ngFor="let stat of magLabels">
-			<ion-row>
-				<ion-col size="8"><label>{{ stat.label }}</label></ion-col>
-				<ion-col><label>{{ stat.value }}</label></ion-col>
-			</ion-row>
-			<ion-row><ion-col><label class="hint">{{ stat.hint }}</label></ion-col></ion-row>
-		</ng-container>
-	</ion-grid>
-</ion-content>
+<form [formGroup]="targetForm" (change)="updateForm()">
+  <h3>{{ title }}</h3>
+  <div *ngFor="let control of targetForm.controls | keyvalue: defaultOrder" [ngSwitch]="control.key">
+    <label [for]="control.key" *ngSwitchCase="'ev'">Energie Vitale (EV)</label>
+    <label [for]="control.key" *ngSwitchCase="'ea'" margin-bottom>Energie Astrale (EA)</label>
+    <label [for]="control.key" *ngSwitchCase="'cou'">Courage (COU)</label>
+    <label [for]="control.key" *ngSwitchCase="'int'">Intelligence (INT)</label>
+    <label [for]="control.key" *ngSwitchCase="'cha'">Charisme (CHA)</label>
+    <label [for]="control.key" *ngSwitchCase="'ad'">Adresse (AD)</label>
+    <label [for]="control.key" *ngSwitchCase="'fo'" margin-bottom>Force (FO)</label>
+    <label [for]="control.key" *ngSwitchCase="'atq'">ATTAQUE</label>
+    <label [for]="control.key" *ngSwitchCase="'prd'" margin-bottom>PARADE</label>
+    <label *ngSwitchCase="'magphy'" [for]="control.key">Magie Phy.</label>
+    <label *ngSwitchCase="'magpsy'" [for]="control.key">Magie Psy.</label>
+    <label [for]="control.key" *ngSwitchCase="'resmag'">Résist. Mag.</label>
+    <input
+      text-center
+      *ngIf="control.key !== 'magphy' && control.key !== 'magpsy' && control.key !== 'resmag'"
+      type="number"
+      [id]="control.key"
+      placeholder="0"
+      [formControlName]="control.key"
+      [value]="targetForm.get(control.key).value"
+    />
+    <span *ngIf="control.key === 'magphy' || control.key === 'magpsy' || control.key === 'resmag'" justify-content-center>{{
+      targetForm.get(control.key).value
+    }}</span>
+    <div class="hint" *ngSwitchCase="'magphy'" margin-bottom>Moyenne INT et AD</div>
+    <div class="hint" *ngSwitchCase="'magpsy'" margin-bottom>Moyenne INT et CHA</div>
+    <div class="hint" *ngSwitchCase="'resmag'">Moyenne COU, INT et FO</div>
+  </div>
+</form>

@@ -15,27 +15,25 @@
   src: url('assets/fonts/dauphin.ttf');
 }
 
-body,
-ion-content {
+body {
   font-family: 'dauphin';
   font-weight: bold;
 }
 
-h6 {
-  font-size: 1.3em;
+form {
+  padding: 20px;
+  text-transform: capitalize;
+}
+
+h3 {
+  text-transform: uppercase;
   font-weight: bold;
 }
 
 label,
-input,
-ion-label {
-  border: 0;
-  background: none;
-  text-transform: capitalize;
-}
-
 input {
-  width: 100%;
+  border: 0;
+  text-transform: capitalize;
 }
 
 .hint {

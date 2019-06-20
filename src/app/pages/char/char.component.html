@@ -2,13 +2,13 @@
   <h3>{{ title }}</h3>
   <div *ngFor="let control of targetForm.controls | keyvalue: defaultOrder" [ngSwitch]="control.key">
     <div *ngIf="control.key === 'berylium'">Mes richesses à moi que j'ai:</div>
-    <label [for]="control.key">{{ control.key === 'point_de_destin' ? 'point de destin' : control.key }}</label>
+    <label [for]="control.key">{{ control.key === 'pd' ? 'point de destin' : control.key }}</label>
     <input
       *ngSwitchDefault
       type="text"
-      [placeholder]="control.key === 'point_de_destin' ? 'point de destin' : control.key"
+      [id]="control.key"
+      [placeholder]="control.key === 'pd' ? 'point de destin' : control.key"
       [formControlName]="control.key"
-      (change)="updateForm()"
       [value]="targetForm.get(control.key).value"
     />
     <ng-container *ngSwitchCase="'sexe'">

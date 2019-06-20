@@ -30,7 +30,14 @@ const routes: Routes = [
           targetForm: 'charForm'
         }
       },
-      { path: 'stats', component: StatsComponent },
+      {
+        path: 'stats',
+        component: StatsComponent,
+        data: {
+          title: 'statistiques',
+          targetForm: 'statsForm'
+        }
+      },
       {
         path: 'skills',
         component: ListComponent,
@@ -68,8 +75,7 @@ const routes: Routes = [
             component: ListComponent,
             data: {
               title: 'butin a revendre (ou pas)',
-              subtitle:
-                'tout ces machins volés sur les innocents, ou récupérés dans des coffres...',
+              subtitle: 'tout ces machins volés sur les innocents, ou récupérés dans des coffres...',
               placeholder: 'Ajouter du butin.',
               dataKey: 'lootData'
             }
@@ -93,8 +99,7 @@ const routes: Routes = [
             component: ListComponent,
             data: {
               title: 'machin precieux',
-              subtitle:
-                'titres particuliers, montures, habitations, héritages et autre souvenirs...',
+              subtitle: 'titres particuliers, montures, habitations, héritages et autre souvenirs...',
               placeholder: 'Ajouter un objet précieux.',
               dataKey: 'preciousData'
             }

@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { KeyValue } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 
-import { mainForm } from '../../models/form';
+import { mainForm } from 'src/app/models/form';
 
 @Component({
   selector: 'app-char',

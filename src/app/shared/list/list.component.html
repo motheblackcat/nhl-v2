@@ -1,28 +1,18 @@
-<ion-content>
-  <ion-grid padding>
-    <ion-row>
-      <ion-col><h6 text-uppercase>{{ config.title }}</h6></ion-col>
-    </ion-row>
-    <ion-row *ngIf="config.subtitle" padding-bottom>
-        <ion-col><label class="hint">{{ config.subtitle }}</label></ion-col>
-      </ion-row>
-    <ion-row>
-      <ion-col size="1"><ion-icon name="add-circle-outline" margin-right (click)="item.focus()"></ion-icon></ion-col>
-      <ion-col>
-          <input
-              #item
-              text-capitalize
-              margin-bottom      
-              type="text"
-              placeholder="{{ config.placeholder }}"
-              (blur)="addSkill(item)"
-              (keydown.enter)="addSkill(item)">
-      </ion-col>
-    </ion-row>
-    <!-- CHANGE WITH INPUT TO MODIFY ITEM -->
-    <ion-row *ngFor="let item of items">
-      <ion-col size="1"><ion-icon name="close" margin-right (click)="deleteSkill(item)"></ion-icon></ion-col>
-      <ion-col><label text-capitalize>{{ item }}</label></ion-col>
-    </ion-row>
-  </ion-grid>
-</ion-content>
+<form [formGroup]="mainForm">
+  <h3>{{ title }}</h3>
+  <label class="hint" *ngIf="subtitle !== ''">{{ subtitle }}</label>
+  <div>
+    <label for="first">
+      <ion-icon name="add-circle-outline"></ion-icon>
+    </label>
+    <input #add type="text" id="first" [placeholder]="placeholder" (change)="updateForm(add)" />
+  </div>
+  <ng-container [formArrayName]="targetFormName">
+    <div *ngFor="let control of targetForm.controls; let i = index">
+      <label [for]="i" (click)="deleteSkill(i)">
+        <ion-icon name="close"></ion-icon>
+      </label>
+      <input #update type="text" [id]="i" [formControlName]="i" (change)="updateForm(update, i)" />
+    </div>
+  </ng-container>
+</form>

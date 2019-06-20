@@ -1,4 +1,4 @@
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, FormArray } from '@angular/forms';
 
 export const mainForm = new FormGroup({
   charForm: new FormGroup({
@@ -28,5 +28,6 @@ export const mainForm = new FormGroup({
     magphy: new FormControl(0),
     magpsy: new FormControl(0),
     resmag: new FormControl(0)
-  })
+  }),
+  skillsForm: new FormArray([])
 });

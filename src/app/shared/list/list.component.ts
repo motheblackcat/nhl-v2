@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { FormControl, FormArray, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { NotifierService } from 'src/app/services/notifier.service';
+
+import { mainForm } from '../../models/form';
 
 @Component({
   selector: 'app-list',
@@ -8,43 +10,36 @@ import { NotifierService } from 'src/app/services/notifier.service';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-  @Input() config: any = {
-    title: '',
-    subtitle: '',
-    placeholder: '',
-    dataKey: ''
-  }
-  items: Array<String> = [];
-  constructor(private route: ActivatedRoute, private notify: NotifierService) { }
+  @Input() title: string;
+  @Input() subtitle: string;
+  @Input() placeholder: string;
+  @Input() targetForm: FormArray;
+  targetFormName: string;
+  mainForm: FormGroup = mainForm;
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.route.data.subscribe(res => {
-      if (res.title) {
-        this.config = res;
-      }
-    });
-    if (localStorage.getItem(this.config.dataKey)) {
-      this.items = JSON.parse(localStorage.getItem(this.config.dataKey));
-    }
-
-    this.notify.reset.subscribe((res) => {
-      if (res) {
-        this.items = [];
-        this.notify.reset.next(false);
-      }
+      this.title = res.title;
+      this.subtitle = res.subtitle;
+      this.placeholder = res.placeholder;
+      this.targetFormName = res.targetForm;
+      this.targetForm = mainForm.get(this.targetFormName) as FormArray;
     });
   }
 
-  addSkill(skill: any): void {
-    if (skill.value !== '') {
-      this.items.push(skill.value);
-      localStorage.setItem(this.config.dataKey, JSON.stringify(this.items));
-      skill.value = '';
+  updateForm(input: HTMLInputElement, i?: number): void {
+    if (i !== undefined) {
+      this.targetForm.setControl(i, new FormControl(input.value));
+    } else {
+      this.targetForm.push(new FormControl(input.value));
+      input.value = '';
     }
+    console.warn(this.targetForm);
   }
 
-  deleteSkill(skill: string): void {
-    this.items.splice(this.items.indexOf(skill), 1);
-    localStorage.setItem(this.config.dataKey, JSON.stringify(this.items));
+  deleteSkill(i: number): void {
+    this.targetForm.removeAt(i);
+    console.warn(this.targetForm);
   }
 }

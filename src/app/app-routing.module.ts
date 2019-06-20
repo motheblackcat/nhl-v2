@@ -44,7 +44,7 @@ const routes: Routes = [
         data: {
           title: 'compétences',
           placeholder: 'Ajouter une compétence.',
-          dataKey: 'skillsData'
+          targetForm: 'skillsForm'
         }
       },
       {

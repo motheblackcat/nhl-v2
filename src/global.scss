@@ -18,6 +18,7 @@
 body {
   font-family: 'dauphin';
   font-weight: bold;
+  background: #eae7de;
 }
 
 form {
@@ -34,9 +35,15 @@ label,
 input {
   border: 0;
   text-transform: capitalize;
+  background: none;
 }
 
 .hint {
   font-size: 0.9em;
   font-style: italic;
+}
+
+ion-icon {
+  font-size: 25px;
+  font-weight: bold;
 }

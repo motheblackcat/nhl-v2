@@ -20,6 +20,7 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.data.subscribe(res => {
+      console.log(res);
       this.title = res.title;
       this.subtitle = res.subtitle;
       this.placeholder = res.placeholder;

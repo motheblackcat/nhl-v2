@@ -1,6 +1,7 @@
 <form [formGroup]="mainForm">
   <h3>{{ title }}</h3>
   <label class="hint" *ngIf="subtitle !== ''">{{ subtitle }}</label>
+  <br *ngIf="subtitle !== ''" />
   <div>
     <label for="first">
       <ion-icon name="add-circle-outline"></ion-icon>

@@ -52,8 +52,22 @@ const routes: Routes = [
         component: EquipComponent,
         children: [
           { path: '', redirectTo: 'weapon', pathMatch: 'full' },
-          { path: 'weapon', component: WeaponComponent },
-          { path: 'armor', component: ArmorComponent }
+          {
+            path: 'weapon',
+            component: WeaponComponent,
+            data: {
+              title: 'armement et baston',
+              targetForm: 'weaponsForm'
+            }
+          },
+          {
+            path: 'armor',
+            component: ArmorComponent,
+            data: {
+              title: 'armure et protection',
+              targetForm: 'armorsForm'
+            }
+          }
         ]
       },
       {
@@ -67,7 +81,7 @@ const routes: Routes = [
             data: {
               title: 'objets de quete',
               placeholder: 'Ajouter un objet de quête.',
-              dataKey: 'questData'
+              targetForm: 'questForm'
             }
           },
           {
@@ -77,23 +91,58 @@ const routes: Routes = [
               title: 'butin a revendre (ou pas)',
               subtitle: 'tout ces machins volés sur les innocents, ou récupérés dans des coffres...',
               placeholder: 'Ajouter du butin.',
-              dataKey: 'lootData'
+              targetForm: 'lootForm'
             }
           },
-          { path: 'bags', component: BagsComponent },
-          { path: 'camp', component: CampComponent },
+          {
+            path: 'bags',
+            component: BagsComponent,
+            data: {
+              title: 'sac et transport',
+              targetForm: 'bagsForm'
+            }
+          },
+          {
+            path: 'camp',
+            component: CampComponent,
+            data: {
+              title: 'materiel de bivouac et camping',
+              targetForm: 'campForm'
+            }
+          },
           {
             path: 'food',
             component: ListComponent,
             data: {
               title: 'bouffe et boisson',
               placeholder: 'Ajouter un aliment / boisson.',
-              dataKey: 'foodData'
+              targetForm: 'foodForm'
             }
           },
-          { path: 'special', component: SpecialComponent },
-          { path: 'gems', component: GemsComponent },
-          { path: 'potions', component: PotionsComponent },
+          {
+            path: 'special',
+            component: SpecialComponent,
+            data: {
+              title: 'objets speciaux et reliques',
+              targetForm: 'specialForm'
+            }
+          },
+          {
+            path: 'gems',
+            component: GemsComponent,
+            data: {
+              title: 'gemmes et pierres précieuses',
+              targetForm: 'gemsForm'
+            }
+          },
+          {
+            path: 'potions',
+            component: PotionsComponent,
+            data: {
+              title: 'potions, poisons, antidotes et ingrédients magiques',
+              targetForm: 'potionsForm'
+            }
+          },
           {
             path: 'precious',
             component: ListComponent,
@@ -101,7 +150,7 @@ const routes: Routes = [
               title: 'machin precieux',
               subtitle: 'titres particuliers, montures, habitations, héritages et autre souvenirs...',
               placeholder: 'Ajouter un objet précieux.',
-              dataKey: 'preciousData'
+              targetForm: 'preciousForm'
             }
           }
         ]

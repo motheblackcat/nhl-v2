@@ -29,5 +29,16 @@ export const mainForm = new FormGroup({
     magpsy: new FormControl(0),
     resmag: new FormControl(0)
   }),
-  skillsForm: new FormArray([])
+  skillsForm: new FormArray([]),
+  weaponsForm: new FormGroup({}),
+  armorsForm: new FormGroup({}),
+  questForm: new FormArray([]),
+  lootForm: new FormArray([]),
+  bagsForm: new FormGroup({}),
+  campForm: new FormGroup({}),
+  foodForm: new FormArray([]),
+  specialForm: new FormGroup({}),
+  gemsForm: new FormGroup({}),
+  potionsForm: new FormGroup({}),
+  preciousForm: new FormArray([])
 });

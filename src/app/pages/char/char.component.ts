@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { KeyValue } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
-import { NotifierService } from 'src/app/services/notifier.service';
-import { charLabels } from 'src/app/models/labels';
+import { mainForm } from '../../models/form';
 
 @Component({
   selector: 'app-char',
@@ -10,43 +10,24 @@ import { charLabels } from 'src/app/models/labels';
   styleUrls: ['./char.component.scss']
 })
 export class CharComponent implements OnInit {
-  charForm: FormGroup;
-  charControls = charLabels;
-  constructor(private fb: FormBuilder, private notify: NotifierService) {}
+  @Input() targetForm;
+  @Input() title: string;
+  constructor(private route: ActivatedRoute) {}
 
-  ngOnInit(): void {
-    this.createForm();
-
-    if (localStorage.getItem('charData')) {
-      this.charForm.setValue(JSON.parse(localStorage.getItem('charData')));
-    }
-
-    this.notify.reset.subscribe(res => {
-      if (res) {
-        this.charForm.reset();
-        this.notify.reset.next(false);
+  ngOnInit() {
+    this.route.data.subscribe(res => {
+      if (res.title) {
+        this.targetForm = mainForm.get(res.targetForm);
+        this.title = res.title;
       }
     });
   }
 
-  createForm(): void {
-    this.charForm = this.fb.group({
-      niv: '',
-      xp: '',
-      dp: '',
-      name: '',
-      ori: '',
-      job: '',
-      gen: '',
-      ber: '',
-      thi: '',
-      gol: '',
-      sil: '',
-      cop: ''
-    });
+  defaultOrder(a: KeyValue<number, string>, b: KeyValue<number, string>) {
+    return -1;
   }
 
-  saveData(): void {
-    localStorage.setItem('charData', JSON.stringify(this.charForm.value));
+  updateForm() {
+    console.warn('target', this.targetForm.value);
   }
 }

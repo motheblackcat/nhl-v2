@@ -1,13 +1,32 @@
-ion-icon {
-    color: grey;
-    font-size: 1.5em;
+form {
+  padding: 20px;
+  text-transform: capitalize;
+}
+
+h3 {
+  text-transform: uppercase;
+}
+
+div {
+  margin-bottom: 20px;
+}
+
+label,
+input {
+  display: inline-flex;
+  width: 50%;
+  border: 0;
+}
+
+#sexe {
+  width: 25%;
+  color: gray;
 }
 
 .selected {
-    color: black;
+  color: black;
 }
 
-.subtitle {
-    padding-top: 30px;
-    padding-bottom: 15px;
+input[type='radio'] {
+  display: none;
 }

@@ -22,10 +22,25 @@ const routes: Routes = [
     path: 'tabs',
     component: TabsComponent,
     children: [
-      { path: 'char', component: CharComponent },
+      {
+        path: 'char',
+        component: CharComponent,
+        data: {
+          title: 'personnage',
+          targetForm: 'charForm'
+        }
+      },
       { path: 'stats', component: StatsComponent },
-      { path: 'skills', component: ListComponent, data: { title: 'compétences', placeholder: 'Ajouter une compétence.', dataKey: 'skillsData' }},
-      { 
+      {
+        path: 'skills',
+        component: ListComponent,
+        data: {
+          title: 'compétences',
+          placeholder: 'Ajouter une compétence.',
+          dataKey: 'skillsData'
+        }
+      },
+      {
         path: 'equip',
         component: EquipComponent,
         children: [
@@ -39,33 +54,51 @@ const routes: Routes = [
         component: InvComponent,
         children: [
           { path: '', redirectTo: 'quest', pathMatch: 'full' },
-          { path: 'quest', component: ListComponent, data: { title: 'objets de quete', placeholder: 'Ajouter un objet de quête.', dataKey: 'questData' }},
+          {
+            path: 'quest',
+            component: ListComponent,
+            data: {
+              title: 'objets de quete',
+              placeholder: 'Ajouter un objet de quête.',
+              dataKey: 'questData'
+            }
+          },
           {
             path: 'loot',
             component: ListComponent,
             data: {
-                    title: 'butin a revendre (ou pas)',
-                    subtitle: 'tout ces machins volés sur les innocents, ou récupérés dans des coffres...',
-                    placeholder: 'Ajouter du butin.',
-                    dataKey: 'lootData' 
+              title: 'butin a revendre (ou pas)',
+              subtitle:
+                'tout ces machins volés sur les innocents, ou récupérés dans des coffres...',
+              placeholder: 'Ajouter du butin.',
+              dataKey: 'lootData'
             }
           },
           { path: 'bags', component: BagsComponent },
           { path: 'camp', component: CampComponent },
-          { path: 'food', component: ListComponent, data: { title: 'bouffe et boisson', placeholder: 'Ajouter un aliment / boisson.', dataKey: 'foodData' }},
-          { path: 'special', component: SpecialComponent},
+          {
+            path: 'food',
+            component: ListComponent,
+            data: {
+              title: 'bouffe et boisson',
+              placeholder: 'Ajouter un aliment / boisson.',
+              dataKey: 'foodData'
+            }
+          },
+          { path: 'special', component: SpecialComponent },
           { path: 'gems', component: GemsComponent },
           { path: 'potions', component: PotionsComponent },
           {
             path: 'precious',
             component: ListComponent,
             data: {
-                    title: 'machin precieux',
-                    subtitle: 'titres particuliers, montures, habitations, héritages et autre souvenirs...',
-                    placeholder: 'Ajouter un objet précieux.',
-                    dataKey: 'preciousData'
-                  }
+              title: 'machin precieux',
+              subtitle:
+                'titres particuliers, montures, habitations, héritages et autre souvenirs...',
+              placeholder: 'Ajouter un objet précieux.',
+              dataKey: 'preciousData'
             }
+          }
         ]
       }
     ]
@@ -76,4 +109,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

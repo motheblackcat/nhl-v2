@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { Component, OnInit, Input } from '@angular/core';
+import { FormGroup, FormControl, FormArray } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
-import { NotifierService } from 'src/app/services/notifier.service';
+import { mainForm } from 'src/app/models/form';
 
 @Component({
   selector: 'app-bags',
@@ -9,50 +10,28 @@ import { NotifierService } from 'src/app/services/notifier.service';
   styleUrls: ['./bags.component.scss']
 })
 export class BagsComponent implements OnInit {
-  bagsForm: FormGroup;
-  sacs: FormArray;
-  bourses: FormArray;
+  @Input() targetForm: FormGroup;
+  @Input() title: string;
+  constructor(private route: ActivatedRoute) {}
 
-  constructor(private fb: FormBuilder, private notify: NotifierService) { }
-
-  ngOnInit(): void {
-    this.createForm();
-    const data = JSON.parse(localStorage.getItem('bagsData'));
-
-    if (data) {
-      this.bagsForm.setValue(data);
-    }
-
-    this.notify.reset.subscribe((res) => {
-      if (res) {
-        this.bagsForm.reset();
-        this.notify.reset.next(false);
+  ngOnInit() {
+    this.route.data.subscribe(res => {
+      if (res.title) {
+        this.targetForm = mainForm.get(res.targetForm) as FormGroup;
+        this.title = res.title;
       }
     });
   }
 
-  createForm(): void {
-    this.bagsForm = this.fb.group({
-      poidsmax: '',
-      sacs: this.fb.array([]),
-      bourses: this.fb.array([])
-    });
-    this.sacs = this.bagsForm.get('sacs') as FormArray;
-    this.bourses = this.bagsForm.get('bourses') as FormArray;
-    this.createArray(this.sacs);
-    this.createArray(this.bourses);
+  updateForm(): void {
+    console.warn('target', this.targetForm.value);
   }
 
-  createArray(array: FormArray): void {
-    for (let i = 0; i < 5; i++) {
-      array.push(this.fb.group({
-        nom: '',
-        chargemax: ''
-      }));
-    }
+  addItem(array: string): void {
+    (this.targetForm.get(array) as FormArray).push(new FormGroup({ name: new FormControl(), max: new FormControl() }));
   }
 
-  saveData(): void {
-    localStorage.setItem('bagsData', JSON.stringify(this.bagsForm.value));
+  removeItem(array: string, i: number): void {
+    (this.targetForm.get(array) as FormArray).removeAt(i);
   }
 }

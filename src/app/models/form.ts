@@ -2,18 +2,18 @@ import { FormGroup, FormControl, FormArray } from '@angular/forms';
 
 export const mainForm = new FormGroup({
   charForm: new FormGroup({
-    niveau: new FormControl(''),
-    pd: new FormControl(''),
-    experience: new FormControl(''),
-    nom: new FormControl(''),
-    origine: new FormControl(''),
-    metiers: new FormControl(''),
-    sexe: new FormControl(''),
-    berylium: new FormControl(''),
-    thritil: new FormControl(''),
-    or: new FormControl(''),
-    argent: new FormControl(''),
-    cuivre: new FormControl('')
+    niveau: new FormControl(),
+    pd: new FormControl(),
+    experience: new FormControl(),
+    nom: new FormControl(),
+    origine: new FormControl(),
+    metiers: new FormControl(),
+    sexe: new FormControl(),
+    berylium: new FormControl(),
+    thritil: new FormControl(),
+    or: new FormControl(),
+    argent: new FormControl(),
+    cuivre: new FormControl()
   }),
   statsForm: new FormGroup({
     ev: new FormControl(),
@@ -34,7 +34,21 @@ export const mainForm = new FormGroup({
   armorsForm: new FormGroup({}),
   questForm: new FormArray([]),
   lootForm: new FormArray([]),
-  bagsForm: new FormGroup({}),
+  bagsForm: new FormGroup({
+    max: new FormControl(),
+    bags: new FormArray([
+      new FormGroup({
+        name: new FormControl(),
+        max: new FormControl()
+      })
+    ]),
+    pooches: new FormArray([
+      new FormGroup({
+        name: new FormControl(),
+        max: new FormControl()
+      })
+    ])
+  }),
   campForm: new FormGroup({}),
   foodForm: new FormArray([]),
   specialForm: new FormGroup({}),

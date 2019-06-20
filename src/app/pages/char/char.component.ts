@@ -24,7 +24,7 @@ export class CharComponent implements OnInit {
     });
   }
 
-  defaultOrder(a: KeyValue<number, string>, b: KeyValue<number, string>): number {
+  defaultOrder(): number {
     return -1;
   }
 

@@ -1,4 +1,22 @@
-input {
-    padding: 3px 5px;
-    border-bottom: 1px solid black;
+div {
+  display: flex;
+  align-items: center;
+
+  input[type='number'] {
+    width: 20%;
+    text-align: center;
+  }
+
+  input[type='text'] {
+    width: 100%;
+    text-align: initial;
+  }
+}
+
+.title {
+  justify-content: space-between;
+
+  label {
+    text-transform: uppercase;
+  }
 }

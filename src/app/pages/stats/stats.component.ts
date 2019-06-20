@@ -24,7 +24,7 @@ export class StatsComponent implements OnInit {
     });
   }
 
-  defaultOrder(a: KeyValue<number, string>, b: KeyValue<number, string>): number {
+  defaultOrder(): number {
     // Chrome 1 / Firefox -1
     return -1;
   }

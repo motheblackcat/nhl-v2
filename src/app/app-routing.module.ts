@@ -1,21 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { TabsComponent } from './shared/tabs/tabs.component';
-import { FabComponent } from './shared/fab/fab.component';
-
 import { CharComponent } from './pages/char/char.component';
 import { StatsComponent } from './pages/stats/stats.component';
 import { EquipComponent } from './pages/equip/equip.component';
 import { InvComponent } from './pages/inv/inv.component';
 import { WeaponComponent } from './pages/equip/weapon/weapon.component';
 import { ArmorComponent } from './pages/equip/armor/armor.component';
-import { ListComponent } from './shared/list/list.component';
 import { BagsComponent } from './pages/inv/bags/bags.component';
 import { CampComponent } from './pages/inv/camp/camp.component';
-import { SpecialComponent } from './pages/inv/special/special.component';
-import { GemsComponent } from './pages/inv/gems/gems.component';
-import { PotionsComponent } from './pages/inv/potions/potions.component';
+
+import { ListComponent } from './shared/list/list.component';
+import { ListMultiComponent } from './shared/list-multi/list-multi.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'char', pathMatch: 'full' },
@@ -118,26 +114,33 @@ const routes: Routes = [
       },
       {
         path: 'special',
-        component: SpecialComponent,
+        component: ListMultiComponent,
         data: {
-          title: 'objets speciaux et reliques',
-          targetForm: 'specialForm'
+          title: 'objets speciaux, maudit ou reliques',
+          targetForm: 'specialForm',
+          nameLabel: 'objet',
+          effectLabel: 'bonus / effets'
         }
       },
       {
         path: 'gems',
-        component: GemsComponent,
+        component: ListMultiComponent,
         data: {
           title: 'gemmes et pierres précieuses',
+          subtitle: 'u. g. : unité goltor',
+          nameLabel: 'nom',
+          effectLabel: 'u. g.',
           targetForm: 'gemsForm'
         }
       },
       {
         path: 'potions',
-        component: PotionsComponent,
+        component: ListMultiComponent,
         data: {
           title: 'potions, poisons, antidotes et ingrédients magiques',
-          targetForm: 'potionsForm'
+          targetForm: 'potionsForm',
+          nameLabel: 'doses',
+          effectLabel: 'effets'
         }
       },
       {

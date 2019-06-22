@@ -1,9 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { KeyValue } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 import { mainForm } from 'src/app/models/form';
+import { FormManagementService } from 'src/app/services/form-management.service';
 
 @Component({
   selector: 'app-stats',
@@ -11,9 +11,9 @@ import { mainForm } from 'src/app/models/form';
   styleUrls: ['./stats.component.scss']
 })
 export class StatsComponent implements OnInit {
-  @Input() targetForm: FormGroup;
-  @Input() title: string;
-  constructor(private route: ActivatedRoute) {}
+  targetForm: FormGroup;
+  title: string;
+  constructor(private route: ActivatedRoute, public fm: FormManagementService) {}
 
   ngOnInit(): void {
     this.route.data.subscribe(res => {
@@ -22,11 +22,6 @@ export class StatsComponent implements OnInit {
         this.title = res.title;
       }
     });
-  }
-
-  defaultOrder(): number {
-    // Chrome 1 / Firefox -1
-    return -1;
   }
 
   updateForm(): void {

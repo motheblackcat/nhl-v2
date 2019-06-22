@@ -1,0 +1,24 @@
+<ion-content padding [formGroup]="mainForm" (change)="updateForm()">
+  <h3>{{ title }}</h3>
+  <label class="hint" *ngIf="subtitle">{{ subtitle }}</label>
+  <ng-container [formArrayName]="targetFormName">
+    <div *ngFor="let control of targetForm.controls; let i = index" [formGroupName]="i" class="item">
+      <ion-icon name="close" class="del" (click)="deleteItem(i)"></ion-icon>
+      <div>
+        <div>
+          <label for="name">{{ nameLabel }} :</label>
+          <input type="text" id="name" formControlName="name" [placeholder]="nameLabel" />
+        </div>
+        <div>
+          <label for="effect"> {{ effectLabel }} :</label>
+          <input type="text" id="effect" formControlName="effect" [placeholder]="effectLabel" />
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <br />
+  <div (click)="addItem()" id="add">
+    <ion-icon name="add-circle-outline"></ion-icon>
+    <label>Ajouter un objet</label>
+  </div>
+</ion-content>

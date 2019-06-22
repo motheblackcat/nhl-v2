@@ -49,10 +49,44 @@ export const mainForm = new FormGroup({
       })
     ])
   }),
-  campForm: new FormGroup({}),
+  campForm: new FormGroup({
+    tent: new FormGroup({
+      name: new FormControl(),
+      pv: new FormControl(),
+      h: new FormControl(),
+      wei: new FormControl()
+    }),
+    mat: new FormGroup({
+      name: new FormControl(),
+      pv: new FormControl(),
+      h: new FormControl(),
+      wei: new FormControl()
+    }),
+    blan: new FormGroup({
+      name: new FormControl(),
+      pv: new FormControl(),
+      h: new FormControl(),
+      wei: new FormControl()
+    })
+  }),
   foodForm: new FormArray([]),
-  specialForm: new FormGroup({}),
-  gemsForm: new FormGroup({}),
-  potionsForm: new FormGroup({}),
+  specialForm: new FormArray([
+    new FormGroup({
+      name: new FormControl(),
+      effect: new FormControl()
+    })
+  ]),
+  gemsForm: new FormArray([
+    new FormGroup({
+      name: new FormControl(),
+      effect: new FormControl()
+    })
+  ]),
+  potionsForm: new FormArray([
+    new FormGroup({
+      name: new FormControl(),
+      effect: new FormControl()
+    })
+  ]),
   preciousForm: new FormArray([])
 });

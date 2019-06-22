@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { ListComponent } from './shared/list/list.component';
+import { ListMultiComponent } from './shared/list-multi/list-multi.component';
 import { ResetComponent } from './shared/reset/reset.component';
 
 import { CharComponent } from './pages/char/char.component';
@@ -22,15 +23,15 @@ import { ArmorComponent } from './pages/equip/armor/armor.component';
 import { InvComponent } from './pages/inv/inv.component';
 import { BagsComponent } from './pages/inv/bags/bags.component';
 import { CampComponent } from './pages/inv/camp/camp.component';
-import { SpecialComponent } from './pages/inv/special/special.component';
-import { GemsComponent } from './pages/inv/gems/gems.component';
-import { PotionsComponent } from './pages/inv/potions/potions.component';
 import { FabComponent } from './shared/fab/fab.component';
+
+import { FormManagementService } from './services/form-management.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListComponent,
+    ListMultiComponent,
     CharComponent,
     StatsComponent,
     EquipComponent,
@@ -40,14 +41,11 @@ import { FabComponent } from './shared/fab/fab.component';
     ArmorComponent,
     BagsComponent,
     CampComponent,
-    SpecialComponent,
-    GemsComponent,
-    PotionsComponent,
     FabComponent
   ],
   entryComponents: [ResetComponent],
   imports: [BrowserModule, ReactiveFormsModule, FlexLayoutModule, IonicModule.forRoot(), AppRoutingModule],
-  providers: [StatusBar, SplashScreen, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [StatusBar, SplashScreen, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, FormManagementService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SpecialComponent } from './special.component';
+import { ListMultiComponent } from './list-multi.component';
 
-describe('SpecialComponent', () => {
-  let component: SpecialComponent;
-  let fixture: ComponentFixture<SpecialComponent>;
+describe('ListMultiComponent', () => {
+  let component: ListMultiComponent;
+  let fixture: ComponentFixture<ListMultiComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SpecialComponent ]
+      declarations: [ ListMultiComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SpecialComponent);
+    fixture = TestBed.createComponent(ListMultiComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

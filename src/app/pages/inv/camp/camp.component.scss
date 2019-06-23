@@ -1,3 +1,41 @@
-input {
-    border-bottom: 1px solid black;
+.hint {
+  display: block;
+  margin-bottom: 15px;
+}
+
+.divLabel {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.divInput {
+  display: flex;
+  justify-content: space-between;
+
+  input[type='text'] {
+    width: 45%;
+  }
+
+  input[type='number'] {
+    width: 10%;
+  }
+
+  .h {
+    margin-left: 15px;
+  }
+
+  .wei {
+    margin-left: auto;
+    text-align: center;
+  }
+}
+
+#divAdd {
+  display: flex;
+  align-content: center;
+}
+
+#divWei {
+  margin-bottom: 75px;
 }

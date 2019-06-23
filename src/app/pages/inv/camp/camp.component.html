@@ -1,36 +1,40 @@
-<ion-content>
-  <ion-grid padding [formGroup]="campForm">
-    <ion-row><ion-col><h6 text-uppercase>Materiel de Bivouac et Camping</h6></ion-col></ion-row>
-    <ion-row padding-bottom><ion-col><label class="hint">Récup. : Récupération PV</label></ion-col></ion-row>
-    <ng-container formArrayName="material">
-      <ng-container *ngFor="let item of material.controls; let i = index" [formGroupName]="i">
-          <ion-row>
-            <ion-col size="5"><h6 text-capitalize>{{ labels[i] }}</h6></ion-col>
-            <ion-col size="5"><h6 text-capitalize>Récup.</h6></ion-col>
-            <ion-col size="2"><h6 text-capitalize>Poids</h6></ion-col>
-          </ion-row>
-          <ion-row padding-bottom>
-            <ion-col size="5"><input type="text" formControlName="name" (blur)="saveData()" (keydown.enter)="saveData()"></ion-col>
-            <ion-col size="1"><input type="number" formControlName="pv" (blur)="saveData()" (keydown.enter)="saveData()"></ion-col>
-            <ion-col size="2"><label>PV/</label></ion-col>
-            <ion-col size="1"><input type="number" formControlName="hour" (blur)="saveData()" (keydown.enter)="saveData()"></ion-col>
-            <ion-col size="1"><label>h</label></ion-col>
-            <ion-col size="1"><input type="text" formControlName="weight" (blur)="saveData()" (keydown.enter)="saveData()"></ion-col>
-            <ion-col size="1"><label>kg</label></ion-col>
-          </ion-row>
-        </ng-container>
-        </ng-container>
-        <ion-row>
-          <ion-col size="8"><h6 text-capitalize>nom</h6></ion-col>
-          <ion-col size="4"><h6 text-capitalize>poids</h6></ion-col>
-        </ion-row>
-        <ng-container formArrayName="list">
-          <ion-row *ngFor="let item of list.controls; let i = index" [formGroupName]="i">
-            <ion-col size="8"><input type="text" formControlName="name" (blur)="saveData()" (keydown.enter)="saveData()"></ion-col>
-            <ion-col size="3"><input type="number" formControlName="weight" (blur)="saveData()" (keydown.enter)="saveData()"></ion-col>
-            <ion-col size="1"><label>kg</label></ion-col>
-          </ion-row>
-        </ng-container>
-        <ion-row padding-top><ion-col text-right><label>poids total: {{ total }} kg</label></ion-col></ion-row>
-  </ion-grid>
+<ion-content padding [formGroup]="targetForm" (change)="updateForm()">
+  <h3>{{ title }}</h3>
+  <label class="hint">récup. : récupération PV</label>
+  <ng-container *ngFor="let control of targetForm.controls | keyvalue: fm.defaultOrder; let i = index">
+    <div *ngIf="control.key !== 'mat'" [formGroupName]="control.key">
+      <div class="divLabel">
+        <label>{{ control.key }}</label>
+        <label>Récup.</label>
+        <label>Poids</label>
+      </div>
+      <div class="divInput">
+        <input type="text" formControlName="name" placeholder="Nom" />
+        <input type="number" formControlName="pv" placeholder="0" />
+        <label>PV /</label>
+        <input type="number" formControlName="h" placeholder="0" class="h" />
+        <label>H</label>
+        <input type="number" formControlName="wei" placeholder="0" class="wei" />
+      </div>
+    </div>
+    <br />
+  </ng-container>
+  <div class="divLabel">
+    <label>Nom</label>
+    <label>Poids</label>
+  </div>
+  <ng-container formArrayName="mat">
+    <div class="divLabel" *ngFor="let control of targetForm.get('mat').controls; let i = index" [formGroupName]="i">
+      <ion-icon name="close" (click)="removeItem(i)"></ion-icon>
+      <input type="text" formControlName="name" placeholder="nom" />
+      <input type="number" formControlName="wei" placeholder="poids" text-end />
+    </div>
+  </ng-container>
+  <div id="divAdd" (click)="addItem()">
+    <ion-icon name="add-circle"></ion-icon>
+    <label>Ajouter un objet</label>
+  </div>
+  <div text-end id="divWei">
+    <label>Poids total: {{ pTotal }} Kg</label>
+  </div>
 </ion-content>

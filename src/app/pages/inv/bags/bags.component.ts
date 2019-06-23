@@ -14,12 +14,10 @@ export class BagsComponent implements OnInit {
   @Input() title: string;
   constructor(private route: ActivatedRoute) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.route.data.subscribe(res => {
-      if (res.title) {
-        this.targetForm = mainForm.get(res.targetForm) as FormGroup;
-        this.title = res.title;
-      }
+      this.targetForm = mainForm.get(res.targetForm) as FormGroup;
+      this.title = res.title;
     });
   }
 

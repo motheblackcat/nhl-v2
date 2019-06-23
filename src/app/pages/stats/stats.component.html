@@ -1,5 +1,6 @@
 <ion-content padding [formGroup]="targetForm" (change)="updateForm()">
   <h3>{{ title }}</h3>
+  <br />
   <div *ngFor="let control of targetForm.controls | keyvalue: fm.defaultOrder" [ngSwitch]="control.key">
     <label [for]="control.key" *ngSwitchCase="'ev'">Energie Vitale (EV)</label>
     <label [for]="control.key" *ngSwitchCase="'ea'" margin-bottom>Energie Astrale (EA)</label>

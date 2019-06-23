@@ -1,5 +1,6 @@
 <ion-content padding [formGroup]="targetForm" (change)="updateForm()">
   <h3>{{ title }}</h3>
+  <br />
   <div *ngFor="let control of targetForm.controls | keyvalue: fm.defaultOrder" [ngSwitch]="control.key">
     <div *ngIf="control.key === 'berylium'">Mes richesses à moi que j'ai:</div>
     <label [for]="control.key">{{ control.key === 'pd' ? 'point de destin' : control.key }}</label>

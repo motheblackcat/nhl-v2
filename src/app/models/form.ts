@@ -50,24 +50,30 @@ export const mainForm = new FormGroup({
     ])
   }),
   campForm: new FormGroup({
-    tent: new FormGroup({
+    tente: new FormGroup({
       name: new FormControl(),
       pv: new FormControl(),
       h: new FormControl(),
       wei: new FormControl()
     }),
-    mat: new FormGroup({
+    matelas: new FormGroup({
       name: new FormControl(),
       pv: new FormControl(),
       h: new FormControl(),
       wei: new FormControl()
     }),
-    blan: new FormGroup({
+    couverture: new FormGroup({
       name: new FormControl(),
       pv: new FormControl(),
       h: new FormControl(),
       wei: new FormControl()
-    })
+    }),
+    mat: new FormArray([
+      new FormGroup({
+        name: new FormControl(),
+        wei: new FormControl()
+      })
+    ])
   }),
   foodForm: new FormArray([]),
   specialForm: new FormArray([

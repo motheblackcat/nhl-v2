@@ -23,6 +23,6 @@ export class CharComponent implements OnInit {
   }
 
   updateForm(): void {
-    console.warn('target', this.targetForm.value);
+    console.warn(this.targetForm.value);
   }
 }

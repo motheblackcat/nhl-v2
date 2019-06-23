@@ -17,6 +17,7 @@ export class ResetComponent {
     const toast = await this.toast.create({
       message: 'Toutes les données ont été effacées !',
       duration: 2000,
+      color: 'dark',
       position: 'top'
     });
     toast.present();

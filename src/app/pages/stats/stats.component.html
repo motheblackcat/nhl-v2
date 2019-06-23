@@ -24,7 +24,7 @@
       [value]="targetForm.get(control.key).value"
     />
     <span *ngIf="control.key === 'magphy' || control.key === 'magpsy' || control.key === 'resmag'" justify-content-center>{{
-      targetForm.get(control.key).value
+      targetForm.get(control.key).value === null ? 0 : targetForm.get(control.key).value
     }}</span>
     <span *ngIf="control.key !== 'magphy' && control.key !== 'magpsy' && control.key !== 'resmag'" justify-content-center>0</span>
     <div class="hint" *ngSwitchCase="'magphy'" margin-bottom>Moyenne INT et AD</div>

@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-inv',
-  templateUrl: './inv.component.html',
-  styleUrls: ['./inv.component.scss']
+  templateUrl: './inv.component.html'
 })
 export class InvComponent {
   config: Array<Object> = [

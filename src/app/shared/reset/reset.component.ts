@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 
 import { NotifierService } from 'src/app/services/notifier.service';
+import { mainForm } from 'src/app/models/form';
 
 @Component({
   selector: 'app-reset',
@@ -10,11 +11,7 @@ import { NotifierService } from 'src/app/services/notifier.service';
   styleUrls: ['./reset.component.scss']
 })
 export class ResetComponent {
-  constructor(
-    public modal: ModalController,
-    private toast: ToastController,
-    private notify: NotifierService
-  ) {}
+  constructor(public modal: ModalController, private toast: ToastController, private notify: NotifierService) {}
 
   async presentToast(): Promise<any> {
     const toast = await this.toast.create({
@@ -26,7 +23,7 @@ export class ResetComponent {
   }
 
   reset(): void {
-    this.notify.reset.next(true);
+    mainForm.reset();
     localStorage.clear();
     this.presentToast();
     this.modal.dismiss();

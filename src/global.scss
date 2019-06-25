@@ -53,3 +53,12 @@ ion-icon {
   display: block;
   border-radius: 25px;
 }
+
+.add {
+  display: flex;
+  align-items: center;
+
+  ion-icon {
+    margin-right: 5px;
+  }
+}

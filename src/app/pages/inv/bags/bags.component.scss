@@ -1,19 +1,15 @@
-div {
-  display: flex;
-  align-items: center;
+input[type='number'] {
+  width: 20%;
+  text-align: center;
+}
 
-  input[type='number'] {
-    width: 20%;
-    text-align: center;
-  }
-
-  input[type='text'] {
-    width: 100%;
-    text-align: initial;
-  }
+input[type='text'] {
+  width: 100%;
+  text-align: initial;
 }
 
 .title {
+  display: flex;
   justify-content: space-between;
 
   label {

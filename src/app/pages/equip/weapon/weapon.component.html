@@ -1,84 +1,27 @@
-<ion-content>
-  <ion-grid padding [formGroup]="weaponsForm">
-    <ion-row
-      ><ion-col><h6 text-uppercase>armement et baston</h6></ion-col></ion-row
-    >
-    <ng-container *ngFor="let weapon of weaponsArray">
-      <ion-row
-        ><ion-col
-          ><h6 text-capitalize>{{ weapon.label }}</h6></ion-col
-        ></ion-row
-      >
-      <ng-container [formGroupName]="weapon.key">
-        <ion-row>
-          <ion-col size="2"><label>Equipé</label></ion-col>
-          <ion-col size="4"
-            ><ion-checkbox
-              formControlName="equ"
-              (ionChange)="addWeapon(true)"
-            ></ion-checkbox
-          ></ion-col>
-          <ion-col size="2"><label for="name">Nom :</label></ion-col>
-          <ion-col size="4"
-            ><input
-              id="name"
-              type="text"
-              placeholder="Nom"
-              formControlName="name"
-              (blur)="addWeapon()"
-          /></ion-col>
-          <ion-col size="2"><label for="pi">P. I.</label></ion-col>
-          <ion-col size="4"
-            ><input
-              id="pi"
-              type="text"
-              placeholder="ex : 1D6"
-              formControlName="pi"
-              (blur)="addWeapon()"
-          /></ion-col>
-          <ion-col size="2"><label for="rup">P. Rup.</label></ion-col>
-          <ion-col size="4"
-            ><input
-              id="rup"
-              type="text"
-              placeholder="ex : 1 à 5"
-              formControlName="rup"
-              (blur)="addWeapon()"
-          /></ion-col>
-        </ion-row>
-        <ion-row
-          ><ion-col><label>Ajouter un effet</label></ion-col></ion-row
-        >
-        <ion-row>
-          <ion-col size="1"
-            ><ion-icon name="add" (click)="effect.focus()"></ion-icon
-          ></ion-col>
-          <ion-col
-            ><input
-              #effect
-              text-uppercase
-              type="text"
-              placeholder="ex : ad - 2"
-              (blur)="addEffect(weapon.key, effect, true)"
-          /></ion-col>
-        </ion-row>
-        <ng-container formArrayName="ef">
-          <ion-row
-            *ngFor="
-              let effect of weaponsForm.get(weapon.key).get('ef').controls;
-              let i = index
-            "
-          >
-            <ion-col size="1" (click)="removeEffect(weapon.key, i, true)"
-              ><ion-icon name="close"></ion-icon
-            ></ion-col>
-            <ion-col
-              ><label text-uppercase>{{ effect.value }}</label></ion-col
-            >
-          </ion-row>
-        </ng-container>
+<ion-content padding [formGroup]="targetForm" (change)="updateForm()">
+  <h3>{{ title }}</h3>
+  <div class="hint">p. i. : points d'impacts, dégâts infligés.</div>
+  <div class="hint">rup. : points de rupture.</div>
+  <ng-container *ngFor="let control of targetForm.controls | keyvalue: fm.defaultOrder; let i = index" [ngSwitch]="control.key">
+    <h2 *ngSwitchCase="'wea1'">arme principale :</h2>
+    <h2 *ngSwitchCase="'wea2'">arme secondaire :</h2>
+    <h2 *ngSwitchDefault>arme supplémentaire :</h2>
+    <div [formGroupName]="control.key" margin-top>
+      <input type="text" formControlName="name" placeholder="nom" />
+      <input type="text" formControlName="pi" placeholder="p. i." />
+      <input type="text" formControlName="rup" placeholder="rup." />
+      <label [for]="i">equipé ?</label>
+      <ion-checkbox type="checkbox" [id]="i" formControlName="equ" (ionChange)="updateForm()"></ion-checkbox>
+      <div margin-top margin-bottom>effets :</div>
+      <ng-container formArrayName="ef">
+        <div margin-bottom *ngFor="let item of targetForm.get(control.key).get('ef').controls; let i = index">
+          <input type="text" placeholder="effet (ex: AD + 1)" [formControlName]="i" />
+        </div>
       </ng-container>
-      <br />
-    </ng-container>
-  </ion-grid>
+      <div class="add" (click)="addItem(control.key)">
+        <ion-icon name="add-circle-outline"></ion-icon>
+        <label>Ajouter un effet</label>
+      </div>
+    </div>
+  </ng-container>
 </ion-content>

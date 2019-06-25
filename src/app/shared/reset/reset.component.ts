@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-
 import { ModalController, ToastController } from '@ionic/angular';
 
-import { NotifierService } from 'src/app/services/notifier.service';
 import { mainForm } from 'src/app/models/form';
 
 @Component({
@@ -11,7 +9,7 @@ import { mainForm } from 'src/app/models/form';
   styleUrls: ['./reset.component.scss']
 })
 export class ResetComponent {
-  constructor(public modal: ModalController, private toast: ToastController, private notify: NotifierService) {}
+  constructor(public modal: ModalController, private toast: ToastController) {}
 
   async presentToast(): Promise<any> {
     const toast = await this.toast.create({
@@ -24,6 +22,7 @@ export class ResetComponent {
   }
 
   reset(): void {
+    // Fix reset on FormArrays
     mainForm.reset();
     localStorage.clear();
     this.presentToast();

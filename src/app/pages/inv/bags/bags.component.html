@@ -12,7 +12,7 @@
   </div>
   <br />
   <ng-container formArrayName="bags">
-    <div *ngFor="let bag of targetForm.get('bags').controls; let i = index" [formGroupName]="i">
+    <div class="add" *ngFor="let bag of targetForm.get('bags').controls; let i = index" [formGroupName]="i">
       <ion-icon name="close" (click)="removeItem('bags', i)"></ion-icon>
       <input type="text" formControlName="name" placeholder="nom" />
       <input type="number" formControlName="max" placeholder="0" />
@@ -20,8 +20,8 @@
     </div>
   </ng-container>
   <br />
-  <div (click)="addItem('bags')">
-    <ion-icon name="add-circle"></ion-icon>
+  <div class="add" (click)="addItem('bags')">
+    <ion-icon name="add-circle-outline"></ion-icon>
     <label>Ajouter un sac</label>
   </div>
   <br />
@@ -32,15 +32,15 @@
   </div>
   <br />
   <ng-container formArrayName="pooches">
-    <div *ngFor="let pooch of targetForm.get('pooches').controls; let i = index" [formGroupName]="i">
+    <div class="add" *ngFor="let pooch of targetForm.get('pooches').controls; let i = index" [formGroupName]="i">
       <ion-icon name="close" (click)="removeItem('pooches', i)"></ion-icon>
       <input type="text" formControlName="name" placeholder="nom" />
       <input type="number" formControlName="max" placeholder="0" />
     </div>
   </ng-container>
   <br />
-  <div (click)="addItem('pooches')">
-    <ion-icon name="add-circle"></ion-icon>
+  <div class="add" (click)="addItem('pooches')">
+    <ion-icon name="add-circle-outline"></ion-icon>
     <label>Ajouter une bourse</label>
   </div>
 </ion-content>

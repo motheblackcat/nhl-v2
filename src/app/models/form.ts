@@ -30,7 +30,29 @@ export const mainForm = new FormGroup({
     resmag: new FormControl(0)
   }),
   skillsForm: new FormArray([]),
-  weaponsForm: new FormGroup({}),
+  weaponsForm: new FormGroup({
+    wea1: new FormGroup({
+      name: new FormControl(),
+      pi: new FormControl(),
+      rup: new FormControl(),
+      equ: new FormControl(),
+      ef: new FormArray([])
+    }),
+    wea2: new FormGroup({
+      name: new FormControl(),
+      pi: new FormControl(),
+      rup: new FormControl(),
+      equ: new FormControl(),
+      ef: new FormArray([])
+    }),
+    wea3: new FormGroup({
+      name: new FormControl(),
+      pi: new FormControl(),
+      rup: new FormControl(),
+      equ: new FormControl(),
+      ef: new FormArray([])
+    })
+  }),
   armorsForm: new FormGroup({}),
   questForm: new FormArray([]),
   lootForm: new FormArray([]),

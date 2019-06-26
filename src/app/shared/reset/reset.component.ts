@@ -25,7 +25,7 @@ export class ResetComponent {
 
   reset(): void {
     // this.resetArray.forEach(form => mainForm.get(form).setValue(new FormArray([])));
-    // (mainForm.get('potionsForm') as FormArray).clear();
+    (mainForm.get('potionsForm') as FormArray).clear();
     console.log(mainForm.get('potionsForm'));
     mainForm.reset();
     localStorage.clear();

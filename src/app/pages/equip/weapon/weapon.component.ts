@@ -27,6 +27,12 @@ export class WeaponComponent implements OnInit {
   }
 
   addItem(control: string): void {
-    (this.targetForm.get(control).get('ef') as FormArray).push(new FormControl())
+    (this.targetForm.get(control).get('ef') as FormArray).push(new FormControl());
+    this.updateForm();
+  }
+
+  removeItem(control: string, i: number): void {
+    (this.targetForm.get(control).get('ef') as FormArray).removeAt(i);
+    this.updateForm();
   }
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
+import { FormArray } from '@angular/forms';
 
 import { mainForm } from 'src/app/models/form';
 
@@ -9,6 +10,7 @@ import { mainForm } from 'src/app/models/form';
   styleUrls: ['./reset.component.scss']
 })
 export class ResetComponent {
+  resetArray = ['skillsForm', 'questForm', 'lootForm', 'foodForm', 'specialForm', 'gemsForm', 'potionsForm', 'preciousForm'];
   constructor(public modal: ModalController, private toast: ToastController) {}
 
   async presentToast(): Promise<any> {
@@ -22,7 +24,9 @@ export class ResetComponent {
   }
 
   reset(): void {
-    // Fix reset on FormArrays
+    // this.resetArray.forEach(form => mainForm.get(form).setValue(new FormArray([])));
+    // (mainForm.get('potionsForm') as FormArray).clear();
+    console.log(mainForm.get('potionsForm'));
     mainForm.reset();
     localStorage.clear();
     this.presentToast();

@@ -15,6 +15,7 @@
       <div margin-top margin-bottom>effets :</div>
       <ng-container formArrayName="ef">
         <div margin-bottom *ngFor="let item of targetForm.get(control.key).get('ef').controls; let i = index">
+          <ion-icon name="close" (click)="removeItem(control.key, i)"></ion-icon>
           <input type="text" placeholder="effet (ex: AD + 1)" [formControlName]="i" />
         </div>
       </ng-container>

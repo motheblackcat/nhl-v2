@@ -24,9 +24,8 @@ export class ResetComponent {
   }
 
   reset(): void {
-    // this.resetArray.forEach(form => mainForm.get(form).setValue(new FormArray([])));
-    (mainForm.get('potionsForm') as FormArray).clear();
-    console.log(mainForm.get('potionsForm'));
+    this.resetArray.forEach(form => (mainForm.get(form) as FormArray).clear());
+    // NEED TO CORRECT MODAL STYLE and reset sub formArrays
     mainForm.reset();
     localStorage.clear();
     this.presentToast();

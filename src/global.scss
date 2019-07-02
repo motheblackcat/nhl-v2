@@ -45,13 +45,8 @@ ion-icon {
   font-weight: bold;
 }
 
-.my-custom-modal-css .modal-wrapper {
-  height: 35%;
-  width: 80%;
-  top: 30%;
-  position: absolute;
-  display: block;
-  border-radius: 25px;
+.reset-modal {
+  --height: 35% !important;
 }
 
 .add {

@@ -13,7 +13,7 @@ export class FabComponent {
   async presentModal(): Promise<void> {
     const modal = await this.modalController.create({
       component: ResetComponent,
-      cssClass: 'my-custom-modal-css'
+      cssClass: 'reset-modal'
     });
     return await modal.present();
   }

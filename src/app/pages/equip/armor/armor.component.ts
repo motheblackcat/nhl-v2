@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
+import { FormGroup, FormArray, FormControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
-import { NotifierService } from 'src/app/services/notifier.service';
+import { mainForm } from 'src/app/models/form';
+import { FormManagementService } from 'src/app/services/form-management.service';
 
 @Component({
   selector: 'app-armor',
@@ -9,70 +11,42 @@ import { NotifierService } from 'src/app/services/notifier.service';
   styleUrls: ['./armor.component.scss']
 })
 export class ArmorComponent implements OnInit {
-  armorsLabels = [ 'tête :', 'torse :', 'bouclier :', 'bras :', 'mains :', 'jambes :', 'pieds :'];
-  armorsForm: FormArray;
-  tdm = false;
+  targetForm: FormGroup;
+  title: string;
   prNat = 0;
   prMag = 0;
+  constructor(private route: ActivatedRoute, public fm: FormManagementService) {}
 
-  constructor(private fb: FormBuilder, private notify: NotifierService) {
-    this.createForm();
+  ngOnInit(): void {
+    this.route.data.subscribe(res => {
+      this.title = res.title;
+      this.targetForm = mainForm.get(res.targetForm) as FormGroup;
+    });
+    this.prNatSum();
   }
-  ngOnInit() {
-    const data = JSON.parse(localStorage.getItem('armorData'));
-    if (data) {
-      this.armorsForm.setValue(data);
-    }
 
-    if (localStorage.getItem('tdmData')) {
-      this.tdm = JSON.parse(localStorage.getItem('tdmData'));
-    }
+  updateForm(): void {
+    this.prNatSum();
+    console.warn(this.targetForm.value);
+  }
 
-    this.checkStats();
-
-    this.notify.reset.subscribe((res) => {
-      if (res) {
-        this.armorsForm.reset();
-        this.tdm = false;
-        this.checkStats();
+  prNatSum() {
+    this.prNat = 0;
+    for (const control in this.targetForm.controls) {
+      if (control !== 'tdm') {
+        this.prNat += this.targetForm.get(control).get('pr').value ? Number(this.targetForm.get(control).get('pr').value) : 0;
       }
-    });
-  }
-
-  createForm() {
-    this.armorsForm = this.fb.array([]);
-    this.armorsLabels.forEach(() => {
-      this.armorsForm.push(this.fb.group({
-        name: '',
-        pr: '',
-        rup: '',
-        equ: ''
-      }));
-    });
-  }
-
-  saveData() {
-    localStorage.setItem('armorData', JSON.stringify(this.armorsForm.value));
-    this.checkStats();
-  }
-
-  toggleTdm() {
-    this.tdm = !this.tdm;
-    localStorage.setItem('tdmData', String(this.tdm));
-    this.checkStats();
-  }
-
-  checkStats() {
-    let sum = 0;
-    for (let i = 0; i < this.armorsForm.length; i++) {
-      const pr = Number(this.armorsForm.get(i.toString()).get('pr').value);
-      sum += pr;
-      this.prNat = sum;
     }
-    if (this.tdm) {
-      this.prNat = sum + 1;
-    } else {
-      this.prNat = sum;
-    }
+    this.prNat = this.targetForm.get('tdm').value ? this.prNat + 1 : this.prNat;
+  }
+
+  addItem(control: string): void {
+    (this.targetForm.get(control).get('ef') as FormArray).push(new FormControl());
+    this.updateForm();
+  }
+
+  removeItem(control: string, i: number): void {
+    (this.targetForm.get(control).get('ef') as FormArray).removeAt(i);
+    this.updateForm();
   }
 }

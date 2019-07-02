@@ -44,7 +44,7 @@ const routes: Routes = [
     path: 'equip',
     component: EquipComponent,
     children: [
-      { path: '', redirectTo: 'weapon', pathMatch: 'full' },
+      { path: '', redirectTo: 'armor', pathMatch: 'full' },
       {
         path: 'weapon',
         component: WeaponComponent,

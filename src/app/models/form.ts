@@ -53,7 +53,58 @@ export const mainForm = new FormGroup({
       ef: new FormArray([])
     })
   }),
-  armorsForm: new FormGroup({}),
+  armorsForm: new FormGroup({
+    tete: new FormGroup({
+      name: new FormControl(),
+      pr: new FormControl(),
+      rup: new FormControl(),
+      equ: new FormControl(),
+      ef: new FormArray([])
+    }),
+    torse: new FormGroup({
+      name: new FormControl(),
+      pr: new FormControl(),
+      rup: new FormControl(),
+      equ: new FormControl(),
+      ef: new FormArray([])
+    }),
+    bouclier: new FormGroup({
+      name: new FormControl(),
+      pr: new FormControl(),
+      rup: new FormControl(),
+      equ: new FormControl(),
+      ef: new FormArray([])
+    }),
+    bras: new FormGroup({
+      name: new FormControl(),
+      pr: new FormControl(),
+      rup: new FormControl(),
+      equ: new FormControl(),
+      ef: new FormArray([])
+    }),
+    mains: new FormGroup({
+      name: new FormControl(),
+      pr: new FormControl(),
+      rup: new FormControl(),
+      equ: new FormControl(),
+      ef: new FormArray([])
+    }),
+    jambes: new FormGroup({
+      name: new FormControl(),
+      pr: new FormControl(),
+      rup: new FormControl(),
+      equ: new FormControl(),
+      ef: new FormArray([])
+    }),
+    pieds: new FormGroup({
+      name: new FormControl(),
+      pr: new FormControl(),
+      rup: new FormControl(),
+      equ: new FormControl(),
+      ef: new FormArray([])
+    }),
+    tdm: new FormControl()
+  }),
   questForm: new FormArray([]),
   lootForm: new FormArray([]),
   bagsForm: new FormGroup({

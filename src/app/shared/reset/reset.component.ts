@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
+import { FormArray, FormGroup } from '@angular/forms';
 import { ModalController, ToastController } from '@ionic/angular';
-import { FormArray } from '@angular/forms';
 
 import { mainForm } from 'src/app/models/form';
 
@@ -25,7 +25,25 @@ export class ResetComponent {
 
   reset(): void {
     this.resetArray.forEach(form => (mainForm.get(form) as FormArray).clear());
-    // NEED TO CORRECT MODAL STYLE and reset sub formArrays
+    for (const control in (mainForm.get('weaponsForm') as FormGroup).controls) {
+      if (control) {
+        (mainForm
+          .get('weaponsForm')
+          .get(control)
+          .get('ef') as FormArray).clear();
+      }
+    }
+    for (const control in (mainForm.get('armorsForm') as FormGroup).controls) {
+      if (control !== 'equ' && control !== 'tdm') {
+        (mainForm
+          .get('armorsForm')
+          .get(control)
+          .get('ef') as FormArray).clear();
+      }
+    }
+    (mainForm.get('bagsForm').get('bags') as FormArray).clear();
+    (mainForm.get('bagsForm').get('pooches') as FormArray).clear();
+    (mainForm.get('campForm').get('mat') as FormArray).clear();
     mainForm.reset();
     localStorage.clear();
     this.presentToast();

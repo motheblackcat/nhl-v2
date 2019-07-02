@@ -1,79 +1,37 @@
-<ion-content padding [formGroup]="armorsForm">
-  <ion-grid>
-    <ion-row padding-bottom
-      ><ion-col
-        ><h6 text-uppercase>armures et protections</h6></ion-col
-      ></ion-row
-    >
-    <ng-container *ngFor="let label of armorsLabels; let i = index">
-      <ion-row>
-        <ion-col
-          ><label>{{ label }}</label></ion-col
-        >
-        <ion-col text-right><label>equipé ?</label></ion-col>
-      </ion-row>
-      <ion-row padding-bottom [formArrayName]="i">
-        <ion-col
-          ><input
-            formControlName="name"
-            type="text"
-            placeholder="Nom"
-            (blur)="saveData()"
-            (keydown.enter)="saveData()"
-        /></ion-col>
-        <ion-col
-          ><input
-            formControlName="pr"
-            type="number"
-            placeholder="PR"
-            (blur)="saveData()"
-            (keydown.enter)="saveData()"
-        /></ion-col>
-        <ion-col
-          ><input
-            formControlName="rup"
-            type="text"
-            placeholder="Rup."
-            (blur)="saveData()"
-            (keydown.enter)="saveData()"
-        /></ion-col>
-        <ion-col
-          ><input formControlName="equ" type="checkbox" (change)="saveData()"
-        /></ion-col>
-      </ion-row>
-    </ng-container>
-    <ion-row padding-bottom>
-      <ion-col><label for="tm">Truc de Mauviette</label></ion-col>
-      <ion-col pull="2.6"
-        ><input id="tm" type="checkbox" [checked]="tdm" (change)="toggleTdm()"
-      /></ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col><label>Protection Naturel</label></ion-col>
-      <ion-col
-        ><label>{{ prNat }}</label></ion-col
-      >
-    </ion-row>
-    <ion-row>
-      <ion-col><label>Protection Magique</label></ion-col>
-      <ion-col
-        ><label>{{ prMag }}</label></ion-col
-      >
-    </ion-row>
-    <ng-container formArrayName="ef">
-      <ion-row
-        *ngFor="
-          let effect of weaponsForm.get(weapon.key).get('ef').controls;
-          let i = index
-        "
-      >
-        <ion-col size="1" (click)="removeEffect(weapon.key, i, true)"
-          ><ion-icon name="close"></ion-icon
-        ></ion-col>
-        <ion-col
-          ><label text-uppercase>{{ effect.value }}</label></ion-col
-        >
-      </ion-row>
-    </ng-container>
-  </ion-grid>
+<ion-content padding [formGroup]="targetForm" (change)="updateForm()">
+  <h3>{{ title }}</h3>
+  <label class="hint">PR: points de protection</label>
+  <br />
+  <label class="hint">rup. : points de rupture</label>
+  <ng-container *ngFor="let control of targetForm.controls | keyvalue: fm.defaultOrder; let i = index">
+    <div *ngIf="control.key !== 'tdm'">
+      <h2>{{ control.key }}</h2>
+      <div [formGroupName]="control.key">
+        <div><label for="name{{ i }}">nom :</label><input type="text" id="name{{ i }}" formControlName="name" placeholder="nom" /></div>
+        <div class="add">
+          <label for="pr{{ i }}">pr :</label><input type="number" id="pr{{ i }}" class="short" formControlName="pr" placeholder="pr" />
+          <label for="rup{{ i }}">rup. :</label><input type="text" id="rup{{ i }}" class="short" formControlName="rup" placeholder="rup." />
+          <label for="equ{{ i }}">equipé ?</label>
+          <ion-checkbox type="checkbox" id="equ{{ i }}" formControlName="equ" color="dark" (ionChange)="updateForm()"></ion-checkbox>
+        </div>
+        <ng-container formArrayName="ef">
+          <div>effet(s):</div>
+          <div class="add" *ngFor="let item of targetForm.get(control.key).get('ef').controls; let i = index">
+            <ion-icon name="close" (click)="removeItem(control.key, i)"></ion-icon>
+            <input type="text" placeholder="effet (ex: AD + 1)" [formControlName]="i" />
+          </div>
+        </ng-container>
+        <div class="add" (click)="addItem(control.key)">
+          <ion-icon name="add-circle-outline"></ion-icon>
+          <label>Ajouter un effet</label>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <div class="add">
+    <label for="tdm">truc de mauviette</label>
+    <ion-checkbox type="checkbox" id="tdm" formControlName="tdm" color="dark" (ionChange)="updateForm()"></ion-checkbox>
+  </div>
+  <div>protection naturel {{ prNat }}</div>
+  <div>protection magique {{ prMag }}</div>
 </ion-content>

@@ -28,6 +28,12 @@ export class FabComponent implements OnInit {
           case '/equip':
             this.icon = 'shirt';
             break;
+          case '/equip/armor':
+            this.icon = 'shirt';
+            break;
+          case '/equip/weapon':
+            this.icon = 'shirt';
+            break;
           default:
             this.icon = 'body';
             break;

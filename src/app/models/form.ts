@@ -16,15 +16,15 @@ export const mainForm = new FormGroup({
     cuivre: new FormControl()
   }),
   statsForm: new FormGroup({
-    ev: new FormControl(),
-    ea: new FormControl(),
-    cou: new FormControl(),
-    int: new FormControl(),
-    cha: new FormControl(),
-    ad: new FormControl(),
-    fo: new FormControl(),
-    atq: new FormControl(),
-    prd: new FormControl(),
+    ev: new FormGroup({ val: new FormControl(), ef: new FormControl(0) }),
+    ea: new FormGroup({ val: new FormControl(), ef: new FormControl(0) }),
+    cou: new FormGroup({ val: new FormControl(), ef: new FormControl(0) }),
+    int: new FormGroup({ val: new FormControl(), ef: new FormControl(0) }),
+    cha: new FormGroup({ val: new FormControl(), ef: new FormControl(0) }),
+    ad: new FormGroup({ val: new FormControl(), ef: new FormControl(0) }),
+    fo: new FormGroup({ val: new FormControl(), ef: new FormControl(0) }),
+    atq: new FormGroup({ val: new FormControl(), ef: new FormControl(0) }),
+    prd: new FormGroup({ val: new FormControl(), ef: new FormControl(0) }),
     magphy: new FormControl(0),
     magpsy: new FormControl(0),
     resmag: new FormControl(0)
@@ -36,7 +36,12 @@ export const mainForm = new FormGroup({
       pi: new FormControl(),
       rup: new FormControl(),
       equ: new FormControl(),
-      ef: new FormArray([])
+      ef: new FormArray([
+        new FormGroup({
+          name: new FormControl(),
+          val: new FormControl()
+        })
+      ])
     }),
     wea2: new FormGroup({
       name: new FormControl(),
@@ -59,7 +64,12 @@ export const mainForm = new FormGroup({
       pr: new FormControl(),
       rup: new FormControl(),
       equ: new FormControl(),
-      ef: new FormArray([])
+      ef: new FormArray([
+        new FormGroup({
+          name: new FormControl(),
+          val: new FormControl()
+        })
+      ])
     }),
     torse: new FormGroup({
       name: new FormControl(),
@@ -103,7 +113,8 @@ export const mainForm = new FormGroup({
       equ: new FormControl(),
       ef: new FormArray([])
     }),
-    tdm: new FormControl()
+    tdm: new FormControl(),
+    prmag: new FormControl()
   }),
   questForm: new FormArray([]),
   lootForm: new FormArray([]),

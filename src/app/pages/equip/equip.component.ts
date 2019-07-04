@@ -14,11 +14,11 @@ export class EquipComponent implements OnInit {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationStart) {
         switch (event.url) {
-          case '/equip/weapon':
-            this.icon = 'flash';
+          case '/equip/armor':
+            this.icon = 'shirt';
             break;
           default:
-            this.icon = 'shirt';
+            this.icon = 'flash';
             break;
         }
       }

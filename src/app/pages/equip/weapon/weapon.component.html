@@ -17,9 +17,14 @@
       </div>
       <div margin-top margin-bottom>effets :</div>
       <ng-container formArrayName="ef">
-        <div margin-bottom *ngFor="let item of targetForm.get(control.key).get('ef').controls; let i = index" class="add">
+        <div margin-bottom *ngFor="let item of targetForm.get(control.key).get('ef').controls; let i = index" class="add effect">
           <ion-icon name="close" (click)="removeItem(control.key, i)"></ion-icon>
-          <input type="text" placeholder="effet (ex: AD + 1)" [formControlName]="i" />
+          <ng-container [formGroupName]="i">
+            <label for="efname">stat. :</label>
+            <input type="text" id="efname" class="short" placeholder="ex : ad / int" formControlName="name" />
+            <label for="efval">valeur :</label>
+            <input type="text" id="efval" class="short" placeholder="ex : 2 / -3" formControlName="val" />
+          </ng-container>
         </div>
       </ng-container>
       <div class="add" (click)="addItem(control.key)">

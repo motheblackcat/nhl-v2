@@ -2,6 +2,12 @@ ion-checkbox {
   margin-left: 15px;
 }
 
-.short {
-  width: 25%;
+.effect {
+  label {
+    margin-right: 10px;
+
+    &:nth-child(4) {
+      margin-left: 15px;
+    }
+  }
 }

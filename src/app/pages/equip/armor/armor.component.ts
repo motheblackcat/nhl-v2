@@ -27,13 +27,14 @@ export class ArmorComponent implements OnInit {
 
   updateForm(): void {
     this.prNatSum();
+    this.fm.updateEffects();
     console.warn(this.targetForm.value);
   }
 
   prNatSum() {
     this.prNat = 0;
     for (const control in this.targetForm.controls) {
-      if (control !== 'tdm') {
+      if (control !== 'tdm' && control !== 'prmag') {
         this.prNat += this.targetForm.get(control).get('pr').value ? Number(this.targetForm.get(control).get('pr').value) : 0;
       }
     }
@@ -41,7 +42,12 @@ export class ArmorComponent implements OnInit {
   }
 
   addItem(control: string): void {
-    (this.targetForm.get(control).get('ef') as FormArray).push(new FormControl());
+    (this.targetForm.get(control).get('ef') as FormArray).push(
+      new FormGroup({
+        name: new FormControl(),
+        val: new FormControl()
+      })
+    );
     this.updateForm();
   }
 

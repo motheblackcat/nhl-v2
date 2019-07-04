@@ -23,11 +23,11 @@ export class StatsComponent implements OnInit {
   }
 
   updateForm(): void {
-    const int = this.targetForm.get('int').value;
-    const ad = this.targetForm.get('ad').value;
-    const cha = this.targetForm.get('cha').value;
-    const cou = this.targetForm.get('cou').value;
-    const fo = this.targetForm.get('fo').value;
+    const int = this.targetForm.get('int').get('val').value;
+    const ad = this.targetForm.get('ad').get('val').value;
+    const cha = this.targetForm.get('cha').get('val').value;
+    const cou = this.targetForm.get('cou').get('val').value;
+    const fo = this.targetForm.get('fo').get('val').value;
 
     this.targetForm.get('magphy').setValue(Math.ceil((int + ad) / 2));
     this.targetForm.get('magpsy').setValue(Math.ceil((int + cha) / 2));

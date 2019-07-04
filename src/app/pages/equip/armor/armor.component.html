@@ -4,7 +4,7 @@
   <br />
   <label class="hint">rup. : points de rupture</label>
   <ng-container *ngFor="let control of targetForm.controls | keyvalue: fm.defaultOrder; let i = index">
-    <div *ngIf="control.key !== 'tdm'">
+    <div *ngIf="control.key !== 'tdm' && control.key !== 'prmag'">
       <h2>{{ control.key }}</h2>
       <div [formGroupName]="control.key">
         <div><label for="name{{ i }}">nom :</label><input type="text" id="name{{ i }}" formControlName="name" placeholder="nom" /></div>
@@ -16,9 +16,14 @@
         </div>
         <ng-container formArrayName="ef">
           <div>effet(s):</div>
-          <div class="add" *ngFor="let item of targetForm.get(control.key).get('ef').controls; let i = index">
+          <div margin-bottom *ngFor="let item of targetForm.get(control.key).get('ef').controls; let i = index" class="add effect">
             <ion-icon name="close" (click)="removeItem(control.key, i)"></ion-icon>
-            <input type="text" placeholder="effet (ex: AD + 1)" [formControlName]="i" />
+            <ng-container [formGroupName]="i">
+              <label for="efname">stat. :</label>
+              <input type="text" id="efname" class="short" placeholder="ex : ad / int" formControlName="name" />
+              <label for="efval">valeur :</label>
+              <input type="text" id="efval" class="short" placeholder="ex : 2 / -3" formControlName="val" />
+            </ng-container>
           </div>
         </ng-container>
         <div class="add" (click)="addItem(control.key)">
@@ -33,5 +38,6 @@
     <ion-checkbox type="checkbox" id="tdm" formControlName="tdm" color="dark" (ionChange)="updateForm()"></ion-checkbox>
   </div>
   <div>protection naturel {{ prNat }}</div>
-  <div class="last">protection magique {{ prMag }}</div>
+  <label for="prmag">protection magique</label>
+  <input type="number" id="prmag" class="last" placeholder="0" formControlName="prmag" />
 </ion-content>

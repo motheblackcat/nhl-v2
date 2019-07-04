@@ -23,29 +23,16 @@ export class WeaponComponent implements OnInit {
   }
 
   updateForm(): void {
-    let adcounter = 0;
-    let intcounter = 0;
-    for (const control in this.targetForm.controls) {
-      if (this.targetForm.get(control).get('equ').value) {
-        this.targetForm
-          .get(control)
-          .get('ef')
-          .value.forEach(effect => {
-            if (effect.split(' ')[0] === 'ad') {
-              adcounter += Number(effect.split(' ')[2]);
-            }
-            if (effect.split(' ')[0] === 'int') {
-              intcounter += Number(effect.split(' ')[2]);
-            }
-          });
-      }
-    }
-    console.log(adcounter, intcounter);
-    console.log(this.targetForm.value);
+    this.fm.updateEffects();
   }
 
   addItem(control: string): void {
-    (this.targetForm.get(control).get('ef') as FormArray).push(new FormControl());
+    (this.targetForm.get(control).get('ef') as FormArray).push(
+      new FormGroup({
+        name: new FormControl(),
+        val: new FormControl()
+      })
+    );
     this.updateForm();
   }
 

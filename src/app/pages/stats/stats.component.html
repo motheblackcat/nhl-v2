@@ -14,19 +14,22 @@
     <label *ngSwitchCase="'magphy'" [for]="control.key">Magie Phy.</label>
     <label *ngSwitchCase="'magpsy'" [for]="control.key">Magie Psy.</label>
     <label [for]="control.key" *ngSwitchCase="'resmag'">Résist. Mag.</label>
-    <input
-      text-center
-      *ngIf="control.key !== 'magphy' && control.key !== 'magpsy' && control.key !== 'resmag'"
-      type="number"
-      [id]="control.key"
-      placeholder="0"
-      [formControlName]="control.key"
-      [value]="targetForm.get(control.key).value"
-    />
-    <span *ngIf="control.key === 'magphy' || control.key === 'magpsy' || control.key === 'resmag'" justify-content-center>{{
-      targetForm.get(control.key).value === null ? 0 : targetForm.get(control.key).value
-    }}</span>
-    <span *ngIf="control.key !== 'magphy' && control.key !== 'magpsy' && control.key !== 'resmag'" justify-content-center>0</span>
+    <ng-container [formGroupName]="control.key">
+      <input
+        text-center
+        *ngIf="control.key !== 'magphy' && control.key !== 'magpsy' && control.key !== 'resmag'"
+        type="number"
+        [id]="control.key"
+        placeholder="0"
+        formControlName="val"
+      />
+    </ng-container>
+    <span *ngIf="control.key === 'magphy' || control.key === 'magpsy' || control.key === 'resmag'" justify-content-center>
+      {{ targetForm.get(control.key).value }}
+    </span>
+    <span *ngIf="control.key !== 'magphy' && control.key !== 'magpsy' && control.key !== 'resmag'" justify-content-center>
+      effet : {{ targetForm.get(control.key).get('ef').value }}
+    </span>
     <div class="hint" *ngSwitchCase="'magphy'" margin-bottom>Moyenne INT et AD</div>
     <div class="hint" *ngSwitchCase="'magpsy'" margin-bottom>Moyenne INT et CHA</div>
     <div class="hint" *ngSwitchCase="'resmag'">Moyenne COU, INT et FO</div>

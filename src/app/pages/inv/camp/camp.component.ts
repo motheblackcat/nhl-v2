@@ -14,14 +14,15 @@ import { FormManagementService } from 'src/app/services/form-management.service'
 export class CampComponent implements OnInit {
   title: string;
   targetForm: FormGroup;
+  matFormArray: FormArray;
   pTotal = 0;
-
   constructor(public fm: FormManagementService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.route.data.subscribe(res => {
       this.title = res.title;
       this.targetForm = mainForm.get(res.targetForm) as FormGroup;
+      this.matFormArray = this.targetForm.get('mat') as FormArray;
     });
   }
 

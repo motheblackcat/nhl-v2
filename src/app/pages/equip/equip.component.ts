@@ -7,7 +7,7 @@ import { Router, NavigationStart } from '@angular/router';
   styleUrls: ['./equip.component.scss']
 })
 export class EquipComponent implements OnInit {
-  icon = 'shirt';
+  icon = 'flash';
   constructor(private router: Router) {}
 
   ngOnInit(): void {

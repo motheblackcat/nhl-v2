@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup, FormControl, FormArray } from '@angular/forms';
+import { FormGroup, FormControl, FormArray, Form } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 import { mainForm } from 'src/app/models/form';
@@ -12,12 +12,16 @@ import { mainForm } from 'src/app/models/form';
 export class BagsComponent implements OnInit {
   @Input() targetForm: FormGroup;
   @Input() title: string;
+  bagsFormArray: FormArray;
+  poochesFormArray: FormArray;
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.route.data.subscribe(res => {
       this.targetForm = mainForm.get(res.targetForm) as FormGroup;
       this.title = res.title;
+      this.bagsFormArray = this.targetForm.get('bags') as FormArray;
+      this.poochesFormArray = this.targetForm.get('bags') as FormArray;
     });
   }
 

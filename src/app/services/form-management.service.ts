@@ -11,14 +11,14 @@ export class FormManagementService {
   initForm(): void {
     this.store.get('mainForm').then(res => {
       if (res) {
-        mainForm.setValue(JSON.parse(res));
+        mainForm.setValue(res);
       }
     });
-    console.log(mainForm.value);
   }
 
   saveForm(): void {
-    this.store.set('mainForm', JSON.stringify(mainForm.value));
+    console.log('SAVED');
+    this.store.set('mainForm', mainForm.value);
   }
 
   defaultOrder(): null {

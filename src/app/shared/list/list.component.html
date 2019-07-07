@@ -1,14 +1,14 @@
-<ion-content padding [formGroup]="mainForm" (change)="updateForm(add)">
+<ion-content padding [formGroup]="mainForm">
   <h3>{{ title }}</h3>
   <label class="hint" *ngIf="subtitle">{{ subtitle }}</label>
   <br *ngIf="subtitle" />
   <div>
     <label for="first"><ion-icon name="add-circle-outline"></ion-icon></label>
-    <input #add type="text" id="first" [placeholder]="placeholder" />
+    <input #add type="text" id="first" [placeholder]="placeholder" (change)="updateItem(add)" />
   </div>
   <br />
   <ng-container [formArrayName]="targetFormName">
-    <div class="item" *ngFor="let control of targetForm.controls; let i = index">
+    <div class="item" *ngFor="let control of targetForm.controls; let i = index" (change)="updateItem(update, i)">
       <ion-icon name="close" (click)="deleteItem(i)"></ion-icon>
       <input #update type="text" [formControlName]="i" />
     </div>

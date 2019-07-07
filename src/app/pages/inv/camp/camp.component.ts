@@ -32,8 +32,6 @@ export class CampComponent implements OnInit {
       this.targetForm.get('matelas').get('wei').value +
       this.targetForm.get('couverture').get('wei').value +
       this.targetForm.get('mat').value.reduce((a, b) => a + b.wei, 0);
-    // localStorage.setItem('mainForm', JSON.stringify(mainForm));
-    console.warn(this.targetForm.value);
   }
 
   addItem(): void {

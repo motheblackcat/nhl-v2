@@ -1,4 +1,4 @@
-<ion-content padding [formGroup]="mainForm" (change)="updateForm()">
+<ion-content padding [formGroup]="mainForm">
   <h3>{{ title }}</h3>
   <label class="hint" *ngIf="subtitle">{{ subtitle }}</label>
   <ng-container [formArrayName]="targetFormName">

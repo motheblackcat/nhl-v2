@@ -36,7 +36,5 @@ export class StatsComponent implements OnInit {
 
   updateForm(): void {
     this.updateMagStats();
-    // localStorage.setItem('mainForm', JSON.stringify(mainForm));
-    console.warn(this.targetForm.value);
   }
 }

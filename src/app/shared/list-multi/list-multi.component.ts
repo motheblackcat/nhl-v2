@@ -30,11 +30,6 @@ export class ListMultiComponent implements OnInit {
     });
   }
 
-  updateForm(): void {
-    // localStorage.setItem('mainForm', JSON.stringify(mainForm));
-    console.warn(mainForm);
-  }
-
   addItem(): void {
     this.targetForm.push(new FormGroup({ name: new FormControl(), effect: new FormControl() }));
   }

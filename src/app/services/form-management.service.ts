@@ -1,15 +1,23 @@
 import { Injectable } from '@angular/core';
 
+import { Storage } from '@ionic/storage';
+
 import { mainForm } from '../models/form';
 import { FormGroup } from '@angular/forms';
 
 @Injectable()
 export class FormManagementService {
+  constructor(private store: Storage) {}
   initForm(): void {
-    const data = localStorage.getItem('mainForm');
-    if (data) {
-      mainForm.setValue(JSON.parse(data));
-    }
+    this.store.get('mainForm').then(res => {
+      if (res) {
+        mainForm.setValue(JSON.parse(res));
+      }
+    });
+  }
+
+  saveForm(): void {
+    this.store.set('mainForm', JSON.stringify(mainForm.value));
   }
 
   defaultOrder(): null {
@@ -40,6 +48,5 @@ export class FormManagementService {
           .setValue(effects.filter(e => e.name === stat).reduce((a, b) => a + Number(b.val), 0));
       });
     });
-    console.log(mainForm.get('statsForm').value);
   }
 }

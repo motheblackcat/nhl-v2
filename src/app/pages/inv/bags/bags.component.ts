@@ -25,11 +25,6 @@ export class BagsComponent implements OnInit {
     });
   }
 
-  updateForm(): void {
-    // localStorage.setItem('mainForm', JSON.stringify(mainForm));
-    console.warn('target', this.targetForm.value);
-  }
-
   addItem(array: string): void {
     (this.targetForm.get(array) as FormArray).push(new FormGroup({ name: new FormControl(), max: new FormControl() }));
   }

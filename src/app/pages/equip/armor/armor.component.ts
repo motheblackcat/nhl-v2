@@ -28,8 +28,6 @@ export class ArmorComponent implements OnInit {
   updateForm(): void {
     this.prNatSum();
     this.fm.updateEffects();
-    // localStorage.setItem('mainForm', JSON.stringify(mainForm));
-    console.warn(this.targetForm.value);
   }
 
   prNatSum() {

@@ -28,15 +28,12 @@ export class ListComponent implements OnInit {
     });
   }
 
-  updateForm(input: HTMLInputElement, i?: number): void {
+  updateForm(input: HTMLInputElement): void {
     this.targetForm.push(new FormControl(input.value));
     input.value = '';
-    // localStorage.setItem('mainForm', JSON.stringify(mainForm));
-    console.warn(this.targetForm);
   }
 
   deleteItem(i: number): void {
     this.targetForm.removeAt(i);
-    console.warn(this.targetForm);
   }
 }

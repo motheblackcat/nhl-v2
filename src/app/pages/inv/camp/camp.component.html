@@ -1,4 +1,4 @@
-<ion-content padding [formGroup]="targetForm" (change)="updateForm()">
+<ion-content padding [formGroup]="targetForm">
   <h3>{{ title }}</h3>
   <label class="hint">récup. : récupération PV</label>
   <ng-container *ngFor="let control of targetForm.controls | keyvalue: fm.defaultOrder; let i = index">

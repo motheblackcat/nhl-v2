@@ -4,6 +4,7 @@ import { RouteReuseStrategy } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { IonicStorageModule } from '@ionic/storage';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
@@ -43,7 +44,7 @@ import { FormManagementService } from './services/form-management.service';
     FabComponent
   ],
   entryComponents: [ResetComponent],
-  imports: [BrowserModule, ReactiveFormsModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [BrowserModule, ReactiveFormsModule, IonicModule.forRoot(), IonicStorageModule.forRoot(), AppRoutingModule],
   providers: [StatusBar, SplashScreen, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, FormManagementService],
   bootstrap: [AppComponent]
 })

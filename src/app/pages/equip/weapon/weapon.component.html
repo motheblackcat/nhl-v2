@@ -1,4 +1,4 @@
-<ion-content padding [formGroup]="targetForm" (change)="updateForm()">
+<ion-content padding [formGroup]="targetForm">
   <h3>{{ title }}</h3>
   <div class="hint">p. i. : points d'impacts, dégâts infligés.</div>
   <div class="hint">rup. : points de rupture.</div>
@@ -13,7 +13,7 @@
         <label for="pr{{ i }}">p. i. :</label><input type="number" id="pi{{ i }}" class="short" formControlName="pi" placeholder="p.i." />
         <label for="rup{{ i }}">rup. :</label><input type="text" id="rup{{ i }}" class="short" formControlName="rup" placeholder="rup." />
         <label for="equ{{ i }}">equipé ?</label>
-        <ion-checkbox type="checkbox" id="equ{{ i }}" formControlName="equ" color="dark" (ionChange)="updateForm()"></ion-checkbox>
+        <ion-checkbox type="checkbox" id="equ{{ i }}" formControlName="equ" color="dark"></ion-checkbox>
       </div>
       <div margin-top margin-bottom>effets :</div>
       <ng-container formArrayName="ef">

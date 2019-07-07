@@ -21,9 +21,4 @@ export class CharComponent implements OnInit {
       this.targetForm = mainForm.get(res.targetForm) as FormGroup;
     });
   }
-
-  updateForm(): void {
-    // localStorage.setItem('mainForm', JSON.stringify(mainForm));
-    console.warn(this.targetForm.value);
-  }
 }

@@ -3,6 +3,7 @@ import { FormArray, FormGroup } from '@angular/forms';
 import { ModalController, ToastController } from '@ionic/angular';
 
 import { mainForm } from 'src/app/models/form';
+import { FormManagementService } from 'src/app/services/form-management.service';
 
 @Component({
   selector: 'app-reset',
@@ -10,8 +11,7 @@ import { mainForm } from 'src/app/models/form';
   styleUrls: ['./reset.component.scss']
 })
 export class ResetComponent {
-  resetArray = ['skillsForm', 'questForm', 'lootForm', 'foodForm', 'specialForm', 'gemsForm', 'potionsForm', 'preciousForm'];
-  constructor(public modal: ModalController, private toast: ToastController) {}
+  constructor(public modal: ModalController, private toast: ToastController, private fm: FormManagementService) {}
 
   async presentToast(): Promise<any> {
     const toast = await this.toast.create({
@@ -24,7 +24,7 @@ export class ResetComponent {
   }
 
   reset(): void {
-    this.resetArray.forEach(form => (mainForm.get(form) as FormArray).clear());
+    this.fm.resetArray.forEach(form => (mainForm.get(form) as FormArray).clear());
     for (const control in (mainForm.get('weaponsForm') as FormGroup).controls) {
       if (control) {
         (mainForm

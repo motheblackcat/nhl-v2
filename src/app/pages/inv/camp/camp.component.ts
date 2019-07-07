@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormArray } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
-import { mainForm } from 'src/app/models/form';
+import { Storage } from '@ionic/storage';
 
+import { mainForm } from 'src/app/models/form';
 import { FormManagementService } from 'src/app/services/form-management.service';
 
 @Component({
@@ -16,17 +17,25 @@ export class CampComponent implements OnInit {
   targetForm: FormGroup;
   matFormArray: FormArray;
   pTotal = 0;
-  constructor(public fm: FormManagementService, private route: ActivatedRoute) {}
+  constructor(public fm: FormManagementService, private route: ActivatedRoute, private store: Storage) {}
 
   ngOnInit(): void {
     this.route.data.subscribe(res => {
       this.title = res.title;
       this.targetForm = mainForm.get(res.targetForm) as FormGroup;
       this.matFormArray = this.targetForm.get('mat') as FormArray;
+      this.store.get('mainForm').then(data => {
+        data.campForm.mat.forEach(item => {
+          this.matFormArray.push(new FormGroup({ name: new FormControl(item.name), wei: new FormControl(item.wei) }));
+        });
+      });
+    });
+    this.targetForm.valueChanges.subscribe(res => {
+      this.updateTotalWeight();
     });
   }
 
-  updateForm(): void {
+  updateTotalWeight(): void {
     this.pTotal =
       this.targetForm.get('tente').get('wei').value +
       this.targetForm.get('matelas').get('wei').value +
@@ -36,11 +45,9 @@ export class CampComponent implements OnInit {
 
   addItem(): void {
     (this.targetForm.get('mat') as FormArray).push(new FormGroup({ name: new FormControl(), wei: new FormControl() }));
-    this.updateForm();
   }
 
   removeItem(i: number): void {
     (this.targetForm.get('mat') as FormArray).removeAt(i);
-    this.updateForm();
   }
 }

@@ -28,11 +28,6 @@ export class ListComponent implements OnInit {
       this.placeholder = res.placeholder;
       this.targetFormName = res.targetForm;
       this.targetForm = mainForm.get(this.targetFormName) as FormArray;
-      this.store.get('mainForm').then(data => {
-        data[this.targetFormName].forEach(item => {
-          this.targetForm.push(new FormControl(item));
-        });
-      });
     });
   }
 

@@ -120,18 +120,8 @@ export const mainForm = new FormGroup({
   lootForm: new FormArray([]),
   bagsForm: new FormGroup({
     max: new FormControl(),
-    bags: new FormArray([
-      new FormGroup({
-        name: new FormControl(),
-        max: new FormControl()
-      })
-    ]),
-    pooches: new FormArray([
-      new FormGroup({
-        name: new FormControl(),
-        max: new FormControl()
-      })
-    ])
+    bags: new FormArray([]),
+    pooches: new FormArray([])
   }),
   campForm: new FormGroup({
     tente: new FormGroup({
@@ -152,31 +142,11 @@ export const mainForm = new FormGroup({
       h: new FormControl(),
       wei: new FormControl()
     }),
-    mat: new FormArray([
-      new FormGroup({
-        name: new FormControl(),
-        wei: new FormControl()
-      })
-    ])
+    mat: new FormArray([])
   }),
   foodForm: new FormArray([]),
-  specialForm: new FormArray([
-    new FormGroup({
-      name: new FormControl(),
-      effect: new FormControl()
-    })
-  ]),
-  gemsForm: new FormArray([
-    new FormGroup({
-      name: new FormControl(),
-      effect: new FormControl()
-    })
-  ]),
-  potionsForm: new FormArray([
-    new FormGroup({
-      name: new FormControl(),
-      effect: new FormControl()
-    })
-  ]),
+  specialForm: new FormArray([]),
+  gemsForm: new FormArray([]),
+  potionsForm: new FormArray([]),
   preciousForm: new FormArray([])
 });

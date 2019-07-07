@@ -22,11 +22,6 @@ export class WeaponComponent implements OnInit {
     });
   }
 
-  updateForm(): void {
-    this.fm.updateEffects();
-    // localStorage.setItem('mainForm', JSON.stringify(mainForm));
-  }
-
   addItem(control: string): void {
     (this.targetForm.get(control).get('ef') as FormArray).push(
       new FormGroup({
@@ -34,11 +29,9 @@ export class WeaponComponent implements OnInit {
         val: new FormControl()
       })
     );
-    this.updateForm();
   }
 
   removeItem(control: string, i: number): void {
     (this.targetForm.get(control).get('ef') as FormArray).removeAt(i);
-    this.updateForm();
   }
 }

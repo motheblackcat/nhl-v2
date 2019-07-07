@@ -20,6 +20,7 @@ export class StatsComponent implements OnInit {
       this.targetForm = mainForm.get(res.targetForm) as FormGroup;
       this.title = res.title;
     });
+    this.updateMagStats();
   }
 
   updateMagStats() {
@@ -32,9 +33,5 @@ export class StatsComponent implements OnInit {
     this.targetForm.get('magphy').setValue(Math.ceil((int + ad) / 2));
     this.targetForm.get('magpsy').setValue(Math.ceil((int + cha) / 2));
     this.targetForm.get('resmag').setValue(Math.ceil((cou + int + fo) / 3));
-  }
-
-  updateForm(): void {
-    this.updateMagStats();
   }
 }

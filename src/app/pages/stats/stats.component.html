@@ -1,4 +1,4 @@
-<ion-content padding [formGroup]="targetForm">
+<ion-content padding [formGroup]="targetForm" (change)="updateMagStats()">
   <h3>{{ title }}</h3>
   <br />
   <div *ngFor="let control of targetForm.controls | keyvalue: fm.defaultOrder" [ngSwitch]="control.key">
@@ -28,7 +28,7 @@
       {{ targetForm.get(control.key).value }}
     </span>
     <span *ngIf="control.key !== 'magphy' && control.key !== 'magpsy' && control.key !== 'resmag'" justify-content-center>
-      effet : {{ targetForm.get(control.key).get('ef').value }}
+      {{ targetForm.get(control.key).get('ef').value }}
     </span>
     <div class="hint" *ngSwitchCase="'magphy'" margin-bottom>Moyenne INT et AD</div>
     <div class="hint" *ngSwitchCase="'magpsy'" margin-bottom>Moyenne INT et CHA</div>

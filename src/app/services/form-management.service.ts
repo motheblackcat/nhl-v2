@@ -14,6 +14,7 @@ export class FormManagementService {
         mainForm.setValue(JSON.parse(res));
       }
     });
+    console.log(mainForm.value);
   }
 
   saveForm(): void {

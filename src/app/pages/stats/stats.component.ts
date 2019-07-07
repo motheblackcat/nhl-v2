@@ -22,7 +22,7 @@ export class StatsComponent implements OnInit {
     });
   }
 
-  updateForm(): void {
+  updateMagStats() {
     const int = this.targetForm.get('int').get('val').value;
     const ad = this.targetForm.get('ad').get('val').value;
     const cha = this.targetForm.get('cha').get('val').value;
@@ -32,6 +32,11 @@ export class StatsComponent implements OnInit {
     this.targetForm.get('magphy').setValue(Math.ceil((int + ad) / 2));
     this.targetForm.get('magpsy').setValue(Math.ceil((int + cha) / 2));
     this.targetForm.get('resmag').setValue(Math.ceil((cou + int + fo) / 3));
+  }
+
+  updateForm(): void {
+    this.updateMagStats();
+    // localStorage.setItem('mainForm', JSON.stringify(mainForm));
     console.warn(this.targetForm.value);
   }
 }

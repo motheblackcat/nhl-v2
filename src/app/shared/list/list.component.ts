@@ -29,10 +29,9 @@ export class ListComponent implements OnInit {
   }
 
   updateForm(input: HTMLInputElement, i?: number): void {
-    if (i === undefined) {
-      this.targetForm.push(new FormControl(input.value));
-      input.value = '';
-    }
+    this.targetForm.push(new FormControl(input.value));
+    input.value = '';
+    // localStorage.setItem('mainForm', JSON.stringify(mainForm));
     console.warn(this.targetForm);
   }
 

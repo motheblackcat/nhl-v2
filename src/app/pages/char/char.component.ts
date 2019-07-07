@@ -23,6 +23,7 @@ export class CharComponent implements OnInit {
   }
 
   updateForm(): void {
+    // localStorage.setItem('mainForm', JSON.stringify(mainForm));
     console.warn(this.targetForm.value);
   }
 }

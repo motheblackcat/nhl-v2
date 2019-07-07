@@ -26,6 +26,7 @@ export class BagsComponent implements OnInit {
   }
 
   updateForm(): void {
+    // localStorage.setItem('mainForm', JSON.stringify(mainForm));
     console.warn('target', this.targetForm.value);
   }
 

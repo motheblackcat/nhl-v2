@@ -31,6 +31,7 @@ export class ListMultiComponent implements OnInit {
   }
 
   updateForm(): void {
+    // localStorage.setItem('mainForm', JSON.stringify(mainForm));
     console.warn(mainForm);
   }
 

@@ -6,7 +6,7 @@ import { FormGroup } from '@angular/forms';
 @Injectable()
 export class FormManagementService {
   initForm(): void {
-    const data = window.localStorage.getItem('mainForm');
+    const data = localStorage.getItem('mainForm');
     if (data) {
       mainForm.setValue(JSON.parse(data));
     }

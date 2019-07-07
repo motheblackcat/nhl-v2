@@ -24,6 +24,7 @@ export class WeaponComponent implements OnInit {
 
   updateForm(): void {
     this.fm.updateEffects();
+    // localStorage.setItem('mainForm', JSON.stringify(mainForm));
   }
 
   addItem(control: string): void {

@@ -7,16 +7,19 @@
     <div *ngIf="control.key !== 'tdm' && control.key !== 'prmag'">
       <h2>{{ control.key }}</h2>
       <div [formGroupName]="control.key">
-        <div><label for="name{{ i }}">nom :</label><input type="text" id="name{{ i }}" formControlName="name" placeholder="nom" /></div>
-        <div class="add">
+        <div margin-bottom>
+          <label for="name{{ i }}">nom :</label>
+          <input type="text" id="name{{ i }}" formControlName="name" placeholder="nom" />
+        </div>
+        <div class="add" margin-bottom>
           <label for="pr{{ i }}">pr :</label><input type="number" id="pr{{ i }}" class="short" formControlName="pr" placeholder="pr" />
           <label for="rup{{ i }}">rup. :</label><input type="text" id="rup{{ i }}" class="short" formControlName="rup" placeholder="rup." />
           <label for="equ{{ i }}">equipé ?</label>
           <ion-checkbox type="checkbox" id="equ{{ i }}" formControlName="equ" color="dark"></ion-checkbox>
         </div>
         <ng-container formArrayName="ef">
-          <div>effet(s):</div>
-          <div margin-bottom *ngFor="let item of targetForm.get(control.key).get('ef').controls; let i = index" class="add effect">
+          <div margin-bottom>effet(s):</div>
+          <div *ngFor="let item of targetForm.get(control.key).get('ef').controls; let i = index" class="add effect">
             <ion-icon name="close" (click)="removeItem(control.key, i)"></ion-icon>
             <ng-container [formGroupName]="i">
               <label for="efname">stat. :</label>
@@ -26,7 +29,7 @@
             </ng-container>
           </div>
         </ng-container>
-        <div class="add" (click)="addItem(control.key)">
+        <div margin-top class="add" (click)="addItem(control.key)">
           <ion-icon name="add-circle-outline"></ion-icon>
           <label>Ajouter un effet</label>
         </div>

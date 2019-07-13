@@ -17,7 +17,7 @@
       </div>
       <div margin-top margin-bottom>effets :</div>
       <ng-container formArrayName="ef">
-        <div margin-bottom *ngFor="let item of targetForm.get(control.key).get('ef').controls; let i = index" class="add effect">
+        <div *ngFor="let item of targetForm.get(control.key).get('ef').controls; let i = index" class="add effect">
           <ion-icon name="close" (click)="removeItem(control.key, i)"></ion-icon>
           <ng-container [formGroupName]="i">
             <label for="efname">stat. :</label>
@@ -27,7 +27,7 @@
           </ng-container>
         </div>
       </ng-container>
-      <div class="add" (click)="addItem(control.key)">
+      <div margin-top class="add" (click)="addItem(control.key)">
         <ion-icon name="add-circle-outline"></ion-icon>
         <label>Ajouter un effet</label>
       </div>

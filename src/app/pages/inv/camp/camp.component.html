@@ -27,7 +27,7 @@
     <div class="divLabel" *ngFor="let control of matFormArray.controls; let i = index" [formGroupName]="i">
       <ion-icon name="close" (click)="removeItem(i)"></ion-icon>
       <input type="text" formControlName="name" placeholder="nom" />
-      <input type="number" formControlName="wei" placeholder="poids" text-end />
+      <input class="short" type="number" formControlName="wei" placeholder="poids" text-end />
     </div>
   </ng-container>
   <div class="add" (click)="addItem()">

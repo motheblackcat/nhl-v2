@@ -8,33 +8,54 @@ import { FormGroup, FormArray, FormControl } from '@angular/forms';
 @Injectable()
 export class FormManagementService {
   resetArray = ['skillsForm', 'questForm', 'lootForm', 'foodForm', 'specialForm', 'gemsForm', 'potionsForm', 'preciousForm'];
-  equipArray = ['weaponsForm', 'armorsForm'];
   constructor(private store: Storage) {}
   initForm(): void {
-    this.store.get('mainForm').then(data => {
-      if (data) {
-        console.log('DATA', data);
-        for (const control in mainForm.controls) {
-          if (this.resetArray.includes(control)) {
-            data[control].forEach(item => {
-              (mainForm.get(control) as FormArray).push(new FormControl(item));
-            });
-          } else if (this.equipArray.includes(control)) {
-          } else {
-            mainForm.get(control).setValue(data[control]);
+    this.store.get('mainForm').then(storedForm => {
+      if (storedForm) {
+        // Load formarrays
+        this.resetArray.forEach(formName => {
+          for (let i = 0; i < storedForm[formName].length; i++) {
+            (mainForm.get(formName) as FormArray).push(new FormControl(storedForm[formName][i]));
           }
-        }
+        });
+        // Load weapons/armors
+        ['weaponsForm', 'armorsForm'].forEach(form => {
+          for (const control in (mainForm.get(form) as FormGroup).controls) {
+            if (
+              mainForm
+                .get(form)
+                .get(control)
+                .get('ef')
+            ) {
+              (mainForm
+                .get(form)
+                .get(control)
+                .get('ef') as FormArray).clear();
+              for (let i = 0; i < storedForm[form][control].ef.length; i++) {
+                (mainForm
+                  .get(form)
+                  .get(control)
+                  .get('ef') as FormArray).push(
+                  new FormGroup({
+                    name: new FormControl(storedForm[form][control].ef[i].name),
+                    val: new FormControl(storedForm[form][control].ef[i].val)
+                  })
+                );
+              }
+            }
+          }
+        });
+        // Load the rest
+        mainForm.setValue(storedForm);
       }
     });
+    this.updateEffects();
   }
 
   saveForm(): void {
     console.log('SAVED');
+    this.updateEffects();
     this.store.set('mainForm', mainForm.value);
-  }
-
-  defaultOrder(): null {
-    return null;
   }
 
   updateEffects(): void {
@@ -61,5 +82,53 @@ export class FormManagementService {
           .setValue(effects.filter(e => e.name === stat).reduce((a, b) => a + Number(b.val), 0));
       });
     });
+  }
+
+  reset(): void {
+    this.resetArray.forEach(form => (mainForm.get(form) as FormArray).clear());
+    for (const control in (mainForm.get('weaponsForm') as FormGroup).controls) {
+      if (control) {
+        const effectForm = mainForm
+          .get('weaponsForm')
+          .get(control)
+          .get('ef') as FormArray;
+        effectForm.clear();
+        effectForm.push(
+          new FormGroup({
+            name: new FormControl(),
+            val: new FormControl()
+          })
+        );
+      }
+    }
+    for (const control in (mainForm.get('armorsForm') as FormGroup).controls) {
+      if (
+        mainForm
+          .get('armorsForm')
+          .get(control)
+          .get('ef')
+      ) {
+        const effectForm = mainForm
+          .get('armorsForm')
+          .get(control)
+          .get('ef') as FormArray;
+        effectForm.clear();
+        effectForm.push(
+          new FormGroup({
+            name: new FormControl(),
+            val: new FormControl()
+          })
+        );
+      }
+    }
+    (mainForm.get('bagsForm').get('bags') as FormArray).clear();
+    (mainForm.get('bagsForm').get('pooches') as FormArray).clear();
+    (mainForm.get('campForm').get('mat') as FormArray).clear();
+    mainForm.reset();
+    this.store.clear();
+  }
+
+  defaultOrder(): null {
+    return null;
   }
 }

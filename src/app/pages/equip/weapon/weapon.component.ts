@@ -33,5 +33,6 @@ export class WeaponComponent implements OnInit {
 
   removeItem(control: string, i: number): void {
     (this.targetForm.get(control).get('ef') as FormArray).removeAt(i);
+    this.fm.saveForm();
   }
 }

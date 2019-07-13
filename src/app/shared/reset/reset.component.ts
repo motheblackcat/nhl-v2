@@ -24,28 +24,7 @@ export class ResetComponent {
   }
 
   reset(): void {
-    this.fm.resetArray.forEach(form => (mainForm.get(form) as FormArray).clear());
-    for (const control in (mainForm.get('weaponsForm') as FormGroup).controls) {
-      if (control) {
-        (mainForm
-          .get('weaponsForm')
-          .get(control)
-          .get('ef') as FormArray).clear();
-      }
-    }
-    for (const control in (mainForm.get('armorsForm') as FormGroup).controls) {
-      if (control !== 'equ' && control !== 'tdm') {
-        (mainForm
-          .get('armorsForm')
-          .get(control)
-          .get('ef') as FormArray).clear();
-      }
-    }
-    (mainForm.get('bagsForm').get('bags') as FormArray).clear();
-    (mainForm.get('bagsForm').get('pooches') as FormArray).clear();
-    (mainForm.get('campForm').get('mat') as FormArray).clear();
-    mainForm.reset();
-    localStorage.clear();
+    this.fm.reset();
     this.presentToast();
     this.modal.dismiss();
   }

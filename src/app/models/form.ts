@@ -48,14 +48,24 @@ export const mainForm = new FormGroup({
       pi: new FormControl(),
       rup: new FormControl(),
       equ: new FormControl(),
-      ef: new FormArray([])
+      ef: new FormArray([
+        new FormGroup({
+          name: new FormControl(),
+          val: new FormControl()
+        })
+      ])
     }),
     wea3: new FormGroup({
       name: new FormControl(),
       pi: new FormControl(),
       rup: new FormControl(),
       equ: new FormControl(),
-      ef: new FormArray([])
+      ef: new FormArray([
+        new FormGroup({
+          name: new FormControl(),
+          val: new FormControl()
+        })
+      ])
     })
   }),
   armorsForm: new FormGroup({
@@ -76,42 +86,72 @@ export const mainForm = new FormGroup({
       pr: new FormControl(),
       rup: new FormControl(),
       equ: new FormControl(),
-      ef: new FormArray([])
+      ef: new FormArray([
+        new FormGroup({
+          name: new FormControl(),
+          val: new FormControl()
+        })
+      ])
     }),
     bouclier: new FormGroup({
       name: new FormControl(),
       pr: new FormControl(),
       rup: new FormControl(),
       equ: new FormControl(),
-      ef: new FormArray([])
+      ef: new FormArray([
+        new FormGroup({
+          name: new FormControl(),
+          val: new FormControl()
+        })
+      ])
     }),
     bras: new FormGroup({
       name: new FormControl(),
       pr: new FormControl(),
       rup: new FormControl(),
       equ: new FormControl(),
-      ef: new FormArray([])
+      ef: new FormArray([
+        new FormGroup({
+          name: new FormControl(),
+          val: new FormControl()
+        })
+      ])
     }),
     mains: new FormGroup({
       name: new FormControl(),
       pr: new FormControl(),
       rup: new FormControl(),
       equ: new FormControl(),
-      ef: new FormArray([])
+      ef: new FormArray([
+        new FormGroup({
+          name: new FormControl(),
+          val: new FormControl()
+        })
+      ])
     }),
     jambes: new FormGroup({
       name: new FormControl(),
       pr: new FormControl(),
       rup: new FormControl(),
       equ: new FormControl(),
-      ef: new FormArray([])
+      ef: new FormArray([
+        new FormGroup({
+          name: new FormControl(),
+          val: new FormControl()
+        })
+      ])
     }),
     pieds: new FormGroup({
       name: new FormControl(),
       pr: new FormControl(),
       rup: new FormControl(),
       equ: new FormControl(),
-      ef: new FormArray([])
+      ef: new FormArray([
+        new FormGroup({
+          name: new FormControl(),
+          val: new FormControl()
+        })
+      ])
     }),
     tdm: new FormControl(),
     prmag: new FormControl()
@@ -120,8 +160,18 @@ export const mainForm = new FormGroup({
   lootForm: new FormArray([]),
   bagsForm: new FormGroup({
     max: new FormControl(),
-    bags: new FormArray([]),
-    pooches: new FormArray([])
+    bags: new FormArray([
+      new FormGroup({
+        name: new FormControl(),
+        max: new FormControl()
+      })
+    ]),
+    pooches: new FormArray([
+      new FormGroup({
+        name: new FormControl(),
+        max: new FormControl()
+      })
+    ])
   }),
   campForm: new FormGroup({
     tente: new FormGroup({
@@ -142,7 +192,12 @@ export const mainForm = new FormGroup({
       h: new FormControl(),
       wei: new FormControl()
     }),
-    mat: new FormArray([])
+    mat: new FormArray([
+      new FormGroup({
+        name: new FormControl(),
+        wei: new FormControl()
+      })
+    ])
   }),
   foodForm: new FormArray([]),
   specialForm: new FormArray([]),

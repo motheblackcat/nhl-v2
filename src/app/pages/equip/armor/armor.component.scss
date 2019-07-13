@@ -1,12 +1,14 @@
-input {
-  padding-left: 5px;
-}
-
 ion-checkbox {
   margin-left: 15px;
 }
 
-label,
-div {
-  margin: 10px 0;
+.effect {
+  margin: 0 0 5px 0;
+  label {
+    margin-right: 10px;
+
+    &:nth-child(4) {
+      margin-left: 15px;
+    }
+  }
 }

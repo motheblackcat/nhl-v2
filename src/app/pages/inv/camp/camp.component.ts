@@ -24,11 +24,6 @@ export class CampComponent implements OnInit {
       this.title = res.title;
       this.targetForm = mainForm.get(res.targetForm) as FormGroup;
       this.matFormArray = this.targetForm.get('mat') as FormArray;
-      this.store.get('mainForm').then(data => {
-        data.campForm.mat.forEach(item => {
-          this.matFormArray.push(new FormGroup({ name: new FormControl(item.name), wei: new FormControl(item.wei) }));
-        });
-      });
     });
     this.targetForm.valueChanges.subscribe(res => {
       this.updateTotalWeight();
@@ -49,5 +44,6 @@ export class CampComponent implements OnInit {
 
   removeItem(i: number): void {
     (this.targetForm.get('mat') as FormArray).removeAt(i);
+    this.fm.saveForm();
   }
 }

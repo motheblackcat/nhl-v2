@@ -3,6 +3,7 @@ import { FormGroup, FormControl, FormArray, Form } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 import { mainForm } from 'src/app/models/form';
+import { FormManagementService } from 'src/app/services/form-management.service';
 
 @Component({
   selector: 'app-bags',
@@ -14,7 +15,7 @@ export class BagsComponent implements OnInit {
   @Input() title: string;
   bagsFormArray: FormArray;
   poochesFormArray: FormArray;
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private fm: FormManagementService) {}
 
   ngOnInit(): void {
     this.route.data.subscribe(res => {
@@ -31,5 +32,6 @@ export class BagsComponent implements OnInit {
 
   removeItem(array: string, i: number): void {
     (this.targetForm.get(array) as FormArray).removeAt(i);
+    this.fm.saveForm();
   }
 }

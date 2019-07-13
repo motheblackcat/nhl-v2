@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private fm: FormManagementService
+    public fm: FormManagementService
   ) {
     this.initializeApp();
   }

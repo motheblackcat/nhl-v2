@@ -22,7 +22,7 @@ export class BagsComponent implements OnInit {
       this.targetForm = mainForm.get(res.targetForm) as FormGroup;
       this.title = res.title;
       this.bagsFormArray = this.targetForm.get('bags') as FormArray;
-      this.poochesFormArray = this.targetForm.get('bags') as FormArray;
+      this.poochesFormArray = this.targetForm.get('pooches') as FormArray;
     });
   }
 

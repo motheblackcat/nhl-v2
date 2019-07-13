@@ -12,7 +12,7 @@ export class FormManagementService {
   initForm(): void {
     this.store.get('mainForm').then(storedForm => {
       if (storedForm) {
-        // Load formarrays
+        // Load mono list
         this.resetArray.forEach(formName => {
           for (let i = 0; i < storedForm[formName].length; i++) {
             (mainForm.get(formName) as FormArray).push(new FormControl(storedForm[formName][i]));
@@ -45,6 +45,40 @@ export class FormManagementService {
             }
           }
         });
+        // Load camps
+        (mainForm.get('campForm').get('mat') as FormArray).clear();
+        for (let i = 0; i < storedForm['campForm'].mat.length; i++) {
+          (mainForm.get('campForm').get('mat') as FormArray).push(
+            new FormGroup({
+              name: new FormControl(storedForm['campForm']['mat'][i].name),
+              wei: new FormControl(storedForm['campForm']['mat'][i].wei)
+            })
+          );
+        }
+        // Load bags
+        ['bags', 'pooches'].forEach(form => {
+          (mainForm.get('bagsForm').get(form) as FormArray).clear();
+          for (let i = 0; i < storedForm['bagsForm'][form].length; i++) {
+            (mainForm.get('bagsForm').get(form) as FormArray).push(
+              new FormGroup({
+                name: new FormControl(storedForm['bagsForm'][form][i].name),
+                max: new FormControl(storedForm['bagsForm'][form][i].max)
+              })
+            );
+          }
+        });
+        // Load multi list
+        ['potionsForm', 'specialForm', 'gemsForm'].forEach(formName => {
+          (mainForm.get(formName) as FormArray).clear();
+          for (let i = 0; i < storedForm[formName].length; i++) {
+            (mainForm.get(formName) as FormArray).push(
+              new FormGroup({
+                name: new FormControl(storedForm[formName][i].name),
+                effect: new FormControl(storedForm[formName][i].effect)
+              })
+            );
+          }
+        });
         // Load the rest
         mainForm.setValue(storedForm);
       }
@@ -53,7 +87,6 @@ export class FormManagementService {
   }
 
   saveForm(): void {
-    console.log('SAVED');
     this.updateEffects();
     this.store.set('mainForm', mainForm.value);
   }

@@ -4,6 +4,7 @@ import { Storage } from '@ionic/storage';
 
 import { mainForm } from '../models/form';
 import { FormGroup, FormArray, FormControl } from '@angular/forms';
+import { KeyValue } from '@angular/common';
 
 @Injectable()
 export class FormManagementService {
@@ -161,7 +162,7 @@ export class FormManagementService {
     this.store.clear();
   }
 
-  defaultOrder(): null {
-    return null;
-  }
+  defaultOrder = (a: KeyValue<number, string>, b: KeyValue<number, string>): number => {
+    return a.value.localeCompare(b.value);
+  };
 }

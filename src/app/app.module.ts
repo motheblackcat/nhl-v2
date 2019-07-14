@@ -44,7 +44,7 @@ import { FormManagementService } from './services/form-management.service';
     FabComponent
   ],
   entryComponents: [ResetComponent],
-  imports: [BrowserModule, ReactiveFormsModule, IonicModule.forRoot(), IonicStorageModule.forRoot(), AppRoutingModule],
+  imports: [BrowserModule, ReactiveFormsModule, IonicModule.forRoot({ mode: 'md' }), IonicStorageModule.forRoot(), AppRoutingModule],
   providers: [StatusBar, SplashScreen, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, FormManagementService],
   bootstrap: [AppComponent]
 })

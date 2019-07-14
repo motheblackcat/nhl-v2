@@ -16,10 +16,12 @@
 }
 
 ion-content {
-  font-family: 'dauphin';
+  font-family: 'dauphin' !important;
   font-weight: bold;
   text-transform: capitalize;
-  --background: #eae7de;
+  --background: #dacfab !important;
+  --padding-start: 20px !important;
+  --padding-end: 20px !important;
 }
 
 h3 {

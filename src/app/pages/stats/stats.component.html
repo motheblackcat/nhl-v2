@@ -1,4 +1,4 @@
-<ion-content padding [formGroup]="targetForm" (change)="updateMagStats()">
+<ion-content [formGroup]="targetForm" (change)="updateMagStats()">
   <h3>{{ title }}</h3>
   <br />
   <div *ngFor="let control of targetForm.controls | keyvalue: fm.defaultOrder" [ngSwitch]="control.key">

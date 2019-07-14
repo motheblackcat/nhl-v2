@@ -1,4 +1,4 @@
-<ion-content padding [formGroup]="targetForm">
+<ion-content [formGroup]="targetForm">
   <h3>{{ title }}</h3>
   <label class="hint">PR: points de protection</label>
   <br />
@@ -29,18 +29,18 @@
             </ng-container>
           </div>
         </ng-container>
-        <div margin-top class="add" (click)="addItem(control.key)">
+        <div margin-top margin-bottom class="add" (click)="addItem(control.key)">
           <ion-icon name="add-circle-outline"></ion-icon>
           <label>Ajouter un effet</label>
         </div>
       </div>
     </div>
   </ng-container>
-  <div class="add">
+  <div class="add" margin-bottom>
     <label for="tdm">truc de mauviette</label>
     <ion-checkbox type="checkbox" id="tdm" formControlName="tdm" color="dark"></ion-checkbox>
   </div>
-  <div>protection naturel {{ prNat }}</div>
+  <div margin-bottom>protection naturel {{ prNat }}</div>
   <label for="prmag">protection magique</label>
-  <input type="number" id="prmag" class="last" placeholder="0" formControlName="prmag" />
+  <input type="number" id="prmag" class="last short" placeholder="0" formControlName="prmag" />
 </ion-content>

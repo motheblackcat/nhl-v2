@@ -32,7 +32,7 @@ export class ListComponent implements OnInit {
   }
 
   updateItem(item, i) {
-    if (i === undefined) {
+    if (i === null) {
       this.targetForm.push(new FormControl(item.value));
       item.value = '';
     } else {

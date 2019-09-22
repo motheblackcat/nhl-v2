@@ -24,11 +24,11 @@ export class StatsComponent implements OnInit {
   }
 
   updateMagStats() {
-    const int = this.targetForm.get('int').get('val').value;
-    const ad = this.targetForm.get('ad').get('val').value;
-    const cha = this.targetForm.get('cha').get('val').value;
-    const cou = this.targetForm.get('cou').get('val').value;
-    const fo = this.targetForm.get('fo').get('val').value;
+    const int = this.targetForm.get('int').get('val').value + this.targetForm.get('int').get('ef').value;
+    const ad = this.targetForm.get('ad').get('val').value + this.targetForm.get('ad').get('ef').value;
+    const cha = this.targetForm.get('cha').get('val').value + this.targetForm.get('cha').get('ef').value;
+    const cou = this.targetForm.get('cou').get('val').value + this.targetForm.get('cou').get('ef').value;
+    const fo = this.targetForm.get('fo').get('val').value + this.targetForm.get('fo').get('ef').value;
 
     this.targetForm.get('magphy').setValue(Math.ceil((int + ad) / 2));
     this.targetForm.get('magpsy').setValue(Math.ceil((int + cha) / 2));

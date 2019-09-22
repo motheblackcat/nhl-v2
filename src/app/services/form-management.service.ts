@@ -164,7 +164,7 @@ export class FormManagementService {
     this.store.clear();
   }
 
-  defaultOrder = (a: KeyValue<number, string>, b: KeyValue<number, string>): number => {
-    return a.value.localeCompare(b.value);
-  };
+  defaultOrder(): number {
+    return 0;
+  }
 }

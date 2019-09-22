@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
+import { FormGroup, FormArray, FormControl } from '@angular/forms';
+import { KeyValue } from '@angular/common';
 
 import { Storage } from '@ionic/storage';
 
 import { mainForm } from '../models/form';
-import { FormGroup, FormArray, FormControl } from '@angular/forms';
-import { KeyValue } from '@angular/common';
 
 @Injectable()
 export class FormManagementService {
   resetArray = ['skillsForm', 'questForm', 'lootForm', 'foodForm', 'specialForm', 'gemsForm', 'potionsForm', 'preciousForm'];
   constructor(private store: Storage) {}
+
   initForm(): void {
     this.store.get('mainForm').then(storedForm => {
       if (storedForm) {
@@ -108,6 +109,7 @@ export class FormManagementService {
             });
         }
       }
+
       ['ev', 'ea', 'cou', 'int', 'cha', 'ad', 'fo', 'atq', 'prd'].forEach(stat => {
         mainForm
           .get('statsForm')

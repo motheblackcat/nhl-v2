@@ -109,14 +109,14 @@ export class FormManagementService {
             });
         }
       }
+    });
 
-      ['ev', 'ea', 'cou', 'int', 'cha', 'ad', 'fo', 'atq', 'prd'].forEach(stat => {
-        mainForm
-          .get('statsForm')
-          .get(stat)
-          .get('ef')
-          .setValue(effects.filter(e => e.name.toLowerCase() === stat).reduce((a, b) => a + Number(b.val), 0));
-      });
+    ['ev', 'ea', 'cou', 'int', 'cha', 'ad', 'fo', 'atq', 'prd'].forEach(stat => {
+      mainForm
+        .get('statsForm')
+        .get(stat)
+        .get('ef')
+        .setValue(effects.filter(e => e.name.toLowerCase() === stat).reduce((a, b) => a + Number(b.val), 0));
     });
   }
 

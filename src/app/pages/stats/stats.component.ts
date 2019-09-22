@@ -23,7 +23,7 @@ export class StatsComponent implements OnInit {
     });
   }
 
-  updateMagStats() {
+  updateMagStats(): void {
     const int = this.targetForm.get('int').get('val').value + this.targetForm.get('int').get('ef').value;
     const ad = this.targetForm.get('ad').get('val').value + this.targetForm.get('ad').get('ef').value;
     const cha = this.targetForm.get('cha').get('val').value + this.targetForm.get('cha').get('ef').value;

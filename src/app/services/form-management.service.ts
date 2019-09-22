@@ -115,7 +115,7 @@ export class FormManagementService {
           .get('statsForm')
           .get(stat)
           .get('ef')
-          .setValue(effects.filter(e => e.name === stat).reduce((a, b) => a + Number(b.val), 0));
+          .setValue(effects.filter(e => e.name.toLowerCase() === stat).reduce((a, b) => a + Number(b.val), 0));
       });
     });
   }

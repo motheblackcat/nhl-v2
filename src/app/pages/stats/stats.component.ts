@@ -19,8 +19,8 @@ export class StatsComponent implements OnInit {
     this.route.data.subscribe(res => {
       this.targetForm = mainForm.get(res.targetForm) as FormGroup;
       this.title = res.title;
+      this.updateMagStats();
     });
-    this.updateMagStats();
   }
 
   updateMagStats() {

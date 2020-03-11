@@ -1,5 +1,5 @@
 {
-  "name": "nhl-v2.1",
+  "name": "nhl2",
   "version": "0.0.3",
   "author": "Morad EL HAMDOUNI",
   "homepage": "https://motheblackcat.github.io/home",
@@ -38,7 +38,7 @@
   },
   "devDependencies": {
     "@angular-devkit/architect": "~0.800.4",
-    "@angular-devkit/build-angular": "^0.900.6",
+    "@angular-devkit/build-angular": "0.803.24",
     "@angular-devkit/core": "~8.0.4",
     "@angular-devkit/schematics": "~8.0.4",
     "@angular/cli": "^8.0.4",

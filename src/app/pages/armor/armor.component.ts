@@ -15,7 +15,10 @@ export class ArmorComponent implements OnInit {
   title: string;
   prNat = 0;
   prMag = 0;
-  constructor(private route: ActivatedRoute, public fm: FormManagementService) {}
+  constructor(
+    private route: ActivatedRoute,
+    public fm: FormManagementService
+  ) {}
 
   ngOnInit(): void {
     this.route.data.subscribe(res => {
@@ -25,6 +28,7 @@ export class ArmorComponent implements OnInit {
     this.prNatSum();
   }
 
+  /** TODO: TDM is not directly updated */
   updateForm(): void {
     this.prNatSum();
     this.fm.updateEffects();
@@ -34,7 +38,9 @@ export class ArmorComponent implements OnInit {
     this.prNat = 0;
     for (const control in this.targetForm.controls) {
       if (control !== 'tdm' && control !== 'prmag') {
-        this.prNat += this.targetForm.get(control).get('pr').value ? Number(this.targetForm.get(control).get('pr').value) : 0;
+        this.prNat += this.targetForm.get(control).get('pr').value
+          ? Number(this.targetForm.get(control).get('pr').value)
+          : 0;
       }
     }
     this.prNat = this.targetForm.get('tdm').value ? this.prNat + 1 : this.prNat;

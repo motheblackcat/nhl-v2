@@ -8,7 +8,16 @@ import { mainForm } from '../models/form';
 
 @Injectable()
 export class FormManagementService {
-  resetArray = ['skillsForm', 'questForm', 'lootForm', 'foodForm', 'specialForm', 'gemsForm', 'potionsForm', 'preciousForm'];
+  resetArray = [
+    'skillsForm',
+    'questForm',
+    'lootForm',
+    'foodForm',
+    'specialForm',
+    'gemsForm',
+    'potionsForm',
+    'preciousForm'
+  ];
   constructor(private store: Storage) {}
 
   initForm(): void {
@@ -17,7 +26,9 @@ export class FormManagementService {
         // Load mono list
         this.resetArray.forEach(formName => {
           for (let i = 0; i < storedForm[formName].length; i++) {
-            (mainForm.get(formName) as FormArray).push(new FormControl(storedForm[formName][i]));
+            (mainForm.get(formName) as FormArray).push(
+              new FormControl(storedForm[formName][i])
+            );
           }
         });
         // Load weapons/armors
@@ -98,7 +109,11 @@ export class FormManagementService {
     ['armorsForm', 'weaponsForm'].forEach(formName => {
       const form = mainForm.get(formName) as FormGroup;
       for (const control in form.controls) {
-        if (control !== 'tdm' && control !== 'prmag' && form.get(control).get('equ').value) {
+        if (
+          control !== 'tdm' &&
+          control !== 'prmag' &&
+          form.get(control).get('equ').value
+        ) {
           form
             .get(control)
             .get('ef')
@@ -111,13 +126,19 @@ export class FormManagementService {
       }
     });
 
-    ['ev', 'ea', 'cou', 'int', 'cha', 'ad', 'fo', 'atq', 'prd'].forEach(stat => {
-      mainForm
-        .get('statsForm')
-        .get(stat)
-        .get('ef')
-        .setValue(effects.filter(e => e.name.toLowerCase() === stat).reduce((a, b) => a + Number(b.val), 0));
-    });
+    ['ev', 'ea', 'cou', 'int', 'cha', 'ad', 'fo', 'atq', 'prd'].forEach(
+      stat => {
+        mainForm
+          .get('statsForm')
+          .get(stat)
+          .get('ef')
+          .setValue(
+            effects
+              .filter(e => e.name.toLowerCase() === stat)
+              .reduce((a, b) => a + Number(b.val), 0)
+          );
+      }
+    );
   }
 
   reset(): void {

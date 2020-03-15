@@ -1,43 +1,35 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, RoutesRecognized } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 
 import { ResetComponent } from '../reset/reset.component';
-import { Router, NavigationStart } from '@angular/router';
+import { MenuConfig } from 'src/app/models/MenuConfig';
 
 @Component({
   selector: 'app-fab',
   templateUrl: './fab.component.html'
 })
 export class FabComponent implements OnInit {
-  icon = 'body';
-  constructor(public modalController: ModalController, private router: Router) {}
+  config: MenuConfig[] = [];
+  icon: string;
 
-  ngOnInit(): void {
+  constructor(
+    private router: Router,
+    public modalController: ModalController
+  ) {}
+
+  ngOnInit() {
+    this.router.config
+      .filter(route => route.data)
+      .forEach(route =>
+        this.config.push({ path: `/${route.path}`, icon: route.data.icon })
+      );
+
     this.router.events.subscribe(event => {
-      if (event instanceof NavigationStart) {
-        switch (event.url) {
-          case '/stats':
-            this.icon = 'stats';
-            break;
-          case '/skills':
-            this.icon = 'hand';
-            break;
-          case '/inv':
-            this.icon = 'cube';
-            break;
-          case '/equip':
-            this.icon = 'shirt';
-            break;
-          case '/equip/armor':
-            this.icon = 'shirt';
-            break;
-          case '/equip/weapon':
-            this.icon = 'shirt';
-            break;
-          default:
-            this.icon = 'body';
-            break;
-        }
+      if (event instanceof RoutesRecognized) {
+        this.icon = this.config.find(
+          route => route.path === `/${event.url.split('/')[1]}`
+        ).icon;
       }
     });
   }

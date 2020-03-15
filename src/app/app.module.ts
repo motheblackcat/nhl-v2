@@ -17,9 +17,8 @@ import { ResetComponent } from './shared/reset/reset.component';
 
 import { CharComponent } from './pages/char/char.component';
 import { StatsComponent } from './pages/stats/stats.component';
-import { EquipComponent } from './pages/equip/equip.component';
-import { WeaponComponent } from './pages/equip/weapon/weapon.component';
-import { ArmorComponent } from './pages/equip/armor/armor.component';
+import { WeaponComponent } from './pages/weapon/weapon.component';
+import { ArmorComponent } from './pages/armor/armor.component';
 import { InvComponent } from './pages/inv/inv.component';
 import { BagsComponent } from './pages/inv/bags/bags.component';
 import { CampComponent } from './pages/inv/camp/camp.component';
@@ -34,7 +33,6 @@ import { FormManagementService } from './services/form-management.service';
     ListMultiComponent,
     CharComponent,
     StatsComponent,
-    EquipComponent,
     InvComponent,
     ResetComponent,
     WeaponComponent,
@@ -44,8 +42,19 @@ import { FormManagementService } from './services/form-management.service';
     FabComponent
   ],
   entryComponents: [ResetComponent],
-  imports: [BrowserModule, ReactiveFormsModule, IonicModule.forRoot({ mode: 'md' }), IonicStorageModule.forRoot(), AppRoutingModule],
-  providers: [StatusBar, SplashScreen, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, FormManagementService],
+  imports: [
+    BrowserModule,
+    ReactiveFormsModule,
+    IonicModule.forRoot({ mode: 'md' }),
+    IonicStorageModule.forRoot(),
+    AppRoutingModule
+  ],
+  providers: [
+    StatusBar,
+    SplashScreen,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    FormManagementService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

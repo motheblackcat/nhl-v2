@@ -4,9 +4,11 @@
   </ion-fab-button>
 
   <ion-fab-list side="top" id="inv">
-    <ion-fab-button *ngFor="let button of config" routerLink="{{ button.link }}">
-      <ion-icon [name]="button.icon"></ion-icon>
-    </ion-fab-button>
+    <ng-container *ngFor="let route of config">
+      <ion-fab-button [routerLink]="route.path">
+        <ion-icon [name]="route.icon"></ion-icon>
+      </ion-fab-button>
+    </ng-container>
   </ion-fab-list>
 </ion-fab>
 <ion-router-outlet></ion-router-outlet>

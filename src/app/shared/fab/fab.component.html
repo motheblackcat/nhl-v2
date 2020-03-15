@@ -1,31 +1,18 @@
 <ion-fab vertical="bottom" horizontal="end" slot="fixed">
   <ion-fab-button color="dark" size="small">
-    <ion-icon name="{{ icon }}"></ion-icon>
+    <ion-icon [name]="icon"></ion-icon>
   </ion-fab-button>
 
   <ion-fab-list side="top">
+    <ng-container *ngFor="let route of config">
+      <ion-fab-button [routerLink]="route.path">
+        <ion-icon [name]="route.icon"></ion-icon>
+      </ion-fab-button>
+    </ng-container>
+
+    <!-- TODO: This might be moved elsewhere -->
     <ion-fab-button (click)="presentModal()">
       <ion-icon name="warning"></ion-icon>
-    </ion-fab-button>
-
-    <ion-fab-button routerLink="/equip">
-      <ion-icon name="shirt"></ion-icon>
-    </ion-fab-button>
-
-    <ion-fab-button routerLink="/inv">
-      <ion-icon name="cube"></ion-icon>
-    </ion-fab-button>
-
-    <ion-fab-button routerLink="/skills">
-      <ion-icon name="hand"></ion-icon>
-    </ion-fab-button>
-
-    <ion-fab-button routerLink="/stats">
-      <ion-icon name="stats"></ion-icon>
-    </ion-fab-button>
-
-    <ion-fab-button routerLink="/char">
-      <ion-icon name="body"></ion-icon>
     </ion-fab-button>
   </ion-fab-list>
 </ion-fab>

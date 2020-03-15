@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { FormArray, FormGroup } from '@angular/forms';
 import { ModalController, ToastController } from '@ionic/angular';
 
-import { mainForm } from 'src/app/models/form';
 import { FormManagementService } from 'src/app/services/form-management.service';
 
 @Component({

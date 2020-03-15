@@ -13,14 +13,7 @@ export class EquipComponent implements OnInit {
   ngOnInit(): void {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationStart) {
-        switch (event.url) {
-          case '/equip/armor':
-            this.icon = 'shirt';
-            break;
-          default:
-            this.icon = 'flash';
-            break;
-        }
+        this.icon = event.url === '/equip/armor' ? 'shirt' : 'flash';
       }
     });
   }

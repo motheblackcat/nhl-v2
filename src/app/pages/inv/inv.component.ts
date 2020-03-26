@@ -23,13 +23,8 @@ export class InvComponent implements OnInit {
 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        const menuConfig = this.config.find(route => route.path === event.url);
-        /** TODO: Replace strings by default icons from router */
-        this.icon = menuConfig
-          ? menuConfig.icon
-          : event.url === '/inv'
-          ? 'help'
-          : 'flash';
+        const config = this.config.find(route => event.url.includes(route.path));
+        this.icon = config ? config.icon : event.url === '/inv' ? 'help' : 'flash';
       }
     });
   }

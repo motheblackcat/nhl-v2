@@ -13,23 +13,14 @@ export class FabComponent implements OnInit {
   config: MenuConfig[] = [];
   icon: string;
 
-  constructor(
-    private router: Router,
-    public modalController: ModalController
-  ) {}
+  constructor(private router: Router, public modalController: ModalController) {}
 
   ngOnInit() {
-    this.router.config
-      .filter(route => route.data)
-      .forEach(route =>
-        this.config.push({ path: `/${route.path}`, icon: route.data.icon })
-      );
+    this.router.config.filter(route => route.data).forEach(route => this.config.push({ path: `/${route.path}`, icon: route.data.icon }));
 
     this.router.events.subscribe(event => {
       if (event instanceof RoutesRecognized) {
-        this.icon = this.config.find(
-          route => route.path === `/${event.url.split('/')[1]}`
-        ).icon;
+        this.icon = this.config.find(route => event.url.includes(route.path)).icon;
       }
     });
   }

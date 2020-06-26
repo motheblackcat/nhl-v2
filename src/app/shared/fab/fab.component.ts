@@ -7,7 +7,7 @@ import { MenuConfig } from 'src/app/models/MenuConfig';
 
 @Component({
   selector: 'app-fab',
-  templateUrl: './fab.component.html'
+  templateUrl: './fab.component.html',
 })
 export class FabComponent implements OnInit {
   config: MenuConfig[] = [];
@@ -20,7 +20,7 @@ export class FabComponent implements OnInit {
 
     this.router.events.subscribe(event => {
       if (event instanceof RoutesRecognized) {
-        this.icon = this.config.find(route => event.url.includes(route.path)).icon;
+        this.icon = event.url === '/' ? 'body' : this.config.find(route => event.url.includes(route.path)).icon;
       }
     });
   }
@@ -28,7 +28,7 @@ export class FabComponent implements OnInit {
   async presentModal(): Promise<void> {
     const modal = await this.modalController.create({
       component: ResetComponent,
-      cssClass: 'reset-modal'
+      cssClass: 'reset-modal',
     });
     return await modal.present();
   }

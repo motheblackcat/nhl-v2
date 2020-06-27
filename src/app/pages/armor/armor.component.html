@@ -1,46 +1,53 @@
 <ion-content [formGroup]="targetForm">
-  <h3>{{ title }}</h3>
-  <label class="hint">PR: points de protection</label>
-  <br />
-  <label class="hint">rup. : points de rupture</label>
+  <h2>{{ title }}</h2>
+  <div class="hint">pr: points de protection</div>
+  <div class="hint mb">rup. : points de rupture</div>
+  <div class="mb flexc">
+    <label class="mr" for="tdm">truc de mauviette</label>
+    <ion-checkbox type="checkbox" id="tdm" formControlName="tdm" color="dark" (ionChange)="prNatSum()"></ion-checkbox>
+  </div>
+  <div class="mb">
+    <label class="mr">protection naturel</label>
+    <label>{{ prNat }}</label>
+  </div>
+  <div class="mb">
+    <label class="mr" for="prmag">protection magique</label>
+    <input type="number" id="prmag" placeholder="0" formControlName="prmag" />
+  </div>
   <ng-container *ngFor="let control of targetForm.controls | keyvalue: fm.defaultOrder; let i = index">
-    <div *ngIf="control.key !== 'tdm' && control.key !== 'prmag'">
-      <h2>{{ control.key }}</h2>
-      <div [formGroupName]="control.key">
-        <div margin-bottom>
+    <div *ngIf="control.key !== 'tdm' && control.key !== 'prmag'" class="card">
+      <div class="subtitle mb" margin-bottom>{{ control.key }}</div>
+      <ng-container [formGroupName]="control.key">
+        <div class="mb">
           <label for="name{{ i }}">nom :</label>
-          <input type="text" id="name{{ i }}" formControlName="name" placeholder="nom" />
+          <input class="ml" type="text" id="name{{ i }}" formControlName="name" placeholder="nom" />
         </div>
-        <div class="add" margin-bottom>
-          <label for="pr{{ i }}">pr :</label><input type="number" id="pr{{ i }}" class="short" formControlName="pr" placeholder="pr" />
-          <label for="rup{{ i }}">rup. :</label><input type="text" id="rup{{ i }}" class="short" formControlName="rup" placeholder="rup." />
-          <label for="equ{{ i }}">equipé ?</label>
-          <ion-checkbox type="checkbox" id="equ{{ i }}" formControlName="equ" color="dark"></ion-checkbox>
+        <div class="mb flexc">
+          <label class="mr" for="pr{{ i }}">pr :</label>
+          <input type="number" id="pr{{ i }}" class="short" formControlName="pr" placeholder="pr" />
+          <label class="mr" for="rup{{ i }}">rup. :</label>
+          <input type="text" id="rup{{ i }}" class="short" formControlName="rup" placeholder="rup." />
+          <label class="mr" for="equ{{ i }}">equipé ?</label>
+          <ion-checkbox (ionChange)="prNatSum()" type="checkbox" id="equ{{ i }}" formControlName="equ" color="dark"></ion-checkbox>
         </div>
+        <div class="mb">effet(s):</div>
         <ng-container formArrayName="ef">
-          <div margin-bottom>effet(s):</div>
-          <div *ngFor="let item of targetForm.get(control.key).get('ef').controls; let i = index" class="add effect">
+          <div class="mb flexc spaceb" *ngFor="let item of targetForm.get(control.key).get('ef').controls; let i = index">
             <ion-icon name="close" (click)="removeItem(control.key, i)"></ion-icon>
             <ng-container [formGroupName]="i">
-              <label for="efname">stat. :</label>
-              <input type="text" id="efname" class="short" placeholder="ex : ad / int" formControlName="name" />
-              <label for="efval">valeur :</label>
-              <input type="text" id="efval" class="short" placeholder="ex : 2 / -3" formControlName="val" />
+              <label for="efname{{ i }}">stat. :</label>
+              <input class="short" type="text" id="efname{{ i }}" placeholder="ex : ad / int" formControlName="name" />
+              <label for="efval{{ i }}">valeur :</label>
+              <input class="short" type="text" id="efval{{ i }}" placeholder="ex : 2 / -3" formControlName="val" />
             </ng-container>
           </div>
         </ng-container>
-        <div margin-top margin-bottom class="add" (click)="addItem(control.key)">
-          <ion-icon name="add-circle-outline"></ion-icon>
+        <div class="flexc" (click)="addItem(control.key)">
+          <ion-icon class="mr" name="add-circle-outline"></ion-icon>
           <label>Ajouter un effet</label>
         </div>
-      </div>
+      </ng-container>
     </div>
   </ng-container>
-  <div class="add" margin-bottom>
-    <label for="tdm">truc de mauviette</label>
-    <ion-checkbox type="checkbox" id="tdm" formControlName="tdm" color="dark"></ion-checkbox>
-  </div>
-  <div margin-bottom>protection naturel {{ prNat }}</div>
-  <label for="prmag">protection magique</label>
-  <input type="number" id="prmag" class="last short" placeholder="0" formControlName="prmag" />
+  <div class="last"></div>
 </ion-content>

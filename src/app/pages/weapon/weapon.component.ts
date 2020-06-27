@@ -8,7 +8,6 @@ import { FormManagementService } from 'src/app/services/form-management.service'
 @Component({
   selector: 'app-weapon',
   templateUrl: './weapon.component.html',
-  styleUrls: ['./weapon.component.scss']
 })
 export class WeaponComponent implements OnInit {
   targetForm: FormGroup;
@@ -26,7 +25,7 @@ export class WeaponComponent implements OnInit {
     (this.targetForm.get(control).get('ef') as FormArray).push(
       new FormGroup({
         name: new FormControl(),
-        val: new FormControl()
+        val: new FormControl(),
       })
     );
   }

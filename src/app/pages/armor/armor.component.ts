@@ -8,27 +8,22 @@ import { FormManagementService } from 'src/app/services/form-management.service'
 @Component({
   selector: 'app-armor',
   templateUrl: './armor.component.html',
-  styleUrls: ['./armor.component.scss']
 })
 export class ArmorComponent implements OnInit {
   targetForm: FormGroup;
   title: string;
   prNat = 0;
   prMag = 0;
-  constructor(
-    private route: ActivatedRoute,
-    public fm: FormManagementService
-  ) {}
+  constructor(private route: ActivatedRoute, public fm: FormManagementService) {}
 
   ngOnInit(): void {
     this.route.data.subscribe(res => {
       this.title = res.title;
       this.targetForm = mainForm.get(res.targetForm) as FormGroup;
     });
-    this.prNatSum();
+    this.updateForm();
   }
 
-  /** TODO: TDM is not directly updated */
   updateForm(): void {
     this.prNatSum();
     this.fm.updateEffects();
@@ -37,10 +32,10 @@ export class ArmorComponent implements OnInit {
   prNatSum() {
     this.prNat = 0;
     for (const control in this.targetForm.controls) {
-      if (control !== 'tdm' && control !== 'prmag') {
-        this.prNat += this.targetForm.get(control).get('pr').value
-          ? Number(this.targetForm.get(control).get('pr').value)
-          : 0;
+      if (control !== 'tdm' && control !== 'prmag' && this.targetForm.get(control).get('pr').value) {
+        if (this.targetForm.get(control).get('equ').value) {
+          this.prNat += Number(this.targetForm.get(control).get('pr').value);
+        }
       }
     }
     this.prNat = this.targetForm.get('tdm').value ? this.prNat + 1 : this.prNat;
@@ -50,7 +45,7 @@ export class ArmorComponent implements OnInit {
     (this.targetForm.get(control).get('ef') as FormArray).push(
       new FormGroup({
         name: new FormControl(),
-        val: new FormControl()
+        val: new FormControl(),
       })
     );
     this.updateForm();

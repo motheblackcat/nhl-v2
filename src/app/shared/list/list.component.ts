@@ -6,11 +6,12 @@ import { Storage } from '@ionic/storage';
 
 import { mainForm } from '../../models/form';
 import { FormManagementService } from 'src/app/services/form-management.service';
+import { skillsList } from 'src/app/models/skills';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnInit {
   title: string;
@@ -19,6 +20,7 @@ export class ListComponent implements OnInit {
   targetFormName: string;
   targetForm: FormArray;
   mainForm: FormGroup = mainForm;
+  skillsList = skillsList;
   constructor(private route: ActivatedRoute, private store: Storage, private fm: FormManagementService) {}
 
   ngOnInit(): void {
@@ -29,6 +31,10 @@ export class ListComponent implements OnInit {
       this.targetFormName = res.targetForm;
       this.targetForm = mainForm.get(this.targetFormName) as FormArray;
     });
+  }
+
+  addItem(skill: string) {
+    console.log(skill);
   }
 
   updateItem(item, i) {

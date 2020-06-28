@@ -12,3 +12,15 @@ input {
 .item {
   margin-bottom: 10px;
 }
+
+select {
+  padding: 5px 10px;
+  width: 100%;
+  border-radius: 5px;
+  background: none;
+
+  option {
+    font-weight: bold;
+    background-color: #dacfab;
+  }
+}

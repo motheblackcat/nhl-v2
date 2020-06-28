@@ -3,8 +3,11 @@
   <label class="hint" *ngIf="subtitle">{{ subtitle }}</label>
   <br *ngIf="subtitle" />
   <div>
-    <label for="first"><ion-icon name="add-circle-outline"></ion-icon></label>
-    <input #add type="text" id="first" [placeholder]="placeholder" (change)="updateItem(add, null)" />
+    <!-- <label for="first"><ion-icon name="add-circle-outline"></ion-icon></label>
+    <input #add type="text" id="first" [placeholder]="placeholder" (change)="updateItem(add, null)" /> -->
+    <select (change)="addItem($event.value)">
+      <option #ert *ngFor="let skill of skillsList" value="{{ skill.title }}">{{ skill.title }}</option>
+    </select>
   </div>
   <br />
   <ng-container [formArrayName]="targetFormName">

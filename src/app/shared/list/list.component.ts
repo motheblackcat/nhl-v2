@@ -21,23 +21,26 @@ export class ListComponent implements OnInit {
   targetForm: FormArray;
   mainForm: FormGroup = mainForm;
   skillsList = skillsList;
+  useSelect: boolean;
   constructor(private route: ActivatedRoute, private store: Storage, private fm: FormManagementService) {}
 
   ngOnInit(): void {
+    this.skillsList.forEach(skill => (skill.title = skill.title.toLowerCase()));
     this.route.data.subscribe(res => {
       this.title = res.title;
       this.subtitle = res.subtitle;
       this.placeholder = res.placeholder;
       this.targetFormName = res.targetForm;
       this.targetForm = mainForm.get(this.targetFormName) as FormArray;
+      this.useSelect = res.useSelect;
     });
   }
 
   addItem(skill: string) {
-    console.log(skill);
+    this.targetForm.push(new FormControl(skill));
   }
 
-  updateItem(item, i) {
+  updateItem(item: HTMLInputElement, i: number) {
     if (i === null) {
       this.targetForm.push(new FormControl(item.value));
       item.value = '';

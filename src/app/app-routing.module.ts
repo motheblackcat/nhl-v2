@@ -19,8 +19,8 @@ export const routes: Routes = [
     data: {
       title: 'personnage',
       targetForm: 'charForm',
-      icon: 'body'
-    }
+      icon: 'body',
+    },
   },
   {
     path: 'stats',
@@ -28,8 +28,8 @@ export const routes: Routes = [
     data: {
       title: 'statistiques',
       targetForm: 'statsForm',
-      icon: 'bar-chart'
-    }
+      icon: 'bar-chart',
+    },
   },
   {
     path: 'skills',
@@ -38,14 +38,15 @@ export const routes: Routes = [
       title: 'compétences',
       placeholder: 'Ajouter une compétence.',
       targetForm: 'skillsForm',
-      icon: 'hand-right'
-    }
+      icon: 'hand-right',
+      useSelect: true,
+    },
   },
   {
     path: 'equip',
     component: InvComponent,
     data: {
-      icon: 'shirt'
+      icon: 'shirt',
     },
     children: [
       { path: '', redirectTo: 'weapon', pathMatch: 'full' },
@@ -55,8 +56,8 @@ export const routes: Routes = [
         data: {
           title: 'armement et baston',
           targetForm: 'weaponsForm',
-          icon: 'flash'
-        }
+          icon: 'flash',
+        },
       },
       {
         path: 'armor',
@@ -64,16 +65,16 @@ export const routes: Routes = [
         data: {
           title: 'armure et protection',
           targetForm: 'armorsForm',
-          icon: 'shirt'
-        }
-      }
-    ]
+          icon: 'shirt',
+        },
+      },
+    ],
   },
   {
     path: 'inv',
     component: InvComponent,
     data: {
-      icon: 'cube'
+      icon: 'cube',
     },
     children: [
       {
@@ -83,20 +84,19 @@ export const routes: Routes = [
           title: 'objets de quete',
           placeholder: 'Ajouter un objet de quête.',
           targetForm: 'questForm',
-          icon: 'help'
-        }
+          icon: 'help',
+        },
       },
       {
         path: 'loot',
         component: ListComponent,
         data: {
           title: 'butin a revendre (ou pas)',
-          subtitle:
-            'tout ces machins volés sur les innocents, ou récupérés dans des coffres...',
+          subtitle: 'tout ces machins volés sur les innocents, ou récupérés dans des coffres...',
           placeholder: 'Ajouter du butin.',
           targetForm: 'lootForm',
-          icon: 'cash'
-        }
+          icon: 'cash',
+        },
       },
       {
         path: 'bags',
@@ -104,8 +104,8 @@ export const routes: Routes = [
         data: {
           title: 'sac et transport',
           targetForm: 'bagsForm',
-          icon: 'basket'
-        }
+          icon: 'basket',
+        },
       },
       {
         path: 'camp',
@@ -113,8 +113,8 @@ export const routes: Routes = [
         data: {
           title: 'materiel de bivouac et camping',
           targetForm: 'campForm',
-          icon: 'bonfire'
-        }
+          icon: 'bonfire',
+        },
       },
       {
         path: 'food',
@@ -123,8 +123,8 @@ export const routes: Routes = [
           title: 'bouffe et boisson',
           placeholder: 'Ajouter un aliment / boisson.',
           targetForm: 'foodForm',
-          icon: 'beer'
-        }
+          icon: 'beer',
+        },
       },
       {
         path: 'special',
@@ -134,8 +134,8 @@ export const routes: Routes = [
           targetForm: 'specialForm',
           nameLabel: 'objet',
           effectLabel: 'bonus / effets',
-          icon: 'color-wand'
-        }
+          icon: 'color-wand',
+        },
       },
       {
         path: 'gems',
@@ -146,8 +146,8 @@ export const routes: Routes = [
           nameLabel: 'nom',
           effectLabel: 'u. g.',
           targetForm: 'gemsForm',
-          icon: 'contract'
-        }
+          icon: 'contract',
+        },
       },
       {
         path: 'potions',
@@ -157,30 +157,29 @@ export const routes: Routes = [
           targetForm: 'potionsForm',
           nameLabel: 'doses',
           effectLabel: 'effets',
-          icon: 'flask'
-        }
+          icon: 'flask',
+        },
       },
       {
         path: 'precious',
         component: ListComponent,
         data: {
           title: 'machin precieux',
-          subtitle:
-            'titres particuliers, montures, habitations, héritages et autre souvenirs...',
+          subtitle: 'titres particuliers, montures, habitations, héritages et autre souvenirs...',
           placeholder: 'Ajouter un objet précieux.',
           targetForm: 'preciousForm',
-          icon: 'today'
-        }
+          icon: 'today',
+        },
       },
-      { path: '', redirectTo: 'quest', pathMatch: 'full' }
-    ]
+      { path: '', redirectTo: 'quest', pathMatch: 'full' },
+    ],
   },
   { path: '', redirectTo: 'char', pathMatch: 'full' },
-  { path: '**', redirectTo: 'char' }
+  { path: '**', redirectTo: 'char' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}

@@ -7,6 +7,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Vibration } from '@ionic-native/vibration/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -39,22 +40,11 @@ import { FormManagementService } from './services/form-management.service';
     ArmorComponent,
     BagsComponent,
     CampComponent,
-    FabComponent
+    FabComponent,
   ],
   entryComponents: [ResetComponent],
-  imports: [
-    BrowserModule,
-    ReactiveFormsModule,
-    IonicModule.forRoot({ mode: 'md' }),
-    IonicStorageModule.forRoot(),
-    AppRoutingModule
-  ],
-  providers: [
-    StatusBar,
-    SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    FormManagementService
-  ],
-  bootstrap: [AppComponent]
+  imports: [BrowserModule, ReactiveFormsModule, IonicModule.forRoot({ mode: 'md' }), IonicStorageModule.forRoot(), AppRoutingModule],
+  providers: [StatusBar, SplashScreen, Vibration, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, FormManagementService],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

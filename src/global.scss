@@ -1,22 +1,22 @@
 // http://ionicframework.com/docs/theming/
-@import "~@ionic/angular/css/core.css";
-@import "~@ionic/angular/css/normalize.css";
-@import "~@ionic/angular/css/structure.css";
-@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/core.css';
+@import '~@ionic/angular/css/normalize.css';
+@import '~@ionic/angular/css/structure.css';
+@import '~@ionic/angular/css/typography.css';
 
-@import "~@ionic/angular/css/padding.css";
-@import "~@ionic/angular/css/float-elements.css";
-@import "~@ionic/angular/css/text-alignment.css";
-@import "~@ionic/angular/css/text-transformation.css";
-@import "~@ionic/angular/css/flex-utils.css";
+@import '~@ionic/angular/css/padding.css';
+@import '~@ionic/angular/css/float-elements.css';
+@import '~@ionic/angular/css/text-alignment.css';
+@import '~@ionic/angular/css/text-transformation.css';
+@import '~@ionic/angular/css/flex-utils.css';
 
 @font-face {
-  font-family: "dauphin";
-  src: url("assets/fonts/dauphin.ttf");
+  font-family: 'dauphin';
+  src: url('assets/fonts/dauphin.ttf');
 }
 
 ion-content {
-  font-family: "dauphin" !important;
+  font-family: 'dauphin' !important;
   font-weight: bold;
   text-transform: capitalize;
   --background: #dacfab !important;
@@ -25,7 +25,7 @@ ion-content {
 }
 
 ion-button {
-  font-family: "dauphin" !important;
+  font-family: 'dauphin' !important;
   font-weight: bold;
 }
 
@@ -89,14 +89,10 @@ ion-icon {
 
 .reset-modal {
   --height: 35% !important;
-}
 
-.add {
-  display: flex;
-  align-items: center;
-
-  ion-icon {
-    margin-right: 5px;
+  .modal-wrapper {
+    width: 90% !important;
+    border-radius: 10px !important;
   }
 }
 
@@ -105,5 +101,5 @@ ion-icon {
 }
 
 .short {
-  width: 25%;
+  width: 22%;
 }

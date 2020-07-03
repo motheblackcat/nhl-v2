@@ -2,16 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormArray, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
+import { ModalController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
 import { mainForm } from '../../models/form';
 import { FormManagementService } from 'src/app/services/form-management.service';
 import { skillsList } from 'src/app/models/skills';
+import { SkillDescComponent } from '../skill-desc/skill-desc.component';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss'],
+  styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
   title: string;
@@ -22,7 +24,7 @@ export class ListComponent implements OnInit {
   mainForm: FormGroup = mainForm;
   skillsList = skillsList;
   useSelect: boolean;
-  constructor(private route: ActivatedRoute, private store: Storage, private fm: FormManagementService) {}
+  constructor(private route: ActivatedRoute, private store: Storage, private fm: FormManagementService, private modal: ModalController) {}
 
   ngOnInit(): void {
     this.skillsList.forEach(skill => (skill.title = skill.title.toLowerCase()));
@@ -36,8 +38,22 @@ export class ListComponent implements OnInit {
     });
   }
 
+  async presentModal(skill: string): Promise<void> {
+    const modal = await this.modal.create({
+      component: SkillDescComponent,
+      componentProps: { skillInput: skill }
+    });
+    return await modal.present();
+  }
+
+  showSkillDes(skill: string) {
+    this.presentModal(skill);
+  }
+
   addItem(skill: string) {
-    this.targetForm.push(new FormControl(skill));
+    if (!this.targetForm.value.find(s => s === skill)) {
+      this.targetForm.push(new FormControl(skill));
+    }
   }
 
   updateItem(item: HTMLInputElement, i: number) {

@@ -24,6 +24,7 @@ import { InvComponent } from './pages/inv/inv.component';
 import { BagsComponent } from './pages/inv/bags/bags.component';
 import { CampComponent } from './pages/inv/camp/camp.component';
 import { FabComponent } from './shared/fab/fab.component';
+import { SkillDescComponent } from './shared/skill-desc/skill-desc.component';
 
 import { FormManagementService } from './services/form-management.service';
 
@@ -41,10 +42,11 @@ import { FormManagementService } from './services/form-management.service';
     BagsComponent,
     CampComponent,
     FabComponent,
+    SkillDescComponent
   ],
   entryComponents: [ResetComponent],
   imports: [BrowserModule, ReactiveFormsModule, IonicModule.forRoot({ mode: 'md' }), IonicStorageModule.forRoot(), AppRoutingModule],
   providers: [StatusBar, SplashScreen, Vibration, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, FormManagementService],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

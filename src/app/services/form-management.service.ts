@@ -8,47 +8,28 @@ import { mainForm } from '../models/form';
 
 @Injectable()
 export class FormManagementService {
-  resetArray = [
-    'skillsForm',
-    'questForm',
-    'lootForm',
-    'foodForm',
-    'specialForm',
-    'gemsForm',
-    'potionsForm',
-    'preciousForm'
-  ];
+  resetArray = ['skillsForm', 'questForm', 'lootForm', 'foodForm', 'specialForm', 'gemsForm', 'potionsForm', 'preciousForm'];
   constructor(private store: Storage) {}
 
   initForm(): void {
     this.store.get('mainForm').then(storedForm => {
       if (storedForm) {
+        if (storedForm.skillsForm.length > 0) {
+          storedForm.skillsForm.sort();
+        }
         // Load mono list
         this.resetArray.forEach(formName => {
           for (let i = 0; i < storedForm[formName].length; i++) {
-            (mainForm.get(formName) as FormArray).push(
-              new FormControl(storedForm[formName][i])
-            );
+            (mainForm.get(formName) as FormArray).push(new FormControl(storedForm[formName][i]));
           }
         });
         // Load weapons/armors
         ['weaponsForm', 'armorsForm'].forEach(form => {
           for (const control in (mainForm.get(form) as FormGroup).controls) {
-            if (
-              mainForm
-                .get(form)
-                .get(control)
-                .get('ef')
-            ) {
-              (mainForm
-                .get(form)
-                .get(control)
-                .get('ef') as FormArray).clear();
+            if (mainForm.get(form).get(control).get('ef')) {
+              (mainForm.get(form).get(control).get('ef') as FormArray).clear();
               for (let i = 0; i < storedForm[form][control].ef.length; i++) {
-                (mainForm
-                  .get(form)
-                  .get(control)
-                  .get('ef') as FormArray).push(
+                (mainForm.get(form).get(control).get('ef') as FormArray).push(
                   new FormGroup({
                     name: new FormControl(storedForm[form][control].ef[i].name),
                     val: new FormControl(storedForm[form][control].ef[i].val)
@@ -109,11 +90,7 @@ export class FormManagementService {
     ['armorsForm', 'weaponsForm'].forEach(formName => {
       const form = mainForm.get(formName) as FormGroup;
       for (const control in form.controls) {
-        if (
-          control !== 'tdm' &&
-          control !== 'prmag' &&
-          form.get(control).get('equ').value
-        ) {
+        if (control !== 'tdm' && control !== 'prmag' && form.get(control).get('equ').value) {
           form
             .get(control)
             .get('ef')
@@ -126,29 +103,20 @@ export class FormManagementService {
       }
     });
 
-    ['ev', 'ea', 'cou', 'int', 'cha', 'ad', 'fo', 'atq', 'prd'].forEach(
-      stat => {
-        mainForm
-          .get('statsForm')
-          .get(stat)
-          .get('ef')
-          .setValue(
-            effects
-              .filter(e => e.name.toLowerCase() === stat)
-              .reduce((a, b) => a + Number(b.val), 0)
-          );
-      }
-    );
+    ['ev', 'ea', 'cou', 'int', 'cha', 'ad', 'fo', 'atq', 'prd'].forEach(stat => {
+      mainForm
+        .get('statsForm')
+        .get(stat)
+        .get('ef')
+        .setValue(effects.filter(e => e.name.toLowerCase() === stat).reduce((a, b) => a + Number(b.val), 0));
+    });
   }
 
   reset(): void {
     this.resetArray.forEach(form => (mainForm.get(form) as FormArray).clear());
     for (const control in (mainForm.get('weaponsForm') as FormGroup).controls) {
       if (control) {
-        const effectForm = mainForm
-          .get('weaponsForm')
-          .get(control)
-          .get('ef') as FormArray;
+        const effectForm = mainForm.get('weaponsForm').get(control).get('ef') as FormArray;
         effectForm.clear();
         effectForm.push(
           new FormGroup({
@@ -159,16 +127,8 @@ export class FormManagementService {
       }
     }
     for (const control in (mainForm.get('armorsForm') as FormGroup).controls) {
-      if (
-        mainForm
-          .get('armorsForm')
-          .get(control)
-          .get('ef')
-      ) {
-        const effectForm = mainForm
-          .get('armorsForm')
-          .get(control)
-          .get('ef') as FormArray;
+      if (mainForm.get('armorsForm').get(control).get('ef')) {
+        const effectForm = mainForm.get('armorsForm').get(control).get('ef') as FormArray;
         effectForm.clear();
         effectForm.push(
           new FormGroup({

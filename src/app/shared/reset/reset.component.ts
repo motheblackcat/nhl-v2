@@ -6,8 +6,7 @@ import { FormManagementService } from 'src/app/services/form-management.service'
 
 @Component({
   selector: 'app-reset',
-  templateUrl: './reset.component.html',
-  styleUrls: ['./reset.component.scss'],
+  templateUrl: './reset.component.html'
 })
 export class ResetComponent implements OnInit {
   constructor(
@@ -26,7 +25,7 @@ export class ResetComponent implements OnInit {
       message: 'Toutes les données ont été effacées !',
       duration: 2000,
       color: 'dark',
-      position: 'top',
+      position: 'top'
     });
     toast.present();
   }

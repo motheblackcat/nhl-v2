@@ -35,10 +35,10 @@
           <div class="mb flexc spaceb" *ngFor="let item of targetForm.get(control.key).get('ef').controls; let i = index">
             <ion-icon name="close" (click)="removeItem(control.key, i)"></ion-icon>
             <ng-container [formGroupName]="i">
-              <label for="efname{{ i }}">stat. :</label>
-              <input class="short" type="text" id="efname{{ i }}" placeholder="ex : ad / int" formControlName="name" />
-              <label for="efval{{ i }}">valeur :</label>
-              <input class="short" type="text" id="efval{{ i }}" placeholder="ex : 2 / -3" formControlName="val" />
+              <label for="efname-{{ control.key }}-{{ i }}">stat. :</label>
+              <input class="short" type="text" id="efname-{{ control.key }}-{{ i }}" placeholder="ex : ad / int" formControlName="name" />
+              <label for="efval-{{ control.key }}-{{ i }}">valeur :</label>
+              <input class="short" type="text" id="efval-{{ control.key }}-{{ i }}" placeholder="ex : 2 / -3" formControlName="val" />
             </ng-container>
           </div>
         </ng-container>

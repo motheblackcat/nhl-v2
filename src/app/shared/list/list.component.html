@@ -1,7 +1,6 @@
 <ion-content [formGroup]="mainForm">
   <h3>{{ title }}</h3>
-  <label class="hint" *ngIf="subtitle">{{ subtitle }}</label>
-  <br *ngIf="subtitle" />
+  <div class="hint mb" *ngIf="subtitle">{{ subtitle }}</div>
   <div>
     <div class="flexc" *ngIf="!useSelect">
       <label for="first"><ion-icon name="add-circle-outline"></ion-icon></label>

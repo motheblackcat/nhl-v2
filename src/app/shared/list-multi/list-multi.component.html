@@ -1,18 +1,16 @@
 <ion-content [formGroup]="mainForm">
   <h3>{{ title }}</h3>
-  <label class="hint" *ngIf="subtitle">{{ subtitle }}</label>
+  <div class="hint mb" *ngIf="subtitle">{{ subtitle }}</div>
   <ng-container [formArrayName]="targetFormName">
     <div *ngFor="let control of targetForm.controls; let i = index" [formGroupName]="i" class="item">
       <ion-icon name="close" class="del" (click)="deleteItem(i)"></ion-icon>
       <div>
-        <div>
-          <label for="name">{{ nameLabel }} :</label>
-          <input type="text" id="name" formControlName="name" [placeholder]="nameLabel" />
-        </div>
-        <div>
-          <label for="effect"> {{ effectLabel }} :</label>
-          <input type="text" id="effect" formControlName="effect" [placeholder]="effectLabel" />
-        </div>
+        <label for="name{{ i }}">{{ nameLabel }} :</label>
+        <input type="text" id="name{{ i }}" formControlName="name" [placeholder]="nameLabel" />
+      </div>
+      <div>
+        <label for="effect{{ i }}"> {{ effectLabel }} :</label>
+        <input type="text" id="effect{{ i }}" formControlName="effect" [placeholder]="effectLabel" />
       </div>
     </div>
   </ng-container>

@@ -13,7 +13,7 @@ export class FabComponent implements OnInit {
   config: MenuConfig[] = [];
   icon: string;
 
-  constructor(private router: Router, public modalController: ModalController) {}
+  constructor(private router: Router, private modalController: ModalController) {}
 
   ngOnInit() {
     this.router.config.filter(route => route.data).forEach(route => this.config.push({ path: `/${route.path}`, icon: route.data.icon }));
@@ -28,7 +28,7 @@ export class FabComponent implements OnInit {
   async presentModal(): Promise<void> {
     const modal = await this.modalController.create({
       component: ResetComponent,
-      cssClass: 'reset-modal'
+      cssClass: 'modal'
     });
     return await modal.present();
   }

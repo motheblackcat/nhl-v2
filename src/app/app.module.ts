@@ -27,12 +27,14 @@ import { FabComponent } from './shared/fab/fab.component';
 import { SkillDescComponent } from './shared/skill-desc/skill-desc.component';
 
 import { FormManagementService } from './services/form-management.service';
+import { CharSelectComponent } from './pages/char-select/char-select.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListComponent,
     ListMultiComponent,
+    CharSelectComponent,
     CharComponent,
     StatsComponent,
     InvComponent,

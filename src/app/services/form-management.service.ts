@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, FormArray, FormControl } from '@angular/forms';
-import { KeyValue } from '@angular/common';
 
 import { Storage } from '@ionic/storage';
 

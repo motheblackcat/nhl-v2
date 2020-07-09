@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { CharSelectComponent } from './pages/char-select/char-select.component';
 import { CharComponent } from './pages/char/char.component';
 import { StatsComponent } from './pages/stats/stats.component';
 import { InvComponent } from './pages/inv/inv.component';
@@ -13,6 +14,10 @@ import { ListComponent } from './shared/list/list.component';
 import { ListMultiComponent } from './shared/list-multi/list-multi.component';
 
 export const routes: Routes = [
+  {
+    path: 'char-select',
+    component: CharSelectComponent
+  },
   {
     path: 'char',
     component: CharComponent,
@@ -174,8 +179,8 @@ export const routes: Routes = [
       { path: '', redirectTo: 'quest', pathMatch: 'full' }
     ]
   },
-  { path: '', redirectTo: 'char', pathMatch: 'full' },
-  { path: '**', redirectTo: 'char' }
+  { path: '', redirectTo: 'char-select', pathMatch: 'full' },
+  { path: '**', redirectTo: 'char-select' }
 ];
 
 @NgModule({

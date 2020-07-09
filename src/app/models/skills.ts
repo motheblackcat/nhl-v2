@@ -182,7 +182,7 @@ export const skillsList = [
     use: `Le personnage sait lire, écrire et compter.`
   },
   {
-    title: 'ESCALADER (AD',
+    title: 'ESCALADER (AD)',
     des: `Spider-Man triche, il a les mains qui collent ! Mais cette compétence permet d’éviter les chutes désastreuses avec talent,
     lorsqu'on déambule sur une corniche, qu'on attaque une falaise par la face nord
     ou qu'on se retrouve suspendu entre ciel et terre par une toute petite corde.`,

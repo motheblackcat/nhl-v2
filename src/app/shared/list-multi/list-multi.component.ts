@@ -31,11 +31,6 @@ export class ListMultiComponent implements OnInit {
       this.targetFormName = res.targetForm;
       this.targetForm = mainForm.get(this.targetFormName) as FormArray;
     });
-    // this.store.get('mainForm').then(data => {
-    //   data[this.targetFormName].forEach(item => {
-    //     this.targetForm.push(new FormGroup({ name: new FormControl(item.name), effect: new FormControl(item.effect) }));
-    //   });
-    // });
   }
 
   addItem(): void {

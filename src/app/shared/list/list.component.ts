@@ -60,8 +60,6 @@ export class ListComponent implements OnInit {
     if (i === null) {
       this.targetForm.push(new FormControl(item.value));
       item.value = '';
-    } else {
-      this.fm.saveForm();
     }
   }
 

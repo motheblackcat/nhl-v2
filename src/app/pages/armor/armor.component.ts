@@ -7,7 +7,7 @@ import { FormManagementService } from 'src/app/services/form-management.service'
 
 @Component({
   selector: 'app-armor',
-  templateUrl: './armor.component.html',
+  templateUrl: './armor.component.html'
 })
 export class ArmorComponent implements OnInit {
   targetForm: FormGroup;
@@ -45,7 +45,7 @@ export class ArmorComponent implements OnInit {
     (this.targetForm.get(control).get('ef') as FormArray).push(
       new FormGroup({
         name: new FormControl(),
-        val: new FormControl(),
+        val: new FormControl()
       })
     );
     this.updateForm();

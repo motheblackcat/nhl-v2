@@ -2,8 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
-import { mainForm } from 'src/app/models/form';
+import { Storage } from '@ionic/storage';
+
 import { FormManagementService } from 'src/app/services/form-management.service';
+
+import { RouteData } from 'src/app/interfaces/route-data.interface';
+import { charForm } from 'src/app/models/charform';
 
 @Component({
   selector: 'app-char',
@@ -11,14 +15,21 @@ import { FormManagementService } from 'src/app/services/form-management.service'
   styleUrls: ['./char.component.scss']
 })
 export class CharComponent implements OnInit {
-  targetForm: FormGroup;
+  charForm: FormGroup = charForm;
   title: string;
-  constructor(private route: ActivatedRoute, public fm: FormManagementService) {}
+  /** TODO: This property could be in the component only instead of being taken from route data */
+  targetForm: string;
+  constructor(private route: ActivatedRoute, private store: Storage, public fm: FormManagementService) {}
 
-  ngOnInit(): void {
-    this.route.data.subscribe(res => {
+  ngOnInit() {
+    this.route.data.subscribe((res: RouteData) => {
       this.title = res.title;
-      this.targetForm = mainForm.get(res.targetForm) as FormGroup;
+      this.targetForm = res.targetForm;
+      this.store.get('mainForm').then(data => {
+        if (data) {
+          this.charForm.setValue(data.charForm);
+        }
+      });
     });
   }
 }

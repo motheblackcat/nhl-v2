@@ -3,11 +3,11 @@ import { Router, RoutesRecognized } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 
 import { ResetComponent } from '../reset/reset.component';
-import { MenuConfig } from 'src/app/models/MenuConfig';
+import { MenuConfig } from 'src/app/interfaces/menu-config.interface';
 
 @Component({
   selector: 'app-fab',
-  templateUrl: './fab.component.html',
+  templateUrl: './fab.component.html'
 })
 export class FabComponent implements OnInit {
   config: MenuConfig[] = [];
@@ -28,7 +28,7 @@ export class FabComponent implements OnInit {
   async presentModal(): Promise<void> {
     const modal = await this.modalController.create({
       component: ResetComponent,
-      cssClass: 'reset-modal',
+      cssClass: 'reset-modal'
     });
     return await modal.present();
   }

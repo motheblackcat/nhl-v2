@@ -27,6 +27,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.fm.initForm();
+    // this.fm.initForm();
   }
 }

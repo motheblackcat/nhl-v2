@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
-import { MenuConfig } from 'src/app/models/MenuConfig';
+import { MenuConfig } from 'src/app/interfaces/menu-config.interface';
 
 @Component({
   selector: 'app-inv',

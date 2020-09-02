@@ -1,7 +1,7 @@
-<ion-content [formGroup]="targetForm">
+<ion-content [formGroup]="charForm" (change)="fm.saveForm(targetForm, charForm.value)">
   <h3>{{ title }}</h3>
   <br />
-  <div *ngFor="let control of targetForm.controls | keyvalue: fm.defaultOrder" [ngSwitch]="control.key">
+  <div *ngFor="let control of charForm.controls | keyvalue: fm.defaultOrder" [ngSwitch]="control.key">
     <div *ngIf="control.key === 'berylium'">Mes richesses à moi que j'ai:</div>
     <label [for]="control.key">{{ control.key === 'pd' ? 'point de destin' : control.key }}</label>
     <input
@@ -10,15 +10,14 @@
       [id]="control.key"
       [placeholder]="control.key === 'pd' ? 'point de destin' : control.key"
       [formControlName]="control.key"
-      [value]="targetForm.get(control.key).value"
     />
     <ng-container *ngSwitchCase="'sexe'">
       <label id="sexe" for="male">
-        <ion-icon name="male" [class.selected]="targetForm.get('sexe').value === 'male'"></ion-icon>
+        <ion-icon name="male" [class.selected]="charForm.get('sexe').value === 'male'"></ion-icon>
       </label>
       <input type="radio" id="male" value="male" [formControlName]="control.key" />
       <label id="sexe" for="female">
-        <ion-icon name="female" [class.selected]="targetForm.get('sexe').value === 'female'"></ion-icon>
+        <ion-icon name="female" [class.selected]="charForm.get('sexe').value === 'female'"></ion-icon>
       </label>
       <input type="radio" id="female" value="female" [formControlName]="control.key" />
     </ng-container>

@@ -5,12 +5,25 @@ import { Storage } from '@ionic/storage';
 import { Persona } from '../interfaces/persona.interface';
 import { CharObject } from '../interfaces/charform.interface';
 
+import { personas } from '../consts/storage-keys.conts';
+
 @Injectable()
 export class FormManagementService {
   personas: Persona[];
   currentPersona: Persona;
   resetArrays = ['skillsForm', 'questForm', 'lootForm', 'foodForm', 'specialForm', 'gemsForm', 'potionsForm', 'preciousForm'];
   constructor(private store: Storage) {}
+
+  GetPersonas() {
+    this.store.set(personas, [{ 0: {} }, { 1: {} }]);
+    this.store.get(personas).then(data => {
+      this.personas = data ? data : [];
+    });
+  }
+
+  GetCurrentPersona() {
+    /** TODO: User have selected a persona from the previous screen */
+  }
 
   // initForm() {
   //   this.store.get('mainForm').then(storedForm => {

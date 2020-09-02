@@ -1,6 +1,6 @@
-import { MergedFormObject } from './mergedform.interface';
+import { PersonaSheet } from './persona-sheet';
 
 export interface Persona {
   name: string;
-  sheet: MergedFormObject;
+  sheet: PersonaSheet;
 }

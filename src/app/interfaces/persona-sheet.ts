@@ -1,5 +1,5 @@
 import { CharObject } from './charform.interface';
 
-export interface MergedFormObject {
+export interface PersonaSheet {
   charForm?: CharObject;
 }

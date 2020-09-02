@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AlertController, ToastController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
+
+import { PERSONAS } from 'src/app/consts/storage.consts';
 
 import { Persona } from 'src/app/interfaces/persona.interface';
-import { PERSONAS } from 'src/app/consts/storage.consts';
 
 @Component({
   selector: 'app-persona-select',
@@ -12,16 +14,16 @@ import { PERSONAS } from 'src/app/consts/storage.consts';
 })
 export class PersonaSelectComponent implements OnInit {
   personas: Persona[];
-  constructor(private alert: AlertController, private toast: ToastController) {}
+  constructor(private alert: AlertController, private toast: ToastController, private store: Storage) {}
 
   ngOnInit() {
-    // this.storage.get(PERSONAS).then(data => {
-    //   this.personas = data ? data : [];
-    // });
+    this.store.get(PERSONAS).then(data => {
+      this.personas = data ? data : [];
+    });
   }
 
-  selectChar(char) {
-    console.log(char);
+  selectPersona(persona: Persona) {
+    console.log(persona);
   }
 
   /** TODO: Add enum for type */
@@ -40,7 +42,21 @@ export class PersonaSelectComponent implements OnInit {
     toast.present();
   }
 
-  async addChar() {
+  createPersona(data) {
+    if (data.charName) {
+      const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+      const index = this.personas.find(char => char.id === `char${this.personas.length}`) ? this.personas.length + 1 : this.personas.length;
+      const newPersona = { id: `char${index}`, name: data.charName, color: `#${randomColor}`, sheet: null };
+      this.personas.push(newPersona);
+      this.store.set(PERSONAS, this.personas);
+      this.presentToast('created');
+    } else {
+      this.presentToast('');
+      return false;
+    }
+  }
+
+  async addPersonaModal() {
     const alert = await this.alert.create({
       header: 'Créer un personnage',
       message: 'Veuillez indiquer le nom du personnage.',
@@ -65,30 +81,13 @@ export class PersonaSelectComponent implements OnInit {
     await alert.present();
   }
 
-  createPersona(data) {
-    console.log(data);
-
-    // if (data.charName) {
-    //   const randomColor = Math.floor(Math.random() * 16777215).toString(16);
-    //   const index = this.personas.find(char => char.id === `char${this.personas.length}`)
-    //      ? this.personas.length + 1 : this.personas.length;
-    //   const newChar = { id: `char${index}`, name: data.charName, color: `#${randomColor}`, sheet: null };
-    //   this.personas.push(newChar);
-    //   this.storage.set('charList', this.personas);
-    //   this.presentToast('created');
-    // } else {
-    //   this.presentToast('');
-    //   return false;
-    // }
+  deletePersona(persona: Persona) {
+    this.personas.splice(this.personas.indexOf(persona), 1);
+    this.store.set(PERSONAS, this.personas);
+    this.presentToast('deleted');
   }
 
-  deletePersona() {
-    // this.personas.splice(this.personas.indexOf(char), 1);
-    // this.store.set(PERSONAS, this.personas);
-    // this.presentToast('deleted');
-  }
-
-  async deleteChar(char) {
+  async deletePersonaModal(persona: Persona) {
     const alert = await this.alert.create({
       header: 'Supprimer un personnage',
       message: 'Etes vous sure de vouloir supprimer ce personnage ?',
@@ -98,7 +97,7 @@ export class PersonaSelectComponent implements OnInit {
         },
         {
           text: 'Ouais !',
-          handler: () => this.deletePersona()
+          handler: () => this.deletePersona(persona)
         }
       ]
     });

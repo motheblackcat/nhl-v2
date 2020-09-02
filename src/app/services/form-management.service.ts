@@ -1,9 +1,5 @@
 import { Injectable } from '@angular/core';
 
-import { Storage } from '@ionic/storage';
-
-import { PERSONAS } from '../consts/storage.consts';
-
 import { Persona } from '../interfaces/persona.interface';
 
 @Injectable()
@@ -11,13 +7,6 @@ export class FormManagementService {
   // resetArray = ['skillsForm', 'questForm', 'lootForm', 'foodForm', 'specialForm', 'gemsForm', 'potionsForm', 'preciousForm'];
   personas: Persona[];
   currentPersona: Persona;
-  constructor(private store: Storage) {}
-
-  getPersonas() {
-    this.store.get(PERSONAS).then(data => {
-      this.personas = data ? data : [];
-    });
-  }
 
   // initForm(): void {
   //   this.store.get('mainForm').then(storedForm => {

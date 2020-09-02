@@ -8,7 +8,7 @@ import { Storage } from '@ionic/storage';
 import { mainForm } from '../../models/form';
 import { FormManagementService } from 'src/app/services/form-management.service';
 import { skillsList } from 'src/app/models/skills';
-import { SkillDescComponent } from '../skill-desc/skill-desc.component';
+import { SkillsDetailsComponent } from '../skill-desc/skill-desc.component';
 
 @Component({
   selector: 'app-list',
@@ -40,7 +40,7 @@ export class ListComponent implements OnInit {
 
   async presentModal(skill: string): Promise<void> {
     const modal = await this.modal.create({
-      component: SkillDescComponent,
+      component: SkillsDetailsComponent,
       componentProps: { skillInput: skill }
     });
     return await modal.present();

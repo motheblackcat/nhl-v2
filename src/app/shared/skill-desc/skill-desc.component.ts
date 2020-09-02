@@ -8,7 +8,7 @@ import { ModalController } from '@ionic/angular';
   templateUrl: './skill-desc.component.html',
   styleUrls: ['./skill-desc.component.scss']
 })
-export class SkillDescComponent implements OnInit {
+export class SkillsDetailsComponent implements OnInit {
   @Input() skillInput;
   skill;
 

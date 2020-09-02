@@ -12,6 +12,8 @@ import { Vibration } from '@ionic-native/vibration/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
+import { FabComponent } from './shared/fab/fab.component';
+import { SkillsDetailsComponent } from './shared/skill-desc/skill-desc.component';
 import { ListComponent } from './shared/list/list.component';
 import { ListMultiComponent } from './shared/list-multi/list-multi.component';
 import { ResetComponent } from './shared/reset/reset.component';
@@ -23,18 +25,16 @@ import { ArmorComponent } from './pages/armor/armor.component';
 import { InvComponent } from './pages/inv/inv.component';
 import { BagsComponent } from './pages/inv/bags/bags.component';
 import { CampComponent } from './pages/inv/camp/camp.component';
-import { FabComponent } from './shared/fab/fab.component';
-import { SkillDescComponent } from './shared/skill-desc/skill-desc.component';
 
 import { FormManagementService } from './services/form-management.service';
-import { CharSelectComponent } from './pages/char-select/char-select.component';
+import { PersonaSelectComponent } from './pages/persona-select/persona-select.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListComponent,
     ListMultiComponent,
-    CharSelectComponent,
+    PersonaSelectComponent,
     CharComponent,
     StatsComponent,
     InvComponent,
@@ -44,7 +44,7 @@ import { CharSelectComponent } from './pages/char-select/char-select.component';
     BagsComponent,
     CampComponent,
     FabComponent,
-    SkillDescComponent
+    SkillsDetailsComponent
   ],
   entryComponents: [ResetComponent],
   imports: [BrowserModule, ReactiveFormsModule, IonicModule.forRoot({ mode: 'md' }), IonicStorageModule.forRoot(), AppRoutingModule],

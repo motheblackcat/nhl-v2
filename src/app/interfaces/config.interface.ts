@@ -1,4 +1,4 @@
-export interface MenuConfig {
+export interface Config {
   path: string;
   icon: string;
 }

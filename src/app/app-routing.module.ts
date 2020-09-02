@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { CharSelectComponent } from './pages/char-select/char-select.component';
+import { PersonaSelectComponent } from './pages/persona-select/persona-select.component';
 import { CharComponent } from './pages/char/char.component';
 import { StatsComponent } from './pages/stats/stats.component';
 import { InvComponent } from './pages/inv/inv.component';
@@ -16,7 +16,7 @@ import { ListMultiComponent } from './shared/list-multi/list-multi.component';
 export const routes: Routes = [
   {
     path: 'char-select',
-    component: CharSelectComponent
+    component: PersonaSelectComponent
   },
   {
     path: 'char',

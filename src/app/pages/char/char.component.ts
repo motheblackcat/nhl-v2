@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
-import { PersonaForm } from 'src/app/interfaces/persona.interface';
+import { FormGroup } from '@angular/forms';
 
 import { PersonaService } from 'src/app/services/persona.service';
+
+import { RouteData } from 'src/app/interfaces/route-data.interface';
+
 import { charForm } from 'src/app/models/charform';
-import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-char',
@@ -13,22 +14,23 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./char.component.scss']
 })
 export class CharComponent implements OnInit {
-  persona: PersonaForm;
+  charForm: FormGroup;
   title: string;
+  formName: string;
   constructor(private route: ActivatedRoute, private personaService: PersonaService) {}
 
   ngOnInit() {
-    // this.persona = this.personaService.currentPersona as PersonaForm;
-    // this.persona.sheet = new FormGroup({ charForm: charForm });
-    // this.persona.sheet.get('charForm').get('nom').setValue(this.persona.name);
-    // this.route.data.subscribe(res => {
-    //   this.title = res.title;
-    // });
+    this.route.data.subscribe((res: RouteData) => {
+      this.title = res.title;
+      this.formName = res.targetForm;
+    });
+
+    this.charForm = charForm;
+    this.charForm.setValue(this.personaService.currentPersona.sheet[this.formName]);
   }
 
   updateSheet() {
-    // this.personaService.updatePersonas(this.persona.sheet.value);
-    // console.log('persona in service', this.personaService.currentPersona);
+    this.personaService.updatePersonas(this.formName, this.charForm.value);
   }
 
   /** TODO: Move this to be global */

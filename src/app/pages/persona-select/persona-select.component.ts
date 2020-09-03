@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 import { AlertController, ToastController } from '@ionic/angular';
 
-import { Persona } from 'src/app/interfaces/persona.interface';
-
 import { PersonaService } from 'src/app/services/persona.service';
+
+import { Persona } from 'src/app/interfaces/persona.interface';
 
 @Component({
   selector: 'app-persona-select',

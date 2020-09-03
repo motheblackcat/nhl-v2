@@ -25,13 +25,19 @@ export class PersonaService {
     });
   }
 
-  /** TODO: Fix */
-  updatePersonas(personaSheet: PersonaSheet) {
+  /** TODO: currentPersonas update only once */
+  updatePersonas(formName: string, personaSheet: PersonaSheet) {
+    const newPersonaSheet: PersonaSheet = {};
+    newPersonaSheet[formName] = personaSheet;
+
     const currentPersonas = this.personas$.value;
-    currentPersonas.splice(currentPersonas.indexOf(this.currentPersona), 1);
-    this.currentPersona = { ...this.currentPersona, sheet: personaSheet };
-    const updatedPersonas = [...this.personas$.value, this.currentPersona];
-    this.personas$.next(updatedPersonas);
+    const index = currentPersonas.indexOf(this.currentPersona);
+
+    currentPersonas[index] = { ...currentPersonas[index], sheet: { ...newPersonaSheet } };
+
+    console.log(currentPersonas[index]);
+
+    this.personas$.next(currentPersonas);
     this.store.set(PERSONAS, this.personas$.value);
   }
 
@@ -46,9 +52,9 @@ export class PersonaService {
   }
 
   removePersona(persona: Persona) {
-    const currentPersonas = this.personas$.value;
-    currentPersonas.splice(currentPersonas.indexOf(persona), 1);
-    this.personas$.next(currentPersonas);
+    const updatedPersonas = this.personas$.value;
+    updatedPersonas.splice(updatedPersonas.indexOf(persona), 1);
+    this.personas$.next(updatedPersonas);
     this.store.set(PERSONAS, this.personas$.value);
   }
 }

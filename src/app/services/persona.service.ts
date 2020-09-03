@@ -21,14 +21,13 @@ export class PersonaService {
     });
   }
 
-  /** TODO: Pass name to the persona's sheet */
   addPersona(persona: Persona) {
     const updatedPersonas = [...this.personas$.value, persona];
     this.personas$.next(updatedPersonas);
     this.store.set(PERSONAS, this.personas$.value);
   }
 
-  /** TODO: Check it best practice are respected */
+  /** TODO: Check if best practice are respected */
   removePersona(persona: Persona) {
     const currentPersonas = this.personas$.value;
     currentPersonas.splice(currentPersonas.indexOf(persona), 1);

@@ -5,6 +5,8 @@ import { AlertController, ToastController } from '@ionic/angular';
 
 import { Persona } from 'src/app/interfaces/persona.interface';
 
+import { charForm } from 'src/app/models/charform';
+
 import { PersonaService } from 'src/app/services/persona.service';
 
 @Component({
@@ -23,6 +25,8 @@ export class PersonaSelectComponent implements OnInit {
   }
 
   selectPersona(persona: Persona) {
+    persona.sheet = charForm;
+    persona.sheet.get('nom').setValue(persona.name);
     this.personaService.currentPersona = persona;
   }
 

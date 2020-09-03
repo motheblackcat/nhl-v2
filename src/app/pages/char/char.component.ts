@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
-import { PersonaService } from 'src/app/services/persona.service';
+import { Persona } from 'src/app/interfaces/persona.interface';
 
-import { mainForm } from 'src/app/models/form';
+import { PersonaService } from 'src/app/services/persona.service';
+import { charForm } from 'src/app/models/charform';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-char',
@@ -12,16 +13,24 @@ import { mainForm } from 'src/app/models/form';
   styleUrls: ['./char.component.scss']
 })
 export class CharComponent implements OnInit {
-  targetForm: FormGroup;
+  persona: Persona;
   title: string;
   constructor(private route: ActivatedRoute, private personaService: PersonaService) {}
 
-  ngOnInit(): void {
-    console.log(this.personaService.currentPersona);
+  /** TODO: Move logic to service */
+  ngOnInit() {
+    this.persona = this.personaService.currentPersona;
+    this.persona.sheet = new FormGroup({ charForm: charForm });
+    this.persona.sheet.get('charForm').get('nom').setValue(this.persona.name);
+    console.log('persona', this.persona.sheet.value);
 
     this.route.data.subscribe(res => {
       this.title = res.title;
-      this.targetForm = mainForm.get(res.targetForm) as FormGroup;
     });
+  }
+
+  /** TODO: Move this to be global */
+  defaultOrder(): number {
+    return 0;
   }
 }

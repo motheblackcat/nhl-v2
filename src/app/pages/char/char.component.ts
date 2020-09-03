@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
+import { PersonaService } from 'src/app/services/persona.service';
+
 import { mainForm } from 'src/app/models/form';
-import { FormManagementService } from 'src/app/services/form-management.service';
 
 @Component({
   selector: 'app-char',
@@ -13,9 +14,11 @@ import { FormManagementService } from 'src/app/services/form-management.service'
 export class CharComponent implements OnInit {
   targetForm: FormGroup;
   title: string;
-  constructor(private route: ActivatedRoute, public fm: FormManagementService) {}
+  constructor(private route: ActivatedRoute, private personaService: PersonaService) {}
 
   ngOnInit(): void {
+    console.log(this.personaService.currentPersona);
+
     this.route.data.subscribe(res => {
       this.title = res.title;
       this.targetForm = mainForm.get(res.targetForm) as FormGroup;

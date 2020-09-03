@@ -3,7 +3,7 @@ import { FormGroup, FormControl, FormArray, Form } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 import { mainForm } from 'src/app/models/form';
-import { FormManagementService } from 'src/app/services/form-management.service';
+import { PersonaService } from 'src/app/services/persona.service';
 
 @Component({
   selector: 'app-bags',
@@ -15,7 +15,7 @@ export class BagsComponent implements OnInit {
   @Input() title: string;
   bagsFormArray: FormArray;
   poochesFormArray: FormArray;
-  constructor(private route: ActivatedRoute, private fm: FormManagementService) {}
+  constructor(private route: ActivatedRoute, private fm: PersonaService) {}
 
   ngOnInit(): void {
     this.route.data.subscribe(res => {

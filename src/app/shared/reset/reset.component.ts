@@ -2,19 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { Vibration } from '@ionic-native/vibration/ngx';
 
-import { FormManagementService } from 'src/app/services/form-management.service';
+import { PersonaService } from 'src/app/services/persona.service';
 
 @Component({
   selector: 'app-reset',
   templateUrl: './reset.component.html'
 })
 export class ResetComponent implements OnInit {
-  constructor(
-    public modal: ModalController,
-    private toast: ToastController,
-    private vibration: Vibration,
-    private fm: FormManagementService
-  ) {}
+  constructor(public modal: ModalController, private toast: ToastController, private vibration: Vibration, private fm: PersonaService) {}
 
   ngOnInit() {
     this.vibration.vibrate(500);

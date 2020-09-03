@@ -15,7 +15,7 @@ import { ListMultiComponent } from './shared/list-multi/list-multi.component';
 
 export const routes: Routes = [
   {
-    path: 'char-select',
+    path: 'persona-select',
     component: PersonaSelectComponent
   },
   {
@@ -179,8 +179,8 @@ export const routes: Routes = [
       { path: '', redirectTo: 'quest', pathMatch: 'full' }
     ]
   },
-  { path: '', redirectTo: 'char-select', pathMatch: 'full' },
-  { path: '**', redirectTo: 'char-select' }
+  { path: '', redirectTo: 'persona-select', pathMatch: 'full' },
+  { path: '**', redirectTo: 'persona-select' }
 ];
 
 @NgModule({

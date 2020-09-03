@@ -1,13 +1,19 @@
 <ion-content ion-padding>
   <h3 class="mb">Choisir un personnage</h3>
+  <br />
   <section class="flexc ml">
     <div class="add mr mb" (click)="addPersonaModal()">
       <div>Nouveau</div>
       <ion-icon name="add"></ion-icon>
     </div>
-    <div *ngFor="let persona of personas" class="add mr mb" [style.background-color]="persona.color" (click)="selectPersona(persona)">
+    <div
+      *ngFor="let persona of personas$ | async"
+      class="add mr mb"
+      [style.background-color]="persona.color"
+      (click)="selectPersona(persona)"
+    >
       <div>{{ persona.name }}</div>
-      <ion-icon name="close" (click)="deletePersonaModal(persona)"></ion-icon>
+      <ion-icon name="close" (click)="removePersonaModal(persona)"></ion-icon>
     </div>
   </section>
 </ion-content>

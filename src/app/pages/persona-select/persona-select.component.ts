@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/internal/Observable';
 
 import { AlertController, ToastController } from '@ionic/angular';
-import { Storage } from '@ionic/storage';
-
-import { PERSONAS } from 'src/app/consts/storage.consts';
 
 import { Persona } from 'src/app/interfaces/persona.interface';
+
+import { PersonaService } from 'src/app/services/persona.service';
 
 @Component({
   selector: 'app-persona-select',
@@ -13,17 +13,17 @@ import { Persona } from 'src/app/interfaces/persona.interface';
   styleUrls: ['./persona-select.component.scss']
 })
 export class PersonaSelectComponent implements OnInit {
-  personas: Persona[];
-  constructor(private alert: AlertController, private toast: ToastController, private store: Storage) {}
+  personas$: Observable<Persona[]>;
+  constructor(private alert: AlertController, private toast: ToastController, private personaService: PersonaService) {}
 
+  /** TODO: Could be combined into only 1 statement? */
   ngOnInit() {
-    this.store.get(PERSONAS).then(data => {
-      this.personas = data ? data : [];
-    });
+    this.personaService.getPersonas();
+    this.personas$ = this.personaService.personas$;
   }
 
   selectPersona(persona: Persona) {
-    console.log(persona);
+    this.personaService.currentPersona = persona;
   }
 
   /** TODO: Add enum for type */
@@ -42,14 +42,11 @@ export class PersonaSelectComponent implements OnInit {
     toast.present();
   }
 
-  createPersona(data) {
-    if (data.charName) {
+  addPersona(modalData) {
+    if (modalData.charName) {
       const randomColor = Math.floor(Math.random() * 16777215).toString(16);
-      /** TODO: Use index in array as id? */
-      const index = this.personas.find(char => char.id === `char${this.personas.length}`) ? this.personas.length + 1 : this.personas.length;
-      const newPersona = { id: `char${index}`, name: data.charName, color: `#${randomColor}`, sheet: null };
-      this.personas.push(newPersona);
-      this.store.set(PERSONAS, this.personas);
+      const newPersona = { name: modalData.charName, color: `#${randomColor}`, sheet: null };
+      this.personaService.addPersona(newPersona);
       this.presentToast('created');
     } else {
       this.presentToast('');
@@ -74,7 +71,7 @@ export class PersonaSelectComponent implements OnInit {
         },
         {
           text: 'Ouais !',
-          handler: data => this.createPersona(data)
+          handler: data => this.addPersona(data)
         }
       ]
     });
@@ -82,13 +79,13 @@ export class PersonaSelectComponent implements OnInit {
     await alert.present();
   }
 
-  deletePersona(persona: Persona) {
-    this.personas.splice(this.personas.indexOf(persona), 1);
-    this.store.set(PERSONAS, this.personas);
+  removePersona(persona: Persona) {
+    this.personaService.removePersona(persona);
     this.presentToast('deleted');
   }
 
-  async deletePersonaModal(persona: Persona) {
+  /** TODO: selectPersona() is also called because of template */
+  async removePersonaModal(persona: Persona) {
     const alert = await this.alert.create({
       header: 'Supprimer un personnage',
       message: 'Etes vous sure de vouloir supprimer ce personnage ?',
@@ -98,7 +95,7 @@ export class PersonaSelectComponent implements OnInit {
         },
         {
           text: 'Ouais !',
-          handler: () => this.deletePersona(persona)
+          handler: () => this.removePersona(persona)
         }
       ]
     });

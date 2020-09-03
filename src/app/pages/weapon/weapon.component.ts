@@ -3,7 +3,7 @@ import { FormGroup, FormArray, FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 import { mainForm } from 'src/app/models/form';
-import { FormManagementService } from 'src/app/services/form-management.service';
+import { PersonaService } from 'src/app/services/persona.service';
 
 @Component({
   selector: 'app-weapon',
@@ -12,7 +12,7 @@ import { FormManagementService } from 'src/app/services/form-management.service'
 export class WeaponComponent implements OnInit {
   targetForm: FormGroup;
   title: string;
-  constructor(private route: ActivatedRoute, public fm: FormManagementService) {}
+  constructor(private route: ActivatedRoute, fm: PersonaService) {}
 
   ngOnInit(): void {
     this.route.data.subscribe(res => {

@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Storage } from '@ionic/storage';
 
 import { mainForm } from 'src/app/models/form';
-import { FormManagementService } from 'src/app/services/form-management.service';
+import { PersonaService } from 'src/app/services/persona.service';
 
 @Component({
   selector: 'app-list-multi',
@@ -20,7 +20,7 @@ export class ListMultiComponent implements OnInit {
   targetFormName: string;
   targetForm: FormArray;
   mainForm: FormGroup = mainForm;
-  constructor(private route: ActivatedRoute, private store: Storage, private fm: FormManagementService) {}
+  constructor(private route: ActivatedRoute, private store: Storage, private fm: PersonaService) {}
 
   ngOnInit(): void {
     this.route.data.subscribe(res => {

@@ -6,7 +6,7 @@ import { ModalController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
 import { mainForm } from '../../models/form';
-import { FormManagementService } from 'src/app/services/form-management.service';
+import { PersonaService } from 'src/app/services/persona.service';
 import { skillsList } from 'src/app/models/skills';
 import { SkillsDetailsComponent } from '../skill-desc/skill-desc.component';
 
@@ -24,7 +24,7 @@ export class ListComponent implements OnInit {
   mainForm: FormGroup = mainForm;
   skillsList = skillsList;
   useSelect: boolean;
-  constructor(private route: ActivatedRoute, private store: Storage, private fm: FormManagementService, private modal: ModalController) {}
+  constructor(private route: ActivatedRoute, private store: Storage, private fm: PersonaService, private modal: ModalController) {}
 
   ngOnInit(): void {
     this.skillsList.forEach(skill => (skill.title = skill.title.toLowerCase()));

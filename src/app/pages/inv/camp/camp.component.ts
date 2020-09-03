@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Storage } from '@ionic/storage';
 
 import { mainForm } from 'src/app/models/form';
-import { FormManagementService } from 'src/app/services/form-management.service';
+import { PersonaService } from 'src/app/services/persona.service';
 
 @Component({
   selector: 'app-camp',
@@ -17,7 +17,7 @@ export class CampComponent implements OnInit {
   targetForm: FormGroup;
   matFormArray: FormArray;
   pTotal = 0;
-  constructor(public fm: FormManagementService, private route: ActivatedRoute, private store: Storage) {}
+  constructor(fm: PersonaService, private route: ActivatedRoute, private store: Storage) {}
 
   ngOnInit(): void {
     this.route.data.subscribe(res => {

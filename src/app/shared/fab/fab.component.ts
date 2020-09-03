@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Router, RoutesRecognized } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 
-import { ResetComponent } from '../reset/reset.component';
 import { Config } from 'src/app/interfaces/config.interface';
+
+import { ResetComponent } from '../reset/reset.component';
 
 @Component({
   selector: 'app-fab',

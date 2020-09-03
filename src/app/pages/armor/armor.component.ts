@@ -26,7 +26,7 @@ export class ArmorComponent implements OnInit {
 
   updateForm(): void {
     this.prNatSum();
-    this.fm.updateEffects();
+    // this.fm.updateEffects();
   }
 
   prNatSum() {
@@ -54,6 +54,6 @@ export class ArmorComponent implements OnInit {
   removeItem(control: string, i: number): void {
     (this.targetForm.get(control).get('ef') as FormArray).removeAt(i);
     this.updateForm();
-    this.fm.saveForm();
+    // this.fm.saveForm();
   }
 }

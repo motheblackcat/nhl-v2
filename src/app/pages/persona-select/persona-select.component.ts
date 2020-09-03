@@ -45,6 +45,7 @@ export class PersonaSelectComponent implements OnInit {
   createPersona(data) {
     if (data.charName) {
       const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+      /** TODO: Use index in array as id? */
       const index = this.personas.find(char => char.id === `char${this.personas.length}`) ? this.personas.length + 1 : this.personas.length;
       const newPersona = { id: `char${index}`, name: data.charName, color: `#${randomColor}`, sheet: null };
       this.personas.push(newPersona);

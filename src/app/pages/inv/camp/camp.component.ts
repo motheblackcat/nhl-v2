@@ -44,6 +44,6 @@ export class CampComponent implements OnInit {
 
   removeItem(i: number): void {
     (this.targetForm.get('mat') as FormArray).removeAt(i);
-    this.fm.saveForm();
+    // this.fm.saveForm();
   }
 }

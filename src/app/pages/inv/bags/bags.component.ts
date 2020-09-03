@@ -32,6 +32,6 @@ export class BagsComponent implements OnInit {
 
   removeItem(array: string, i: number): void {
     (this.targetForm.get(array) as FormArray).removeAt(i);
-    this.fm.saveForm();
+    // this.fm.saveForm();
   }
 }

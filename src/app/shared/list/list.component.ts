@@ -65,6 +65,6 @@ export class ListComponent implements OnInit {
 
   deleteItem(i: number): void {
     this.targetForm.removeAt(i);
-    this.fm.saveForm();
+    // this.fm.saveForm();
   }
 }

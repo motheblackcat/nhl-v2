@@ -31,7 +31,7 @@ export class ResetComponent implements OnInit {
   }
 
   reset(): void {
-    this.fm.reset();
+    // this.fm.reset();
     this.presentToast();
     this.modal.dismiss();
   }

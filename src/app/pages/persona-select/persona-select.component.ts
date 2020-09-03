@@ -5,8 +5,6 @@ import { AlertController, ToastController } from '@ionic/angular';
 
 import { Persona } from 'src/app/interfaces/persona.interface';
 
-import { charForm } from 'src/app/models/charform';
-
 import { PersonaService } from 'src/app/services/persona.service';
 
 @Component({
@@ -25,8 +23,6 @@ export class PersonaSelectComponent implements OnInit {
   }
 
   selectPersona(persona: Persona) {
-    persona.sheet = charForm;
-    persona.sheet.get('nom').setValue(persona.name);
     this.personaService.currentPersona = persona;
   }
 
@@ -58,7 +54,7 @@ export class PersonaSelectComponent implements OnInit {
     }
   }
 
-  async addPersonaModal() {
+  async addPersonaModal(): Promise<any> {
     const alert = await this.alert.create({
       header: 'Créer un personnage',
       message: 'Veuillez indiquer le nom du personnage.',
@@ -88,8 +84,7 @@ export class PersonaSelectComponent implements OnInit {
     this.presentToast('deleted');
   }
 
-  /** TODO: selectPersona() is also called because of template */
-  async removePersonaModal(persona: Persona) {
+  async removePersonaModal(persona: Persona): Promise<any> {
     const alert = await this.alert.create({
       header: 'Supprimer un personnage',
       message: 'Etes vous sure de vouloir supprimer ce personnage ?',

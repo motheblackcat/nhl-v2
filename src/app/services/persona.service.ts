@@ -6,6 +6,7 @@ import { Storage } from '@ionic/storage';
 import { PERSONAS } from '../consts/storage.consts';
 
 import { Persona } from '../interfaces/persona.interface';
+import { PersonaSheet } from '../interfaces/persona-sheet.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,15 @@ export class PersonaService {
     });
   }
 
+  updatePersonas(personaSheet: PersonaSheet) {
+    const currentPersonas = this.personas$.value;
+    currentPersonas.splice(currentPersonas.indexOf(this.currentPersona), 1);
+    this.currentPersona = { ...this.currentPersona, sheet: personaSheet };
+    const updatedPersonas = [...this.personas$.value, this.currentPersona];
+    this.personas$.next(updatedPersonas);
+    this.store.set(PERSONAS, this.personas$.value);
+  }
+
   addPersona(persona: Persona) {
     const updatedPersonas = [...this.personas$.value, persona];
     this.personas$.next(updatedPersonas);
@@ -34,6 +44,4 @@ export class PersonaService {
     this.personas$.next(currentPersonas);
     this.store.set(PERSONAS, this.personas$.value);
   }
-
-  updatePersona(persona: Persona) {}
 }

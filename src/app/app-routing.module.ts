@@ -12,6 +12,7 @@ import { CampComponent } from './pages/inv/camp/camp.component';
 
 import { ListComponent } from './shared/list/list.component';
 import { ListMultiComponent } from './shared/list-multi/list-multi.component';
+import { PersonaGuard } from './guards/persona.guard';
 
 export const routes: Routes = [
   {
@@ -25,7 +26,8 @@ export const routes: Routes = [
       title: 'personnage',
       targetForm: 'charForm',
       icon: 'body'
-    }
+    },
+    canActivate: [PersonaGuard]
   },
   {
     path: 'stats',
@@ -34,7 +36,8 @@ export const routes: Routes = [
       title: 'statistiques',
       targetForm: 'statsForm',
       icon: 'bar-chart'
-    }
+    },
+    canActivate: [PersonaGuard]
   },
   {
     path: 'skills',
@@ -45,7 +48,8 @@ export const routes: Routes = [
       targetForm: 'skillsForm',
       icon: 'hand-right',
       useSelect: true
-    }
+    },
+    canActivate: [PersonaGuard]
   },
   {
     path: 'equip',
@@ -53,6 +57,7 @@ export const routes: Routes = [
     data: {
       icon: 'shirt'
     },
+    canActivate: [PersonaGuard],
     children: [
       { path: '', redirectTo: 'weapon', pathMatch: 'full' },
       {
@@ -81,6 +86,7 @@ export const routes: Routes = [
     data: {
       icon: 'cube'
     },
+    canActivate: [PersonaGuard],
     children: [
       {
         path: 'quest',

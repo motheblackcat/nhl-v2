@@ -18,6 +18,7 @@ export class PersonaSelectComponent implements OnInit {
 
   /** TODO: Could be combined into only 1 statement? */
   ngOnInit() {
+    this.personaService.currentPersona = null;
     this.personaService.getPersonas();
     this.personas$ = this.personaService.personas$;
   }

@@ -1,7 +1,6 @@
-<ion-content [formGroup]="persona.sheet.get('charForm')">
+<!-- <ion-content [formGroup]="persona.sheet.get('charForm')" (change)="updateSheet()">
   <h3>{{ title }}</h3>
   <br />
-  <!-- TODO: Best way to loop on controls? -->
   <div *ngFor="let control of persona.sheet.get('charForm').controls | keyvalue: defaultOrder" [ngSwitch]="control.key">
     <div *ngIf="control.key === 'berylium'">Mes richesses à moi que j'ai:</div>
     <label [for]="control.key">{{ control.key === 'pd' ? 'point de destin' : control.key }}</label>
@@ -24,4 +23,5 @@
       <input type="radio" id="female" value="female" [formControlName]="control.key" />
     </ng-container>
   </div>
-</ion-content>
+</ion-content> -->
+<div>{{ personaService.currentPersona | json }}</div>

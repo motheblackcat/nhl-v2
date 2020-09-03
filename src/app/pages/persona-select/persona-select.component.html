@@ -4,7 +4,7 @@
     <div>Nouveau Personnage</div>
     <ion-icon name="add-circle-outline"></ion-icon>
   </div>
-  <div *ngFor="let persona of personas$ | async" class="flexc spaceb" [style.background-color]="persona.color">
+  <div *ngFor="let persona of personaService.personas$ | async" class="flexc spaceb" [style.background-color]="persona.color">
     <div (click)="selectPersona(persona)" routerLink="/char">{{ persona.name }}</div>
     <ion-icon name="close" (click)="removePersonaModal(persona)"></ion-icon>
   </div>

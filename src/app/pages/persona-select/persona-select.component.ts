@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/internal/Observable';
 
 import { AlertController, ToastController } from '@ionic/angular';
 
@@ -13,14 +12,12 @@ import { PersonaService } from 'src/app/services/persona.service';
   styleUrls: ['./persona-select.component.scss']
 })
 export class PersonaSelectComponent implements OnInit {
-  personas$: Observable<Persona[]>;
   constructor(private alert: AlertController, private toast: ToastController, private personaService: PersonaService) {}
 
   /** TODO: Could be combined into only 1 statement? */
   ngOnInit() {
     this.personaService.currentPersona = null;
     this.personaService.getPersonas();
-    this.personas$ = this.personaService.personas$;
   }
 
   selectPersona(persona: Persona) {
@@ -43,11 +40,9 @@ export class PersonaSelectComponent implements OnInit {
     toast.present();
   }
 
-  addPersona(modalData) {
-    if (modalData.charName) {
-      const randomColor = Math.floor(Math.random() * 16777215).toString(16);
-      const newPersona = { name: modalData.charName, color: `#${randomColor}`, sheet: null };
-      this.personaService.addPersona(newPersona);
+  addPersona(personaName: string) {
+    if (personaName) {
+      this.personaService.addPersona(personaName);
       this.presentToast('created');
     } else {
       this.presentToast('');
@@ -61,7 +56,7 @@ export class PersonaSelectComponent implements OnInit {
       message: 'Veuillez indiquer le nom du personnage.',
       inputs: [
         {
-          name: 'charName',
+          name: 'personaName',
           type: 'text',
           placeholder: 'Nom du personnage'
         }
@@ -72,7 +67,7 @@ export class PersonaSelectComponent implements OnInit {
         },
         {
           text: 'Ouais !',
-          handler: data => this.addPersona(data)
+          handler: data => this.addPersona(data.personaName)
         }
       ]
     });

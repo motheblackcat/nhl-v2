@@ -32,7 +32,7 @@ import { CampComponent } from './pages/inv/camp/camp.component';
     AppComponent,
     FabComponent,
     // SkillsDetailsComponent
-    // ListComponent,
+    ListComponent,
     // ListMultiComponent,
     // ResetComponent,
     PersonaSelectComponent,

@@ -5,8 +5,9 @@ import { ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
-import { mainForm } from '../../models/form';
 import { PersonaService } from 'src/app/services/persona.service';
+
+import { mainForm } from '../../models/form';
 import { skillsList } from 'src/app/consts/skills-list.consts';
 import { SkillsDetailsComponent } from '../skill-desc/skill-desc.component';
 
@@ -19,7 +20,7 @@ export class ListComponent implements OnInit {
   title: string;
   subtitle: string;
   placeholder: string;
-  targetFormName: string;
+  formName: string;
   targetForm: FormArray;
   mainForm: FormGroup = mainForm;
   skillsList = skillsList;
@@ -37,9 +38,14 @@ export class ListComponent implements OnInit {
       this.title = res.title;
       this.subtitle = res.subtitle;
       this.placeholder = res.placeholder;
-      this.targetFormName = res.targetForm;
-      this.targetForm = mainForm.get(this.targetFormName) as FormArray;
       this.useSelect = res.useSelect;
+      this.formName = res.targetForm;
+      this.targetForm = mainForm.get(this.formName) as FormArray;
+      this.targetForm.clear();
+      this.personaService.currentPersona.sheet[this.formName].forEach(skill => {
+        this.targetForm.push(new FormControl(skill));
+      });
+      console.log(this.personaService.currentPersona.sheet[this.formName]);
     });
   }
 
@@ -58,6 +64,7 @@ export class ListComponent implements OnInit {
   addItem(skill: string) {
     if (!this.targetForm.value.find(s => s === skill)) {
       this.targetForm.push(new FormControl(skill));
+      this.personaService.updatePersonas(this.formName, this.targetForm.value);
     }
   }
 
@@ -65,11 +72,12 @@ export class ListComponent implements OnInit {
     if (i === null) {
       this.targetForm.push(new FormControl(item.value));
       item.value = '';
+      this.personaService.updatePersonas(this.formName, this.targetForm.value);
     }
   }
 
   deleteItem(i: number): void {
     this.targetForm.removeAt(i);
-    // this.personaService.saveForm();
+    this.personaService.updatePersonas(this.formName, this.targetForm.value);
   }
 }

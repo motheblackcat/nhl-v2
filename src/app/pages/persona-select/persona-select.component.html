@@ -1,7 +1,7 @@
 <ion-content ion-padding>
   <h3 class="mb">Choisir un personnage</h3>
   <div class="flexc spaceb" (click)="addPersonaModal()">
-    <div>Nouveau Personnage</div>
+    <div>Créer un nouveau Personnage</div>
     <ion-icon name="add-circle-outline"></ion-icon>
   </div>
   <div *ngFor="let persona of personaService.personas$ | async" class="flexc spaceb" [style.background-color]="persona.color">

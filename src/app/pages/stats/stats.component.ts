@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
-import { mainForm } from 'src/app/models/form';
-
 import { PersonaService } from 'src/app/services/persona.service';
+
+import { mainForm } from 'src/app/models/form';
 
 @Component({
   selector: 'app-stats',

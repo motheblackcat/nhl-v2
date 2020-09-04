@@ -9,7 +9,7 @@ import { PERSONAS } from '../consts/storage.consts';
 
 import { Persona } from '../interfaces/persona.interface';
 import { PersonaSheet } from '../interfaces/persona-sheet.interface';
-import { charForm } from '../models/charform';
+import { mainForm } from '../models/form';
 
 @Injectable({
   providedIn: 'root'
@@ -25,25 +25,17 @@ export class PersonaService {
     });
   }
 
-  /** TODO: currentPersonas update only once */
   updatePersonas(formName: string, personaSheet: PersonaSheet) {
-    const newPersonaSheet: PersonaSheet = {};
-    newPersonaSheet[formName] = personaSheet;
-
     const currentPersonas = this.personas$.value;
-    const index = currentPersonas.indexOf(this.currentPersona);
-
-    currentPersonas[index] = { ...currentPersonas[index], sheet: { ...newPersonaSheet } };
-
-    console.log(currentPersonas[index]);
-
+    const currentPersona = currentPersonas.find(pers => pers === this.currentPersona);
+    currentPersona.sheet[formName] = personaSheet;
     this.personas$.next(currentPersonas);
     this.store.set(PERSONAS, this.personas$.value);
   }
 
   addPersona(personaName: string) {
     const randomColor = Math.floor(Math.random() * 16777215).toString(16);
-    const newPersonaSheet = new FormGroup({ charForm: charForm });
+    const newPersonaSheet = mainForm;
     newPersonaSheet.get('charForm').get('nom').setValue(personaName);
     const newPersona = { name: personaName, color: `#${randomColor}`, sheet: newPersonaSheet.value };
     const updatedPersonas = [...this.personas$.value, newPersona];

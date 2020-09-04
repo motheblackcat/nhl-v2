@@ -6,7 +6,7 @@ import { PersonaService } from 'src/app/services/persona.service';
 
 import { RouteData } from 'src/app/interfaces/route-data.interface';
 
-import { charForm } from 'src/app/models/charform';
+import { mainForm } from 'src/app/models/form';
 
 @Component({
   selector: 'app-char',
@@ -14,23 +14,22 @@ import { charForm } from 'src/app/models/charform';
   styleUrls: ['./char.component.scss']
 })
 export class CharComponent implements OnInit {
-  charForm: FormGroup;
   title: string;
   formName: string;
+  targetForm: FormGroup;
   constructor(private route: ActivatedRoute, private personaService: PersonaService) {}
 
   ngOnInit() {
     this.route.data.subscribe((res: RouteData) => {
       this.title = res.title;
       this.formName = res.targetForm;
+      this.targetForm = mainForm.get(res.targetForm) as FormGroup;
+      this.targetForm.setValue(this.personaService.currentPersona.sheet[this.formName]);
     });
-
-    this.charForm = charForm;
-    this.charForm.setValue(this.personaService.currentPersona.sheet[this.formName]);
   }
 
   updateSheet() {
-    this.personaService.updatePersonas(this.formName, this.charForm.value);
+    this.personaService.updatePersonas(this.formName, this.targetForm.value);
   }
 
   /** TODO: Move this to be global */

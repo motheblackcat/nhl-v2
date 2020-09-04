@@ -17,7 +17,7 @@ export class CampComponent implements OnInit {
   targetForm: FormGroup;
   matFormArray: FormArray;
   pTotal = 0;
-  constructor(fm: PersonaService, private route: ActivatedRoute, private store: Storage) {}
+  constructor(personaService: PersonaService, private route: ActivatedRoute, private store: Storage) {}
 
   ngOnInit(): void {
     this.route.data.subscribe(res => {
@@ -44,6 +44,6 @@ export class CampComponent implements OnInit {
 
   removeItem(i: number): void {
     (this.targetForm.get('mat') as FormArray).removeAt(i);
-    // this.fm.saveForm();
+    // this.personaService.saveForm();
   }
 }

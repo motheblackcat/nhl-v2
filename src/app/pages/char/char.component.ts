@@ -31,9 +31,4 @@ export class CharComponent implements OnInit {
   updateSheet() {
     this.personaService.updatePersonas(this.formName, this.targetForm.value);
   }
-
-  /** TODO: Move this to be global */
-  defaultOrder(): number {
-    return 0;
-  }
 }

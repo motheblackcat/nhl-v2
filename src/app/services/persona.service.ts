@@ -49,4 +49,8 @@ export class PersonaService {
     this.personas$.next(updatedPersonas);
     this.store.set(PERSONAS, this.personas$.value);
   }
+
+  defaultOrder(): number {
+    return 0;
+  }
 }

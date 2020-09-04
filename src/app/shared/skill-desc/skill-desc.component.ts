@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { skillsList } from 'src/app/models/skills';
+import { skillsList } from 'src/app/consts/skills-list.consts';
 import { ModalController } from '@ionic/angular';
 
 @Component({

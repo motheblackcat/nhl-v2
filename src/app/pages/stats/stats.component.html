@@ -1,7 +1,7 @@
 <ion-content [formGroup]="targetForm" (change)="updateMagStats()">
   <h3>{{ title }}</h3>
   <br />
-  <div *ngFor="let control of targetForm.controls | keyvalue: fm.defaultOrder" [ngSwitch]="control.key">
+  <div *ngFor="let control of targetForm.controls | keyvalue: personaService.defaultOrder" [ngSwitch]="control.key">
     <label [for]="control.key" *ngSwitchCase="'ev'">Energie Vitale (EV)</label>
     <label [for]="control.key" *ngSwitchCase="'ea'" margin-bottom>Energie Astrale (EA)</label>
     <label [for]="control.key" *ngSwitchCase="'cou'">Courage (COU)</label>

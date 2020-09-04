@@ -1,9 +1,9 @@
-<ion-content [formGroup]="targetForm" (change)="fm.updateEffects()">
+<ion-content [formGroup]="targetForm" (change)="personaService.updateEffects()">
   <h2>{{ title }}</h2>
   <div class="hint">p. i. : points d'impacts, dégâts infligés.</div>
   <div class="hint">rup. : points de rupture.</div>
   <br />
-  <ng-container *ngFor="let control of targetForm.controls | keyvalue: fm.defaultOrder; let i = index">
+  <ng-container *ngFor="let control of targetForm.controls | keyvalue: personaService.defaultOrder; let i = index">
     <div class="card">
       <div class="subtitle mb">
         {{ control.key === 'wea1' ? 'arme principale' : control.key === 'wea2' ? 'arme secondaire' : 'arme supplémentaire' }}

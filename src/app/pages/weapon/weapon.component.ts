@@ -12,7 +12,7 @@ import { PersonaService } from 'src/app/services/persona.service';
 export class WeaponComponent implements OnInit {
   targetForm: FormGroup;
   title: string;
-  constructor(private route: ActivatedRoute, fm: PersonaService) {}
+  constructor(private route: ActivatedRoute, personaService: PersonaService) {}
 
   ngOnInit(): void {
     this.route.data.subscribe(res => {
@@ -32,6 +32,6 @@ export class WeaponComponent implements OnInit {
 
   removeItem(control: string, i: number): void {
     (this.targetForm.get(control).get('ef') as FormArray).removeAt(i);
-    // this.fm.saveForm();
+    // this.personaService.saveForm();
   }
 }

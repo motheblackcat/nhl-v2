@@ -9,7 +9,12 @@ import { PersonaService } from 'src/app/services/persona.service';
   templateUrl: './reset.component.html'
 })
 export class ResetComponent implements OnInit {
-  constructor(public modal: ModalController, private toast: ToastController, private vibration: Vibration, private fm: PersonaService) {}
+  constructor(
+    public modal: ModalController,
+    private toast: ToastController,
+    private vibration: Vibration,
+    private personaService: PersonaService
+  ) {}
 
   ngOnInit() {
     this.vibration.vibrate(500);
@@ -26,7 +31,7 @@ export class ResetComponent implements OnInit {
   }
 
   reset(): void {
-    // this.fm.reset();
+    // this.personaService.reset();
     this.presentToast();
     this.modal.dismiss();
   }

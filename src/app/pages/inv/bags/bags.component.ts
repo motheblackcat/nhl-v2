@@ -15,7 +15,7 @@ export class BagsComponent implements OnInit {
   @Input() title: string;
   bagsFormArray: FormArray;
   poochesFormArray: FormArray;
-  constructor(private route: ActivatedRoute, private fm: PersonaService) {}
+  constructor(private route: ActivatedRoute, private personaService: PersonaService) {}
 
   ngOnInit(): void {
     this.route.data.subscribe(res => {
@@ -32,6 +32,6 @@ export class BagsComponent implements OnInit {
 
   removeItem(array: string, i: number): void {
     (this.targetForm.get(array) as FormArray).removeAt(i);
-    // this.fm.saveForm();
+    // this.personaService.saveForm();
   }
 }

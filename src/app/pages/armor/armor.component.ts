@@ -14,7 +14,7 @@ export class ArmorComponent implements OnInit {
   title: string;
   prNat = 0;
   prMag = 0;
-  constructor(private route: ActivatedRoute, fm: PersonaService) {}
+  constructor(private route: ActivatedRoute, personaService: PersonaService) {}
 
   ngOnInit(): void {
     this.route.data.subscribe(res => {
@@ -26,7 +26,7 @@ export class ArmorComponent implements OnInit {
 
   updateForm(): void {
     this.prNatSum();
-    // this.fm.updateEffects();
+    // this.personaService.updateEffects();
   }
 
   prNatSum() {
@@ -54,6 +54,6 @@ export class ArmorComponent implements OnInit {
   removeItem(control: string, i: number): void {
     (this.targetForm.get(control).get('ef') as FormArray).removeAt(i);
     this.updateForm();
-    // this.fm.saveForm();
+    // this.personaService.saveForm();
   }
 }

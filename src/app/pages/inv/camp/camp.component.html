@@ -1,7 +1,7 @@
 <ion-content [formGroup]="targetForm" (change)="updateTotalWeight()">
   <h3>{{ title }}</h3>
   <div class="hint mb">récup. : récupération PV</div>
-  <ng-container *ngFor="let control of targetForm.controls | keyvalue: fm.defaultOrder; let i = index">
+  <ng-container *ngFor="let control of targetForm.controls | keyvalue: personaService.defaultOrder; let i = index">
     <div *ngIf="control.key !== 'mat'" [formGroupName]="control.key">
       <div class="flexc spaceb mb">
         <label>{{ control.key }}</label>

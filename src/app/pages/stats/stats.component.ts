@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 import { mainForm } from 'src/app/models/form';
+
 import { PersonaService } from 'src/app/services/persona.service';
 
 @Component({
@@ -13,17 +14,20 @@ import { PersonaService } from 'src/app/services/persona.service';
 export class StatsComponent implements OnInit {
   targetForm: FormGroup;
   title: string;
-  constructor(private route: ActivatedRoute, fm: PersonaService) {}
+  formName: string;
+  constructor(private route: ActivatedRoute, private personaService: PersonaService) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.route.data.subscribe(res => {
-      this.targetForm = mainForm.get(res.targetForm) as FormGroup;
       this.title = res.title;
+      this.formName = res.targetForm;
+      this.targetForm = mainForm.get(res.targetForm) as FormGroup;
+      this.targetForm.setValue(this.personaService.currentPersona.sheet[this.formName]);
       this.updateMagStats();
     });
   }
 
-  updateMagStats(): void {
+  updateMagStats() {
     const int = this.targetForm.get('int').get('val').value + this.targetForm.get('int').get('ef').value;
     const ad = this.targetForm.get('ad').get('val').value + this.targetForm.get('ad').get('ef').value;
     const cha = this.targetForm.get('cha').get('val').value + this.targetForm.get('cha').get('ef').value;
@@ -33,5 +37,7 @@ export class StatsComponent implements OnInit {
     this.targetForm.get('magphy').setValue(Math.ceil((int + ad) / 2));
     this.targetForm.get('magpsy').setValue(Math.ceil((int + cha) / 2));
     this.targetForm.get('resmag').setValue(Math.ceil((cou + int + fo) / 3));
+
+    this.personaService.updatePersonas(this.formName, this.targetForm.value);
   }
 }

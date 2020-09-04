@@ -20,7 +20,7 @@ export class ListMultiComponent implements OnInit {
   targetFormName: string;
   targetForm: FormArray;
   mainForm: FormGroup = mainForm;
-  constructor(private route: ActivatedRoute, private store: Storage, private fm: PersonaService) {}
+  constructor(private route: ActivatedRoute, private store: Storage, private personaService: PersonaService) {}
 
   ngOnInit(): void {
     this.route.data.subscribe(res => {
@@ -39,6 +39,6 @@ export class ListMultiComponent implements OnInit {
 
   deleteItem(i: number): void {
     this.targetForm.removeAt(i);
-    // this.fm.saveForm();
+    // this.personaService.saveForm();
   }
 }

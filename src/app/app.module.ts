@@ -36,8 +36,8 @@ import { CampComponent } from './pages/inv/camp/camp.component';
     // ListMultiComponent,
     // ResetComponent,
     PersonaSelectComponent,
-    CharComponent
-    // StatsComponent,
+    CharComponent,
+    StatsComponent
     // InvComponent,
     // WeaponComponent,
     // ArmorComponent,

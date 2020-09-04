@@ -14,7 +14,7 @@
     <label class="mr" for="prmag">protection magique</label>
     <input type="number" id="prmag" placeholder="0" formControlName="prmag" />
   </div>
-  <ng-container *ngFor="let control of targetForm.controls | keyvalue: fm.defaultOrder; let i = index">
+  <ng-container *ngFor="let control of targetForm.controls | keyvalue: personaService.defaultOrder; let i = index">
     <div *ngIf="control.key !== 'tdm' && control.key !== 'prmag'" class="card">
       <div class="subtitle mb" margin-bottom>{{ control.key }}</div>
       <ng-container [formGroupName]="control.key">

@@ -7,7 +7,7 @@ import { Storage } from '@ionic/storage';
 
 import { mainForm } from '../../models/form';
 import { PersonaService } from 'src/app/services/persona.service';
-import { skillsList } from 'src/app/models/skills';
+import { skillsList } from 'src/app/consts/skills-list.consts';
 import { SkillsDetailsComponent } from '../skill-desc/skill-desc.component';
 
 @Component({
@@ -24,7 +24,12 @@ export class ListComponent implements OnInit {
   mainForm: FormGroup = mainForm;
   skillsList = skillsList;
   useSelect: boolean;
-  constructor(private route: ActivatedRoute, private store: Storage, private fm: PersonaService, private modal: ModalController) {}
+  constructor(
+    private route: ActivatedRoute,
+    private store: Storage,
+    private personaService: PersonaService,
+    private modal: ModalController
+  ) {}
 
   ngOnInit(): void {
     this.skillsList.forEach(skill => (skill.title = skill.title.toLowerCase()));
@@ -65,6 +70,6 @@ export class ListComponent implements OnInit {
 
   deleteItem(i: number): void {
     this.targetForm.removeAt(i);
-    // this.fm.saveForm();
+    // this.personaService.saveForm();
   }
 }

@@ -30,19 +30,19 @@ import { CampComponent } from './pages/inv/camp/camp.component';
 @NgModule({
   declarations: [
     AppComponent,
+    FabComponent,
+    // SkillsDetailsComponent
     // ListComponent,
     // ListMultiComponent,
+    // ResetComponent,
     PersonaSelectComponent,
     CharComponent
     // StatsComponent,
     // InvComponent,
-    // ResetComponent,
     // WeaponComponent,
     // ArmorComponent,
     // BagsComponent,
     // CampComponent,
-    // FabComponent,
-    // SkillsDetailsComponent
   ],
   imports: [BrowserModule, ReactiveFormsModule, IonicModule.forRoot({ mode: 'md' }), IonicStorageModule.forRoot(), AppRoutingModule],
   providers: [StatusBar, SplashScreen, Vibration, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],

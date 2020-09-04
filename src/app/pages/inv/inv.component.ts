@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
-import { Config } from 'src/app/interfaces/config.interface';
+import { Route } from 'src/app/interfaces/route.interface';
 
 @Component({
   selector: 'app-inv',
   templateUrl: './inv.component.html'
 })
 export class InvComponent implements OnInit {
-  configs: Config[] = [];
+  configs: Route[] = [];
   icon: string;
   constructor(private router: Router, private activedRoute: ActivatedRoute) {}
 

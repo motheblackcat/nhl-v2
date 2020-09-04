@@ -6,6 +6,8 @@ import { PersonaService } from 'src/app/services/persona.service';
 
 import { Persona } from 'src/app/interfaces/persona.interface';
 
+import { ToasterTypes } from 'src/app/consts/toaster-types.consts';
+
 @Component({
   selector: 'app-persona-select',
   templateUrl: './persona-select.component.html',
@@ -14,7 +16,6 @@ import { Persona } from 'src/app/interfaces/persona.interface';
 export class PersonaSelectComponent implements OnInit {
   constructor(private alert: AlertController, private toast: ToastController, private personaService: PersonaService) {}
 
-  /** TODO: Could be combined into only 1 statement? */
   ngOnInit() {
     this.personaService.currentPersona = null;
     this.personaService.getPersonas();
@@ -28,13 +29,13 @@ export class PersonaSelectComponent implements OnInit {
   async presentToast(type: string): Promise<any> {
     const toast = await this.toast.create({
       message:
-        type === 'created'
+        type === ToasterTypes.CREATED
           ? 'Le personnage a été crée !'
-          : type === 'deleted'
+          : type === ToasterTypes.DELETED
           ? 'Le personnage a été zigouillé !'
           : 'Il faut entrer un nom !',
       duration: 2000,
-      color: type === 'created' ? 'success' : type === 'deleted' ? 'dark' : 'danger',
+      color: type === ToasterTypes.CREATED ? ToasterTypes.SUCCESS : type === ToasterTypes.DELETED ? 'dark' : 'danger',
       position: 'top'
     });
     toast.present();
@@ -43,7 +44,7 @@ export class PersonaSelectComponent implements OnInit {
   addPersona(personaName: string) {
     if (personaName) {
       this.personaService.addPersona(personaName);
-      this.presentToast('created');
+      this.presentToast(ToasterTypes.CREATED);
     } else {
       this.presentToast('');
       return false;
@@ -77,7 +78,7 @@ export class PersonaSelectComponent implements OnInit {
 
   removePersona(persona: Persona) {
     this.personaService.removePersona(persona);
-    this.presentToast('deleted');
+    this.presentToast(ToasterTypes.DELETED);
   }
 
   async removePersonaModal(persona: Persona): Promise<any> {

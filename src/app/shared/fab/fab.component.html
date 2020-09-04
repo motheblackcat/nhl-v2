@@ -1,16 +1,13 @@
-<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+<ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="display">
   <ion-fab-button color="dark" size="small">
     <ion-icon [name]="icon"></ion-icon>
   </ion-fab-button>
 
   <ion-fab-list side="top">
-    <ng-container *ngFor="let route of config">
-      <ion-fab-button [routerLink]="route.path">
-        <ion-icon [name]="route.icon"></ion-icon>
-      </ion-fab-button>
-    </ng-container>
+    <ion-fab-button [routerLink]="route.path" *ngFor="let route of routes">
+      <ion-icon [name]="route.icon"></ion-icon>
+    </ion-fab-button>
 
-    <!-- TODO: This might be moved elsewhere -->
     <ion-fab-button (click)="presentModal()">
       <ion-icon name="warning"></ion-icon>
     </ion-fab-button>

@@ -7,7 +7,7 @@ import { Route } from 'src/app/interfaces/route.interface';
   templateUrl: './inv.component.html'
 })
 export class InvComponent implements OnInit {
-  configs: Route[] = [];
+  routes: Route[] = [];
   icon: string;
   constructor(private router: Router, private activedRoute: ActivatedRoute) {}
 
@@ -15,7 +15,7 @@ export class InvComponent implements OnInit {
     this.activedRoute.routeConfig.children
       .filter(route => route.data)
       .forEach(route =>
-        this.configs.push({
+        this.routes.push({
           path: `/${this.activedRoute.routeConfig.path}/${route.path}`,
           icon: route.data.icon
         })
@@ -23,8 +23,8 @@ export class InvComponent implements OnInit {
 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        const config = this.configs.find(route => event.url.includes(route.path));
-        this.icon = config ? config.icon : event.url === '/inv' ? 'help' : 'flash';
+        const currentRoute = this.routes.find(route => route.path === event.url);
+        this.icon = currentRoute ? currentRoute.icon : event.url === '/inv' ? 'help' : 'flash';
       }
     });
   }

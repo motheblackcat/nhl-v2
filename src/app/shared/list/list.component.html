@@ -1,5 +1,6 @@
 <ion-content [formGroup]="mainForm">
   <h3>{{ title }}</h3>
+  <br *ngIf="!subtitle" />
   <div class="hint mb" *ngIf="subtitle">{{ subtitle }}</div>
   <div>
     <div class="flexc" *ngIf="!useSelect">

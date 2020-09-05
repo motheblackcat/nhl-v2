@@ -4,7 +4,7 @@
   </ion-fab-button>
 
   <ion-fab-list side="top" id="inv">
-    <ng-container *ngFor="let route of config">
+    <ng-container *ngFor="let route of routes">
       <ion-fab-button [routerLink]="route.path">
         <ion-icon [name]="route.icon"></ion-icon>
       </ion-fab-button>

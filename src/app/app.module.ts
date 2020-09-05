@@ -21,11 +21,11 @@ import { ResetComponent } from './shared/reset/reset.component';
 import { PersonaSelectComponent } from './pages/persona-select/persona-select.component';
 import { CharComponent } from './pages/char/char.component';
 import { StatsComponent } from './pages/stats/stats.component';
-import { WeaponComponent } from './pages/weapon/weapon.component';
-import { ArmorComponent } from './pages/armor/armor.component';
 import { InvComponent } from './pages/inv/inv.component';
 import { BagsComponent } from './pages/inv/bags/bags.component';
 import { CampComponent } from './pages/inv/camp/camp.component';
+import { WeaponComponent } from './pages/weapon/weapon.component';
+import { ArmorComponent } from './pages/armor/armor.component';
 
 @NgModule({
   declarations: [
@@ -37,12 +37,12 @@ import { CampComponent } from './pages/inv/camp/camp.component';
     // ResetComponent,
     PersonaSelectComponent,
     CharComponent,
-    StatsComponent
-    // InvComponent,
-    // WeaponComponent,
-    // ArmorComponent,
+    StatsComponent,
+    InvComponent
     // BagsComponent,
     // CampComponent,
+    // WeaponComponent,
+    // ArmorComponent
   ],
   imports: [BrowserModule, ReactiveFormsModule, IonicModule.forRoot({ mode: 'md' }), IonicStorageModule.forRoot(), AppRoutingModule],
   providers: [StatusBar, SplashScreen, Vibration, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],

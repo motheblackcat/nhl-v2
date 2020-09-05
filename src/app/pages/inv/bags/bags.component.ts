@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup, FormControl, FormArray, Form } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, FormArray } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 import { mainForm } from 'src/app/models/form';
@@ -11,27 +11,41 @@ import { PersonaService } from 'src/app/services/persona.service';
   styleUrls: ['./bags.component.scss']
 })
 export class BagsComponent implements OnInit {
-  @Input() targetForm: FormGroup;
-  @Input() title: string;
-  bagsFormArray: FormArray;
-  poochesFormArray: FormArray;
+  title: string;
+  formName: string;
+  targetForm: FormGroup;
+  // bags: FormArray;
+  // pooches: FormArray;
   constructor(private route: ActivatedRoute, private personaService: PersonaService) {}
 
   ngOnInit(): void {
     this.route.data.subscribe(res => {
-      this.targetForm = mainForm.get(res.targetForm) as FormGroup;
       this.title = res.title;
-      this.bagsFormArray = this.targetForm.get('bags') as FormArray;
-      this.poochesFormArray = this.targetForm.get('pooches') as FormArray;
+      this.formName = res.targetForm;
+
+      /** TODO: Check this ref */
+      this.targetForm = mainForm.get(res.targetForm) as FormGroup;
+      const personaForm = this.personaService.currentPersona.sheet[this.formName];
+      this.targetForm.setValue(personaForm);
+
+      console.log(this.targetForm.value, personaForm);
     });
+  }
+
+  updateSheet() {
+    this.personaService.updatePersonas(this.formName, this.targetForm.value);
   }
 
   addItem(array: string): void {
     (this.targetForm.get(array) as FormArray).push(new FormGroup({ name: new FormControl(), max: new FormControl() }));
+    this.personaService.updatePersonas(this.formName, this.targetForm.value);
   }
 
   removeItem(array: string, i: number): void {
-    (this.targetForm.get(array) as FormArray).removeAt(i);
-    // this.personaService.saveForm();
+    const formArray = this.targetForm.get(array) as FormArray;
+    if (formArray.length > 1) {
+      formArray.removeAt(i);
+      this.personaService.updatePersonas(this.formName, this.targetForm.value);
+    }
   }
 }

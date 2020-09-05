@@ -1,4 +1,4 @@
-<ion-content [formGroup]="targetForm">
+<ion-content [formGroup]="targetForm" (change)="updateSheet()">
   <h3>sacs et transport</h3>
   <div>
     <label class="hint">charge max. origine / métier :</label>
@@ -12,7 +12,7 @@
   </div>
   <br />
   <ng-container formArrayName="bags">
-    <div class="flexc" *ngFor="let bag of bagsFormArray.controls; let i = index" [formGroupName]="i">
+    <div class="flexc" *ngFor="let bag of targetForm.get('bags').controls; let i = index" [formGroupName]="i">
       <ion-icon name="close" (click)="removeItem('bags', i)"></ion-icon>
       <input type="text" formControlName="name" placeholder="nom" />
       <input type="number" formControlName="max" placeholder="0" />
@@ -26,7 +26,7 @@
   </div>
   <br />
   <br />
-  <div class="flexc spaceb">
+  <!-- <div class="flexc spaceb">
     <label class="ion-text-uppercase">bourses</label>
     <label>p. o. max.</label>
   </div>
@@ -42,5 +42,6 @@
   <div class="flexc last" (click)="addItem('pooches')">
     <ion-icon name="add-circle-outline"></ion-icon>
     <label>Ajouter une bourse</label>
-  </div>
+  </div> 
+</ion-content>-->
 </ion-content>

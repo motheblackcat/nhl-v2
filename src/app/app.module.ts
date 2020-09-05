@@ -38,8 +38,8 @@ import { ArmorComponent } from './pages/armor/armor.component';
     PersonaSelectComponent,
     CharComponent,
     StatsComponent,
-    InvComponent
-    // BagsComponent,
+    InvComponent,
+    BagsComponent
     // CampComponent,
     // WeaponComponent,
     // ArmorComponent

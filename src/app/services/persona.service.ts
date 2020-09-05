@@ -19,6 +19,7 @@ export class PersonaService {
   currentPersona: Persona;
   constructor(private store: Storage) {}
 
+  /** TODO: Init the main form here? */
   getPersonas() {
     this.store.get(PERSONAS).then(data => {
       data ? this.personas$.next(data) : this.store.set(PERSONAS, []);

@@ -352,10 +352,10 @@ export const skillsList = [
   {
     title: 'SERRURIER (AD)',
     des: `Dans certains villages éloignés de Fangh, les élèves serruriers sont souvent automatiquement pendus de manière préventive.
-    En effet, dans un cas sur deux, ce n’est pas le noble art de la fabrication de serrure qui intéressentles apprentis
+    En effet, dans un cas sur deux, ce n’est pas le noble art de la fabrication de serrure qui intéressent les apprentis
     mais bien comment fracturer le coffre du commerçant d’en face sans faire de bruit. La compétence de serrurier permet de pouvoir
-    ouvrir n’importe quel porte ou mécanisme fonctionnant avec une serrure, avec une épreuv ed'adresse.
-    Ceux qui n'ont pas la compétence auront le droit d'essayer,mais le Grand Vilain MJ leur rendra la vie dure
+    ouvrir n’importe quel porte ou mécanisme fonctionnant avec une serrure, avec une épreuve d'adresse.
+    Ceux qui n'ont pas la compétence auront le droit d'essayer, mais le Grand Vilain MJ leur rendra la vie dure
     avec une épreuve beaucoup plus ardue.`,
     use: `Epreuve AD possible pour tenter de crocheter une porte, un mécanisme.`
   },

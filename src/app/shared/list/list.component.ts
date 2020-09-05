@@ -45,7 +45,6 @@ export class ListComponent implements OnInit {
       this.personaService.currentPersona.sheet[this.formName].forEach(skill => {
         this.targetForm.push(new FormControl(skill));
       });
-      console.log(this.personaService.currentPersona.sheet[this.formName]);
     });
   }
 

@@ -31,7 +31,7 @@ import { CampComponent } from './pages/inv/camp/camp.component';
   declarations: [
     AppComponent,
     FabComponent,
-    // SkillsDetailsComponent
+    SkillsDetailsComponent,
     ListComponent,
     // ListMultiComponent,
     // ResetComponent,

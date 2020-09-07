@@ -1,16 +1,17 @@
+/** TODO: Should have interfaces */
 export interface PersonaSheet {
-  charForm: Object;
-  statsForm: Object;
-  skillForm: Object;
-  weaponsForm: Object;
-  armorsForm: Object;
-  questForm: Object;
-  lootForm: Object;
-  bagsForm: Object;
-  campForm: Object;
-  foodForm: Object;
-  specialForm: Object;
-  gemsForm: Object;
-  potionsForm: Object;
-  preciousForm: Object;
+  char: Object;
+  stats: Object;
+  skills: String[];
+  weapons: Object[];
+  armors: Object[];
+  quest: String[];
+  loot: String[];
+  bags: Object;
+  camp: Object;
+  food: String[];
+  special: Object[];
+  gems: Object[];
+  potions: Object[];
+  precious: String[];
 }

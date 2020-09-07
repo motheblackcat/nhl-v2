@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
 
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
@@ -9,7 +9,9 @@ import { PERSONAS } from '../consts/storage.consts';
 
 import { Persona } from '../interfaces/persona.interface';
 import { PersonaSheet } from '../interfaces/persona-sheet.interface';
+
 import { mainForm } from '../models/form';
+import { personaSheetModel } from '../models/persona-sheet.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +19,8 @@ import { mainForm } from '../models/form';
 export class PersonaService {
   personas$: BehaviorSubject<Persona[]> = new BehaviorSubject<Persona[]>([]);
   currentPersona: Persona;
-  constructor(private store: Storage) {}
+  constructor(private store: Storage, private fb: FormBuilder) {}
 
-  /** TODO: Init the main form here? */
   getPersonas() {
     this.store.get(PERSONAS).then(data => {
       data ? this.personas$.next(data) : this.store.set(PERSONAS, []);
@@ -44,6 +45,7 @@ export class PersonaService {
     this.store.set(PERSONAS, this.personas$.value);
   }
 
+  /** TODO: No immutability */
   removePersona(persona: Persona) {
     const updatedPersonas = this.personas$.value;
     updatedPersonas.splice(updatedPersonas.indexOf(persona), 1);

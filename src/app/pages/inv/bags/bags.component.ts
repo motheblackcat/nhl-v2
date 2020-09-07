@@ -22,13 +22,8 @@ export class BagsComponent implements OnInit {
     this.route.data.subscribe(res => {
       this.title = res.title;
       this.formName = res.targetForm;
-
-      /** TODO: Check this ref */
-      this.targetForm = mainForm.get(res.targetForm) as FormGroup;
       const personaForm = this.personaService.currentPersona.sheet[this.formName];
-      this.targetForm.setValue(personaForm);
-
-      console.log(this.targetForm.value, personaForm);
+      console.log(this.targetForm, personaForm);
     });
   }
 

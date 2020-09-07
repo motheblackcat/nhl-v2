@@ -1,7 +1,7 @@
 export interface RouteData {
   title: string;
   icon: string;
-  targetForm?: string;
+  formName?: string;
   subtitle?: string;
   placeholder?: string;
   useSelect?: boolean;

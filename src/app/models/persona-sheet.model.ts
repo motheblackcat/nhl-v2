@@ -1,86 +1,106 @@
-import { PersonaSheet } from '../interfaces/persona-sheet.interface';
+class CharSheet {
+  niveau: string;
+  pd: string;
+  experience: string;
+  nom: string;
+  origine: string;
+  metiers: string;
+  sexe: string;
+  berylium: string;
+  thritil: string;
+  or: string;
+  argent: string;
+  cuivre: string;
 
-export const personaSheetModel: PersonaSheet = {
-  char: {
-    niveau: '',
-    pd: '',
-    experience: '',
-    nom: '',
-    origine: '',
-    metiers: '',
-    sexe: '',
-    berylium: '',
-    thritil: '',
-    or: '',
-    argent: '',
-    cuivre: ''
-  },
-  stats: {
-    ev: { val: '', ef: 0 },
-    ea: { val: '', ef: 0 },
-    cou: { val: '', ef: 0 },
-    int: { val: '', ef: 0 },
-    cha: { val: '', ef: 0 },
-    ad: { val: '', ef: 0 },
-    fo: { val: '', ef: 0 },
-    atq: { val: '', ef: 0 },
-    prd: { val: '', ef: 0 },
-    magphy: 0,
-    magpsy: 0,
-    resmag: 0
-  },
-  skills: [],
-  weapons: [],
-  armors: [],
-  quest: [],
-  loot: [],
-  bags: {
-    max: '',
-    bags: [
-      {
-        name: '',
-        max: ''
-      }
-    ],
-    pooches: [
-      {
-        name: '',
-        max: ''
-      }
-    ]
-  },
-  camp: {
-    tente: {
-      name: '',
-      pv: '',
-      h: '',
-      wei: ''
-    },
-    matelas: {
-      name: '',
-      pv: '',
-      h: '',
-      wei: ''
-    },
-    couverture: {
-      name: '',
-      pv: '',
-      h: '',
-      wei: ''
-    },
-    mat: [
-      {
-        name: '',
-        wei: ''
-      }
-    ]
-  },
-  food: [],
-  special: [],
-  gems: [],
-  potions: [],
-  precious: []
-};
+  constructor(nom: string) {
+    this.niveau = '';
+    this.pd = '';
+    this.experience = '';
+    this.nom = nom;
+    this.origine = '';
+    this.metiers = '';
+    this.sexe = '';
+    this.berylium = '';
+    this.thritil = '';
+    this.or = '';
+    this.argent = '';
+    this.cuivre = '';
+  }
+}
+
+export class PersonaSheet {
+  char: CharSheet;
+
+  constructor(nom: string) {
+    this.char = new CharSheet(nom);
+  }
+}
+
+// stats: {
+//   ev: { val: '', ef: 0 },
+//   ea: { val: '', ef: 0 },
+//   cou: { val: '', ef: 0 },
+//   int: { val: '', ef: 0 },
+//   cha: { val: '', ef: 0 },
+//   ad: { val: '', ef: 0 },
+//   fo: { val: '', ef: 0 },
+//   atq: { val: '', ef: 0 },
+//   prd: { val: '', ef: 0 },
+//   magphy: 0,
+//   magpsy: 0,
+//   resmag: 0
+// },
+// skills: [],
+// weapons: [],
+// armors: [],
+// quest: [],
+// loot: [],
+// bags: {
+//   max: '',
+//   bags: [
+//     {
+//       name: '',
+//       max: ''
+//     }
+//   ],
+//   pooches: [
+//     {
+//       name: '',
+//       max: ''
+//     }
+//   ]
+// },
+// camp: {
+//   tente: {
+//     name: '',
+//     pv: '',
+//     h: '',
+//     wei: ''
+//   },
+//   matelas: {
+//     name: '',
+//     pv: '',
+//     h: '',
+//     wei: ''
+//   },
+//   couverture: {
+//     name: '',
+//     pv: '',
+//     h: '',
+//     wei: ''
+//   },
+//   mat: [
+//     {
+//       name: '',
+//       wei: ''
+//     }
+//   ]
+// },
+// food: [],
+// special: [],
+// gems: [],
+// potions: [],
+// precious: []
 
 // weapons: {
 //   wea1: {

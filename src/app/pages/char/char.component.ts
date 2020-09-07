@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 
 import { PersonaService } from 'src/app/services/persona.service';
 
 import { RouteData } from 'src/app/interfaces/route-data.interface';
 
-import { mainForm } from 'src/app/models/form';
+import { CharSheetModel } from 'src/app/interfaces/persona.interface';
 
 @Component({
   selector: 'app-char',
@@ -16,19 +16,25 @@ import { mainForm } from 'src/app/models/form';
 export class CharComponent implements OnInit {
   title: string;
   formName: string;
-  targetForm: FormGroup;
+  form: FormGroup;
   constructor(private route: ActivatedRoute, private personaService: PersonaService) {}
 
   ngOnInit() {
     this.route.data.subscribe((res: RouteData) => {
       this.title = res.title;
-      this.formName = res.targetForm;
-      this.targetForm = mainForm.get(res.targetForm) as FormGroup;
-      this.targetForm.setValue(this.personaService.currentPersona.sheet[this.formName]);
+      this.formName = res.formName;
+
+      this.form = new FormGroup({});
+      const charSheetObject: CharSheetModel = this.personaService.currentPersona.sheet[this.formName];
+      for (const key in charSheetObject) {
+        if (key) {
+          this.form.addControl(key, new FormControl(charSheetObject[key]));
+        }
+      }
     });
   }
 
   updateSheet() {
-    this.personaService.updatePersonas(this.formName, this.targetForm.value);
+    this.personaService.updatePersonas(this.formName, this.form.value);
   }
 }

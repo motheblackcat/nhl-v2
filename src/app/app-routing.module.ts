@@ -24,7 +24,7 @@ export const routes: Routes = [
     component: CharComponent,
     data: {
       title: 'personnage',
-      targetForm: 'charForm',
+      formName: 'char',
       icon: 'body'
     },
     canActivate: [PersonaGuard]
@@ -34,7 +34,7 @@ export const routes: Routes = [
     component: StatsComponent,
     data: {
       title: 'statistiques',
-      targetForm: 'statsForm',
+      formName: 'stats',
       icon: 'bar-chart'
     },
     canActivate: [PersonaGuard]
@@ -45,7 +45,7 @@ export const routes: Routes = [
     data: {
       title: 'compétences',
       placeholder: 'Ajouter une compétence.',
-      targetForm: 'skillsForm',
+      formName: 'skills',
       icon: 'hand-right',
       useSelect: true
     },
@@ -65,7 +65,7 @@ export const routes: Routes = [
         component: WeaponComponent,
         data: {
           title: 'armement et baston',
-          targetForm: 'weaponsForm',
+          formName: 'weapons',
           icon: 'flash'
         }
       },
@@ -74,7 +74,7 @@ export const routes: Routes = [
         component: ArmorComponent,
         data: {
           title: 'armure et protection',
-          targetForm: 'armorsForm',
+          formName: 'armors',
           icon: 'shirt'
         }
       }
@@ -94,7 +94,7 @@ export const routes: Routes = [
         data: {
           title: 'objets de quete',
           placeholder: 'Ajouter un objet de quête.',
-          targetForm: 'questForm',
+          formName: 'quest',
           icon: 'help'
         }
       },
@@ -105,7 +105,7 @@ export const routes: Routes = [
           title: 'butin a revendre (ou pas)',
           subtitle: 'tout ces machins volés sur les innocents, ou récupérés dans des coffres...',
           placeholder: 'Ajouter du butin.',
-          targetForm: 'lootForm',
+          formName: 'loot',
           icon: 'cash'
         }
       },
@@ -114,7 +114,7 @@ export const routes: Routes = [
         component: BagsComponent,
         data: {
           title: 'sac et transport',
-          targetForm: 'bagsForm',
+          formName: 'bags',
           icon: 'basket'
         }
       },
@@ -123,7 +123,7 @@ export const routes: Routes = [
         component: CampComponent,
         data: {
           title: 'materiel de bivouac et camping',
-          targetForm: 'campForm',
+          formName: 'camp',
           icon: 'bonfire'
         }
       },
@@ -133,7 +133,7 @@ export const routes: Routes = [
         data: {
           title: 'bouffe et boisson',
           placeholder: 'Ajouter un aliment / boisson.',
-          targetForm: 'foodForm',
+          formName: 'food',
           icon: 'beer'
         }
       },
@@ -142,7 +142,7 @@ export const routes: Routes = [
         component: ListMultiComponent,
         data: {
           title: 'objets speciaux, maudit ou reliques',
-          targetForm: 'specialForm',
+          formName: 'special',
           nameLabel: 'objet',
           effectLabel: 'bonus/effets',
           icon: 'color-wand'
@@ -156,7 +156,7 @@ export const routes: Routes = [
           subtitle: 'u. g. : unité goltor',
           nameLabel: 'nom',
           effectLabel: 'u. g.',
-          targetForm: 'gemsForm',
+          formName: 'gems',
           icon: 'contract'
         }
       },
@@ -165,7 +165,7 @@ export const routes: Routes = [
         component: ListMultiComponent,
         data: {
           title: 'potions, poisons, antidotes et ingrédients magiques',
-          targetForm: 'potionsForm',
+          formName: 'potions',
           nameLabel: 'doses',
           effectLabel: 'effets',
           icon: 'flask'
@@ -178,7 +178,7 @@ export const routes: Routes = [
           title: 'machin precieux',
           subtitle: 'titres particuliers, montures, habitations, héritages et autre souvenirs...',
           placeholder: 'Ajouter un objet précieux.',
-          targetForm: 'preciousForm',
+          formName: 'precious',
           icon: 'today'
         }
       },

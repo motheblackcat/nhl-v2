@@ -47,9 +47,9 @@ export class CampComponent implements OnInit {
 
   updateTotalWeight() {
     this.totalWei =
-      Number(this.form.get('tente').get('wei').value) +
+      Number(this.form.get('tentes').get('wei').value) +
       Number(this.form.get('matelas').get('wei').value) +
-      Number(this.form.get('couverture').get('wei').value) +
+      Number(this.form.get('couvertures').get('wei').value) +
       this.form.get('autres').value.reduce((a, b) => a + b.wei, 0);
     this.personaService.updatePersonas(this.formName, this.form.value);
   }
@@ -61,6 +61,6 @@ export class CampComponent implements OnInit {
 
   removeItem(i: number) {
     (this.form.get('autres') as FormArray).removeAt(i);
-    this.personaService.updatePersonas(this.formName, this.form.value);
+    this.updateTotalWeight();
   }
 }

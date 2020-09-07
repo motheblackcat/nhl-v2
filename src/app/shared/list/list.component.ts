@@ -39,7 +39,6 @@ export class ListComponent implements OnInit {
       sheetObject.forEach(skill => {
         this.form.push(new FormControl(skill));
       });
-      console.log(this.form, this.form.value, sheetObject);
     });
   }
 

@@ -8,18 +8,19 @@ export interface PersonaSheetModel {
   char: CharSheetModel;
   stats: StatsSheetModel;
   skills: String[];
-  // weapons: Object[];
-  // armors: Object[];
   quest: String[];
   loot: String[];
-  // bags: Object;
-  // camp: Object;
+  bags: BagsSheetModel;
   food: String[];
-  // special: Object[];
-  // gems: Object[];
-  // potions: Object[];
   precious: String[];
 }
+
+// weapons: Object[];
+// armors: Object[];
+// camp: Object;
+// special: Object[];
+// gems: Object[];
+// potions: Object[];
 
 export interface CharSheetModel {
   niveau: string;
@@ -36,22 +37,33 @@ export interface CharSheetModel {
   cuivre: string;
 }
 
-export interface Effect {
+export interface EffectModel {
   val: string;
   ef: number;
 }
 
 export interface StatsSheetModel {
-  ev: Effect;
-  ea: Effect;
-  cou: Effect;
-  int: Effect;
-  cha: Effect;
-  ad: Effect;
-  fo: Effect;
-  atq: Effect;
-  prd: Effect;
+  ev: EffectModel;
+  ea: EffectModel;
+  cou: EffectModel;
+  int: EffectModel;
+  cha: EffectModel;
+  ad: EffectModel;
+  fo: EffectModel;
+  atq: EffectModel;
+  prd: EffectModel;
   magphy: number;
   magpsy: number;
   resmag: number;
+}
+
+export interface BagModel {
+  name: string;
+  max: string;
+}
+
+export interface BagsSheetModel {
+  max: string;
+  bags: BagModel[];
+  pooches: BagModel[];
 }

@@ -68,6 +68,28 @@ class StatsSheet {
   }
 }
 
+class Bag {
+  name: string;
+  max: string;
+
+  constructor() {
+    this.name = '';
+    this.max = '';
+  }
+}
+
+class BagsSheet {
+  max: string;
+  bags: Bag[];
+  pooches: Bag[];
+
+  constructor() {
+    this.max = '';
+    this.bags = [];
+    this.pooches = [];
+  }
+}
+
 export class PersonaSheet {
   char: CharSheet;
   stats: StatsSheet;
@@ -76,6 +98,7 @@ export class PersonaSheet {
   loot: String[];
   food: String[];
   precious: String[];
+  bags: BagsSheet;
 
   constructor(nom: string) {
     this.char = new CharSheet(nom);
@@ -85,6 +108,7 @@ export class PersonaSheet {
     this.loot = [];
     this.food = [];
     this.precious = [];
+    this.bags = new BagsSheet();
   }
 }
 
@@ -94,22 +118,6 @@ export class PersonaSheet {
 // gems: [],
 // potions: [],
 
-// bags: {
-//   max: '',
-//   bags: [
-//     {
-//       name: '',
-//       max: ''
-//     }
-//   ],
-//   pooches: [
-//     {
-//       name: '',
-//       max: ''
-//     }
-//   ]
-// },
-// camp: {
 //   tente: {
 //     name: '',
 //     pv: '',

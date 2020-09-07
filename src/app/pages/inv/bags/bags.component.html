@@ -1,4 +1,4 @@
-<!-- <ion-content [formGroup]="targetForm" (change)="updateSheet()">
+<ion-content [formGroup]="form" (change)="updateSheet()">
   <h3>sacs et transport</h3>
   <div>
     <label class="hint">charge max. origine / métier :</label>
@@ -12,7 +12,7 @@
   </div>
   <br />
   <ng-container formArrayName="bags">
-    <div class="flexc" *ngFor="let bag of targetForm.get('bags').controls; let i = index" [formGroupName]="i">
+    <div class="flexc" *ngFor="let bag of form.get('bags').controls; let i = index" [formGroupName]="i">
       <ion-icon name="close" (click)="removeItem('bags', i)"></ion-icon>
       <input type="text" formControlName="name" placeholder="nom" />
       <input type="number" formControlName="max" placeholder="0" />
@@ -32,7 +32,7 @@
   </div>
   <br />
   <ng-container formArrayName="pooches">
-    <div class="flexc" *ngFor="let pooch of poochesFormArray.controls; let i = index" [formGroupName]="i">
+    <div class="flexc" *ngFor="let pooch of form.get('pooches').controls; let i = index" [formGroupName]="i">
       <ion-icon name="close" (click)="removeItem('pooches', i)"></ion-icon>
       <input type="text" formControlName="name" placeholder="nom" />
       <input type="number" formControlName="max" placeholder="0" />
@@ -42,5 +42,5 @@
   <div class="flexc last" (click)="addItem('pooches')">
     <ion-icon name="add-circle-outline"></ion-icon>
     <label>Ajouter une bourse</label>
-  </div> 
-</ion-content>-->
+  </div>
+</ion-content>

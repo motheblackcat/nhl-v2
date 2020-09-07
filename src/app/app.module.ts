@@ -39,8 +39,8 @@ import { ArmorComponent } from './pages/armor/armor.component';
     CharComponent,
     StatsComponent,
     InvComponent,
-    BagsComponent
-    // CampComponent,
+    BagsComponent,
+    CampComponent
     // WeaponComponent,
     // ArmorComponent
   ],

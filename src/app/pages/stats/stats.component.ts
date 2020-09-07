@@ -30,7 +30,7 @@ export class StatsComponent implements OnInit {
         } else {
           this.form.addControl(
             key,
-            new FormGroup({ val: new FormControl(sheetObject[key]['val']), ef: new FormControl(sheetObject[key]['ef']) })
+            new FormGroup({ val: new FormControl(sheetObject[key]['val']), ef: new FormControl(Number(sheetObject[key]['ef'])) })
           );
         }
       }
@@ -39,11 +39,11 @@ export class StatsComponent implements OnInit {
   }
 
   updateMagStats() {
-    const int = Number(this.form.get('int').get('val').value) + this.form.get('int').get('ef').value;
-    const ad = Number(this.form.get('ad').get('val').value) + this.form.get('ad').get('ef').value;
-    const cha = Number(this.form.get('cha').get('val').value) + this.form.get('cha').get('ef').value;
-    const cou = Number(this.form.get('cou').get('val').value) + this.form.get('cou').get('ef').value;
-    const fo = Number(this.form.get('fo').get('val').value) + this.form.get('fo').get('ef').value;
+    const int = this.form.get('int').get('val').value + this.form.get('int').get('ef').value;
+    const ad = this.form.get('ad').get('val').value + this.form.get('ad').get('ef').value;
+    const cha = this.form.get('cha').get('val').value + this.form.get('cha').get('ef').value;
+    const cou = this.form.get('cou').get('val').value + this.form.get('cou').get('ef').value;
+    const fo = this.form.get('fo').get('val').value + this.form.get('fo').get('ef').value;
 
     this.form.get('magphy').setValue(Math.ceil((int + ad) / 2));
     this.form.get('magpsy').setValue(Math.ceil((int + cha) / 2));

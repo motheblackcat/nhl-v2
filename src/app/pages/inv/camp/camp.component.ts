@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormArray } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
-import { Storage } from '@ionic/storage';
-
-import { mainForm } from 'src/app/models/form';
 import { PersonaService } from 'src/app/services/persona.service';
+
+import { CampSheetModel } from 'src/app/interfaces/persona.interface';
 
 @Component({
   selector: 'app-camp',
@@ -14,36 +13,54 @@ import { PersonaService } from 'src/app/services/persona.service';
 })
 export class CampComponent implements OnInit {
   title: string;
-  targetForm: FormGroup;
-  matFormArray: FormArray;
-  pTotal = 0;
-  constructor(personaService: PersonaService, private route: ActivatedRoute, private store: Storage) {}
+  formName: string;
+  form: FormGroup;
+  totalWei: number;
+  constructor(private route: ActivatedRoute, private personaService: PersonaService) {}
 
   ngOnInit(): void {
     this.route.data.subscribe(res => {
       this.title = res.title;
-      this.targetForm = mainForm.get(res.targetForm) as FormGroup;
-      this.matFormArray = this.targetForm.get('mat') as FormArray;
-    });
-    this.targetForm.valueChanges.subscribe(res => {
+      this.formName = res.formName;
+      this.totalWei = 0;
+
+      this.form = new FormGroup({});
+      const sheetObject: CampSheetModel = this.personaService.currentPersona.sheet[this.formName];
+      for (const key in sheetObject) {
+        if (key !== 'autres') {
+          this.form.addControl(key, new FormGroup({}));
+          for (const prop in sheetObject[key]) {
+            if (prop) {
+              (this.form.get(key) as FormGroup).addControl(prop, new FormControl(sheetObject[key][prop]));
+            }
+          }
+        } else {
+          this.form.addControl(key, new FormArray([]));
+          sheetObject[key].forEach(other => {
+            (this.form.get(key) as FormArray).push(new FormGroup({ name: new FormControl(other.name), wei: new FormControl(other.wei) }));
+          });
+        }
+      }
       this.updateTotalWeight();
     });
   }
 
-  updateTotalWeight(): void {
-    this.pTotal =
-      this.targetForm.get('tente').get('wei').value +
-      this.targetForm.get('matelas').get('wei').value +
-      this.targetForm.get('couverture').get('wei').value +
-      this.targetForm.get('mat').value.reduce((a, b) => a + b.wei, 0);
+  updateTotalWeight() {
+    this.totalWei =
+      Number(this.form.get('tente').get('wei').value) +
+      Number(this.form.get('matelas').get('wei').value) +
+      Number(this.form.get('couverture').get('wei').value) +
+      this.form.get('autres').value.reduce((a, b) => a + b.wei, 0);
+    this.personaService.updatePersonas(this.formName, this.form.value);
   }
 
-  addItem(): void {
-    (this.targetForm.get('mat') as FormArray).push(new FormGroup({ name: new FormControl(), wei: new FormControl() }));
+  addItem() {
+    (this.form.get('autres') as FormArray).push(new FormGroup({ name: new FormControl(), wei: new FormControl() }));
+    this.personaService.updatePersonas(this.formName, this.form.value);
   }
 
-  removeItem(i: number): void {
-    (this.targetForm.get('mat') as FormArray).removeAt(i);
-    // this.personaService.saveForm();
+  removeItem(i: number) {
+    (this.form.get('autres') as FormArray).removeAt(i);
+    this.personaService.updatePersonas(this.formName, this.form.value);
   }
 }

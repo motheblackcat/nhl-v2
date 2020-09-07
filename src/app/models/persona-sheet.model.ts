@@ -90,6 +90,43 @@ class BagsSheet {
   }
 }
 
+class LightCamp {
+  name: string;
+  wei: string;
+
+  constructor() {
+    this.name = '';
+    this.wei = '';
+  }
+}
+class Camp {
+  name: string;
+  wei: string;
+  pv: string;
+  h: string;
+
+  constructor() {
+    this.name = '';
+    this.wei = '';
+    this.pv = '';
+    this.h = '';
+  }
+}
+
+class CampSheet {
+  tentes: Camp;
+  matelas: Camp;
+  couvertures: Camp;
+  autres: LightCamp[];
+
+  constructor() {
+    this.tentes = new Camp();
+    this.matelas = new Camp();
+    this.couvertures = new Camp();
+    this.autres = [];
+  }
+}
+
 export class PersonaSheet {
   char: CharSheet;
   stats: StatsSheet;
@@ -99,6 +136,7 @@ export class PersonaSheet {
   food: String[];
   precious: String[];
   bags: BagsSheet;
+  camp: CampSheet;
 
   constructor(nom: string) {
     this.char = new CharSheet(nom);
@@ -109,40 +147,13 @@ export class PersonaSheet {
     this.food = [];
     this.precious = [];
     this.bags = new BagsSheet();
+    this.camp = new CampSheet();
   }
 }
 
-// weapons: [],
-// armors: [],
 // special: [],
 // gems: [],
 // potions: [],
-
-//   tente: {
-//     name: '',
-//     pv: '',
-//     h: '',
-//     wei: ''
-//   },
-//   matelas: {
-//     name: '',
-//     pv: '',
-//     h: '',
-//     wei: ''
-//   },
-//   couverture: {
-//     name: '',
-//     pv: '',
-//     h: '',
-//     wei: ''
-//   },
-//   mat: [
-//     {
-//       name: '',
-//       wei: ''
-//     }
-//   ]
-// },
 
 // weapons: {
 //   wea1: {

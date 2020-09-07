@@ -3,7 +3,6 @@ export interface Persona {
   sheet: PersonaSheetModel;
 }
 
-/** TODO: Should have interfaces */
 export interface PersonaSheetModel {
   char: CharSheetModel;
   stats: StatsSheetModel;
@@ -15,9 +14,9 @@ export interface PersonaSheetModel {
   precious: String[];
 }
 
+/** TODO: Should have interfaces */
 // weapons: Object[];
 // armors: Object[];
-// camp: Object;
 // special: Object[];
 // gems: Object[];
 // potions: Object[];
@@ -37,7 +36,7 @@ export interface CharSheetModel {
   cuivre: string;
 }
 
-export interface EffectModel {
+interface EffectModel {
   val: string;
   ef: number;
 }
@@ -57,7 +56,7 @@ export interface StatsSheetModel {
   resmag: number;
 }
 
-export interface BagModel {
+interface BagModel {
   name: string;
   max: string;
 }
@@ -66,4 +65,23 @@ export interface BagsSheetModel {
   max: string;
   bags: BagModel[];
   pooches: BagModel[];
+}
+
+interface Camp {
+  name: string;
+  pv: string;
+  h: string;
+  wei: string;
+}
+
+interface LightCamp {
+  name: string;
+  wei: string;
+}
+
+export interface CampSheetModel {
+  tentes: Camp;
+  matelas: Camp;
+  couvertures: Camp;
+  autres: LightCamp[];
 }

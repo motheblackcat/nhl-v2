@@ -1,8 +1,8 @@
-<ion-content [formGroup]="targetForm" (change)="updateTotalWeight()">
+<ion-content [formGroup]="form" (change)="updateTotalWeight()">
   <h3>{{ title }}</h3>
   <div class="hint mb">récup. : récupération PV</div>
-  <ng-container *ngFor="let control of targetForm.controls | keyvalue: personaService.defaultOrder; let i = index">
-    <div *ngIf="control.key !== 'mat'" [formGroupName]="control.key">
+  <ng-container *ngFor="let control of form.controls | keyvalue: personaService.defaultOrder">
+    <div *ngIf="control.key !== 'autres'" [formGroupName]="control.key">
       <div class="flexc spaceb mb">
         <label>{{ control.key }}</label>
         <label>Récup.</label>
@@ -14,7 +14,7 @@
         <label class="mr">PV /</label>
         <input type="number" formControlName="h" placeholder="0" />
         <label>H</label>
-        <input type="number" formControlName="wei" placeholder="0" class="ion-text-end" />
+        <input type="number" formControlName="wei" placeholder="0" text-end />
       </div>
     </div>
     <br />
@@ -23,11 +23,11 @@
     <label>Nom</label>
     <label>Poids</label>
   </div>
-  <ng-container formArrayName="mat">
-    <div class="flexc spaceb mb" *ngFor="let control of matFormArray.controls; let i = index" [formGroupName]="i">
+  <ng-container formArrayName="autres" *ngFor="let control of form.get('autres').controls; let i = index">
+    <div class="flexc spaceb mb" [formGroupName]="i">
       <ion-icon name="close" (click)="removeItem(i)"></ion-icon>
       <input type="text" formControlName="name" placeholder="nom" />
-      <input class="short" type="number" formControlName="wei" placeholder="poids" text-end />
+      <input type="number" formControlName="wei" placeholder="poids" text-end />
     </div>
   </ng-container>
   <br />
@@ -36,5 +36,5 @@
     <label>Ajouter un objet</label>
   </div>
   <br />
-  <div class="last ion-text-end">Poids total: {{ pTotal }} Kg</div>
+  <div class="last ion-text-end">Poids total: {{ totalWei }} Kg</div>
 </ion-content>

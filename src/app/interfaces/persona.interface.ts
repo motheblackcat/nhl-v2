@@ -7,18 +7,18 @@ export interface Persona {
 export interface PersonaSheetModel {
   char: CharSheetModel;
   stats: StatsSheetModel;
-  // skills: String[];
+  skills: String[];
   // weapons: Object[];
   // armors: Object[];
-  // quest: String[];
-  // loot: String[];
+  quest: String[];
+  loot: String[];
   // bags: Object;
   // camp: Object;
-  // food: String[];
+  food: String[];
   // special: Object[];
   // gems: Object[];
   // potions: Object[];
-  // precious: String[];
+  precious: String[];
 }
 
 export interface CharSheetModel {

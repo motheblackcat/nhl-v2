@@ -1,4 +1,4 @@
-<ion-content [formGroup]="mainForm">
+<ion-content [formGroup]="form">
   <h3>{{ title }}</h3>
   <br *ngIf="!subtitle" />
   <div class="hint mb" *ngIf="subtitle">{{ subtitle }}</div>
@@ -14,15 +14,13 @@
     </ng-container>
   </div>
   <br />
-  <ng-container [formArrayName]="formName">
-    <div class="flexc mb" *ngFor="let control of targetForm.controls; let i = index" (change)="updateItem(update, i)">
-      <ion-icon class="mr" name="close" (click)="deleteItem(i)"></ion-icon>
-      <input #update *ngIf="!useSelect" type="text" [formControlName]="i" />
-      <ng-container *ngIf="useSelect">
-        <label class="ion-text-capitalize mr">{{ control.value }}</label>
-        <ion-icon name="help-circle-outline" (click)="showSkillDes(control.value)"></ion-icon>
-      </ng-container>
-    </div>
-  </ng-container>
+  <div class="flexc mb" *ngFor="let control of form.controls; let i = index" (change)="updateItem(update, i)">
+    <ion-icon class="mr" name="close" (click)="deleteItem(i)"></ion-icon>
+    <input #update *ngIf="!useSelect" type="text" [formControlName]="i" />
+    <ng-container *ngIf="useSelect">
+      <label class="ion-text-capitalize mr">{{ control.value }}</label>
+      <ion-icon name="help-circle-outline" (click)="showSkillDes(control.value)"></ion-icon>
+    </ng-container>
+  </div>
   <div class="last"></div>
 </ion-content>

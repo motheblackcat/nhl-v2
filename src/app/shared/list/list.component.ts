@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormArray, FormGroup } from '@angular/forms';
+import { FormControl, FormArray } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 import { ModalController } from '@ionic/angular';
-import { Storage } from '@ionic/storage';
 
 import { PersonaService } from 'src/app/services/persona.service';
 
-import { mainForm } from '../../models/form';
 import { skillsList } from 'src/app/consts/skills-list.consts';
+
 import { SkillsDetailsComponent } from '../skill-desc/skill-desc.component';
 
 @Component({
@@ -21,16 +20,10 @@ export class ListComponent implements OnInit {
   subtitle: string;
   placeholder: string;
   formName: string;
-  targetForm: FormArray;
-  mainForm: FormGroup = mainForm;
-  skillsList = skillsList;
+  form: FormArray;
   useSelect: boolean;
-  constructor(
-    private route: ActivatedRoute,
-    private store: Storage,
-    private personaService: PersonaService,
-    private modal: ModalController
-  ) {}
+  skillsList = skillsList;
+  constructor(private route: ActivatedRoute, private personaService: PersonaService, private modal: ModalController) {}
 
   ngOnInit(): void {
     this.skillsList.forEach(skill => (skill.title = skill.title.toLowerCase()));
@@ -38,13 +31,15 @@ export class ListComponent implements OnInit {
       this.title = res.title;
       this.subtitle = res.subtitle;
       this.placeholder = res.placeholder;
+      this.formName = res.formName;
       this.useSelect = res.useSelect;
-      this.formName = res.targetForm;
-      this.targetForm = mainForm.get(this.formName) as FormArray;
-      this.targetForm.clear();
-      this.personaService.currentPersona.sheet[this.formName].forEach(skill => {
-        this.targetForm.push(new FormControl(skill));
+
+      this.form = new FormArray([]);
+      const sheetObject: String[] = this.personaService.currentPersona.sheet[this.formName];
+      sheetObject.forEach(skill => {
+        this.form.push(new FormControl(skill));
       });
+      console.log(this.form, this.form.value, sheetObject);
     });
   }
 
@@ -61,22 +56,22 @@ export class ListComponent implements OnInit {
   }
 
   addItem(skill: string) {
-    if (!this.targetForm.value.find(s => s === skill)) {
-      this.targetForm.push(new FormControl(skill));
-      this.personaService.updatePersonas(this.formName, this.targetForm.value);
+    if (!this.form.value.find(s => s === skill)) {
+      this.form.push(new FormControl(skill));
+      this.personaService.updatePersonas(this.formName, this.form.value);
     }
   }
 
   updateItem(item: HTMLInputElement, i: number) {
     if (i === null) {
-      this.targetForm.push(new FormControl(item.value));
+      this.form.push(new FormControl(item.value));
       item.value = '';
-      this.personaService.updatePersonas(this.formName, this.targetForm.value);
+      this.personaService.updatePersonas(this.formName, this.form.value);
     }
   }
 
   deleteItem(i: number): void {
-    this.targetForm.removeAt(i);
-    this.personaService.updatePersonas(this.formName, this.targetForm.value);
+    this.form.removeAt(i);
+    this.personaService.updatePersonas(this.formName, this.form.value);
   }
 }

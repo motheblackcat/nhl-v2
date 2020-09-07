@@ -71,23 +71,28 @@ class StatsSheet {
 export class PersonaSheet {
   char: CharSheet;
   stats: StatsSheet;
+  skills: String[];
+  quest: String[];
+  loot: String[];
+  food: String[];
+  precious: String[];
 
   constructor(nom: string) {
     this.char = new CharSheet(nom);
     this.stats = new StatsSheet();
+    this.skills = [];
+    this.quest = [];
+    this.loot = [];
+    this.food = [];
+    this.precious = [];
   }
 }
 
-// skills: [],
 // weapons: [],
 // armors: [],
-// quest: [],
-// loot: [],
-// food: [],
 // special: [],
 // gems: [],
 // potions: [],
-// precious: []
 
 // bags: {
 //   max: '',

@@ -1,5 +1,3 @@
-import { PersonaSheet } from '../models/persona-sheet.model';
-
 export interface Persona {
   name: string;
   sheet: PersonaSheetModel;
@@ -8,7 +6,7 @@ export interface Persona {
 /** TODO: Should have interfaces */
 export interface PersonaSheetModel {
   char: CharSheetModel;
-  // stats: Object;
+  stats: StatsSheetModel;
   // skills: String[];
   // weapons: Object[];
   // armors: Object[];
@@ -36,4 +34,24 @@ export interface CharSheetModel {
   or: string;
   argent: string;
   cuivre: string;
+}
+
+export interface Effect {
+  val: string;
+  ef: number;
+}
+
+export interface StatsSheetModel {
+  ev: Effect;
+  ea: Effect;
+  cou: Effect;
+  int: Effect;
+  cha: Effect;
+  ad: Effect;
+  fo: Effect;
+  atq: Effect;
+  prd: Effect;
+  magphy: number;
+  magpsy: number;
+  resmag: number;
 }

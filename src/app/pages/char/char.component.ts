@@ -5,7 +5,6 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { PersonaService } from 'src/app/services/persona.service';
 
 import { RouteData } from 'src/app/interfaces/route-data.interface';
-
 import { CharSheetModel } from 'src/app/interfaces/persona.interface';
 
 @Component({
@@ -25,10 +24,10 @@ export class CharComponent implements OnInit {
       this.formName = res.formName;
 
       this.form = new FormGroup({});
-      const charSheetObject: CharSheetModel = this.personaService.currentPersona.sheet[this.formName];
-      for (const key in charSheetObject) {
+      const sheetObject: CharSheetModel = this.personaService.currentPersona.sheet[this.formName];
+      for (const key in sheetObject) {
         if (key) {
-          this.form.addControl(key, new FormControl(charSheetObject[key]));
+          this.form.addControl(key, new FormControl(sheetObject[key]));
         }
       }
     });

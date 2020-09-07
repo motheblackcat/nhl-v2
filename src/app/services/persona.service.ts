@@ -25,8 +25,6 @@ export class PersonaService {
   }
 
   addPersona(personaName: string) {
-    // WIP CREATE A NEW FORM(?) BASED OFF THE PERSONA CLASS (IN COMPONENTS?)
-    // WIP FILL IN THE PERSONA CLASS
     const newPersonaSheet: PersonaSheetModel = new PersonaSheet(personaName);
     const newPersona: Persona = { name: personaName, sheet: newPersonaSheet };
     const updatedPersonas: Persona[] = [...this.personas$.value, newPersona];

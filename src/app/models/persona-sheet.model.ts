@@ -28,33 +28,67 @@ class CharSheet {
   }
 }
 
-export class PersonaSheet {
-  char: CharSheet;
+class Effect {
+  val: string;
+  ef: number;
 
-  constructor(nom: string) {
-    this.char = new CharSheet(nom);
+  constructor() {
+    this.val = '';
+    this.ef = 0;
   }
 }
 
-// stats: {
-//   ev: { val: '', ef: 0 },
-//   ea: { val: '', ef: 0 },
-//   cou: { val: '', ef: 0 },
-//   int: { val: '', ef: 0 },
-//   cha: { val: '', ef: 0 },
-//   ad: { val: '', ef: 0 },
-//   fo: { val: '', ef: 0 },
-//   atq: { val: '', ef: 0 },
-//   prd: { val: '', ef: 0 },
-//   magphy: 0,
-//   magpsy: 0,
-//   resmag: 0
-// },
+class StatsSheet {
+  ev: Effect;
+  ea: Effect;
+  cou: Effect;
+  int: Effect;
+  cha: Effect;
+  ad: Effect;
+  fo: Effect;
+  atq: Effect;
+  prd: Effect;
+  magphy: number;
+  magpsy: number;
+  resmag: number;
+
+  constructor() {
+    this.ev = new Effect();
+    this.ea = new Effect();
+    this.cou = new Effect();
+    this.int = new Effect();
+    this.cha = new Effect();
+    this.ad = new Effect();
+    this.fo = new Effect();
+    this.atq = new Effect();
+    this.prd = new Effect();
+    this.magphy = 0;
+    this.magpsy = 0;
+    this.resmag = 0;
+  }
+}
+
+export class PersonaSheet {
+  char: CharSheet;
+  stats: StatsSheet;
+
+  constructor(nom: string) {
+    this.char = new CharSheet(nom);
+    this.stats = new StatsSheet();
+  }
+}
+
 // skills: [],
 // weapons: [],
 // armors: [],
 // quest: [],
 // loot: [],
+// food: [],
+// special: [],
+// gems: [],
+// potions: [],
+// precious: []
+
 // bags: {
 //   max: '',
 //   bags: [
@@ -96,11 +130,6 @@ export class PersonaSheet {
 //     }
 //   ]
 // },
-// food: [],
-// special: [],
-// gems: [],
-// potions: [],
-// precious: []
 
 // weapons: {
 //   wea1: {

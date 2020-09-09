@@ -29,12 +29,12 @@ class CharSheet {
 }
 
 class Effect {
-  val: string;
-  ef: number;
+  name: string;
+  effect: number | string;
 
   constructor() {
-    this.val = '';
-    this.ef = 0;
+    this.name = '';
+    this.effect = 0;
   }
 }
 
@@ -137,6 +137,9 @@ export class PersonaSheet {
   precious: String[];
   bags: BagsSheet;
   camp: CampSheet;
+  special: Effect[];
+  gems: Effect[];
+  potions: Effect[];
 
   constructor(nom: string) {
     this.char = new CharSheet(nom);
@@ -148,12 +151,11 @@ export class PersonaSheet {
     this.precious = [];
     this.bags = new BagsSheet();
     this.camp = new CampSheet();
+    this.special = [];
+    this.gems = [];
+    this.potions = [];
   }
 }
-
-// special: [],
-// gems: [],
-// potions: [],
 
 // weapons: {
 //   wea1: {

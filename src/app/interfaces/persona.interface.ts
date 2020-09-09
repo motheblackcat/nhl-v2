@@ -3,6 +3,15 @@ export interface Persona {
   sheet: PersonaSheetModel;
 }
 
+export interface EffectModel {
+  name: string;
+  effect: number | number;
+}
+
+/** TODO: Should have interfaces */
+// weapons: Object[];
+// armors: Object[];
+
 export interface PersonaSheetModel {
   char: CharSheetModel;
   stats: StatsSheetModel;
@@ -12,14 +21,10 @@ export interface PersonaSheetModel {
   bags: BagsSheetModel;
   food: String[];
   precious: String[];
+  special: EffectModel[];
+  gems: EffectModel[];
+  potions: EffectModel[];
 }
-
-/** TODO: Should have interfaces */
-// weapons: Object[];
-// armors: Object[];
-// special: Object[];
-// gems: Object[];
-// potions: Object[];
 
 export interface CharSheetModel {
   niveau: string;
@@ -34,11 +39,6 @@ export interface CharSheetModel {
   or: string;
   argent: string;
   cuivre: string;
-}
-
-interface EffectModel {
-  val: string;
-  ef: number;
 }
 
 export interface StatsSheetModel {

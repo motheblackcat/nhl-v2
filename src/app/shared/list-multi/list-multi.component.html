@@ -1,19 +1,17 @@
-<ion-content [formGroup]="mainForm">
+<ion-content [formGroup]="form" (change)="updateSheet()">
   <h3>{{ title }}</h3>
   <div class="hint mb" *ngIf="subtitle">{{ subtitle }}</div>
-  <ng-container [formArrayName]="targetFormName">
-    <div *ngFor="let control of targetForm.controls; let i = index" [formGroupName]="i" class="item">
-      <ion-icon name="close" class="del" (click)="deleteItem(i)"></ion-icon>
-      <div>
-        <label for="name{{ i }}">{{ nameLabel }} :</label>
-        <input type="text" id="name{{ i }}" formControlName="name" [placeholder]="nameLabel" />
-      </div>
-      <div>
-        <label for="effect{{ i }}"> {{ effectLabel }} :</label>
-        <input type="text" id="effect{{ i }}" formControlName="effect" [placeholder]="effectLabel" />
-      </div>
+  <div *ngFor="let control of form.controls; let i = index" [formGroupName]="i" class="item">
+    <ion-icon name="close" class="del" (click)="deleteItem(i)"></ion-icon>
+    <div>
+      <label for="name{{ i }}">{{ nameLabel }} :</label>
+      <input type="text" id="name{{ i }}" formControlName="name" [placeholder]="nameLabel" />
     </div>
-  </ng-container>
+    <div>
+      <label for="effect{{ i }}"> {{ effectLabel }} :</label>
+      <input type="text" id="effect{{ i }}" formControlName="effect" [placeholder]="effectLabel" />
+    </div>
+  </div>
   <br />
   <div class="flexc last" (click)="addItem()">
     <ion-icon name="add-circle-outline"></ion-icon>

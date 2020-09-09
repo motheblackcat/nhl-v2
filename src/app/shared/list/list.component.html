@@ -16,11 +16,11 @@
   <br />
   <div class="flexc mb" *ngFor="let control of form.controls; let i = index" (change)="updateItem(update, i)">
     <ion-icon class="mr" name="close" (click)="deleteItem(i)"></ion-icon>
-    <input #update *ngIf="!useSelect" type="text" [formControlName]="i" />
-    <ng-container *ngIf="useSelect">
+    <input #update *ngIf="!useSelect; else select" type="text" [formControlName]="i" />
+    <ng-template #select>
       <label class="ion-text-capitalize mr">{{ control.value }}</label>
       <ion-icon name="help-circle-outline" (click)="showSkillDes(control.value)"></ion-icon>
-    </ng-container>
+    </ng-template>
   </div>
   <div class="last"></div>
 </ion-content>

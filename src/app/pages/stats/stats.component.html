@@ -21,15 +21,13 @@
         type="number"
         [id]="control.key"
         placeholder="0"
-        formControlName="val"
+        formControlName="name"
       />
     </ng-container>
-    <span *ngIf="control.key === 'magphy' || control.key === 'magpsy' || control.key === 'resmag'" justify-content-center>
+    <span *ngIf="control.key === 'magphy' || control.key === 'magpsy' || control.key === 'resmag'; else stat" justify-content-center>
       {{ form.get(control.key).value }}
     </span>
-    <span *ngIf="control.key !== 'magphy' && control.key !== 'magpsy' && control.key !== 'resmag'" justify-content-center>
-      {{ form.get(control.key).get('ef').value }}
-    </span>
+    <ng-template #stat justify-content-center>{{ form.get(control.key).get('effect').value }}</ng-template>
     <div class="hint" *ngSwitchCase="'magphy'" margin-bottom>Moyenne INT et AD</div>
     <div class="hint" *ngSwitchCase="'magpsy'" margin-bottom>Moyenne INT et CHA</div>
     <div class="hint" *ngSwitchCase="'resmag'">Moyenne COU, INT et FO</div>

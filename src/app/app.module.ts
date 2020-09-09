@@ -33,7 +33,7 @@ import { ArmorComponent } from './pages/armor/armor.component';
     FabComponent,
     SkillsDetailsComponent,
     ListComponent,
-    // ListMultiComponent,
+    ListMultiComponent,
     // ResetComponent,
     PersonaSelectComponent,
     CharComponent,

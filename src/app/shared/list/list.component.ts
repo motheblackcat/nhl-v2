@@ -61,8 +61,11 @@ export class ListComponent implements OnInit {
     }
   }
 
+  /** TODO: Refactor this method */
   updateItem(item: HTMLInputElement, i: number) {
-    if (i === null) {
+    if (i) {
+      this.personaService.updatePersonas(this.formName, this.form.value);
+    } else {
       this.form.push(new FormControl(item.value));
       item.value = '';
       this.personaService.updatePersonas(this.formName, this.form.value);

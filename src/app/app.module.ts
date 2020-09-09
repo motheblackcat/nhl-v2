@@ -18,7 +18,7 @@ import { ListComponent } from './shared/list/list.component';
 import { ListMultiComponent } from './shared/list-multi/list-multi.component';
 import { ResetComponent } from './shared/reset/reset.component';
 
-import { PersonaSelectComponent } from './pages/persona-select/persona-select.component';
+import { PersonaComponent } from './pages/persona/persona.component';
 import { CharComponent } from './pages/char/char.component';
 import { StatsComponent } from './pages/stats/stats.component';
 import { InvComponent } from './pages/inv/inv.component';
@@ -34,7 +34,7 @@ import { ArmorComponent } from './pages/armor/armor.component';
     SkillsDetailsComponent,
     ListComponent,
     ListMultiComponent,
-    PersonaSelectComponent,
+    PersonaComponent,
     CharComponent,
     StatsComponent,
     InvComponent,

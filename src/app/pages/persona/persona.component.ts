@@ -9,11 +9,11 @@ import { Persona } from 'src/app/interfaces/persona.interface';
 import { ToasterTypes } from 'src/app/consts/toaster-types.consts';
 
 @Component({
-  selector: 'app-persona-select',
-  templateUrl: './persona-select.component.html',
-  styleUrls: ['./persona-select.component.scss']
+  selector: 'app-persona',
+  templateUrl: './persona.component.html',
+  styleUrls: ['./persona.component.scss']
 })
-export class PersonaSelectComponent implements OnInit {
+export class PersonaComponent implements OnInit {
   constructor(private alert: AlertController, private toast: ToastController, private personaService: PersonaService) {}
 
   /** TODO: Check if async behaviorsubject makes persona loading slower */

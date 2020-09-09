@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { PersonaSelectComponent } from './pages/persona-select/persona-select.component';
+import { PersonaComponent } from './pages/persona/persona.component';
 import { CharComponent } from './pages/char/char.component';
 import { StatsComponent } from './pages/stats/stats.component';
 import { InvComponent } from './pages/inv/inv.component';
@@ -16,8 +16,8 @@ import { PersonaGuard } from './guards/persona.guard';
 
 export const routes: Routes = [
   {
-    path: 'persona-select',
-    component: PersonaSelectComponent
+    path: 'persona',
+    component: PersonaComponent
   },
   {
     path: 'char',
@@ -185,8 +185,8 @@ export const routes: Routes = [
       { path: '', redirectTo: 'quest', pathMatch: 'full' }
     ]
   },
-  { path: '', redirectTo: 'persona-select', pathMatch: 'full' },
-  { path: '**', redirectTo: 'persona-select' }
+  { path: '', redirectTo: 'persona', pathMatch: 'full' },
+  { path: '**', redirectTo: 'persona' }
 ];
 
 @NgModule({

@@ -8,7 +8,7 @@ import { PERSONAS } from '../consts/storage.consts';
 
 import { Persona, PersonaSheetModel } from '../interfaces/persona.interface';
 
-import { PersonaSheet } from '../models/persona-sheet.model';
+import { PersonaSheet } from '../models/persona.model';
 
 @Injectable({
   providedIn: 'root'

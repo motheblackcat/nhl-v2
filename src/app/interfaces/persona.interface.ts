@@ -5,11 +5,18 @@ export interface Persona {
 
 export interface EffectModel {
   name: string;
-  effect: number | number;
+  effect: string;
+}
+
+export interface WeaponModel {
+  name: string;
+  pi: string;
+  rup: string;
+  equiped: boolean;
+  effects: EffectModel[];
 }
 
 /** TODO: Should have interfaces */
-// weapons: Object[];
 // armors: Object[];
 
 export interface PersonaSheetModel {
@@ -24,6 +31,7 @@ export interface PersonaSheetModel {
   special: EffectModel[];
   gems: EffectModel[];
   potions: EffectModel[];
+  weapons: WeaponModel[];
 }
 
 export interface CharSheetModel {

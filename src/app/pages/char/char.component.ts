@@ -4,7 +4,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 
 import { PersonaService } from 'src/app/services/persona.service';
 
-import { RouteData } from 'src/app/interfaces/route-data.interface';
+import { RouteData } from 'src/app/interfaces/route.interface';
 import { CharSheetModel } from 'src/app/interfaces/persona.interface';
 
 @Component({

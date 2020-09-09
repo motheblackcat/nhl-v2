@@ -1,37 +1,75 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormArray, FormControl } from '@angular/forms';
+import { FormGroup, FormArray, FormControl, FormArrayName } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
-import { mainForm } from 'src/app/models/form';
 import { PersonaService } from 'src/app/services/persona.service';
+
+import { Weapon } from 'src/app/models/persona.model';
 
 @Component({
   selector: 'app-weapon',
   templateUrl: './weapon.component.html'
 })
 export class WeaponComponent implements OnInit {
-  targetForm: FormGroup;
   title: string;
-  constructor(private route: ActivatedRoute, personaService: PersonaService) {}
+  formName: string;
+  form: FormArray;
+  constructor(private route: ActivatedRoute, private personaService: PersonaService) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.route.data.subscribe(res => {
       this.title = res.title;
-      this.targetForm = mainForm.get(res.targetForm) as FormGroup;
+      this.formName = res.formName;
+      /** TODO: That part could be refactored */
+      this.form = new FormArray([]);
+      const sheetObject: Weapon[] = this.personaService.currentPersona.sheet[this.formName];
+      if (sheetObject.length <= 0) {
+        for (let i = 0; i < 3; i++) {
+          sheetObject.push(new Weapon());
+        }
+        sheetObject.forEach(() =>
+          this.form.push(
+            new FormGroup({
+              name: new FormControl(''),
+              pi: new FormControl(''),
+              rup: new FormControl(''),
+              equiped: new FormControl(false),
+              effects: new FormArray([])
+            })
+          )
+        );
+      } else {
+        sheetObject.forEach(weapon => {
+          this.form.push(
+            new FormGroup({
+              name: new FormControl(weapon.name),
+              pi: new FormControl(weapon.pi),
+              rup: new FormControl(weapon.rup),
+              equiped: new FormControl(weapon.equiped),
+              effects: new FormArray([])
+            })
+          );
+          const weaponIndex = sheetObject.indexOf(weapon).toString();
+          const effects = this.form.get(weaponIndex).get('effects') as FormArray;
+          weapon.effects.forEach(effect =>
+            effects.push(new FormGroup({ name: new FormControl(effect.name), effect: new FormControl(effect.effect) }))
+          );
+        });
+      }
     });
   }
 
-  addItem(control: string): void {
-    (this.targetForm.get(control).get('ef') as FormArray).push(
-      new FormGroup({
-        name: new FormControl(),
-        val: new FormControl()
-      })
-    );
+  updateEffects() {
+    this.personaService.updatePersonas(this.formName, this.form.value);
   }
 
-  removeItem(control: string, i: number): void {
-    (this.targetForm.get(control).get('ef') as FormArray).removeAt(i);
-    // this.personaService.saveForm();
+  addItem(i: number) {
+    (this.form.at(i).get('effects') as FormArray).push(new FormGroup({ name: new FormControl(), effect: new FormControl() }));
+    this.personaService.updatePersonas(this.formName, this.form.value);
+  }
+
+  removeItem(i: number, j: number) {
+    (this.form.at(i).get('effects') as FormArray).removeAt(j);
+    this.personaService.updatePersonas(this.formName, this.form.value);
   }
 }

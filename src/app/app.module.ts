@@ -34,15 +34,15 @@ import { ArmorComponent } from './pages/armor/armor.component';
     SkillsDetailsComponent,
     ListComponent,
     ListMultiComponent,
-    // ResetComponent,
     PersonaSelectComponent,
     CharComponent,
     StatsComponent,
     InvComponent,
     BagsComponent,
-    CampComponent
-    // WeaponComponent,
+    CampComponent,
+    WeaponComponent
     // ArmorComponent
+    // ResetComponent
   ],
   imports: [BrowserModule, ReactiveFormsModule, IonicModule.forRoot({ mode: 'md' }), IonicStorageModule.forRoot(), AppRoutingModule],
   providers: [StatusBar, SplashScreen, Vibration, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],

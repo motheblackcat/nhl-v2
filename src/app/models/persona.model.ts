@@ -30,11 +30,11 @@ class CharSheet {
 
 class Effect {
   name: string;
-  effect: number | string;
+  effect: string;
 
   constructor() {
     this.name = '';
-    this.effect = 0;
+    this.effect = '';
   }
 }
 
@@ -127,6 +127,22 @@ class CampSheet {
   }
 }
 
+export class Weapon {
+  name: string;
+  pi: string;
+  rup: string;
+  equiped: boolean;
+  effects: Effect[];
+
+  constructor() {
+    this.name = '';
+    this.pi = '';
+    this.rup = '';
+    this.equiped = false;
+    this.effects = [];
+  }
+}
+
 export class PersonaSheet {
   char: CharSheet;
   stats: StatsSheet;
@@ -140,6 +156,7 @@ export class PersonaSheet {
   special: Effect[];
   gems: Effect[];
   potions: Effect[];
+  weapons: Weapon[];
 
   constructor(nom: string) {
     this.char = new CharSheet(nom);
@@ -154,47 +171,10 @@ export class PersonaSheet {
     this.special = [];
     this.gems = [];
     this.potions = [];
+    this.weapons = [];
   }
 }
 
-// weapons: {
-//   wea1: {
-//     name: '',
-//     pi: '',
-//     rup: '',
-//     equ: '',
-//     ef: [
-//       {
-//         name: '',
-//         val: ''
-//       }
-//     ]
-//   },
-//   wea2: {
-//     name: '',
-//     pi: '',
-//     rup: '',
-//     equ: '',
-//     ef: [
-//       {
-//         name: '',
-//         val: ''
-//       }
-//     ]
-//   },
-//   wea3: {
-//     name: '',
-//     pi: '',
-//     rup: '',
-//     equ: '',
-//     ef: [
-//       {
-//         name: '',
-//         val: ''
-//       }
-//     ]
-//   }
-// },
 // armors: {
 //   tete: {
 //     name: '',

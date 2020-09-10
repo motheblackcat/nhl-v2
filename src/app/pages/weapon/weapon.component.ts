@@ -6,6 +6,8 @@ import { PersonaService } from 'src/app/services/persona.service';
 
 import { Weapon } from 'src/app/models/persona.model';
 
+import { RouteData } from 'src/app/interfaces/route.interface';
+
 @Component({
   selector: 'app-weapon',
   templateUrl: './weapon.component.html'
@@ -17,7 +19,7 @@ export class WeaponComponent implements OnInit {
   constructor(private route: ActivatedRoute, private personaService: PersonaService) {}
 
   ngOnInit() {
-    this.route.data.subscribe(res => {
+    this.route.data.subscribe((res: RouteData) => {
       this.title = res.title;
       this.formName = res.formName;
       /** TODO: That part could be refactored */

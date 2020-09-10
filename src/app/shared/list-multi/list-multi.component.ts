@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { PersonaService } from 'src/app/services/persona.service';
 
 import { EffectModel } from 'src/app/interfaces/persona.interface';
+import { RouteData } from 'src/app/interfaces/route.interface';
 
 @Component({
   selector: 'app-list-multi',
@@ -21,7 +22,7 @@ export class ListMultiComponent implements OnInit {
   constructor(private route: ActivatedRoute, private personaService: PersonaService) {}
 
   ngOnInit() {
-    this.route.data.subscribe(res => {
+    this.route.data.subscribe((res: RouteData) => {
       this.title = res.title;
       this.subtitle = res.subtitle;
       this.nameLabel = res.nameLabel;

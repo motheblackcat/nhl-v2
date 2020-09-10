@@ -16,9 +16,6 @@ export interface WeaponModel {
   effects: EffectModel[];
 }
 
-/** TODO: Should have interfaces */
-// armors: Object[];
-
 export interface PersonaSheetModel {
   char: CharSheetModel;
   stats: StatsSheetModel;
@@ -32,6 +29,7 @@ export interface PersonaSheetModel {
   gems: EffectModel[];
   potions: EffectModel[];
   weapons: WeaponModel[];
+  armors: ArmorSheetModel;
 }
 
 export interface CharSheetModel {
@@ -92,4 +90,19 @@ export interface CampSheetModel {
   matelas: Camp;
   couvertures: Camp;
   autres: LightCamp[];
+}
+
+export interface ArmorModel {
+  name: string;
+  pr: string;
+  rup: string;
+  equiped: boolean;
+  effects: EffectModel[];
+}
+
+export interface ArmorSheetModel {
+  list: ArmorModel[];
+  tdm: boolean;
+  prNat: number;
+  prMag: number;
 }

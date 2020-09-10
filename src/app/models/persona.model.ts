@@ -118,12 +118,14 @@ class CampSheet {
   matelas: Camp;
   couvertures: Camp;
   autres: LightCamp[];
+  totalWeight: number;
 
   constructor() {
     this.tentes = new Camp();
     this.matelas = new Camp();
     this.couvertures = new Camp();
     this.autres = [];
+    this.totalWeight = 0;
   }
 }
 
@@ -143,6 +145,36 @@ export class Weapon {
   }
 }
 
+export class Armor {
+  name: string;
+  pr: string;
+  rup: string;
+  equiped: boolean;
+  effects: Effect[];
+
+  constructor() {
+    this.name = '';
+    this.pr = '';
+    this.rup = '';
+    this.equiped = false;
+    this.effects = [];
+  }
+}
+
+export class ArmorSheet {
+  list: Armor[];
+  tdm: boolean;
+  prNat: number;
+  prMag: number;
+
+  constructor() {
+    this.list = [];
+    this.tdm = false;
+    this.prNat = 0;
+    this.prMag = 0;
+  }
+}
+
 export class PersonaSheet {
   char: CharSheet;
   stats: StatsSheet;
@@ -157,6 +189,7 @@ export class PersonaSheet {
   gems: Effect[];
   potions: Effect[];
   weapons: Weapon[];
+  armors: ArmorSheet;
 
   constructor(nom: string) {
     this.char = new CharSheet(nom);
@@ -172,94 +205,6 @@ export class PersonaSheet {
     this.gems = [];
     this.potions = [];
     this.weapons = [];
+    this.armors = new ArmorSheet();
   }
 }
-
-// armors: {
-//   tete: {
-//     name: '',
-//     pr: '',
-//     rup: '',
-//     equ: '',
-//     ef: [
-//       {
-//         name: '',
-//         val: ''
-//       }
-//     ]
-//   },
-//   torse: {
-//     name: '',
-//     pr: '',
-//     rup: '',
-//     equ: '',
-//     ef: [
-//       {
-//         name: '',
-//         val: ''
-//       }
-//     ]
-//   },
-//   bouclier: {
-//     name: '',
-//     pr: '',
-//     rup: '',
-//     equ: '',
-//     ef: [
-//       {
-//         name: '',
-//         val: ''
-//       }
-//     ]
-//   },
-//   bras: {
-//     name: '',
-//     pr: '',
-//     rup: '',
-//     equ: '',
-//     ef: [
-//       {
-//         name: '',
-//         val: ''
-//       }
-//     ]
-//   },
-//   mains: {
-//     name: '',
-//     pr: '',
-//     rup: '',
-//     equ: '',
-//     ef: [
-//       {
-//         name: '',
-//         val: ''
-//       }
-//     ]
-//   },
-//   jambes: {
-//     name: '',
-//     pr: '',
-//     rup: '',
-//     equ: '',
-//     ef: [
-//       {
-//         name: '',
-//         val: ''
-//       }
-//     ]
-//   },
-//   pieds: {
-//     name: '',
-//     pr: '',
-//     rup: '',
-//     equ: '',
-//     ef: [
-//       {
-//         name: '',
-//         val: ''
-//       }
-//     ]
-//   },
-//   tdm: '',
-//   prmag: ''
-// },

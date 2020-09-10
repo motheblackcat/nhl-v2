@@ -4,6 +4,8 @@ export interface RouteData {
   formName?: string;
   subtitle?: string;
   placeholder?: string;
+  nameLabel?: string;
+  effectLabel?: string;
   useSelect?: boolean;
 }
 

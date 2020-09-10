@@ -8,6 +8,8 @@ import { PersonaService } from 'src/app/services/persona.service';
 
 import { skillsList } from 'src/app/consts/skills-list.consts';
 
+import { RouteData } from 'src/app/interfaces/route.interface';
+
 import { SkillsDetailsComponent } from '../skill-desc/skill-desc.component';
 
 @Component({
@@ -27,7 +29,7 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.skillsList.forEach(skill => (skill.title = skill.title.toLowerCase()));
-    this.route.data.subscribe(res => {
+    this.route.data.subscribe((res: RouteData) => {
       this.title = res.title;
       this.subtitle = res.subtitle;
       this.placeholder = res.placeholder;

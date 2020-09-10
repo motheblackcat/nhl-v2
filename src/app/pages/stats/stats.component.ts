@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { PersonaService } from 'src/app/services/persona.service';
 
+import { RouteData } from 'src/app/interfaces/route.interface';
 import { StatsSheetModel } from 'src/app/interfaces/persona.interface';
 
 @Component({
@@ -18,7 +19,7 @@ export class StatsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private personaService: PersonaService) {}
 
   ngOnInit() {
-    this.route.data.subscribe(res => {
+    this.route.data.subscribe((res: RouteData) => {
       this.title = res.title;
       this.formName = res.formName;
 

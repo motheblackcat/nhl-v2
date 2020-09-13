@@ -1,53 +1,55 @@
-<ion-content [formGroup]="form">
+<ion-content [formGroup]="form" (change)="updateSheet()" (ionChange)="updateSheet()">
   <h2>{{ title }}</h2>
   <div class="hint">pr: points de protection</div>
   <div class="hint mb">rup. : points de rupture</div>
   <div class="mb flexc">
-    <label class="mr" for="tdm">truc de mauviette</label>
-    <ion-checkbox type="checkbox" id="tdm" formControlName="tdm" color="dark" (ionChange)="prNatSum()"></ion-checkbox>
+    <label class="mr">truc de mauviette</label>
+    <ion-checkbox type="checkbox" formControlName="tdm" color="dark"></ion-checkbox>
   </div>
   <div class="mb">
     <label class="mr">protection naturel</label>
     <label>{{ prNat }}</label>
   </div>
   <div class="mb">
-    <label class="mr" for="prmag">protection magique</label>
-    <input type="number" id="prmag" placeholder="0" formControlName="prmag" />
+    <label class="mr">protection magique</label>
+    <label>{{ prMag }}</label>
   </div>
-  <ng-container *ngFor="let control of form.controls | keyvalue: personaService.defaultOrder; let i = index">
-    <div *ngIf="control.key !== 'tdm' && control.key !== 'prmag'" class="card">
-      <div class="subtitle mb" margin-bottom>{{ control.key }}</div>
-      <ng-container [formGroupName]="control.key">
+
+  <ng-container formArrayName="list">
+    <div class="card" *ngFor="let armor of form.get('list').controls | keyvalue: personaService.defaultOrder; let i = index">
+      <ng-container [formGroupName]="i">
+        <div class="subtitle mb" margin-bottom>{{ armorNames[i] }}</div>
         <div class="mb">
           <label for="name{{ i }}">nom :</label>
           <input class="ml" type="text" id="name{{ i }}" formControlName="name" placeholder="nom" />
         </div>
         <div class="mb flexc">
           <label class="mr" for="pr{{ i }}">pr :</label>
-          <input (blur)="prNatSum()" type="number" id="pr{{ i }}" class="short" formControlName="pr" placeholder="pr" />
+          <input type="number" id="pr{{ i }}" class="short" formControlName="pr" placeholder="pr" />
           <label class="mr" for="rup{{ i }}">rup. :</label>
           <input type="text" id="rup{{ i }}" class="short" formControlName="rup" placeholder="rup." />
-          <label class="mr" for="equ{{ i }}">equipé ?</label>
-          <ion-checkbox (ionChange)="prNatSum()" type="checkbox" id="equ{{ i }}" formControlName="equ" color="dark"></ion-checkbox>
+          <label class="mr">equipé ?</label>
+          <ion-checkbox type="checkbox" formControlName="equiped" color="dark"></ion-checkbox>
         </div>
         <div class="mb">effet(s):</div>
-        <ng-container formArrayName="ef">
-          <div class="mb flexc spaceb" *ngFor="let item of form.get(control.key).get('ef').controls; let i = index">
-            <ion-icon name="close" (click)="removeItem(control.key, i)"></ion-icon>
-            <ng-container [formGroupName]="i">
-              <label for="efname-{{ control.key }}-{{ i }}">stat. :</label>
-              <input class="short" type="text" id="efname-{{ control.key }}-{{ i }}" placeholder="ex : ad / int" formControlName="name" />
-              <label for="efval-{{ control.key }}-{{ i }}">valeur :</label>
-              <input class="short" type="text" id="efval-{{ control.key }}-{{ i }}" placeholder="ex : 2 / -3" formControlName="val" />
+        <ng-container formArrayName="effects">
+          <div class="mb flexc spaceb" *ngFor="let effect of form.get('list').at(i).get('effects').controls; let j = index">
+            <ion-icon name="close" (click)="removeItem(i, j)"></ion-icon>
+            <ng-container [formGroupName]="j">
+              <label for="efname-{{ i }}-{{ j }}">stat. :</label>
+              <input class="short" type="text" id="efname-{{ i }}-{{ j }}" placeholder="ex : ad / int" formControlName="name" />
+              <label for="efval-{{ i }}-{{ j }}">valeur :</label>
+              <input class="short" type="text" id="efval-{{ i }}-{{ j }}" placeholder="ex : 2 / -3" formControlName="effect" />
             </ng-container>
           </div>
         </ng-container>
-        <div class="flexc" (click)="addItem(control.key)">
+        <div class="flexc" (click)="addItem(i)">
           <ion-icon class="mr" name="add-circle-outline"></ion-icon>
           <label>Ajouter un effet</label>
         </div>
       </ng-container>
     </div>
   </ng-container>
+
   <div class="last"></div>
 </ion-content>

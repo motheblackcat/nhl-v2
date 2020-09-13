@@ -40,8 +40,8 @@ import { ArmorComponent } from './pages/armor/armor.component';
     InvComponent,
     BagsComponent,
     CampComponent,
-    WeaponComponent
-    // ArmorComponent
+    WeaponComponent,
+    ArmorComponent
     // ResetComponent
   ],
   imports: [BrowserModule, ReactiveFormsModule, IonicModule.forRoot({ mode: 'md' }), IonicStorageModule.forRoot(), AppRoutingModule],

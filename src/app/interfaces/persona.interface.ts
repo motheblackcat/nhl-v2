@@ -23,6 +23,7 @@ export interface PersonaSheetModel {
   quest: String[];
   loot: String[];
   bags: BagsSheetModel;
+  camp: CampSheetModel;
   food: String[];
   precious: String[];
   special: EffectModel[];
@@ -90,6 +91,7 @@ export interface CampSheetModel {
   matelas: Camp;
   couvertures: Camp;
   autres: LightCamp[];
+  totalWeight: number;
 }
 
 export interface ArmorModel {

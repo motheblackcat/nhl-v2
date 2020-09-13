@@ -29,6 +29,7 @@ export class WeaponComponent implements OnInit {
         for (let i = 0; i < 3; i++) {
           sheetObject.push(new Weapon());
         }
+        /** TODO: That part could be refactored (Check ARMOR) */
         sheetObject.forEach(() =>
           this.form.push(
             new FormGroup({

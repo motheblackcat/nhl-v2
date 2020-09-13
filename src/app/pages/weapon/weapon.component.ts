@@ -22,43 +22,29 @@ export class WeaponComponent implements OnInit {
     this.route.data.subscribe((res: RouteData) => {
       this.title = res.title;
       this.formName = res.formName;
-      /** TODO: That part could be refactored */
       this.form = new FormArray([]);
       const sheetObject: Weapon[] = this.personaService.currentPersona.sheet[this.formName];
       if (sheetObject.length <= 0) {
         for (let i = 0; i < 3; i++) {
           sheetObject.push(new Weapon());
         }
-        /** TODO: That part could be refactored (Check ARMOR) */
-        sheetObject.forEach(() =>
-          this.form.push(
-            new FormGroup({
-              name: new FormControl(''),
-              pi: new FormControl(''),
-              rup: new FormControl(''),
-              equiped: new FormControl(false),
-              effects: new FormArray([])
-            })
-          )
-        );
-      } else {
-        sheetObject.forEach(weapon => {
-          this.form.push(
-            new FormGroup({
-              name: new FormControl(weapon.name),
-              pi: new FormControl(weapon.pi),
-              rup: new FormControl(weapon.rup),
-              equiped: new FormControl(weapon.equiped),
-              effects: new FormArray([])
-            })
-          );
-          const weaponIndex = sheetObject.indexOf(weapon).toString();
-          const effects = this.form.get(weaponIndex).get('effects') as FormArray;
-          weapon.effects.forEach(effect =>
-            effects.push(new FormGroup({ name: new FormControl(effect.name), effect: new FormControl(effect.effect) }))
-          );
-        });
       }
+      sheetObject.forEach(weapon => {
+        this.form.push(
+          new FormGroup({
+            name: new FormControl(weapon.name),
+            pi: new FormControl(weapon.pi),
+            rup: new FormControl(weapon.rup),
+            equiped: new FormControl(weapon.equiped),
+            effects: new FormArray([])
+          })
+        );
+        const weaponIndex = sheetObject.indexOf(weapon).toString();
+        const effects = this.form.get(weaponIndex).get('effects') as FormArray;
+        weapon.effects.forEach(effect =>
+          effects.push(new FormGroup({ name: new FormControl(effect.name), effect: new FormControl(effect.effect) }))
+        );
+      });
     });
   }
 

@@ -64,8 +64,9 @@ export class ArmorComponent implements OnInit {
   prSums() {
     const sum = this.form
       .get('list')
-      .value.map(armor => Number(armor.pr))
-      .reduce((a, b) => a + b);
+      .value.filter(armor => armor.equiped)
+      .map(armor => Number(armor.pr))
+      .reduce((a: number, b: number) => a + b, 0);
     this.prNat = this.form.get('tdm').value ? sum + 1 : sum;
     this.form.get('prNat').setValue(this.prNat);
 

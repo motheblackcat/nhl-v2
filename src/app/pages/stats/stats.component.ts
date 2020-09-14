@@ -35,21 +35,20 @@ export class StatsComponent implements OnInit {
         }
       }
       this.updateMagStats();
-      this.updateEffects();
     });
   }
 
   updateMagStats() {
-    const int = Number(this.form.get('int').get('name').value) + this.form.get('int').get('effect').value;
-    const ad = Number(this.form.get('ad').get('name').value) + this.form.get('ad').get('effect').value;
-    const cha = Number(this.form.get('cha').get('name').value) + this.form.get('cha').get('effect').value;
-    const cou = Number(this.form.get('cou').get('name').value) + this.form.get('cou').get('effect').value;
-    const fo = Number(this.form.get('fo').get('name').value) + this.form.get('fo').get('effect').value;
-
+    this.updateEffects();
+    const sheetObject: StatsSheetModel = this.personaService.currentPersona.sheet[this.formName];
+    const int = Number(sheetObject.int.name + sheetObject.int.effect);
+    const ad = Number(sheetObject.ad.name + sheetObject.ad.effect);
+    const cha = Number(sheetObject.cha.name + sheetObject.cha.effect);
+    const cou = Number(sheetObject.cou.name + sheetObject.cou.effect);
+    const fo = Number(sheetObject.fo.name + sheetObject.fo.effect);
     this.form.get('magphy').setValue(Math.ceil((int + ad) / 2));
     this.form.get('magpsy').setValue(Math.ceil((int + cha) / 2));
     this.form.get('resmag').setValue(Math.ceil((cou + int + fo) / 3));
-
     this.personaService.updatePersonas(this.formName, this.form.value);
   }
 
@@ -58,6 +57,12 @@ export class StatsComponent implements OnInit {
     const weaponsEffects = sheetObject.weapons.filter(weapon => weapon.effects.length > 0 && weapon.equiped).map(weapon => weapon.effects);
     const armorsEffects = sheetObject.armors.list.filter(armor => armor.effects.length > 0 && armor.equiped).map(armor => armor.effects);
     const effects: EffectModel[] = [].concat(...weaponsEffects, ...armorsEffects);
-    effects.forEach((effect: EffectModel) => {});
+    ['ev', 'ea', 'cou', 'int', 'cha', 'ad', 'fo', 'atq', 'prd'].forEach(stat => {
+      this.form
+        .get(stat)
+        .get('effect')
+        .setValue(effects.filter(e => e.name === stat).reduce((a, b) => a + Number(b.effect), 0));
+    });
+    this.personaService.updatePersonas(this.formName, this.form.value);
   }
 }

@@ -34,10 +34,12 @@
         <div class="mb">effet(s):</div>
         <ng-container formArrayName="effects">
           <div class="mb flexc spaceb" *ngFor="let effect of form.get('list').at(i).get('effects').controls; let j = index">
-            <ion-icon name="close" (click)="removeItem(i, j)"></ion-icon>
             <ng-container [formGroupName]="j">
-              <label for="efname-{{ i }}-{{ j }}">stat. :</label>
-              <input class="short" type="text" id="efname-{{ i }}-{{ j }}" placeholder="ex : ad / int" formControlName="name" />
+              <ion-icon name="close" (click)="removeItem(i, j)"></ion-icon>
+              <label>stat. :</label>
+              <select formControlName="name">
+                <option *ngFor="let stat of statsNames" [value]="stat">{{ stat }}</option>
+              </select>
               <label for="efval-{{ i }}-{{ j }}">valeur :</label>
               <input class="short" type="text" id="efval-{{ i }}-{{ j }}" placeholder="ex : 2 / -3" formControlName="effect" />
             </ng-container>

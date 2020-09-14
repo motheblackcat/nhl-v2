@@ -18,6 +18,7 @@ export class ArmorComponent implements OnInit {
   formName: string;
   form: FormGroup;
   armorNames: String[];
+  statsNames: String[];
   prNat: number;
   prMag: number;
   constructor(private route: ActivatedRoute, private personaService: PersonaService) {}
@@ -53,6 +54,9 @@ export class ArmorComponent implements OnInit {
           effects.push(new FormGroup({ name: new FormControl(effect.name), effect: new FormControl(effect.effect) }))
         );
       });
+      this.statsNames = Object.keys(this.personaService.currentPersona.sheet['stats']).filter(
+        stat => stat !== 'magpsy' && stat !== 'magphy' && stat !== 'resmag'
+      );
       this.prSums();
     });
   }

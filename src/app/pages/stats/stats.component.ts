@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { PersonaService } from 'src/app/services/persona.service';
 
 import { RouteData } from 'src/app/interfaces/route.interface';
-import { StatsSheetModel } from 'src/app/interfaces/persona.interface';
+import { EffectModel, PersonaSheetModel, StatsSheetModel } from 'src/app/interfaces/persona.interface';
 
 @Component({
   selector: 'app-stats',
@@ -22,7 +22,6 @@ export class StatsComponent implements OnInit {
     this.route.data.subscribe((res: RouteData) => {
       this.title = res.title;
       this.formName = res.formName;
-
       this.form = new FormGroup({});
       const sheetObject: StatsSheetModel = this.personaService.currentPersona.sheet[this.formName];
       for (const key in sheetObject) {
@@ -36,6 +35,7 @@ export class StatsComponent implements OnInit {
         }
       }
       this.updateMagStats();
+      this.updateEffects();
     });
   }
 
@@ -51,5 +51,13 @@ export class StatsComponent implements OnInit {
     this.form.get('resmag').setValue(Math.ceil((cou + int + fo) / 3));
 
     this.personaService.updatePersonas(this.formName, this.form.value);
+  }
+
+  updateEffects() {
+    const sheetObject: PersonaSheetModel = this.personaService.currentPersona.sheet;
+    const weaponsEffects = sheetObject.weapons.filter(weapon => weapon.effects.length > 0 && weapon.equiped).map(weapon => weapon.effects);
+    const armorsEffects = sheetObject.armors.list.filter(armor => armor.effects.length > 0 && armor.equiped).map(armor => armor.effects);
+    const effects: EffectModel[] = [].concat(...weaponsEffects, ...armorsEffects);
+    effects.forEach((effect: EffectModel) => {});
   }
 }

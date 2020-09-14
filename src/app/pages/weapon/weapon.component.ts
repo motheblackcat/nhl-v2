@@ -16,6 +16,7 @@ export class WeaponComponent implements OnInit {
   title: string;
   formName: string;
   form: FormArray;
+  statsNames: String[];
   constructor(private route: ActivatedRoute, private personaService: PersonaService) {}
 
   ngOnInit() {
@@ -45,6 +46,9 @@ export class WeaponComponent implements OnInit {
           effects.push(new FormGroup({ name: new FormControl(effect.name), effect: new FormControl(effect.effect) }))
         );
       });
+      this.statsNames = Object.keys(this.personaService.currentPersona.sheet['stats']).filter(
+        stat => stat !== 'magpsy' && stat !== 'magphy' && stat !== 'resmag'
+      );
     });
   }
 

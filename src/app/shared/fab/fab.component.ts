@@ -5,8 +5,6 @@ import { ModalController } from '@ionic/angular';
 
 import { Route } from 'src/app/interfaces/route.interface';
 
-import { ResetComponent } from '../reset/reset.component';
-
 @Component({
   selector: 'app-fab',
   templateUrl: './fab.component.html'
@@ -28,13 +26,5 @@ export class FabComponent implements OnInit {
         this.icon = currentRoute ? currentRoute.icon : '';
       }
     });
-  }
-
-  async presentModal(): Promise<void> {
-    const modal = await this.modalController.create({
-      component: ResetComponent,
-      cssClass: 'modal'
-    });
-    return await modal.present();
   }
 }

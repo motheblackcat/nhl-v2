@@ -17,11 +17,14 @@ export class ArmorComponent implements OnInit {
   title: string;
   formName: string;
   form: FormGroup;
+  get list() {
+    return <FormArray>this.form.get('list');
+  }
   armorNames: String[];
   statsNames: String[];
   prNat: number;
   prMag: number;
-  constructor(private route: ActivatedRoute, private personaService: PersonaService) {}
+  constructor(private route: ActivatedRoute, public personaService: PersonaService) {}
 
   ngOnInit() {
     this.route.data.subscribe((res: RouteData) => {

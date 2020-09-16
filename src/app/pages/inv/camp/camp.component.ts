@@ -16,14 +16,17 @@ export class CampComponent implements OnInit {
   title: string;
   formName: string;
   form: FormGroup;
-  totalWei: number;
-  constructor(private route: ActivatedRoute, private personaService: PersonaService) {}
+  get autres() {
+    return <FormArray>this.form.get('autres');
+  }
+  totalWeight: number;
+  constructor(private route: ActivatedRoute, public personaService: PersonaService) {}
 
   ngOnInit(): void {
     this.route.data.subscribe((res: RouteData) => {
       this.title = res.title;
       this.formName = res.formName;
-      this.totalWei = 0;
+      this.totalWeight = 0;
 
       this.form = new FormGroup({});
       const sheetObject: CampSheetModel = this.personaService.currentPersona.sheet[this.formName];
@@ -47,7 +50,7 @@ export class CampComponent implements OnInit {
   }
 
   updateTotalWeight() {
-    this.totalWei =
+    this.totalWeight =
       Number(this.form.get('tentes').get('wei').value) +
       Number(this.form.get('matelas').get('wei').value) +
       Number(this.form.get('couvertures').get('wei').value) +

@@ -25,7 +25,7 @@ export class ListComponent implements OnInit {
   form: FormArray;
   useSelect: boolean;
   skillsList = skillsList;
-  constructor(private route: ActivatedRoute, private personaService: PersonaService, private modal: ModalController) {}
+  constructor(private route: ActivatedRoute, public personaService: PersonaService, private modal: ModalController) {}
 
   ngOnInit(): void {
     this.skillsList.forEach(skill => (skill.title = skill.title.toLowerCase()));

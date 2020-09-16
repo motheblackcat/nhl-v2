@@ -2,7 +2,7 @@
   <h3>{{ title }}</h3>
   <div class="hint mb">récup. : récupération PV</div>
   <ng-container *ngFor="let control of form.controls | keyvalue: personaService.defaultOrder">
-    <div *ngIf="control.key !== 'autres'" [formGroupName]="control.key">
+    <div *ngIf="control.key !== 'autres' && control.key !== 'totalWeight'" [formGroupName]="control.key">
       <div class="flexc spaceb mb">
         <label>{{ control.key }}</label>
         <label>Récup.</label>
@@ -23,7 +23,7 @@
     <label>Nom</label>
     <label>Poids</label>
   </div>
-  <ng-container formArrayName="autres" *ngFor="let control of form.get('autres').controls; let i = index">
+  <ng-container formArrayName="autres" *ngFor="let control of autres.controls; let i = index">
     <div class="flexc spaceb mb" [formGroupName]="i">
       <ion-icon name="close" (click)="removeItem(i)"></ion-icon>
       <input type="text" formControlName="name" placeholder="nom" />
@@ -36,5 +36,5 @@
     <label>Ajouter un objet</label>
   </div>
   <br />
-  <div class="last ion-text-end">Poids total: {{ totalWei }} Kg</div>
+  <div class="last ion-text-end">Poids total: {{ totalWeight }} Kg</div>
 </ion-content>

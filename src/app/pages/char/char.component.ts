@@ -16,7 +16,7 @@ export class CharComponent implements OnInit {
   title: string;
   formName: string;
   form: FormGroup;
-  constructor(private route: ActivatedRoute, private personaService: PersonaService) {}
+  constructor(private route: ActivatedRoute, public personaService: PersonaService) {}
 
   ngOnInit() {
     this.route.data.subscribe((res: RouteData) => {

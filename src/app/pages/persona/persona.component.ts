@@ -14,7 +14,7 @@ import { ToasterTypes } from 'src/app/consts/toaster-types.consts';
   styleUrls: ['./persona.component.scss']
 })
 export class PersonaComponent implements OnInit {
-  constructor(private alert: AlertController, private toast: ToastController, private personaService: PersonaService) {}
+  constructor(private alert: AlertController, private toast: ToastController, public personaService: PersonaService) {}
 
   /** TODO: Check if async behaviorsubject makes persona loading slower */
   ngOnInit() {

@@ -16,7 +16,7 @@
   </div>
 
   <ng-container formArrayName="list">
-    <div class="card" *ngFor="let armor of form.get('list').controls | keyvalue: personaService.defaultOrder; let i = index">
+    <div class="card" *ngFor="let armor of list.controls | keyvalue: personaService.defaultOrder; let i = index">
       <ng-container [formGroupName]="i">
         <div class="subtitle mb" margin-bottom>{{ armorNames[i] }}</div>
         <div class="mb">
@@ -33,7 +33,7 @@
         </div>
         <div class="mb">effet(s):</div>
         <ng-container formArrayName="effects">
-          <div class="mb flexc spaceb" *ngFor="let effect of form.get('list').at(i).get('effects').controls; let j = index">
+          <div class="mb flexc spaceb" *ngFor="let effect of list.at(i).get('effects').controls; let j = index">
             <ng-container [formGroupName]="j">
               <ion-icon name="close" (click)="removeItem(i, j)"></ion-icon>
               <label>stat. :</label>

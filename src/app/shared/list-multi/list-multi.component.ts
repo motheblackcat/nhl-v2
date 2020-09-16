@@ -19,7 +19,7 @@ export class ListMultiComponent implements OnInit {
   effectLabel: string;
   formName: string;
   form: FormArray;
-  constructor(private route: ActivatedRoute, private personaService: PersonaService) {}
+  constructor(private route: ActivatedRoute, public personaService: PersonaService) {}
 
   ngOnInit() {
     this.route.data.subscribe((res: RouteData) => {

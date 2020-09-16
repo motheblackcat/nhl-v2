@@ -16,7 +16,13 @@ export class BagsComponent implements OnInit {
   title: string;
   formName: string;
   form: FormGroup;
-  constructor(private route: ActivatedRoute, private personaService: PersonaService) {}
+  get bags() {
+    return <FormArray>this.form.get('bags');
+  }
+  get pooches() {
+    return <FormArray>this.form.get('pooches');
+  }
+  constructor(private route: ActivatedRoute, public personaService: PersonaService) {}
 
   ngOnInit() {
     this.route.data.subscribe((res: RouteData) => {

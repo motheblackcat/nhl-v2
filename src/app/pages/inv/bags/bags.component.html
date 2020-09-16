@@ -12,7 +12,7 @@
   </div>
   <br />
   <ng-container formArrayName="bags">
-    <div class="flexc" *ngFor="let bag of form.get('bags').controls; let i = index" [formGroupName]="i">
+    <div class="flexc" *ngFor="let bag of bags.controls; let i = index" [formGroupName]="i">
       <ion-icon name="close" (click)="removeItem('bags', i)"></ion-icon>
       <input type="text" formControlName="name" placeholder="nom" />
       <input type="number" formControlName="max" placeholder="0" />
@@ -32,7 +32,7 @@
   </div>
   <br />
   <ng-container formArrayName="pooches">
-    <div class="flexc" *ngFor="let pooch of form.get('pooches').controls; let i = index" [formGroupName]="i">
+    <div class="flexc" *ngFor="let pooch of pooches.controls; let i = index" [formGroupName]="i">
       <ion-icon name="close" (click)="removeItem('pooches', i)"></ion-icon>
       <input type="text" formControlName="name" placeholder="nom" />
       <input type="number" formControlName="max" placeholder="0" />

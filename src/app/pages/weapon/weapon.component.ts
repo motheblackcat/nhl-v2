@@ -17,7 +17,7 @@ export class WeaponComponent implements OnInit {
   formName: string;
   form: FormArray;
   statsNames: String[];
-  constructor(private route: ActivatedRoute, private personaService: PersonaService) {}
+  constructor(private route: ActivatedRoute, public personaService: PersonaService) {}
 
   ngOnInit() {
     this.route.data.subscribe((res: RouteData) => {

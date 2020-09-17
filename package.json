@@ -25,7 +25,6 @@
     "@ionic-native/vibration": "^5.27.0",
     "@ionic/angular": "^5.0.5",
     "@ionic/storage": "^2.2.0",
-    "cordova-android": "^8.0.0",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-ionic-keyboard": "^2.1.3",
     "cordova-plugin-ionic-webview": "^4.1.1",
@@ -52,6 +51,8 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~12.0.10",
     "codelyzer": "^5.2.2",
+    "cordova-android": "^9.0.0",
+    "cordova-browser": "^6.0.0",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "^5.1.0",
@@ -78,6 +79,7 @@
       "cordova-plugin-vibration": {}
     },
     "platforms": [
+      "browser",
       "android"
     ]
   }

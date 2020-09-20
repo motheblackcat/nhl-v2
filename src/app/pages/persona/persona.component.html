@@ -1,11 +1,13 @@
 <ion-content ion-padding>
   <h3 class="mb">Choisir un personnage</h3>
-  <div class="flexc spaceb mb" (click)="addPersonaModal()">
+  <br />
+  <div class="flexc mb" (click)="addPersonaModal()">
+    <ion-icon name="add-circle-outline" class="mr"></ion-icon>
     <div>Créer un nouveau Personnage</div>
-    <ion-icon name="add-circle-outline"></ion-icon>
   </div>
-  <div *ngFor="let persona of personaService.personas$ | async" class="flexc spaceb mb" [style.background-color]="persona.color">
+  <br />
+  <div *ngFor="let persona of personaService.personas$ | async" class="flexc mb" [style.background-color]="persona.color">
+    <ion-icon name="close" class="mr" (click)="removePersonaModal(persona)"></ion-icon>
     <div (click)="selectPersona(persona)" routerLink="/char">{{ persona.name }}</div>
-    <ion-icon name="close" (click)="removePersonaModal(persona)"></ion-icon>
   </div>
 </ion-content>

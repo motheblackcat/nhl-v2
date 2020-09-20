@@ -25,8 +25,7 @@ export class PersonaService {
   }
 
   addPersona(personaName: string) {
-    const newPersonaSheet: PersonaSheetModel = new PersonaSheet(personaName);
-    const newPersona: Persona = { name: personaName, sheet: newPersonaSheet };
+    const newPersona: Persona = { name: personaName, sheet: new PersonaSheet(personaName) };
     const updatedPersonas: Persona[] = [...this.personas$.value, newPersona];
     this.personas$.next(updatedPersonas);
     this.store.set(PERSONAS, this.personas$.value);

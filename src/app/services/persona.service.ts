@@ -111,15 +111,16 @@ export class PersonaService {
         weapons,
         armors
       };
-      this.store.remove('mainForm');
-      console.log(newPersona);
-      this.store.set(PERSONAS, [newPersona]);
+      const updatedPersonas: Persona[] = [...this.personas$.value, newPersona];
+      this.personas$.next(updatedPersonas);
+      this.store.set(PERSONAS, this.personas$.value);
+      // this.store.remove('mainForm');
     }
   }
 
   getPersonas() {
-    this.store.get('mainForm').then(data => {
-      this.getLegacyPersona(data);
+    this.store.get('mainForm').then(form => {
+      this.getLegacyPersona(form);
     });
 
     this.store.get(PERSONAS).then(data => {

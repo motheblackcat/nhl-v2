@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RoutesRecognized } from '@angular/router';
 
-import { ModalController } from '@ionic/angular';
-
 import { Route } from 'src/app/interfaces/route.interface';
 
 @Component({
@@ -20,7 +18,7 @@ export class FabComponent implements OnInit {
     this.router.config.filter(route => route.data).forEach(route => this.routes.push({ path: `/${route.path}`, icon: route.data.icon }));
     this.router.events.subscribe(event => {
       if (event instanceof RoutesRecognized) {
-        this.display = event.url !== '/persona';
+        this.display = event.url !== '/' && event.url !== '/persona';
         const currentRoute = this.routes.find(route => route.path === event.url);
         this.icon = currentRoute ? currentRoute.icon : '';
       }

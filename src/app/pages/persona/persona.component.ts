@@ -16,7 +16,6 @@ import { ToasterTypes } from 'src/app/consts/toaster-types.consts';
 export class PersonaComponent implements OnInit {
   constructor(private alert: AlertController, private toast: ToastController, public personaService: PersonaService) {}
 
-  /** TODO: Check if async behaviorsubject makes persona loading slower */
   ngOnInit() {
     this.personaService.currentPersona = null;
     this.personaService.getPersonas();
@@ -26,7 +25,6 @@ export class PersonaComponent implements OnInit {
     this.personaService.currentPersona = persona;
   }
 
-  /** TODO: Add enum for type */
   async presentToast(type: string): Promise<any> {
     const toast = await this.toast.create({
       message:

@@ -56,8 +56,8 @@ export class ListComponent implements OnInit {
     this.presentModal(skill);
   }
 
-  addItem(skill: string) {
-    if (!this.form.value.find(s => s === skill)) {
+  addSkill(skill: string) {
+    if (this.form.value.indexOf(skill) === -1) {
       this.form.push(new FormControl(skill));
       this.personaService.updatePersonas(this.formName, this.form.value);
     }

@@ -28,15 +28,11 @@ export class ListMultiComponent implements OnInit {
       this.nameLabel = res.nameLabel;
       this.effectLabel = res.effectLabel;
       this.formName = res.formName;
-
-      console.log(this.nameLabel, this.effectLabel, this.formName);
-
       this.form = new FormArray([]);
       const sheetObject: EffectModel[] = this.personaService.currentPersona.sheet[this.formName];
       sheetObject.forEach(item => {
         this.form.push(new FormGroup({ name: new FormControl(item.name), effect: new FormControl(item.effect) }));
       });
-      console.log(this.form.controls, sheetObject);
     });
   }
 

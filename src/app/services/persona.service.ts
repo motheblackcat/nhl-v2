@@ -6,9 +6,9 @@ import { Storage } from '@ionic/storage';
 
 import { PERSONAS } from '../consts/storage.consts';
 
-import { Persona, PersonaSheetModel } from '../interfaces/persona.interface';
+import { ArmorSheet, PersonaSheet } from '../models/persona.model';
 
-import { PersonaSheet } from '../models/persona.model';
+import { Persona, PersonaSheetModel, StatsSheetModel, WeaponModel } from '../interfaces/persona.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +19,71 @@ export class PersonaService {
   constructor(private store: Storage) {}
 
   getPersonas() {
+    this.store.get('mainForm').then(data => {
+      const newPersona: Persona = { name: data.charForm.nom, sheet: new PersonaSheet(data.charForm.nom) };
+
+      const stats = {};
+      for (const stat in data.statsForm) {
+        if (stat === 'magphy' || stat === 'magpsy' || stat === 'resmag') {
+          stats[stat] = data.statsForm[stat];
+        } else {
+          stats[stat] = { name: data.statsForm[stat].val, effect: data.statsForm[stat].ef ? String(data.statsForm[stat].ef) : '' };
+        }
+      }
+
+      const weapons: WeaponModel[] = [];
+      for (const weapon in data.weaponsForm) {
+        if (weapon) {
+          weapons.push({
+            name: data.weaponsForm[weapon].name,
+            pi: data.weaponsForm[weapon].pi,
+            rup: data.weaponsForm[weapon].rup,
+            equiped: data.weaponsForm[weapon].equ,
+            effects: []
+          });
+
+          data.weaponsForm[weapon].ef.forEach(effect => {
+            if (effect.name) {
+              weapons[weapon].effects.push({ name: effect.name, effect: effect.val });
+            }
+          });
+        }
+      }
+
+      const armors: ArmorSheet = { list: [], tdm: false, prNat: 0, prMag: 0 };
+      for (const armor in data.armorsForm) {
+        if (armor !== 'tdm' && armor !== 'prmag') {
+          armors.list.push({
+            name: data.armorsForm[armor].name,
+            pr: data.armorsForm[armor].pr,
+            rup: data.armorsForm[armor].rup,
+            equiped: data.armorsForm[armor].equ,
+            effects: []
+          });
+
+          data.armorsForm[armor].ef.forEach(effect => {
+            if (effect.name) {
+              armors[armor].effects.push({ name: effect.name, effect: effect.val });
+            }
+          });
+        }
+      }
+
+      // newPersona.sheet = {
+      //   ...newPersona.sheet,
+      //   char: data.charForm,
+      //   stats: stats as StatsSheetModel,
+      //   skills: data.skillsForm,
+      //   weapons,
+      //   armors,
+      //   quest: data.questForm,
+      //   loot: data.lootForm,
+      //   food: data.foodForm,
+      //   precious: data.preciousForm
+      // };
+      // console.log(newPersona);
+    });
+
     this.store.get(PERSONAS).then(data => {
       data ? this.personas$.next(data) : this.store.set(PERSONAS, []);
     });

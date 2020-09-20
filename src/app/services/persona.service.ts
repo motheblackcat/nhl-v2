@@ -8,7 +8,7 @@ import { PERSONAS } from '../consts/storage.consts';
 
 import { ArmorSheet, PersonaSheet } from '../models/persona.model';
 
-import { Persona, PersonaSheetModel, StatsSheetModel, WeaponModel } from '../interfaces/persona.interface';
+import { BagsSheetModel, CampSheetModel, Persona, PersonaSheetModel, StatsSheetModel, WeaponModel } from '../interfaces/persona.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -18,10 +18,8 @@ export class PersonaService {
   currentPersona: Persona;
   constructor(private store: Storage) {}
 
-  getPersonas() {
-    this.store.get('mainForm').then(data => {
-      const newPersona: Persona = { name: data.charForm.nom, sheet: new PersonaSheet(data.charForm.nom) };
-
+  getLegacyPersona(data: any) {
+    if (data) {
       const stats = {};
       for (const stat in data.statsForm) {
         if (stat === 'magphy' || stat === 'magpsy' || stat === 'resmag') {
@@ -44,7 +42,7 @@ export class PersonaService {
 
           data.weaponsForm[weapon].ef.forEach(effect => {
             if (effect.name) {
-              weapons[weapon].effects.push({ name: effect.name, effect: effect.val });
+              weapons.find(wea => wea.name === data.weaponsForm[weapon].name).effects.push({ name: effect.name, effect: effect.val });
             }
           });
         }
@@ -63,25 +61,65 @@ export class PersonaService {
 
           data.armorsForm[armor].ef.forEach(effect => {
             if (effect.name) {
-              armors[armor].effects.push({ name: effect.name, effect: effect.val });
+              armors.list.find(arm => arm.name === data.armorsForm[armor].name).effects.push({ name: effect.name, effect: effect.val });
             }
           });
         }
       }
 
-      // newPersona.sheet = {
-      //   ...newPersona.sheet,
-      //   char: data.charForm,
-      //   stats: stats as StatsSheetModel,
-      //   skills: data.skillsForm,
-      //   weapons,
-      //   armors,
-      //   quest: data.questForm,
-      //   loot: data.lootForm,
-      //   food: data.foodForm,
-      //   precious: data.preciousForm
-      // };
-      // console.log(newPersona);
+      /** TODO: Can be refactored with a single loop on bags/pooches */
+      const bags: BagsSheetModel = { max: data.bagsForm.max, bags: [], pooches: [] };
+      for (const bag in data.bagsForm['bags']) {
+        if (bag) {
+          bags.bags.push({ name: data.bagsForm['bags'][bag].name, max: data.bagsForm['bags'][bag].max });
+        }
+      }
+      for (const pooch in data.bagsForm['pooches']) {
+        if (pooch) {
+          bags.pooches.push({ name: data.bagsForm['pooches'][pooch].name, max: data.bagsForm['pooches'][pooch].max });
+        }
+      }
+
+      const camp: CampSheetModel = {
+        tente: data.campForm.tente,
+        matelas: data.campForm.matelas,
+        couverture: data.campForm.couverture,
+        autres: [],
+        totalWeight: 0
+      };
+      for (const autre in data.campForm['mat']) {
+        if (autre) {
+          camp.autres.push(data.campForm['mat'][autre]);
+        }
+      }
+
+      const newPersona: Persona = { name: data.charForm.nom, sheet: new PersonaSheet(data.charForm.nom) };
+      newPersona.sheet = {
+        ...newPersona.sheet,
+        char: data.charForm,
+        stats: stats as StatsSheetModel,
+        skills: data.skillsForm,
+        quest: data.questForm,
+        loot: data.lootForm,
+        food: data.foodForm,
+        precious: data.preciousForm,
+        bags,
+        camp,
+        special: data.specialForm,
+        gems: data.gemsForm,
+        potions: data.potionsForm,
+        weapons,
+        armors
+      };
+      this.store.remove('mainForm');
+      console.log(newPersona);
+      this.store.set(PERSONAS, [newPersona]);
+    }
+  }
+
+  getPersonas() {
+    this.store.get('mainForm').then(data => {
+      this.getLegacyPersona(data);
     });
 
     this.store.get(PERSONAS).then(data => {

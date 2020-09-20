@@ -51,9 +51,9 @@ export class CampComponent implements OnInit {
 
   updateTotalWeight() {
     this.totalWeight =
-      Number(this.form.get('tentes').get('wei').value) +
+      Number(this.form.get('tente').get('wei').value) +
       Number(this.form.get('matelas').get('wei').value) +
-      Number(this.form.get('couvertures').get('wei').value) +
+      Number(this.form.get('couverture').get('wei').value) +
       this.form.get('autres').value.reduce((a, b) => a + b.wei, 0);
     this.personaService.updatePersonas(this.formName, this.form.value);
   }

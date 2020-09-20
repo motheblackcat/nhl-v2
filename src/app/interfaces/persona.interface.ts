@@ -87,9 +87,9 @@ interface LightCamp {
 }
 
 export interface CampSheetModel {
-  tentes: Camp;
+  tente: Camp;
   matelas: Camp;
-  couvertures: Camp;
+  couverture: Camp;
   autres: LightCamp[];
   totalWeight: number;
 }

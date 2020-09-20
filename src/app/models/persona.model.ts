@@ -114,16 +114,16 @@ class Camp {
 }
 
 class CampSheet {
-  tentes: Camp;
+  tente: Camp;
   matelas: Camp;
-  couvertures: Camp;
+  couverture: Camp;
   autres: LightCamp[];
   totalWeight: number;
 
   constructor() {
-    this.tentes = new Camp();
+    this.tente = new Camp();
     this.matelas = new Camp();
-    this.couvertures = new Camp();
+    this.couverture = new Camp();
     this.autres = [];
     this.totalWeight = 0;
   }

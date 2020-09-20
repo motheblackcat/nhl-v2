@@ -114,7 +114,7 @@ export class PersonaService {
       const updatedPersonas: Persona[] = [...this.personas$.value, newPersona];
       this.personas$.next(updatedPersonas);
       this.store.set(PERSONAS, this.personas$.value);
-      // this.store.remove('mainForm');
+      this.store.remove('mainForm');
     }
   }
 

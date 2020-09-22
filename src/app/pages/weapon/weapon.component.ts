@@ -57,7 +57,7 @@ export class WeaponComponent implements OnInit {
   }
 
   addItem(i: number) {
-    (this.form.at(i).get('effects') as FormArray).push(new FormGroup({ name: new FormControl(), effect: new FormControl() }));
+    (this.form.at(i).get('effects') as FormArray).push(new FormGroup({ name: new FormControl('ev'), effect: new FormControl() }));
     this.personaService.updatePersonas(this.formName, this.form.value);
   }
 

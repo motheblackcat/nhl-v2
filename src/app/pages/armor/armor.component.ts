@@ -88,7 +88,7 @@ export class ArmorComponent implements OnInit {
     const armorPiece = (this.form.get('list') as FormArray).at(i);
     (armorPiece.get('effects') as FormArray).push(
       new FormGroup({
-        name: new FormControl(),
+        name: new FormControl('ev'),
         effect: new FormControl()
       })
     );

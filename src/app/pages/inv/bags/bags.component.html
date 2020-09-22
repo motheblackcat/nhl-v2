@@ -2,7 +2,7 @@
   <h3>sacs et transport</h3>
   <div>
     <label class="hint">charge max. origine / métier :</label>
-    <input type="number" formControlName="max" placeholder="0" />
+    <input type="number" step="0.5" min="0" formControlName="max" placeholder="0" />
     <label>Kg</label>
   </div>
   <br />
@@ -15,7 +15,7 @@
     <div class="flexc" *ngFor="let bag of bags.controls; let i = index" [formGroupName]="i">
       <ion-icon name="close" (click)="removeItem('bags', i)"></ion-icon>
       <input type="text" formControlName="name" placeholder="nom" />
-      <input type="number" formControlName="max" placeholder="0" />
+      <input type="number" step="0.5" min="0" formControlName="max" placeholder="0" />
       <label>kg</label>
     </div>
   </ng-container>
@@ -35,7 +35,7 @@
     <div class="flexc" *ngFor="let pooch of pooches.controls; let i = index" [formGroupName]="i">
       <ion-icon name="close" (click)="removeItem('pooches', i)"></ion-icon>
       <input type="text" formControlName="name" placeholder="nom" />
-      <input type="number" formControlName="max" placeholder="0" />
+      <input type="number" step="0.5" min="0" formControlName="max" placeholder="0" />
     </div>
   </ng-container>
   <br />

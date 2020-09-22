@@ -27,14 +27,9 @@ export class PersonaComponent implements OnInit {
 
   async presentToast(type: string): Promise<any> {
     const toast = await this.toast.create({
-      message:
-        type === ToasterTypes.CREATED
-          ? 'Le personnage a été crée !'
-          : type === ToasterTypes.DELETED
-          ? 'Le personnage a été zigouillé !'
-          : 'Il faut entrer un nom !',
+      message: type === ToasterTypes.DELETED ? 'Le personnage a été zigouillé !' : 'Il faut entrer un nom !',
       duration: 2000,
-      color: type === ToasterTypes.CREATED ? ToasterTypes.SUCCESS : type === ToasterTypes.DELETED ? 'dark' : 'danger',
+      color: type === ToasterTypes.DELETED ? 'dark' : 'danger',
       position: 'top'
     });
     toast.present();
@@ -43,7 +38,6 @@ export class PersonaComponent implements OnInit {
   addPersona(personaName: string) {
     if (personaName) {
       this.personaService.addPersona(personaName);
-      this.presentToast(ToasterTypes.CREATED);
     } else {
       this.presentToast('');
       return false;

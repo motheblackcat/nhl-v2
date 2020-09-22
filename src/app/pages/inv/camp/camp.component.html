@@ -1,6 +1,7 @@
 <ion-content [formGroup]="form" (change)="updateTotalWeight()">
   <h3>{{ title }}</h3>
   <div class="hint mb">récup. : récupération PV</div>
+  <br />
   <ng-container *ngFor="let control of form.controls | keyvalue: personaService.defaultOrder">
     <div *ngIf="control.key !== 'autres' && control.key !== 'totalWeight'" [formGroupName]="control.key">
       <div class="flexc spaceb mb">
@@ -10,11 +11,11 @@
       </div>
       <div class="flexc spaceb">
         <input type="text" formControlName="name" placeholder="Nom" />
-        <input type="number" formControlName="pv" placeholder="0" />
+        <input type="number" step="0.5" formControlName="pv" placeholder="0" />
         <label class="mr">PV /</label>
-        <input type="number" formControlName="h" placeholder="0" />
+        <input type="number" step="0.5" formControlName="h" placeholder="0" />
         <label>H</label>
-        <input type="number" formControlName="wei" placeholder="0" text-end />
+        <input type="number" step="0.5" formControlName="wei" placeholder="0" text-end />
       </div>
     </div>
     <br />
@@ -27,7 +28,7 @@
     <div class="flexc spaceb mb" [formGroupName]="i">
       <ion-icon name="close" (click)="removeItem(i)"></ion-icon>
       <input type="text" formControlName="name" placeholder="nom" />
-      <input type="number" formControlName="wei" placeholder="poids" text-end />
+      <input type="number" step="0.5" formControlName="wei" placeholder="poids" text-end />
     </div>
   </ng-container>
   <br />

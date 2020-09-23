@@ -51,13 +51,10 @@ export class PersonaComponent implements OnInit {
         {
           name: 'personaName',
           type: 'text',
-          placeholder: 'Nom du personnage'
+          placeholder: 'Nom'
         }
       ],
       buttons: [
-        {
-          text: 'Nan !'
-        },
         {
           text: 'Ouais !',
           handler: data => this.addPersona(data.personaName)

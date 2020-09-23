@@ -83,6 +83,21 @@ select {
   padding: 10px;
 }
 
+.alert {
+  .alert-wrapper {
+    .alert-title {
+      font-weight: bold;
+    }
+    .alert-input {
+      font-size: larger;
+    }
+    .alert-button {
+      font-weight: bold;
+      font-size: larger;
+    }
+  }
+}
+
 /** Custom style classes **/
 
 .hint {

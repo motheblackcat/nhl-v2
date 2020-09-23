@@ -3,14 +3,14 @@
   <br />
   <div *ngFor="let control of form.controls | keyvalue: personaService.defaultOrder" [ngSwitch]="control.key">
     <label [for]="control.key" *ngSwitchCase="'ev'">Energie Vitale (EV)</label>
-    <label [for]="control.key" *ngSwitchCase="'ea'" margin-bottom>Energie Astrale (EA)</label>
+    <label [for]="control.key" *ngSwitchCase="'ea'">Energie Astrale (EA)</label>
     <label [for]="control.key" *ngSwitchCase="'cou'">Courage (COU)</label>
     <label [for]="control.key" *ngSwitchCase="'int'">Intelligence (INT)</label>
     <label [for]="control.key" *ngSwitchCase="'cha'">Charisme (CHA)</label>
     <label [for]="control.key" *ngSwitchCase="'ad'">Adresse (AD)</label>
-    <label [for]="control.key" *ngSwitchCase="'fo'" margin-bottom>Force (FO)</label>
+    <label [for]="control.key" *ngSwitchCase="'fo'">Force (FO)</label>
     <label [for]="control.key" *ngSwitchCase="'atq'">ATTAQUE</label>
-    <label [for]="control.key" *ngSwitchCase="'prd'" margin-bottom>PARADE</label>
+    <label [for]="control.key" *ngSwitchCase="'prd'">PARADE</label>
     <label [for]="control.key" *ngSwitchCase="'magphy'">Magie Phy.</label>
     <label [for]="control.key" *ngSwitchCase="'magpsy'">Magie Psy.</label>
     <label [for]="control.key" *ngSwitchCase="'resmag'">Résist. Mag.</label>
@@ -24,12 +24,14 @@
         formControlName="name"
       />
     </ng-container>
-    <span *ngIf="control.key === 'magphy' || control.key === 'magpsy' || control.key === 'resmag'; else stat" justify-content-center>
+    <span *ngIf="control.key === 'magphy' || control.key === 'magpsy' || control.key === 'resmag'; else effect" justify-content-center>
       {{ form.get(control.key).value }}
     </span>
-    <ng-template #stat justify-content-center>{{ form.get(control.key).get('effect').value }}</ng-template>
-    <div class="hint" *ngSwitchCase="'magphy'" margin-bottom>Moyenne INT et AD</div>
-    <div class="hint" *ngSwitchCase="'magpsy'" margin-bottom>Moyenne INT et CHA</div>
+    <ng-template #effect>
+      <span>{{ form.get(control.key).get('effect').value }}</span>
+    </ng-template>
+    <div class="hint" *ngSwitchCase="'magphy'">Moyenne INT et AD</div>
+    <div class="hint" *ngSwitchCase="'magpsy'">Moyenne INT et CHA</div>
     <div class="hint" *ngSwitchCase="'resmag'">Moyenne COU, INT et FO</div>
   </div>
 </ion-content>

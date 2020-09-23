@@ -1,13 +1,14 @@
-<ion-content ion-padding>
-  <h3 class="mb">Choisir un personnage</h3>
-  <br />
-  <div class="flexc mb" (click)="addPersonaModal()">
-    <ion-icon name="add-circle-outline" class="mr"></ion-icon>
-    <div>Créer un nouveau Personnage</div>
+<ion-content>
+  <h3 class="ion-margin-bottom">choisir un personnage</h3>
+  <div (click)="addPersonaAlert()" class="flex-align-center ion-margin-bottom">
+    <ion-icon name="add-circle-outline" class="ion-margin-end"></ion-icon>
+    <div>Créer un nouveau personnage</div>
   </div>
-  <br />
-  <div *ngFor="let persona of personaService.personas$ | async" class="flexc mb" [style.background-color]="persona.color">
-    <ion-icon name="close" class="mr" (click)="removePersonaModal(persona)"></ion-icon>
-    <div (click)="selectPersona(persona)" routerLink="/char">{{ persona.name }}</div>
+  <div *ngFor="let persona of personaService.personas$ | async" class="flex-align-center ion-margin-bottom border-shadow">
+    <ion-icon name="close" (click)="removePersonaAlert(persona)" class="p10"></ion-icon>
+    <div (click)="selectPersona(persona)" routerLink="/char" class="w100 p10">
+      {{ persona.name | titlecase }} est {{ persona.sheet.char.origine ? (persona.sheet.char.origine | titlecase) : 'sans orgine' }} de
+      niveau {{ persona.sheet.char.niveau ? persona.sheet.char.niveau : 0 }}.
+    </div>
   </div>
 </ion-content>

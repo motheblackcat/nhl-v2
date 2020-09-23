@@ -9,8 +9,7 @@ import { RouteData } from 'src/app/interfaces/route.interface';
 
 @Component({
   selector: 'app-list-multi',
-  templateUrl: './list-multi.component.html',
-  styleUrls: ['./list-multi.component.scss']
+  templateUrl: './list-multi.component.html'
 })
 export class ListMultiComponent implements OnInit {
   title: string;

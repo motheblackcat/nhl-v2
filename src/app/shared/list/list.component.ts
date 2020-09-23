@@ -14,8 +14,7 @@ import { SkillsDetailsComponent } from '../skill-desc/skill-desc.component';
 
 @Component({
   selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  templateUrl: './list.component.html'
 })
 export class ListComponent implements OnInit {
   title: string;
@@ -63,9 +62,9 @@ export class ListComponent implements OnInit {
     }
   }
 
-  /** TODO: Refactor this method */
   updateItem(item: HTMLInputElement, i: number) {
     if (i) {
+      this.form.at(i).setValue(item.value);
       this.personaService.updatePersonas(this.formName, this.form.value);
     } else {
       this.form.push(new FormControl(item.value));

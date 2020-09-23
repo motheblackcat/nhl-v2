@@ -9,8 +9,7 @@ import { BagsSheetModel } from 'src/app/interfaces/persona.interface';
 
 @Component({
   selector: 'app-bags',
-  templateUrl: './bags.component.html',
-  styleUrls: ['./bags.component.scss']
+  templateUrl: './bags.component.html'
 })
 export class BagsComponent implements OnInit {
   title: string;

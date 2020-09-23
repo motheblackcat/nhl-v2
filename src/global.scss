@@ -1,4 +1,3 @@
-// http://ionicframework.com/docs/theming/
 @import '~@ionic/angular/css/core.css';
 @import '~@ionic/angular/css/normalize.css';
 @import '~@ionic/angular/css/structure.css';
@@ -15,32 +14,11 @@
   src: url('assets/fonts/dauphin.ttf');
 }
 
+/** Global elements styling **/
+
 ion-content {
-  font-family: 'dauphin' !important;
-  font-weight: bold;
-  text-transform: capitalize;
-  --background: #dacfab !important;
-  --padding-start: 20px !important;
-  --padding-end: 20px !important;
-}
-
-ion-button {
-  font-family: 'dauphin' !important;
-  font-weight: bold;
-}
-
-h1,
-h2,
-h3 {
-  text-transform: uppercase;
-  font-weight: bold;
-}
-
-label,
-input {
-  border: 0;
-  text-transform: capitalize;
-  background: none;
+  --padding-end: 20px;
+  --padding-start: 20px;
 }
 
 ion-icon {
@@ -48,58 +26,89 @@ ion-icon {
   font-weight: bold;
 }
 
+h3 {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+label,
+input {
+  text-transform: capitalize;
+}
+
+input {
+  border: 0;
+  background: none;
+}
+
+input[type='radio'] {
+  display: none;
+}
+
+select {
+  padding: 5px 10px;
+  border-radius: 5px;
+  background: none;
+
+  option {
+    font-weight: bold;
+    background-color: #dacfab;
+  }
+}
+
+/** Helper classes **/
+
+.flex-align-center {
+  display: flex;
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.w100 {
+  width: 100%;
+}
+
+.w25 {
+  width: 25%;
+}
+
+.w23 {
+  width: 23%;
+}
+
+.p10 {
+  padding: 10px;
+}
+
+/** Custom style classes **/
+
 .hint {
   font-size: 0.9em;
   font-style: italic;
   font-weight: normal;
 }
 
-.subtitle {
-  font-size: 1.5em;
+.selected {
+  color: black;
+}
+
+.border-shadow {
+  border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .card {
   border: 1px solid black;
-  border-radius: 7px;
-  padding: 15px;
+  border-radius: 5px;
+  padding: 10px 15px;
   margin-bottom: 20px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-.ml {
-  margin-left: 10px;
-}
-
-.mr {
-  margin-right: 10px;
-}
-
-.mb {
-  margin-bottom: 10px;
-}
-
-.flexc {
-  display: flex;
-  align-items: center;
-}
-
-.spaceb {
-  justify-content: space-between;
-}
-
-.modal {
-  --height: 35% !important;
-
-  .modal-wrapper {
-    width: 90% !important;
-    border-radius: 10px !important;
-  }
-}
-
 .last {
   margin-bottom: 75px !important;
-}
-
-.short {
-  width: 22%;
 }

@@ -10,8 +10,7 @@ import { ToasterTypes } from 'src/app/consts/toaster-types.consts';
 
 @Component({
   selector: 'app-persona',
-  templateUrl: './persona.component.html',
-  styleUrls: ['./persona.component.scss']
+  templateUrl: './persona.component.html'
 })
 export class PersonaComponent implements OnInit {
   constructor(private alert: AlertController, private toast: ToastController, public personaService: PersonaService) {}
@@ -44,10 +43,10 @@ export class PersonaComponent implements OnInit {
     }
   }
 
-  async addPersonaModal(): Promise<any> {
+  async addPersonaAlert(): Promise<any> {
     const alert = await this.alert.create({
       header: 'Créer un personnage',
-      message: 'Veuillez indiquer le nom du personnage.',
+      cssClass: 'alert',
       inputs: [
         {
           name: 'personaName',
@@ -74,10 +73,11 @@ export class PersonaComponent implements OnInit {
     this.presentToast(ToasterTypes.DELETED);
   }
 
-  async removePersonaModal(persona: Persona): Promise<any> {
+  async removePersonaAlert(persona: Persona): Promise<any> {
     const alert = await this.alert.create({
       header: 'Supprimer un personnage',
       message: 'Etes vous sure de vouloir supprimer ce personnage ?',
+      cssClass: 'alert',
       buttons: [
         {
           text: 'Nan !'

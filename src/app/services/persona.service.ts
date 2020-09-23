@@ -144,7 +144,6 @@ export class PersonaService {
     this.store.set(PERSONAS, this.personas$.value);
   }
 
-  /** TODO: No immutability? */
   removePersona(persona: Persona) {
     const updatedPersonas = this.personas$.value;
     updatedPersonas.splice(updatedPersonas.indexOf(persona), 1);

@@ -1,41 +1,43 @@
 <ion-content [formGroup]="form" (change)="updateTotalWeight()">
   <h3>{{ title }}</h3>
-  <div class="hint mb">récup. : récupération PV</div>
-  <br />
+  <div class="hint ion-margin-bottom">Récup. : Récupération PV</div>
   <ng-container *ngFor="let control of form.controls | keyvalue: personaService.defaultOrder">
     <div *ngIf="control.key !== 'autres' && control.key !== 'totalWeight'" [formGroupName]="control.key">
-      <div class="flexc spaceb mb">
+      <div class="ion-margin-bottom">
         <label>{{ control.key }}</label>
-        <label>Récup.</label>
-        <label>Poids</label>
       </div>
-      <div class="flexc spaceb">
-        <input type="text" formControlName="name" placeholder="Nom" />
-        <input type="number" step="0.5" min="0" formControlName="pv" placeholder="0" />
-        <label class="mr">PV /</label>
-        <input type="number" step="0.5" min="0" formControlName="h" placeholder="0" />
-        <label>H</label>
-        <input type="number" step="0.5" min="0" formControlName="wei" placeholder="0" text-end />
+      <div class="ion-margin-bottom">
+        <div>
+          <label class="ion-margin-end">Nom:</label>
+          <input type="text" formControlName="name" placeholder="Nom" />
+        </div>
+        <div>
+          <input type="number" step="0.5" min="0" formControlName="pv" placeholder="0" class="w23" />
+          <label>PV /</label>
+          <input type="number" step="0.5" min="0" formControlName="h" placeholder="0" class="ion-text-end w23" />
+          <label class="ion-margin-start">H</label>
+          <input type="number" step="0.5" min="0" formControlName="wei" placeholder="0" class="ion-text-end w23" />
+          <label class="ion-margin-start">Kg</label>
+        </div>
       </div>
     </div>
-    <br />
   </ng-container>
-  <div class="flexc spaceb mb">
+  <br />
+  <div class="flex-align-center justify-between ion-margin-bottom">
     <label>Nom</label>
     <label>Poids</label>
   </div>
   <ng-container formArrayName="autres" *ngFor="let control of autres.controls; let i = index">
-    <div class="flexc spaceb mb" [formGroupName]="i">
+    <div class="flex-align-center justify-between ion-margin-bottom" [formGroupName]="i">
       <ion-icon name="close" (click)="removeItem(i)"></ion-icon>
-      <input type="text" formControlName="name" placeholder="nom" />
-      <input type="number" step="0.5" min="0" formControlName="wei" placeholder="poids" text-end />
+      <input type="text" formControlName="name" placeholder="nom" class="w100" />
+      <input type="number" step="0.5" min="0" formControlName="wei" placeholder="poids" class="ion-text-center w25" />
     </div>
   </ng-container>
   <br />
-  <div class="flexc mb" (click)="addItem()">
-    <ion-icon name="add-circle-outline" class="mr"></ion-icon>
+  <div class="flex-align-center ion-margin-bottom" (click)="addItem()">
+    <ion-icon name="add-circle-outline" class="ion-margin-end"></ion-icon>
     <label>Ajouter un objet</label>
   </div>
-  <br />
   <div class="last ion-text-end">Poids total: {{ totalWeight }} Kg</div>
 </ion-content>

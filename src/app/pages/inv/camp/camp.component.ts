@@ -9,8 +9,7 @@ import { CampSheetModel } from 'src/app/interfaces/persona.interface';
 
 @Component({
   selector: 'app-camp',
-  templateUrl: './camp.component.html',
-  styleUrls: ['./camp.component.scss']
+  templateUrl: './camp.component.html'
 })
 export class CampComponent implements OnInit {
   title: string;

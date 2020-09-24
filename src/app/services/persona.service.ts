@@ -42,7 +42,9 @@ export class PersonaService {
 
           data.weaponsForm[weapon].ef.forEach(effect => {
             if (effect.name) {
-              weapons.find(wea => wea.name === data.weaponsForm[weapon].name).effects.push({ name: effect.name, effect: effect.val });
+              weapons
+                .find(wea => wea.name === data.weaponsForm[weapon].name)
+                .effects.push({ name: effect.name.toLowerCase(), effect: effect.val });
             }
           });
         }
@@ -61,7 +63,9 @@ export class PersonaService {
 
           data.armorsForm[armor].ef.forEach(effect => {
             if (effect.name) {
-              armors.list.find(arm => arm.name === data.armorsForm[armor].name).effects.push({ name: effect.name, effect: effect.val });
+              armors.list
+                .find(arm => arm.name === data.armorsForm[armor].name)
+                .effects.push({ name: effect.name.toLowerCase(), effect: effect.val });
             }
           });
         }

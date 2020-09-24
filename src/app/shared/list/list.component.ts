@@ -6,11 +6,11 @@ import { ModalController } from '@ionic/angular';
 
 import { PersonaService } from 'src/app/services/persona.service';
 
+import { SkillsDetailsComponent } from '../skill-desc/skill-desc.component';
+
 import { skillsList } from 'src/app/consts/skills-list.consts';
 
 import { RouteData } from 'src/app/interfaces/route.interface';
-
-import { SkillsDetailsComponent } from '../skill-desc/skill-desc.component';
 
 @Component({
   selector: 'app-list',
@@ -43,15 +43,16 @@ export class ListComponent implements OnInit {
     });
   }
 
-  async presentModal(skill: string): Promise<void> {
+  async presentModal(skill): Promise<void> {
     const modal = await this.modal.create({
       component: SkillsDetailsComponent,
-      componentProps: { skillInput: skill }
+      componentProps: { skill }
     });
     return await modal.present();
   }
 
-  showSkillDes(skill: string) {
+  showSkillDes(skillName: string) {
+    const skill = skillsList.find(s => s.title.toLowerCase() === skillName.toLowerCase().trim());
     this.presentModal(skill);
   }
 
@@ -63,7 +64,7 @@ export class ListComponent implements OnInit {
   }
 
   updateItem(item: HTMLInputElement, i: number) {
-    if (i) {
+    if (i !== null) {
       this.form.at(i).setValue(item.value);
       this.personaService.updatePersonas(this.formName, this.form.value);
     } else {

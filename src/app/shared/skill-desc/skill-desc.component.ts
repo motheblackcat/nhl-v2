@@ -1,6 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
-import { skillsList } from 'src/app/consts/skills-list.consts';
 import { ModalController } from '@ionic/angular';
 
 @Component({
@@ -8,16 +7,10 @@ import { ModalController } from '@ionic/angular';
   templateUrl: './skill-desc.component.html',
   styleUrls: ['./skill-desc.component.scss']
 })
-export class SkillsDetailsComponent implements OnInit {
-  @Input() skillInput;
-  skill;
+export class SkillsDetailsComponent {
+  @Input() skill;
 
   constructor(private modalCtrl: ModalController) {}
-
-  ngOnInit() {
-    this.skill = skillsList.find(s => this.skillInput === s.title);
-  }
-
   dismiss() {
     this.modalCtrl.dismiss({
       dismissed: true

@@ -185,7 +185,7 @@ export const routes: Routes = [
       { path: '', redirectTo: 'quest', pathMatch: 'full' }
     ]
   },
-  { path: '**', redirectTo: 'persona' }
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({

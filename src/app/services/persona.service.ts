@@ -44,7 +44,7 @@ export class PersonaService {
             if (effect.name) {
               weapons
                 .find(wea => wea.name === data.weaponsForm[weapon].name)
-                .effects.push({ name: effect.name.toLowerCase(), effect: effect.val });
+                .effects.push({ name: effect.name.toLowerCase().trim(), effect: effect.val });
             }
           });
         }
@@ -65,7 +65,7 @@ export class PersonaService {
             if (effect.name) {
               armors.list
                 .find(arm => arm.name === data.armorsForm[armor].name)
-                .effects.push({ name: effect.name.toLowerCase(), effect: effect.val });
+                .effects.push({ name: effect.name.toLowerCase().trim(), effect: effect.val });
             }
           });
         }

@@ -16,7 +16,7 @@ import { PersonaGuard } from './guards/persona.guard';
 
 export const routes: Routes = [
   {
-    path: 'persona',
+    path: '',
     component: PersonaComponent
   },
   {
@@ -185,7 +185,6 @@ export const routes: Routes = [
       { path: '', redirectTo: 'quest', pathMatch: 'full' }
     ]
   },
-  { path: '', redirectTo: 'persona', pathMatch: 'full' },
   { path: '**', redirectTo: 'persona' }
 ];
 

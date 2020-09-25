@@ -50,7 +50,7 @@ export class PersonaService {
         }
       }
 
-      const armors: ArmorSheet = { list: [], tdm: false, prNat: 0, prMag: 0 };
+      const armors: ArmorSheet = { list: [], tdm: data.armorsForm['tdm'], prNat: 0, prMag: 0 };
       for (const armor in data.armorsForm) {
         if (armor !== 'tdm' && armor !== 'prmag') {
           armors.list.push({

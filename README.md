@@ -6,8 +6,6 @@ This app use the classic paper character sheet and upgrade it with several featu
 
 - Automatic stats calculation
 - Equip / unequip weapons and armors with effects on stats
+- Multiple characters managment
 
-Soon to come:
-
-- Multi characters
-- Mages / Priest Add-on
+Check the trello for upcoming features and fix: https://trello.com/b/hng8qiP4/nhl-v2

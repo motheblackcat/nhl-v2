@@ -1,11 +1,11 @@
-<ion-content class="ion-padding">
-  <h1>{{ skill.title }}</h1>
-  <div class="mb" *ngIf="skill.des">{{ skill.des }}</div>
-  <div class="mb" *ngIf="skill.use">Utilisation : {{ skill.use }}</div>
-  <div class="mb" *ngIf="skill.req">Requis : {{ skill.req }}</div>
-  <div class="mb" *ngIf="skill.rat">Rattrapage : {{ skill.rat }}</div>
-  <div class="mb" *ngIf="skill.rp">Roleplay : {{ skill.rp }}</div>
-  <div class="mb" *ngIf="skill.part">Particularité : {{ skill.part }}</div>
-  <div class="mb" *ngIf="skill.res">Restrictions : {{ skill.res }}</div>
+<ion-content>
+  <h3>{{ skill.title }}</h3>
+  <div class="ion-margin-bottom" *ngIf="skill.des">{{ skill.des }}</div>
+  <div class="ion-margin-bottom" *ngIf="skill.use">Utilisation : {{ skill.use }}</div>
+  <div class="ion-margin-bottom" *ngIf="skill.req">Requis : {{ skill.req }}</div>
+  <div class="ion-margin-bottom" *ngIf="skill.rat">Rattrapage : {{ skill.rat }}</div>
+  <div class="ion-margin-bottom" *ngIf="skill.rp">Roleplay : {{ skill.rp }}</div>
+  <div class="ion-margin-bottom" *ngIf="skill.part">Particularité : {{ skill.part }}</div>
+  <div class="ion-margin-bottom" *ngIf="skill.res">Restrictions : {{ skill.res }}</div>
   <ion-icon name="close-circle-outline" (click)="dismiss()"></ion-icon>
 </ion-content>

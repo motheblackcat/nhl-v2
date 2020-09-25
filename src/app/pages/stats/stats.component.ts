@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
-import { mainForm } from 'src/app/models/form';
-import { FormManagementService } from 'src/app/services/form-management.service';
+import { PersonaService } from 'src/app/services/persona.service';
+
+import { RouteData } from 'src/app/interfaces/route.interface';
+import { EffectModel, PersonaSheetModel, StatsSheetModel } from 'src/app/interfaces/persona.interface';
 
 @Component({
   selector: 'app-stats',
@@ -11,27 +13,56 @@ import { FormManagementService } from 'src/app/services/form-management.service'
   styleUrls: ['./stats.component.scss']
 })
 export class StatsComponent implements OnInit {
-  targetForm: FormGroup;
   title: string;
-  constructor(private route: ActivatedRoute, public fm: FormManagementService) {}
+  formName: string;
+  form: FormGroup;
+  constructor(private route: ActivatedRoute, public personaService: PersonaService) {}
 
-  ngOnInit(): void {
-    this.route.data.subscribe(res => {
-      this.targetForm = mainForm.get(res.targetForm) as FormGroup;
+  ngOnInit() {
+    this.route.data.subscribe((res: RouteData) => {
       this.title = res.title;
+      this.formName = res.formName;
+      this.form = new FormGroup({});
+      const sheetObject: StatsSheetModel = this.personaService.currentPersona.sheet[this.formName];
+      for (const key in sheetObject) {
+        if (key === 'magphy' || key === 'magpsy' || key === 'resmag') {
+          this.form.addControl(key, new FormControl(sheetObject[key]));
+        } else {
+          this.form.addControl(
+            key,
+            new FormGroup({ name: new FormControl(sheetObject[key]['name']), effect: new FormControl(Number(sheetObject[key]['effect'])) })
+          );
+        }
+      }
       this.updateMagStats();
     });
   }
 
-  updateMagStats(): void {
-    const int = this.targetForm.get('int').get('val').value + this.targetForm.get('int').get('ef').value;
-    const ad = this.targetForm.get('ad').get('val').value + this.targetForm.get('ad').get('ef').value;
-    const cha = this.targetForm.get('cha').get('val').value + this.targetForm.get('cha').get('ef').value;
-    const cou = this.targetForm.get('cou').get('val').value + this.targetForm.get('cou').get('ef').value;
-    const fo = this.targetForm.get('fo').get('val').value + this.targetForm.get('fo').get('ef').value;
+  updateMagStats() {
+    this.updateEffects();
+    const sheetObject: StatsSheetModel = this.personaService.currentPersona.sheet[this.formName];
+    const int = Number(sheetObject.int.name + sheetObject.int.effect);
+    const ad = Number(sheetObject.ad.name + sheetObject.ad.effect);
+    const cha = Number(sheetObject.cha.name + sheetObject.cha.effect);
+    const cou = Number(sheetObject.cou.name + sheetObject.cou.effect);
+    const fo = Number(sheetObject.fo.name + sheetObject.fo.effect);
+    this.form.get('magphy').setValue(Math.ceil((int + ad) / 2));
+    this.form.get('magpsy').setValue(Math.ceil((int + cha) / 2));
+    this.form.get('resmag').setValue(Math.ceil((cou + int + fo) / 3));
+    this.personaService.updatePersonas(this.formName, this.form.value);
+  }
 
-    this.targetForm.get('magphy').setValue(Math.ceil((int + ad) / 2));
-    this.targetForm.get('magpsy').setValue(Math.ceil((int + cha) / 2));
-    this.targetForm.get('resmag').setValue(Math.ceil((cou + int + fo) / 3));
+  updateEffects() {
+    const sheetObject: PersonaSheetModel = this.personaService.currentPersona.sheet;
+    const weaponsEffects = sheetObject.weapons.filter(weapon => weapon.effects.length > 0 && weapon.equiped).map(weapon => weapon.effects);
+    const armorsEffects = sheetObject.armors.list.filter(armor => armor.effects.length > 0 && armor.equiped).map(armor => armor.effects);
+    const effects: EffectModel[] = [].concat(...weaponsEffects, ...armorsEffects);
+    ['ev', 'ea', 'cou', 'int', 'cha', 'ad', 'fo', 'atq', 'prd'].forEach(stat => {
+      this.form
+        .get(stat)
+        .get('effect')
+        .setValue(effects.filter(e => e.name === stat).reduce((a, b) => a + Number(b.effect), 0));
+    });
+    this.personaService.updatePersonas(this.formName, this.form.value);
   }
 }

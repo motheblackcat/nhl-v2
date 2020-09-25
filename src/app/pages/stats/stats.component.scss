@@ -1,14 +1,19 @@
+div {
+  margin-bottom: 15px;
+}
+
 input,
 span {
   display: inline-flex;
+  text-align: center;
   width: 25%;
+}
+
+span {
+  justify-content: center;
 }
 
 label {
   display: inline-flex;
   width: 50%;
-}
-
-div {
-  margin-bottom: 15px;
 }

@@ -1,72 +1,81 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormArray, FormGroup } from '@angular/forms';
+import { FormControl, FormArray } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 import { ModalController } from '@ionic/angular';
-import { Storage } from '@ionic/storage';
 
-import { mainForm } from '../../models/form';
-import { FormManagementService } from 'src/app/services/form-management.service';
-import { skillsList } from 'src/app/models/skills';
-import { SkillDescComponent } from '../skill-desc/skill-desc.component';
+import { PersonaService } from 'src/app/services/persona.service';
+
+import { SkillsDetailsComponent } from '../skill-desc/skill-desc.component';
+
+import { skillsList } from 'src/app/consts/skills-list.consts';
+
+import { RouteData } from 'src/app/interfaces/route.interface';
 
 @Component({
   selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  templateUrl: './list.component.html'
 })
 export class ListComponent implements OnInit {
   title: string;
   subtitle: string;
   placeholder: string;
-  targetFormName: string;
-  targetForm: FormArray;
-  mainForm: FormGroup = mainForm;
-  skillsList = skillsList;
+  formName: string;
+  form: FormArray;
   useSelect: boolean;
-  constructor(private route: ActivatedRoute, private store: Storage, private fm: FormManagementService, private modal: ModalController) {}
+  skillsList = skillsList;
+  constructor(private route: ActivatedRoute, public personaService: PersonaService, private modal: ModalController) {}
 
   ngOnInit(): void {
     this.skillsList.forEach(skill => (skill.title = skill.title.toLowerCase()));
-    this.route.data.subscribe(res => {
+    this.route.data.subscribe((res: RouteData) => {
       this.title = res.title;
       this.subtitle = res.subtitle;
       this.placeholder = res.placeholder;
-      this.targetFormName = res.targetForm;
-      this.targetForm = mainForm.get(this.targetFormName) as FormArray;
+      this.formName = res.formName;
       this.useSelect = res.useSelect;
+
+      this.form = new FormArray([]);
+      const sheetObject: String[] = this.personaService.currentPersona.sheet[this.formName];
+      sheetObject.forEach(skill => {
+        this.form.push(new FormControl(skill));
+      });
     });
   }
 
-  async presentModal(skill: string): Promise<void> {
+  async presentModal(skill): Promise<void> {
     const modal = await this.modal.create({
-      component: SkillDescComponent,
-      componentProps: { skillInput: skill }
+      component: SkillsDetailsComponent,
+      componentProps: { skill }
     });
     return await modal.present();
   }
 
-  showSkillDes(skill: string) {
+  showSkillDes(skillName: string) {
+    const skill = skillsList.find(s => s.title.toLowerCase() === skillName.toLowerCase().trim());
     this.presentModal(skill);
   }
 
-  addItem(skill: string) {
-    if (!this.targetForm.value.find(s => s === skill)) {
-      this.targetForm.push(new FormControl(skill));
+  addSkill(skill: string) {
+    if (this.form.value.indexOf(skill) === -1) {
+      this.form.push(new FormControl(skill));
+      this.personaService.updatePersonas(this.formName, this.form.value);
     }
   }
 
   updateItem(item: HTMLInputElement, i: number) {
-    if (i === null) {
-      this.targetForm.push(new FormControl(item.value));
-      item.value = '';
+    if (i !== null) {
+      this.form.at(i).setValue(item.value);
+      this.personaService.updatePersonas(this.formName, this.form.value);
     } else {
-      this.fm.saveForm();
+      this.form.push(new FormControl(item.value));
+      item.value = '';
+      this.personaService.updatePersonas(this.formName, this.form.value);
     }
   }
 
   deleteItem(i: number): void {
-    this.targetForm.removeAt(i);
-    this.fm.saveForm();
+    this.form.removeAt(i);
+    this.personaService.updatePersonas(this.formName, this.form.value);
   }
 }

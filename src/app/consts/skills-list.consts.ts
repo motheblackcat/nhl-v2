@@ -6,7 +6,7 @@ export const skillsList = [
     Ce qui lui donne, bien sûr, deux fois plus de chance de se blesser tout seul... Car la deuxième attaque est plus difficile à réussir.
     Il ne peut parer qu'une fois, ambidextre ou non.`,
     use: 'Deuxième attaque possible à chaque assaut, avec une épreuve AT-5 / une seule parade.',
-    req: 'Avoir 2 armes à 1 main, minimum AD 14'
+    req: 'Avoir 2 armes à 1 main, minimum AD 14.'
   },
   {
     title: 'AGORAPHOBIE (INT)',
@@ -15,7 +15,8 @@ export const skillsList = [
     le héros devra réussir une épreuve d'intelligence +4 pour garder le contrôle de lui-même.
     S'il échoue, il prendra la fuite et devra être convaincu par les autres de reprendre sa place dans le groupe.
     C'est dommage, mais c'est comme ça.`,
-    use: 'En milieu peuplé, épreuve INT +4 du héros pour garder son sang-froid. Échec : fuite.',
+    use: 'En milieu peuplé, épreuve INT +4 du héros pour garder son sang-froid.',
+    fail: 'Fuite.',
     rat: 'Les équipiers peuvent tenter une épreuve de CHA pour le raisonner.'
   },
   {
@@ -23,7 +24,7 @@ export const skillsList = [
     des: `Cette compétence permet de fuir très vite en arrière en oubliant ses petits camarades derrière soi.
     Le héros qui sait fuir (dignement, bien sûr) ne sera jamais touché par des ennemis au moment de leur tourner le dos pour détaler.
     Bien entendu, les Barbares et les Paladins ne font jamais ça...`,
-    use: `En cas de fuite d'une scène de combat, le héros ne peut être frappé par les ennemis`
+    use: `En cas de fuite d'une scène de combat, le héros ne peut être frappé par les ennemis.`
   },
   {
     title: 'APPEL DU SAUVAGE (INT)',
@@ -31,7 +32,8 @@ export const skillsList = [
     Si les aventuriers sont attaqués par un grand nombre d'ennemis (à partir de 5),
     le Grand Vilain MJ demandera au héros sauvage de faire une épreuve d'intelligence +4.
     S'il échoue, il rejoindra le camp adverse... Et il ne sera pas facile de le faire changer d'avis.`,
-    use: 'En présence de horde, épreuve INT +4 du héros pour garder son sang-froid. Échec : le héros devient ennemi.',
+    use: 'En présence de horde, épreuve INT +4 du héros pour garder son sang-froid.',
+    fail: 'Le héros devient ennemi.',
     rat: 'Les équipiers peuvent tenter une épreuve de CHA pour le raisonner.'
   },
   {
@@ -39,7 +41,8 @@ export const skillsList = [
     des: `L'alcool attire le héros, s'il ne parvient pas à résister à son instinct de poivrot.
     Il devra passer une épreuve d'intelligence +4 pour s'en sortir...
     Ou décidera de s'adonner à la boisson, quitte à finir allongé dans son vomi. C'est vraiment la honte.`,
-    use: `En présence d'alcool, épreuve INT +4 du héros pour ne pas s'enivrer. Échec : le héros finit bourré.`,
+    use: `En présence d'alcool, épreuve INT +4 du héros pour ne pas s'enivrer.`,
+    fail: 'Le héros finit bourré.',
     rat: `A moins d'utiliser la force, on ne peut pas tenter de raisonner un ivrogne.`
   },
   {
@@ -49,8 +52,9 @@ export const skillsList = [
     S'il n'a pas ses trois repas par jour, il devra résister à l'envie de piquer la nourriture de ses camarades,
     ou même à la tentation de leur manger un bras.
     Il sera bon pour une épreuve d'intelligence +4. S'il échoue, ça risque de causer quelques problèmes !`,
-    use: 'En manque de nourriture, épreuve INT +4 du héros pour rester calme. Échec : il veut manger ses amis',
-    rat: ' Epreuve de CHA (difficile) pour le convaincre ou épreuve de FO (difficile) pour le ceinturer'
+    use: 'En manque de nourriture, épreuve INT +4 du héros pour rester calme.',
+    fail: 'Il veut manger ses amis.',
+    rat: 'Epreuve de CHA (difficile) pour le convaincre ou épreuve de FO (difficile) pour le ceinturer.'
   },
   {
     title: 'ARMES DE BOURRIN',
@@ -58,7 +62,7 @@ export const skillsList = [
     comme les grosses haches, les grosses épées, les grosses massues...
     En bref, ils ont la capacité d'utiliser des armes portant l'étiquette «à deux mains».
     Cette compétence n'est pas utilisable par les Nains et certaines autres créatures.`,
-    use: `Peut s'équiper d'armes à deux mains et les utiliser (une à la fois !)`,
+    use: `Peut s'équiper d'armes à deux mains et les utiliser (une à la fois !).`,
     req: `Avoir la force nécessaire (donc, n'avoir pas de restriction d'origine sur les armes à deux mains).`
   },
   {
@@ -147,7 +151,7 @@ export const skillsList = [
     des: `C'est l'ami de tout le monde, ce cuistot!
     Grâce à ses talents, il peut préparer à manger pour tous ses amis en utilisant quelques ingrédients de base, et en plus, c'est bon!
     Chaque repas préparé par le cuistot permettra de récupérer 2PV au lieu d'un seul.
-    De plus, on n'attrape pas de maladie liée à la nourriture. Pas d'épreuve nécessaire..`,
+    De plus, on n'attrape pas de maladie liée à la nourriture. Pas d'épreuve nécessaire.`,
     use: `+1 PV de récupération sur un repas pour toute l'équipe. Pas d'épreuve.`,
     req: `Disposer d'ingrédients et de matériel de cuisine, avoir 30 minutes pour cuisiner.`
   },
@@ -206,7 +210,7 @@ export const skillsList = [
     use: `Une fois les dégâts de l'arme calculés sur une attaque réussie, multipliez le total par 2.`,
     req: `Avoir une dague, poignard ou autre lame courte - se placer dans le dos de la cible.`,
     res: `Une seule fois par combat, non cumulable avec «ambidextrie», ne fonctionne que sur les humanoïdes de taille standard
-    (pas sur les monstres, esprits, animaux et autres) – dague ou autre lame courte uniquement`
+    (pas sur les monstres, esprits, animaux et autres) – dague ou autre lame courte uniquement.`
   },
   {
     title: 'FARIBOLES (INT, CHA)',
@@ -229,9 +233,9 @@ export const skillsList = [
   },
   {
     title: 'INSTINCT DE SURVIE',
-    des: `Le héros dispose d'un flair particulier : il trouve de la nourriture ou de la boisson quand il y en aquelque part.
+    des: `Le héros dispose d'un flair particulier : il trouve de la nourriture ou de la boisson quand il y en a quelque part.
     Il peut ainsi guider tout un groupe d'aventuriers vers la cuisine du donjon.`,
-    use: `Si le héros annonce qu'il suit son instinct de survie, le MJ devra le guider vers la nourriture/boisson proche.`
+    use: `Si le héros annonce qu'il suit son instinct de survie, le MJ devra le guider vers la nourriture / boisson proche.`
   },
   {
     title: 'INSTINCT DU TRESOR (INT)',
@@ -270,7 +274,7 @@ export const skillsList = [
   },
   {
     title: 'MENDIER ET PLEURNICHER (INT)',
-    des: `Cette compétence permet au héros de gagner quelques pièces d'or entre deuxaventures,
+    des: `Cette compétence permet au héros de gagner quelques pièces d'or entre deux aventures,
     sans rien faire... Le montant sera tiré au dé, sur une décision du Grand Vilain MJ.`,
     use: `Gagner de l'or entre deux aventures, sur jet de dé (1D20 PO max.).`
   },
@@ -295,7 +299,7 @@ export const skillsList = [
     Le Grand Vilain MJ peut lui demander de faire une épreuve d'intelligence dans ce genre de cas,
     pour savoir s'il se fait frapper ou non.`,
     use: `En cours de partie, le MJ décide que le héros a été chiant et que ses compagnons sont fâchés.
-    Le héros peutessayer de sauver la situation en réussissant une épreuve INT (sans quoi, il se fait frapper).`
+    Le héros peut essayer de sauver la situation en réussissant une épreuve INT (sans quoi, il se fait frapper).`
   },
   {
     title: 'PISTER (INT)',
@@ -310,7 +314,7 @@ export const skillsList = [
     title: 'PREMIERS SOINS (AD, INT)',
     des: `Le personnage maîtrisant les premiers soins aura plein d'amis !
     Il peut faire récupérer quelques points de vie à ses camarades tombés au combat,
-    pour peu qu'il réussisse une épreuve de moyenne AD/INT.
+    pour peu qu'il réussisse une épreuve de moyenne AD / INT.
     Le Grand Vilain MJ prendra soin d'augmenter ou de diminuer la difficulté en fonction de la blessure.`,
     use: `Epreuve AD possible pour tenter de soigner quelqu'un (max 1D6 PV).`,
     part: `Sur un échec critique, le héros parvient à blesser encore plus son compagnon (-1D6 PV).`
@@ -320,14 +324,14 @@ export const skillsList = [
     des: `Cette compétence est innée chez les Nains... Le héros radin disposera d'un bonus de +4 sur son épreuve de charisme pour marchander
     (dans la limite d'une remise de 20%, non cumulable avec d'autres bonus). En contrepartie, il devra passer une épreuve d'intelligence +4
     quand il faut partager un butin ou une dépense avec le reste du groupe. S'il échoue, il y aura sans doute un conflit à régler !`,
-    use: `+4 à l'épreuve CHA pour le marchandage, épreuve nécessaire INT+4 en cas de partage de butin (conflit).`
+    use: `+4 à l'épreuve de CHA pour le marchandage, épreuve nécessaire INT +4 en cas de partage de butin (conflit).`
   },
   {
     title: 'RÉCUPÉRATION (PA)',
     des: `Les mages, les prêtres et les paladins ont besoin de se poser 1H par jour pour réviser leurs sortilèges ou prier.
     C'est comme ça... Et ce n'est pas la peine d'essayer d'y couper. Ils peuvent le faire à la place du repos,
     au détriment de la récupération d'un certain nombre de points de vie (voir les règles de récupération).`,
-    use: `Obligation de faire une pause chaque jour pour continuer à pratiquer la magie / les prodiges. Récupère 4PA.`
+    use: `Obligation de faire une pause chaque jour pour continuer à pratiquer la magie / les prodiges. Récupère 4 PA.`
   },
   {
     title: 'RESSEMBLE À RIEN',
@@ -338,7 +342,7 @@ export const skillsList = [
   },
   {
     title: 'RUNES BIZARRES (INT)',
-    des: `Le héros disposant de cette compétence peut interpréter les écritures les plus étranges de laTerre de Fangh,
+    des: `Le héros disposant de cette compétence peut interpréter les écritures les plus étranges de la Terre de Fangh,
     pour peu qu'il réussisse une épreuve d'intelligence +4. Les autres, c'est pas de chance, ils n'ont même pas le droit d'essayer.`,
     use: `+4 à l'épreuve INT pour lire les langues bizarres.`
   },
@@ -375,17 +379,17 @@ export const skillsList = [
     use: `Epreuve AD possible pour utiliser des armes de jet.`
   },
   {
-    title: 'TOMBER DANS LES PIÈGE',
-    des: `Une fois qu'il se retrouve affublé de cette tare grotesque, le héros sera toujours le premierà tomber dans un piège,
+    title: 'TOMBER DANS LES PIÈGES',
+    des: `Une fois qu'il se retrouve affublé de cette tare grotesque, le héros sera toujours le premier à tomber dans un piège,
     dans le cas ou un groupe d'aventuriers marche dedans sans le détecter. Il n'avait qu'à faire attention.
     Si plusieurs aventuriers ont cette compétence, ils peuvent régler l'affaire avec un duel au dé.`,
     use: `Le héros se prend toujours le piège en premier.`
   },
   {
     title: 'TRUC DE MAUVIETTE (PR)',
-    des: `Le héros n'a pas mal, même quand il a mal. Il serre les dents et continue de faire so nmalin,
+    des: `Le héros n'a pas mal, même quand il a mal. Il serre les dents et continue de faire son malin,
     parce que la douleur est une simple information.
-    Le héros qui rit des trucs de mauviette dispose d'une protection naturelle de 1 point supplémentaire (PR+1).`,
+    Le héros qui rit des trucs de mauviette dispose d'une protection naturelle de 1 point supplémentaire (PR +1).`,
     use: `+1 au score de PR totale.`
   }
 ];

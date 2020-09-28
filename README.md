@@ -1,6 +1,6 @@
 # nhl-v2.1
 
-Character sheet for the tabletop rpg "Le Donjon de Naheulbeuk" mobile app made with Ionic 4 / Angular 8
+Character sheet for the tabletop rpg "Le Donjon de Naheulbeuk" mobile app made with Ionic / Angular
 
 This app use the classic paper character sheet and upgrade it with several features such as:
 

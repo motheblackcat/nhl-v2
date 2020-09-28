@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 
 import { PersonaService } from 'src/app/services/persona.service';
 
+import { skillsList } from 'src/app/consts/skills-list.consts';
+
 import { RouteData } from 'src/app/interfaces/route.interface';
 import { StatsSheetModel } from 'src/app/interfaces/persona.interface';
 
@@ -33,14 +35,20 @@ export class ArmorComponent implements OnInit {
       this.form = new FormGroup({});
       this.armorNames = ['tete', 'torse', 'bouclier', 'bras', 'mains', 'jambes', 'pieds'];
       const sheetObject: ArmorSheet = this.personaService.currentPersona.sheet[this.formName];
+
       if (sheetObject.list.length <= 0) {
         this.armorNames.forEach(() => sheetObject.list.push(new Armor()));
       }
-      for (const item in sheetObject) {
-        if (sheetObject) {
-          this.form.addControl(item, item === 'list' ? new FormArray([]) : new FormControl(sheetObject[item]));
-        }
-      }
+
+      const tdm = !!this.personaService.currentPersona.sheet['skills'].find(
+        skill => skill.toLowerCase().trim() === skillsList[skillsList.length - 1].title.toLowerCase()
+      );
+
+      this.form.addControl('tdm', new FormControl({ value: tdm, disabled: true }));
+      this.form.addControl('prNat', new FormControl(sheetObject['prNat']));
+      this.form.addControl('prMag', new FormControl(sheetObject['prMag']));
+      this.form.addControl('list', new FormArray([]));
+
       sheetObject.list.forEach(armor => {
         (this.form.get('list') as FormArray).push(
           new FormGroup({

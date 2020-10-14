@@ -4,6 +4,4 @@ orbs:
 workflows:
   node-tests:
     jobs:
-      # - node/test
-      steps:
-        - run: npm run test -- --no-watch --no-progress --browsers=Chrome
+      - node/test

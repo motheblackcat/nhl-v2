@@ -16,6 +16,7 @@ export class StatsComponent implements OnInit {
   title: string;
   formName: string;
   form: FormGroup;
+  efNames: string[] = ['ev', 'ea', 'cou', 'int', 'cha', 'ad', 'fo', 'atq', 'prd'];
   constructor(private route: ActivatedRoute, public personaService: PersonaService) {}
 
   ngOnInit() {
@@ -57,7 +58,7 @@ export class StatsComponent implements OnInit {
     const weaponsEffects = sheetObject.weapons.filter(weapon => weapon.effects.length > 0 && weapon.equiped).map(weapon => weapon.effects);
     const armorsEffects = sheetObject.armors.list.filter(armor => armor.effects.length > 0 && armor.equiped).map(armor => armor.effects);
     const effects: EffectModel[] = [].concat(...weaponsEffects, ...armorsEffects);
-    ['ev', 'ea', 'cou', 'int', 'cha', 'ad', 'fo', 'atq', 'prd'].forEach(stat => {
+    this.efNames.forEach(stat => {
       this.form
         .get(stat)
         .get('effect')

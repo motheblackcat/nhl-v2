@@ -1,8 +1,8 @@
 {
-  "name": "nhl2",
-  "version": "0.0.3",
+  "name": "nhl",
+  "version": "2.1.7",
   "author": "Morad EL HAMDOUNI",
-  "homepage": "https://motheblackcat.github.io/home",
+  "homepage": "https://github.com/motheblackcat/nhl-v2",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "@angular-devkit/architect": "~0.800.4",
-    "@angular-devkit/build-angular": "^0.1102.11",
+    "@angular-devkit/build-angular": "^12.2.2",
     "@angular-devkit/core": "~10.1.7",
     "@angular-devkit/schematics": "~10.1.7",
     "@angular/cli": "^11.2.11",
@@ -55,7 +55,7 @@
     "cordova-browser": "^6.0.0",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
-    "karma": "^5.1.0",
+    "karma": "^6.3.4",
     "karma-chrome-launcher": "~2.2.0",
     "karma-coverage-istanbul-reporter": "~2.0.5",
     "karma-jasmine": "~2.0.1",

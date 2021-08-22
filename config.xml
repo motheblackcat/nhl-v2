@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="nhlv2.me" version="2.1.6" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="nhl" version="2.1.7" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Naheulbeuk - Fiche de Personnage</name>
-    <description>Fiche de personnage pour le jdr du Donjon de Naheulbeuk.</description>
+    <description>Fiche de personnage pour le jdr le Donjon de Naheulbeuk.</description>
     <author email="morad.elhamdouni@gmail.com" href="https://motheblackcat.github.io/">Morad El Hamdouni</author>
     <content src="index.html" />
     <access origin="*" />

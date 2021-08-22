@@ -1,4 +1,4 @@
-# nhl-v2.1
+# nhl
 
 Character sheet for the tabletop rpg "Le Donjon de Naheulbeuk" mobile app made with Ionic / Angular
 
@@ -8,4 +8,4 @@ This app use the classic paper character sheet and upgrade it with several featu
 - Equip / unequip weapons and armors with effects on stats
 - Multiple characters managment
 
-Check the trello for upcoming features and fix: https://trello.com/b/hng8qiP4/nhl-v2
+Check the trello for upcoming features and fixes: https://trello.com/b/hng8qiP4/nhl-v2

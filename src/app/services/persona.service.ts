@@ -1,14 +1,13 @@
-import { Injectable } from '@angular/core';
-
 import { BehaviorSubject } from 'rxjs';
 
-import { Storage } from '@ionic/storage';
+import { Injectable } from '@angular/core';
+import { Storage } from '@ionic/storage-angular';
 
 import { PERSONAS } from '../consts/storage.consts';
-
+import {
+  BagsSheetModel, CampSheetModel, Persona, PersonaSheetModel, StatsSheetModel, WeaponModel
+} from '../interfaces/persona.interface';
 import { ArmorSheet, PersonaSheet } from '../models/persona.model';
-
-import { BagsSheetModel, CampSheetModel, Persona, PersonaSheetModel, StatsSheetModel, WeaponModel } from '../interfaces/persona.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +15,7 @@ import { BagsSheetModel, CampSheetModel, Persona, PersonaSheetModel, StatsSheetM
 export class PersonaService {
   personas$: BehaviorSubject<Persona[]> = new BehaviorSubject<Persona[]>([]);
   currentPersona: Persona;
-  constructor(private store: Storage) {}
+  constructor(private store: Storage) { }
 
   getLegacyPersona(data: any) {
     if (data) {

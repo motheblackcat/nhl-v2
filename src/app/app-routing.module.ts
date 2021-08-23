@@ -1,18 +1,17 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
-import { PersonaComponent } from './pages/persona/persona.component';
-import { CharComponent } from './pages/char/char.component';
-import { StatsComponent } from './pages/stats/stats.component';
-import { InvComponent } from './pages/inv/inv.component';
-import { WeaponComponent } from './pages/weapon/weapon.component';
+import { PersonaGuard } from './guards/persona.guard';
 import { ArmorComponent } from './pages/armor/armor.component';
+import { CharComponent } from './pages/char/char.component';
 import { BagsComponent } from './pages/inv/bags/bags.component';
 import { CampComponent } from './pages/inv/camp/camp.component';
-
-import { ListComponent } from './shared/list/list.component';
+import { InvComponent } from './pages/inv/inv.component';
+import { PersonaComponent } from './pages/persona/persona.component';
+import { StatsComponent } from './pages/stats/stats.component';
+import { WeaponComponent } from './pages/weapon/weapon.component';
 import { ListMultiComponent } from './shared/list-multi/list-multi.component';
-import { PersonaGuard } from './guards/persona.guard';
+import { ListComponent } from './shared/list/list.component';
 
 export const routes: Routes = [
   {
@@ -192,4 +191,4 @@ export const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

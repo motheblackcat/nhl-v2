@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormArray, FormGroup, FormControl } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-
-import { PersonaService } from 'src/app/services/persona.service';
-
 import { EffectModel } from 'src/app/interfaces/persona.interface';
 import { RouteData } from 'src/app/interfaces/route.interface';
+import { PersonaService } from 'src/app/services/persona.service';
+
+import { Component, OnInit } from '@angular/core';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-list-multi',
@@ -18,7 +17,7 @@ export class ListMultiComponent implements OnInit {
   effectLabel: string;
   formName: string;
   form: FormArray;
-  constructor(private route: ActivatedRoute, public personaService: PersonaService) {}
+  constructor(private route: ActivatedRoute, public personaService: PersonaService) { }
 
   ngOnInit() {
     this.route.data.subscribe((res: RouteData) => {
@@ -28,7 +27,7 @@ export class ListMultiComponent implements OnInit {
       this.effectLabel = res.effectLabel;
       this.formName = res.formName;
       this.form = new FormArray([]);
-      const sheetObject: EffectModel[] = this.personaService.currentPersona.sheet[this.formName];
+      const sheetObject: EffectModel[] = this.personaService.currentPersona.sheets[this.formName];
       sheetObject.forEach(item => {
         this.form.push(new FormGroup({ name: new FormControl(item.name), effect: new FormControl(item.effect) }));
       });

@@ -1,15 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormArray, FormControl } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-
+import { skillsList } from 'src/app/consts/skills-list.consts';
+import { StatsSheetModel } from 'src/app/interfaces/persona.interface';
+import { RouteData } from 'src/app/interfaces/route.interface';
+import { Armor, ArmorSheet } from 'src/app/models/persona.model';
 import { PersonaService } from 'src/app/services/persona.service';
 
-import { skillsList } from 'src/app/consts/skills-list.consts';
-
-import { RouteData } from 'src/app/interfaces/route.interface';
-import { StatsSheetModel } from 'src/app/interfaces/persona.interface';
-
-import { ArmorSheet, Armor } from 'src/app/models/persona.model';
+import { Component, OnInit } from '@angular/core';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-armor',
@@ -26,7 +23,7 @@ export class ArmorComponent implements OnInit {
   statsNames: String[];
   prNat: number;
   prMag: number;
-  constructor(private route: ActivatedRoute, public personaService: PersonaService) {}
+  constructor(private route: ActivatedRoute, public personaService: PersonaService) { }
 
   ngOnInit() {
     this.route.data.subscribe((res: RouteData) => {
@@ -34,13 +31,13 @@ export class ArmorComponent implements OnInit {
       this.formName = res.formName;
       this.form = new FormGroup({});
       this.armorNames = ['tete', 'torse', 'bouclier', 'bras', 'mains', 'jambes', 'pieds'];
-      const sheetObject: ArmorSheet = this.personaService.currentPersona.sheet[this.formName];
+      const sheetObject: ArmorSheet = this.personaService.currentPersona.sheets[this.formName];
 
       if (sheetObject.list.length <= 0) {
         this.armorNames.forEach(() => sheetObject.list.push(new Armor()));
       }
 
-      const tdm = !!this.personaService.currentPersona.sheet['skills'].find(
+      const tdm = !!this.personaService.currentPersona.sheets['skills'].find(
         skill => skill.toLowerCase().trim() === skillsList[skillsList.length - 1].title.toLowerCase()
       );
 
@@ -65,7 +62,7 @@ export class ArmorComponent implements OnInit {
           effects.push(new FormGroup({ name: new FormControl(effect.name), effect: new FormControl(effect.effect) }))
         );
       });
-      this.statsNames = Object.keys(this.personaService.currentPersona.sheet['stats']).filter(
+      this.statsNames = Object.keys(this.personaService.currentPersona.sheets['stats']).filter(
         stat => stat !== 'magpsy' && stat !== 'magphy' && stat !== 'resmag'
       );
       this.prSums();
@@ -85,7 +82,7 @@ export class ArmorComponent implements OnInit {
     this.prNat = this.form.get('tdm').value ? sum + 1 : sum;
     this.form.get('prNat').setValue(this.prNat);
 
-    const statsSheet: StatsSheetModel = this.personaService.currentPersona.sheet['stats'];
+    const statsSheet: StatsSheetModel = this.personaService.currentPersona.sheets['stats'];
     this.prMag = Math.ceil(Number(statsSheet.cou.name + statsSheet.int.name + statsSheet.fo.name) / 3);
     this.form.get('prMag').setValue(this.prMag);
 

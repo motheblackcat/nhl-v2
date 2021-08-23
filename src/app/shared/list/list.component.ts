@@ -1,16 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormArray } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-
-import { ModalController } from '@ionic/angular';
-
+import { skillsList } from 'src/app/consts/skills-list.consts';
+import { RouteData } from 'src/app/interfaces/route.interface';
 import { PersonaService } from 'src/app/services/persona.service';
 
+import { Component, OnInit } from '@angular/core';
+import { FormArray, FormControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+
 import { SkillsDetailsComponent } from '../skill-desc/skill-desc.component';
-
-import { skillsList } from 'src/app/consts/skills-list.consts';
-
-import { RouteData } from 'src/app/interfaces/route.interface';
 
 @Component({
   selector: 'app-list',
@@ -24,7 +21,7 @@ export class ListComponent implements OnInit {
   form: FormArray;
   useSelect: boolean;
   skillsList = skillsList;
-  constructor(private route: ActivatedRoute, public personaService: PersonaService, private modal: ModalController) {}
+  constructor(private route: ActivatedRoute, public personaService: PersonaService, private modal: ModalController) { }
 
   ngOnInit(): void {
     this.skillsList.forEach(skill => (skill.title = skill.title.toLowerCase()));
@@ -36,7 +33,7 @@ export class ListComponent implements OnInit {
       this.useSelect = res.useSelect;
 
       this.form = new FormArray([]);
-      const sheetObject: String[] = this.personaService.currentPersona.sheet[this.formName];
+      const sheetObject: String[] = this.personaService.currentPersona.sheets[this.formName];
       sheetObject.forEach(skill => {
         this.form.push(new FormControl(skill));
       });

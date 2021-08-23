@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-
+import {
+    EffectModel, PersonaSheetModel, StatsSheetModel
+} from 'src/app/interfaces/persona.interface';
+import { RouteData } from 'src/app/interfaces/route.interface';
 import { PersonaService } from 'src/app/services/persona.service';
 
-import { RouteData } from 'src/app/interfaces/route.interface';
-import { EffectModel, PersonaSheetModel, StatsSheetModel } from 'src/app/interfaces/persona.interface';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-stats',
@@ -17,14 +18,14 @@ export class StatsComponent implements OnInit {
   formName: string;
   form: FormGroup;
   efNames: string[] = ['ev', 'ea', 'cou', 'int', 'cha', 'ad', 'fo', 'atq', 'prd'];
-  constructor(private route: ActivatedRoute, public personaService: PersonaService) {}
+  constructor(private route: ActivatedRoute, public personaService: PersonaService) { }
 
   ngOnInit() {
     this.route.data.subscribe((res: RouteData) => {
       this.title = res.title;
       this.formName = res.formName;
       this.form = new FormGroup({});
-      const sheetObject: StatsSheetModel = this.personaService.currentPersona.sheet[this.formName];
+      const sheetObject: StatsSheetModel = this.personaService.currentPersona.sheets[this.formName];
       for (const key in sheetObject) {
         if (key === 'magphy' || key === 'magpsy' || key === 'resmag') {
           this.form.addControl(key, new FormControl(sheetObject[key]));
@@ -41,7 +42,7 @@ export class StatsComponent implements OnInit {
 
   updateMagStats() {
     this.updateEffects();
-    const sheetObject: StatsSheetModel = this.personaService.currentPersona.sheet[this.formName];
+    const sheetObject: StatsSheetModel = this.personaService.currentPersona.sheets[this.formName];
     const int = Number(sheetObject.int.name + sheetObject.int.effect);
     const ad = Number(sheetObject.ad.name + sheetObject.ad.effect);
     const cha = Number(sheetObject.cha.name + sheetObject.cha.effect);
@@ -54,7 +55,7 @@ export class StatsComponent implements OnInit {
   }
 
   updateEffects() {
-    const sheetObject: PersonaSheetModel = this.personaService.currentPersona.sheet;
+    const sheetObject: PersonaSheetModel = this.personaService.currentPersona.sheets;
     const weaponsEffects = sheetObject.weapons.filter(weapon => weapon.effects.length > 0 && weapon.equiped).map(weapon => weapon.effects);
     const armorsEffects = sheetObject.armors.list.filter(armor => armor.effects.length > 0 && armor.equiped).map(armor => armor.effects);
     const effects: EffectModel[] = [].concat(...weaponsEffects, ...armorsEffects);

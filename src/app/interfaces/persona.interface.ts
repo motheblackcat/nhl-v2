@@ -1,6 +1,6 @@
 export interface Persona {
   name: string;
-  sheet: PersonaSheetModel;
+  sheets: PersonaSheetModel;
 }
 
 export interface EffectModel {

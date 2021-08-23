@@ -1,19 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-
-import { AlertController, ToastController } from '@ionic/angular';
-
+import { ToasterTypes } from 'src/app/consts/toaster-types.consts';
+import { Persona } from 'src/app/interfaces/persona.interface';
 import { PersonaService } from 'src/app/services/persona.service';
 
-import { Persona } from 'src/app/interfaces/persona.interface';
-
-import { ToasterTypes } from 'src/app/consts/toaster-types.consts';
+import { Component, OnInit } from '@angular/core';
+import { AlertController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-persona',
   templateUrl: './persona.component.html'
 })
 export class PersonaComponent implements OnInit {
-  constructor(private alert: AlertController, private toast: ToastController, public personaService: PersonaService) {}
+  constructor(private alert: AlertController, private toast: ToastController, public personaService: PersonaService) { }
 
   ngOnInit() {
     this.personaService.currentPersona = null;

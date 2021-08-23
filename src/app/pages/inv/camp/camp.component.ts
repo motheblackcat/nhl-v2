@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormArray } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-
+import { CampSheetModel } from 'src/app/interfaces/persona.interface';
+import { RouteData } from 'src/app/interfaces/route.interface';
 import { PersonaService } from 'src/app/services/persona.service';
 
-import { RouteData } from 'src/app/interfaces/route.interface';
-import { CampSheetModel } from 'src/app/interfaces/persona.interface';
+import { Component, OnInit } from '@angular/core';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-camp',
@@ -19,7 +18,7 @@ export class CampComponent implements OnInit {
     return <FormArray>this.form.get('autres');
   }
   totalWeight: number;
-  constructor(private route: ActivatedRoute, public personaService: PersonaService) {}
+  constructor(private route: ActivatedRoute, public personaService: PersonaService) { }
 
   ngOnInit(): void {
     this.route.data.subscribe((res: RouteData) => {
@@ -28,7 +27,7 @@ export class CampComponent implements OnInit {
       this.totalWeight = 0;
 
       this.form = new FormGroup({});
-      const sheetObject: CampSheetModel = this.personaService.currentPersona.sheet[this.formName];
+      const sheetObject: CampSheetModel = this.personaService.currentPersona.sheets[this.formName];
       for (const key in sheetObject) {
         if (key !== 'autres') {
           this.form.addControl(key, new FormGroup({}));

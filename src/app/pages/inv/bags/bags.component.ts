@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormArray } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-
+import { BagsSheetModel } from 'src/app/interfaces/persona.interface';
+import { RouteData } from 'src/app/interfaces/route.interface';
 import { PersonaService } from 'src/app/services/persona.service';
 
-import { RouteData } from 'src/app/interfaces/route.interface';
-import { BagsSheetModel } from 'src/app/interfaces/persona.interface';
+import { Component, OnInit } from '@angular/core';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-bags',
@@ -21,7 +20,7 @@ export class BagsComponent implements OnInit {
   get pooches() {
     return <FormArray>this.form.get('pooches');
   }
-  constructor(private route: ActivatedRoute, public personaService: PersonaService) {}
+  constructor(private route: ActivatedRoute, public personaService: PersonaService) { }
 
   ngOnInit() {
     this.route.data.subscribe((res: RouteData) => {
@@ -29,7 +28,7 @@ export class BagsComponent implements OnInit {
       this.formName = res.formName;
 
       this.form = new FormGroup({});
-      const sheetObject: BagsSheetModel = this.personaService.currentPersona.sheet[this.formName];
+      const sheetObject: BagsSheetModel = this.personaService.currentPersona.sheets[this.formName];
       for (const key in sheetObject) {
         if (key === 'max') {
           this.form.addControl(key, new FormControl(sheetObject[key]));

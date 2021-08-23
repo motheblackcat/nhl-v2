@@ -1,12 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormArray, FormControl, FormArrayName } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-
+import { RouteData } from 'src/app/interfaces/route.interface';
+import { Weapon } from 'src/app/models/persona.model';
 import { PersonaService } from 'src/app/services/persona.service';
 
-import { Weapon } from 'src/app/models/persona.model';
-
-import { RouteData } from 'src/app/interfaces/route.interface';
+import { Component, OnInit } from '@angular/core';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-weapon',
@@ -17,14 +15,14 @@ export class WeaponComponent implements OnInit {
   formName: string;
   form: FormArray;
   statsNames: String[];
-  constructor(private route: ActivatedRoute, public personaService: PersonaService) {}
+  constructor(private route: ActivatedRoute, public personaService: PersonaService) { }
 
   ngOnInit() {
     this.route.data.subscribe((res: RouteData) => {
       this.title = res.title;
       this.formName = res.formName;
       this.form = new FormArray([]);
-      const sheetObject: Weapon[] = this.personaService.currentPersona.sheet[this.formName];
+      const sheetObject: Weapon[] = this.personaService.currentPersona.sheets[this.formName];
       if (sheetObject.length <= 0) {
         for (let i = 0; i < 3; i++) {
           sheetObject.push(new Weapon());
@@ -46,7 +44,7 @@ export class WeaponComponent implements OnInit {
           effects.push(new FormGroup({ name: new FormControl(effect.name), effect: new FormControl(effect.effect) }))
         );
       });
-      this.statsNames = Object.keys(this.personaService.currentPersona.sheet['stats']).filter(
+      this.statsNames = Object.keys(this.personaService.currentPersona.sheets['stats']).filter(
         stat => stat !== 'magpsy' && stat !== 'magphy' && stat !== 'resmag'
       );
     });

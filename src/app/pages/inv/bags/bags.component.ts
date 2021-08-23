@@ -1,4 +1,4 @@
-import { BagsSheetModel } from 'src/app/interfaces/persona.interface';
+import { IBagsSheet } from 'src/app/interfaces/persona.interface';
 import { RouteData } from 'src/app/interfaces/route.interface';
 import { PersonaService } from 'src/app/services/persona.service';
 
@@ -28,7 +28,7 @@ export class BagsComponent implements OnInit {
       this.formName = res.formName;
 
       this.form = new FormGroup({});
-      const sheetObject: BagsSheetModel = this.personaService.currentPersona.sheets[this.formName];
+      const sheetObject: IBagsSheet = this.personaService.currentPersona.sheets[this.formName];
       for (const key in sheetObject) {
         if (key === 'max') {
           this.form.addControl(key, new FormControl(sheetObject[key]));

@@ -1,4 +1,4 @@
-import { EffectModel } from 'src/app/interfaces/persona.interface';
+import { IEffect } from 'src/app/interfaces/persona.interface';
 import { RouteData } from 'src/app/interfaces/route.interface';
 import { PersonaService } from 'src/app/services/persona.service';
 
@@ -27,7 +27,7 @@ export class ListMultiComponent implements OnInit {
       this.effectLabel = res.effectLabel;
       this.formName = res.formName;
       this.form = new FormArray([]);
-      const sheetObject: EffectModel[] = this.personaService.currentPersona.sheets[this.formName];
+      const sheetObject: IEffect[] = this.personaService.currentPersona.sheets[this.formName];
       sheetObject.forEach(item => {
         this.form.push(new FormGroup({ name: new FormControl(item.name), effect: new FormControl(item.effect) }));
       });

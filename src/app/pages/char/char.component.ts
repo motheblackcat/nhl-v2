@@ -1,4 +1,4 @@
-import { CharSheetModel } from 'src/app/interfaces/persona.interface';
+import { ICharSheet } from 'src/app/interfaces/persona.interface';
 import { RouteData } from 'src/app/interfaces/route.interface';
 import { PersonaService } from 'src/app/services/persona.service';
 
@@ -23,7 +23,7 @@ export class CharComponent implements OnInit {
       this.formName = res.formName;
 
       this.form = new FormGroup({});
-      const sheetObject: CharSheetModel = this.personaService.currentPersona.sheets[this.formName];
+      const sheetObject: ICharSheet = this.personaService.currentPersona.sheets[this.formName];
       for (const key in sheetObject) {
         if (key) {
           this.form.addControl(key, new FormControl(sheetObject[key]));

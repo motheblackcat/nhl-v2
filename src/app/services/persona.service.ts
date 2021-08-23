@@ -4,15 +4,15 @@ import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 
 import { PERSONAS } from '../consts/storage.consts';
-import { Persona, PersonaSheetModel } from '../interfaces/persona.interface';
+import { IPersona, ISheets } from '../interfaces/persona.interface';
 import { PersonaSheet } from '../models/persona.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PersonaService {
-  personas$: BehaviorSubject<Persona[]> = new BehaviorSubject<Persona[]>([]);
-  currentPersona: Persona;
+  personas$: BehaviorSubject<IPersona[]> = new BehaviorSubject<IPersona[]>([]);
+  currentPersona: IPersona;
   constructor(private store: Storage) { }
 
   getPersonas() {
@@ -22,13 +22,13 @@ export class PersonaService {
   }
 
   addPersona(personaName: string) {
-    const newPersona: Persona = { name: personaName, sheets: new PersonaSheet(personaName) };
-    const updatedPersonas: Persona[] = [...this.personas$.value, newPersona];
+    const newPersona: IPersona = { name: personaName, sheets: new PersonaSheet(personaName) };
+    const updatedPersonas: IPersona[] = [...this.personas$.value, newPersona];
     this.personas$.next(updatedPersonas);
     this.store.set(PERSONAS, this.personas$.value);
   }
 
-  updatePersonas(formName: string, personaSheet: PersonaSheetModel) {
+  updatePersonas(formName: string, personaSheet: ISheets) {
     const currentPersonas = this.personas$.value;
     const currentPersona = currentPersonas.find(pers => pers === this.currentPersona);
     currentPersona.sheets[formName] = personaSheet;
@@ -37,7 +37,7 @@ export class PersonaService {
     this.store.set(PERSONAS, this.personas$.value);
   }
 
-  removePersona(persona: Persona) {
+  removePersona(persona: IPersona) {
     const updatedPersonas = this.personas$.value;
     updatedPersonas.splice(updatedPersonas.indexOf(persona), 1);
     this.personas$.next(updatedPersonas);

@@ -1,5 +1,5 @@
 import { ToasterTypes } from 'src/app/consts/toaster-types.consts';
-import { Persona } from 'src/app/interfaces/persona.interface';
+import { IPersona } from 'src/app/interfaces/persona.interface';
 import { PersonaService } from 'src/app/services/persona.service';
 
 import { Component, OnInit } from '@angular/core';
@@ -17,7 +17,7 @@ export class PersonaComponent implements OnInit {
     this.personaService.getPersonas();
   }
 
-  selectPersona(persona: Persona) {
+  selectPersona(persona: IPersona) {
     this.personaService.currentPersona = persona;
   }
 
@@ -62,12 +62,12 @@ export class PersonaComponent implements OnInit {
     await alert.present();
   }
 
-  removePersona(persona: Persona) {
+  removePersona(persona: IPersona) {
     this.personaService.removePersona(persona);
     this.presentToast(ToasterTypes.DELETED);
   }
 
-  async removePersonaAlert(persona: Persona): Promise<any> {
+  async removePersonaAlert(persona: IPersona): Promise<any> {
     const alert = await this.alert.create({
       header: 'Supprimer un personnage',
       message: 'Etes vous sure de vouloir supprimer ce personnage ?',

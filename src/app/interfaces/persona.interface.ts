@@ -1,39 +1,39 @@
-export interface Persona {
+export interface IPersona {
   name: string;
-  sheets: PersonaSheetModel;
+  sheets: ISheets;
 }
 
-export interface EffectModel {
+export interface IEffect {
   name: string;
   effect: string;
 }
 
-export interface WeaponModel {
+export interface IWeapon {
   name: string;
   pi: string;
   rup: string;
   equiped: boolean;
-  effects: EffectModel[];
+  effects: IEffect[];
 }
 
-export interface PersonaSheetModel {
-  char: CharSheetModel;
-  stats: StatsSheetModel;
+export interface ISheets {
+  char: ICharSheet;
+  stats: IStatsSheet;
   skills: String[];
   quest: String[];
   loot: String[];
-  bags: BagsSheetModel;
-  camp: CampSheetModel;
+  bags: IBagsSheet;
+  camp: ICampSheet;
   food: String[];
   precious: String[];
-  special: EffectModel[];
-  gems: EffectModel[];
-  potions: EffectModel[];
-  weapons: WeaponModel[];
-  armors: ArmorSheetModel;
+  special: IEffect[];
+  gems: IEffect[];
+  potions: IEffect[];
+  weapons: IWeapon[];
+  armors: IArmorSheet;
 }
 
-export interface CharSheetModel {
+export interface ICharSheet {
   niveau: string;
   pd: string;
   experience: string;
@@ -48,62 +48,62 @@ export interface CharSheetModel {
   cuivre: string;
 }
 
-export interface StatsSheetModel {
-  ev: EffectModel;
-  ea: EffectModel;
-  cou: EffectModel;
-  int: EffectModel;
-  cha: EffectModel;
-  ad: EffectModel;
-  fo: EffectModel;
-  atq: EffectModel;
-  prd: EffectModel;
+export interface IStatsSheet {
+  ev: IEffect;
+  ea: IEffect;
+  cou: IEffect;
+  int: IEffect;
+  cha: IEffect;
+  ad: IEffect;
+  fo: IEffect;
+  atq: IEffect;
+  prd: IEffect;
   magphy: number;
   magpsy: number;
   resmag: number;
 }
 
-interface BagModel {
+interface IBag {
   name: string;
   max: string;
 }
 
-export interface BagsSheetModel {
+export interface IBagsSheet {
   max: string;
-  bags: BagModel[];
-  pooches: BagModel[];
+  bags: IBag[];
+  pooches: IBag[];
 }
 
-interface Camp {
+interface ICamp {
   name: string;
   pv: string;
   h: string;
   wei: string;
 }
 
-interface LightCamp {
+interface ILightCamp {
   name: string;
   wei: string;
 }
 
-export interface CampSheetModel {
-  tente: Camp;
-  matelas: Camp;
-  couverture: Camp;
-  autres: LightCamp[];
+export interface ICampSheet {
+  tente: ICamp;
+  matelas: ICamp;
+  couverture: ICamp;
+  autres: ILightCamp[];
   totalWeight: number;
 }
 
-export interface ArmorModel {
+export interface IArmor {
   name: string;
   pr: string;
   rup: string;
   equiped: boolean;
-  effects: EffectModel[];
+  effects: IEffect[];
 }
 
-export interface ArmorSheetModel {
-  list: ArmorModel[];
+export interface IArmorSheet {
+  list: IArmor[];
   tdm: boolean;
   prNat: number;
   prMag: number;

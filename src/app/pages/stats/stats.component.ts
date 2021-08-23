@@ -1,6 +1,4 @@
-import {
-    EffectModel, PersonaSheetModel, StatsSheetModel
-} from 'src/app/interfaces/persona.interface';
+import { IEffect, ISheets, IStatsSheet } from 'src/app/interfaces/persona.interface';
 import { RouteData } from 'src/app/interfaces/route.interface';
 import { PersonaService } from 'src/app/services/persona.service';
 
@@ -25,7 +23,7 @@ export class StatsComponent implements OnInit {
       this.title = res.title;
       this.formName = res.formName;
       this.form = new FormGroup({});
-      const sheetObject: StatsSheetModel = this.personaService.currentPersona.sheets[this.formName];
+      const sheetObject: IStatsSheet = this.personaService.currentPersona.sheets[this.formName];
       for (const key in sheetObject) {
         if (key === 'magphy' || key === 'magpsy' || key === 'resmag') {
           this.form.addControl(key, new FormControl(sheetObject[key]));
@@ -42,7 +40,7 @@ export class StatsComponent implements OnInit {
 
   updateMagStats() {
     this.updateEffects();
-    const sheetObject: StatsSheetModel = this.personaService.currentPersona.sheets[this.formName];
+    const sheetObject: IStatsSheet = this.personaService.currentPersona.sheets[this.formName];
     const int = Number(sheetObject.int.name + sheetObject.int.effect);
     const ad = Number(sheetObject.ad.name + sheetObject.ad.effect);
     const cha = Number(sheetObject.cha.name + sheetObject.cha.effect);
@@ -55,10 +53,10 @@ export class StatsComponent implements OnInit {
   }
 
   updateEffects() {
-    const sheetObject: PersonaSheetModel = this.personaService.currentPersona.sheets;
+    const sheetObject: ISheets = this.personaService.currentPersona.sheets;
     const weaponsEffects = sheetObject.weapons.filter(weapon => weapon.effects.length > 0 && weapon.equiped).map(weapon => weapon.effects);
     const armorsEffects = sheetObject.armors.list.filter(armor => armor.effects.length > 0 && armor.equiped).map(armor => armor.effects);
-    const effects: EffectModel[] = [].concat(...weaponsEffects, ...armorsEffects);
+    const effects: IEffect[] = [].concat(...weaponsEffects, ...armorsEffects);
     this.efNames.forEach(stat => {
       this.form
         .get(stat)

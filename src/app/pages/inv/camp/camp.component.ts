@@ -1,4 +1,4 @@
-import { CampSheetModel } from 'src/app/interfaces/persona.interface';
+import { ICampSheet } from 'src/app/interfaces/persona.interface';
 import { RouteData } from 'src/app/interfaces/route.interface';
 import { PersonaService } from 'src/app/services/persona.service';
 
@@ -27,7 +27,7 @@ export class CampComponent implements OnInit {
       this.totalWeight = 0;
 
       this.form = new FormGroup({});
-      const sheetObject: CampSheetModel = this.personaService.currentPersona.sheets[this.formName];
+      const sheetObject: ICampSheet = this.personaService.currentPersona.sheets[this.formName];
       for (const key in sheetObject) {
         if (key !== 'autres') {
           this.form.addControl(key, new FormGroup({}));

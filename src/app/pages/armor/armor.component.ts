@@ -1,5 +1,5 @@
 import { skillsList } from 'src/app/consts/skills-list.consts';
-import { StatsSheetModel } from 'src/app/interfaces/persona.interface';
+import { IStatsSheet } from 'src/app/interfaces/persona.interface';
 import { RouteData } from 'src/app/interfaces/route.interface';
 import { Armor, ArmorSheet } from 'src/app/models/persona.model';
 import { PersonaService } from 'src/app/services/persona.service';
@@ -82,7 +82,7 @@ export class ArmorComponent implements OnInit {
     this.prNat = this.form.get('tdm').value ? sum + 1 : sum;
     this.form.get('prNat').setValue(this.prNat);
 
-    const statsSheet: StatsSheetModel = this.personaService.currentPersona.sheets['stats'];
+    const statsSheet: IStatsSheet = this.personaService.currentPersona.sheets['stats'];
     this.prMag = Math.ceil(Number(statsSheet.cou.name + statsSheet.int.name + statsSheet.fo.name) / 3);
     this.form.get('prMag').setValue(this.prMag);
 

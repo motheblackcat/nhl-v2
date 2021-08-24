@@ -7,23 +7,25 @@ import { CharComponent } from './pages/char/char.component';
 import { BagsComponent } from './pages/inv/bags/bags.component';
 import { CampComponent } from './pages/inv/camp/camp.component';
 import { InvComponent } from './pages/inv/inv.component';
+import { ListMultiComponent } from './pages/inv/list-multi/list-multi.component';
+import { ListComponent } from './pages/inv/list/list.component';
 import { PersonaComponent } from './pages/persona/persona.component';
+import { SkillComponent } from './pages/skill/skill.component';
 import { StatsComponent } from './pages/stats/stats.component';
 import { WeaponComponent } from './pages/weapon/weapon.component';
-import { ListMultiComponent } from './shared/list-multi/list-multi.component';
-import { ListComponent } from './shared/list/list.component';
 
 export const routes: Routes = [
   {
-    path: '',
-    component: PersonaComponent
+    path: 'persona',
+    component: PersonaComponent,
+    data: {
+      icon: 'people'
+    }
   },
   {
     path: 'char',
     component: CharComponent,
     data: {
-      title: 'personnage',
-      formName: 'char',
       icon: 'body'
     },
     canActivate: [PersonaGuard]
@@ -32,52 +34,33 @@ export const routes: Routes = [
     path: 'stats',
     component: StatsComponent,
     data: {
-      title: 'statistiques',
-      formName: 'stats',
       icon: 'bar-chart'
     },
     canActivate: [PersonaGuard]
   },
   {
     path: 'skills',
-    component: ListComponent,
+    component: SkillComponent,
     data: {
-      title: 'compétences',
-      placeholder: 'Ajouter une compétence.',
-      formName: 'skills',
-      icon: 'hand-right',
-      useSelect: true
+      icon: 'school',
     },
     canActivate: [PersonaGuard]
   },
   {
-    path: 'equip',
-    component: InvComponent,
+    path: 'weapon',
+    component: WeaponComponent,
     data: {
-      icon: 'shirt'
+      icon: 'flash'
     },
-    canActivate: [PersonaGuard],
-    children: [
-      { path: '', redirectTo: 'weapon', pathMatch: 'full' },
-      {
-        path: 'weapon',
-        component: WeaponComponent,
-        data: {
-          title: 'armement et baston',
-          formName: 'weapons',
-          icon: 'flash'
-        }
-      },
-      {
-        path: 'armor',
-        component: ArmorComponent,
-        data: {
-          title: 'armure et protection',
-          formName: 'armors',
-          icon: 'shirt'
-        }
-      }
-    ]
+    canActivate: [PersonaGuard]
+  },
+  {
+    path: 'armor',
+    component: ArmorComponent,
+    data: {
+      icon: 'shield'
+    },
+    canActivate: [PersonaGuard]
   },
   {
     path: 'inv',
@@ -91,8 +74,9 @@ export const routes: Routes = [
         path: 'quest',
         component: ListComponent,
         data: {
-          title: 'objets de quete',
-          placeholder: 'Ajouter un objet de quête.',
+          title: 'objets de quête',
+          subtitle: 'A quoi peut bien servir cette clé en forme de choux ?',
+          placeholder: 'ajouter un objet de quête.',
           formName: 'quest',
           icon: 'help'
         }
@@ -102,7 +86,7 @@ export const routes: Routes = [
         component: ListComponent,
         data: {
           title: 'butin a revendre (ou pas)',
-          subtitle: 'tout ces machins volés sur les innocents, ou récupérés dans des coffres...',
+          subtitle: 'Tous ces machins volés sur les innocents, ou récupérés dans des coffres...',
           placeholder: 'Ajouter du butin.',
           formName: 'loot',
           icon: 'cash'
@@ -112,9 +96,10 @@ export const routes: Routes = [
         path: 'bags',
         component: BagsComponent,
         data: {
-          title: 'sac et transport',
+          title: 'sacs et bourses',
+          subtitle: 'Si vous me dites que personne n\'a de briquet...',
           formName: 'bags',
-          icon: 'basket'
+          icon: 'bag-handle'
         }
       },
       {
@@ -122,6 +107,7 @@ export const routes: Routes = [
         component: CampComponent,
         data: {
           title: 'materiel de bivouac et camping',
+          subtitle: 'Tu peux venir dans ma couche !',
           formName: 'camp',
           icon: 'bonfire'
         }
@@ -131,9 +117,22 @@ export const routes: Routes = [
         component: ListComponent,
         data: {
           title: 'bouffe et boisson',
-          placeholder: 'Ajouter un aliment / boisson.',
+          subtitle: 'C\'est pour vous les ours à la bière ?',
+          placeholder: 'ajouter un aliment / boisson.',
           formName: 'food',
           icon: 'beer'
+        }
+      },
+      {
+        path: 'mounts',
+        component: ListMultiComponent,
+        data: {
+          title: 'montures et animaux',
+          subtitle: 'Gouzi gouzi gouzi !',
+          formName: 'mounts',
+          nameLabel: 'bestiole',
+          effectLabel: 'détails',
+          icon: 'paw'
         }
       },
       {
@@ -141,10 +140,11 @@ export const routes: Routes = [
         component: ListMultiComponent,
         data: {
           title: 'objets speciaux, maudit ou reliques',
+          subtitle: 'Scroll of stupidity ? C\'est quoi ?',
           formName: 'special',
-          nameLabel: 'objet',
+          nameLabel: 'nom',
           effectLabel: 'bonus/effets',
-          icon: 'color-wand'
+          icon: 'skull'
         }
       },
       {
@@ -152,11 +152,11 @@ export const routes: Routes = [
         component: ListMultiComponent,
         data: {
           title: 'gemmes et pierres précieuses',
-          subtitle: 'u. g. : unité goltor',
+          subtitle: 'U. G. : unité goltor (Pas de blague... On déconne pas avec les gemmes !)',
           nameLabel: 'nom',
           effectLabel: 'u. g.',
           formName: 'gems',
-          icon: 'contract'
+          icon: 'diamond'
         }
       },
       {
@@ -164,6 +164,7 @@ export const routes: Routes = [
         component: ListMultiComponent,
         data: {
           title: 'potions, poisons, antidotes et ingrédients magiques',
+          subtitle: 'Où ai je bien pu mettre ces yeux de Globzoule ?',
           formName: 'potions',
           nameLabel: 'doses',
           effectLabel: 'effets',
@@ -174,17 +175,17 @@ export const routes: Routes = [
         path: 'precious',
         component: ListComponent,
         data: {
-          title: 'machin precieux',
-          subtitle: 'titres particuliers, montures, habitations, héritages et autre souvenirs...',
-          placeholder: 'Ajouter un objet précieux.',
+          title: 'machins precieux',
+          subtitle: 'Titres particuliers, habitations, héritages et autre souvenirs...',
+          placeholder: 'ajouter un objet précieux.',
           formName: 'precious',
-          icon: 'today'
+          icon: 'sparkles'
         }
       },
       { path: '', redirectTo: 'quest', pathMatch: 'full' }
     ]
   },
-  { path: '**', redirectTo: '' }
+  { path: '', redirectTo: 'persona' }
 ];
 
 @NgModule({

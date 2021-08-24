@@ -1,14 +1,25 @@
-<ion-content>
-  <h3 class="ion-margin-bottom">choisir un personnage</h3>
-  <div (click)="addPersonaAlert()" class="flex-align-center ion-margin-bottom">
-    <ion-icon name="add-circle-outline" class="ion-margin-end"></ion-icon>
-    <div>Créer un nouveau personnage</div>
-  </div>
-  <div *ngFor="let persona of personaService.personas$ | async" class="flex-align-center ion-margin-bottom border-shadow">
-    <ion-icon name="close" (click)="removePersonaAlert(persona)" class="p10"></ion-icon>
-    <div (click)="selectPersona(persona)" routerLink="/char" class="w100 p10">
-      {{ persona.name | titlecase }} est {{ persona.sheets.char.origine ? (persona.sheets.char.origine | titlecase) : 'sans orgine' }}
-      de niveau {{ persona.sheets.char.niveau ? persona.sheets.char.niveau : 0 }}.
-    </div>
-  </div>
+<ion-header>
+  <ion-toolbar>
+    <ion-title><b>Personnages</b></ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-item lines="none" (click)="addPersonaAlert()">
+    <ion-icon name="person-add" slot="start" color="dark"></ion-icon>
+    <ion-label>Ajouter un personnage</ion-label>
+  </ion-item>
+  <ion-card *ngFor="let persona of personaService.personas">
+    <ion-card-header>
+      <ion-card-title>
+        <ion-item lines="none">
+          <ion-label (click)="selectPersona(persona)">
+            <ion-text>{{ persona.name | titlecase }}</ion-text>
+            <ion-text *ngIf="persona.sheets.char.origine"> est {{ persona.sheets.char.origine | titlecase }}</ion-text>
+            <ion-text *ngIf="persona.sheets.char.niveau"> niveau {{ persona.sheets.char.niveau }}</ion-text>
+          </ion-label>
+          <ion-icon name="trash" color="dark" (click)="removePersonaAlert(persona)"></ion-icon>
+        </ion-item>
+      </ion-card-title>
+    </ion-card-header>
+  </ion-card>
 </ion-content>

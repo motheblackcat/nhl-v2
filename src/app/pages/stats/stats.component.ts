@@ -1,5 +1,7 @@
-import { IEffect, ISheets, IStatsSheet } from 'src/app/interfaces/persona.interface';
-import { RouteData } from 'src/app/interfaces/route.interface';
+import { STATS_NAMES } from 'src/app/enums/stats.enum';
+import { IEffect } from 'src/app/interfaces/effect.interface';
+import { IPersonaSheet } from 'src/app/interfaces/persona.interface';
+import { IStatSheet } from 'src/app/interfaces/statsheet.interface';
 import { PersonaService } from 'src/app/services/persona.service';
 
 import { Component, OnInit } from '@angular/core';
@@ -8,61 +10,86 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-stats',
-  templateUrl: './stats.component.html',
-  styleUrls: ['./stats.component.scss']
+  templateUrl: './stats.component.html'
 })
 export class StatsComponent implements OnInit {
-  title: string;
-  formName: string;
+  title: string = 'statistiques';
+  formName: string = 'stats';
   form: FormGroup;
-  efNames: string[] = ['ev', 'ea', 'cou', 'int', 'cha', 'ad', 'fo', 'atq', 'prd'];
+  magPhy = 0;
+  magPsy = 0;
+  resMag = 0;
+  statsNames = [STATS_NAMES.EV, STATS_NAMES.EA, STATS_NAMES.COU, STATS_NAMES.INT, STATS_NAMES.CHA, STATS_NAMES.AD, STATS_NAMES.FO, STATS_NAMES.ATQ, STATS_NAMES.PRD];
+
   constructor(private route: ActivatedRoute, public personaService: PersonaService) { }
 
   ngOnInit() {
-    this.route.data.subscribe((res: RouteData) => {
-      this.title = res.title;
-      this.formName = res.formName;
-      this.form = new FormGroup({});
-      const sheetObject: IStatsSheet = this.personaService.currentPersona.sheets[this.formName];
-      for (const key in sheetObject) {
-        if (key === 'magphy' || key === 'magpsy' || key === 'resmag') {
-          this.form.addControl(key, new FormControl(sheetObject[key]));
-        } else {
-          this.form.addControl(
-            key,
-            new FormGroup({ name: new FormControl(sheetObject[key]['name']), effect: new FormControl(Number(sheetObject[key]['effect'])) })
-          );
-        }
-      }
+    this.form = new FormGroup({});
+    const sheetObject: IStatSheet = this.personaService.currentPersona.sheets[this.formName];
+
+    /** Note: Removed unused props from old data format - could be readded for text export */
+    delete sheetObject['magphy'];
+    delete sheetObject['magpsy'];
+    delete sheetObject['resmag'];
+
+    for (const key in sheetObject) {
+      this.form.addControl(key, new FormGroup({
+        name: new FormControl(sheetObject[key]['name']),
+        effect: new FormControl(Number(sheetObject[key]['effect']))
+      }));
+    }
+
+    this.route.data.subscribe(() => {
       this.updateMagStats();
-    });
+      this.updateEffects();
+    })
+  }
+
+  getEffectColor(value: number): string {
+    switch (Math.sign(value)) {
+      case 1:
+        return 'success';
+
+      case -1:
+        return 'danger';
+
+      default:
+        return 'medium'
+    }
+  }
+
+  getEffectValue(control: string): number {
+    return this.form.get(control).get('effect').value
   }
 
   updateMagStats() {
-    this.updateEffects();
-    const sheetObject: IStatsSheet = this.personaService.currentPersona.sheets[this.formName];
+    const sheetObject: IStatSheet = this.personaService.currentPersona.sheets[this.formName];
     const int = Number(sheetObject.int.name + sheetObject.int.effect);
     const ad = Number(sheetObject.ad.name + sheetObject.ad.effect);
     const cha = Number(sheetObject.cha.name + sheetObject.cha.effect);
     const cou = Number(sheetObject.cou.name + sheetObject.cou.effect);
     const fo = Number(sheetObject.fo.name + sheetObject.fo.effect);
-    this.form.get('magphy').setValue(Math.ceil((int + ad) / 2));
-    this.form.get('magpsy').setValue(Math.ceil((int + cha) / 2));
-    this.form.get('resmag').setValue(Math.ceil((cou + int + fo) / 3));
+
+    this.magPhy = Math.ceil((int + ad) / 2);
+    this.magPsy = Math.ceil((int + cha) / 2);
+    this.resMag = Math.ceil((cou + int + fo) / 3);
+
     this.personaService.updatePersonas(this.formName, this.form.value);
   }
 
   updateEffects() {
-    const sheetObject: ISheets = this.personaService.currentPersona.sheets;
-    const weaponsEffects = sheetObject.weapons.filter(weapon => weapon.effects.length > 0 && weapon.equiped).map(weapon => weapon.effects);
-    const armorsEffects = sheetObject.armors.list.filter(armor => armor.effects.length > 0 && armor.equiped).map(armor => armor.effects);
+    const sheetObject: IPersonaSheet = this.personaService.currentPersona.sheets;
+    const weaponsEffects = sheetObject.weapons.filter(weapon => weapon.equiped).map(weapon => weapon.effects);
+    const armorsEffects = sheetObject.armors.list.filter(armor => armor.equiped).map(armor => armor.effects);
     const effects: IEffect[] = [].concat(...weaponsEffects, ...armorsEffects);
-    this.efNames.forEach(stat => {
+
+    Object.keys(this.form.controls).forEach(stat => {
       this.form
         .get(stat)
         .get('effect')
         .setValue(effects.filter(e => e.name === stat).reduce((a, b) => a + Number(b.effect), 0));
     });
+
     this.personaService.updatePersonas(this.formName, this.form.value);
   }
 }

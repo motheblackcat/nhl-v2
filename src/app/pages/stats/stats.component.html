@@ -1,37 +1,42 @@
-<ion-content [formGroup]="form" (change)="updateMagStats()">
-  <h3>{{ title }}</h3>
-  <br />
-  <div *ngFor="let control of form.controls | keyvalue: personaService.defaultOrder" [ngSwitch]="control.key">
-    <label [for]="control.key" *ngSwitchCase="'ev'">Energie Vitale (EV)</label>
-    <label [for]="control.key" *ngSwitchCase="'ea'">Energie Astrale (EA)</label>
-    <label [for]="control.key" *ngSwitchCase="'cou'">Courage (COU)</label>
-    <label [for]="control.key" *ngSwitchCase="'int'">Intelligence (INT)</label>
-    <label [for]="control.key" *ngSwitchCase="'cha'">Charisme (CHA)</label>
-    <label [for]="control.key" *ngSwitchCase="'ad'">Adresse (AD)</label>
-    <label [for]="control.key" *ngSwitchCase="'fo'">Force (FO)</label>
-    <label [for]="control.key" *ngSwitchCase="'atq'">ATTAQUE</label>
-    <label [for]="control.key" *ngSwitchCase="'prd'">PARADE</label>
-    <label [for]="control.key" *ngSwitchCase="'magphy'">Magie Phy.</label>
-    <label [for]="control.key" *ngSwitchCase="'magpsy'">Magie Psy.</label>
-    <label [for]="control.key" *ngSwitchCase="'resmag'">Résist. Mag.</label>
-    <ng-container [formGroupName]="control.key">
-      <input
-        text-center
-        *ngIf="control.key !== 'magphy' && control.key !== 'magpsy' && control.key !== 'resmag'"
-        type="number"
-        [id]="control.key"
-        placeholder="0"
-        formControlName="name"
-      />
-    </ng-container>
-    <span *ngIf="control.key === 'magphy' || control.key === 'magpsy' || control.key === 'resmag'; else effect" justify-content-center>
-      {{ form.get(control.key).value }}
-    </span>
-    <ng-template #effect>
-      <span>{{ form.get(control.key).get('effect').value }}</span>
-    </ng-template>
-    <div class="hint" *ngSwitchCase="'magphy'">Moyenne INT et AD</div>
-    <div class="hint" *ngSwitchCase="'magpsy'">Moyenne INT et CHA</div>
-    <div class="hint" *ngSwitchCase="'resmag'">Moyenne COU, INT et FO</div>
-  </div>
+<ion-header>
+  <ion-toolbar>
+    <ion-title><b>{{ title | titlecase }}</b></ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding-horizontal">
+  <ion-grid [formGroup]="form" (change)="updateEffects(); updateMagStats()" (ionChange)="updateEffects(); updateMagStats()">
+    <ion-row *ngFor="let control of form.controls | keyvalue: personaService.defaultOrder; let i = index" class="ion-align-items-center">
+      <ion-col size="4" class="ion-text-nowrap">{{ statsNames[i] }}</ion-col>
+      <ion-col size="6" class="ion-text-center" [formGroupName]="control.key">
+        <ion-input type="number" placeholder="0" formControlName="name"></ion-input>
+      </ion-col>
+      <ion-col>
+        <ion-text [color]="getEffectColor(form.get(control.key).get('effect').value)">
+          {{ getEffectValue(control.key) > 0 ? '+' : '' }}{{ getEffectValue(control.key) }}
+        </ion-text>
+      </ion-col>
+    </ion-row>
+    <br>
+    <ion-row>
+      <ion-col>Magie Phy.</ion-col>
+      <ion-col size="5">
+        <ion-note>Moy. INT / AD</ion-note>
+      </ion-col>
+      <ion-col>{{ magPhy }}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>Magie Psy.</ion-col>
+      <ion-col size="5">
+        <ion-note>Moy. INT / CHA</ion-note>
+      </ion-col>
+      <ion-col>{{ magPsy }}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>Résist. Mag.</ion-col>
+      <ion-col size="5">
+        <ion-note>Moy. COU / INT / FO</ion-note>
+      </ion-col>
+      <ion-col>{{ resMag }}</ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

@@ -1,4 +1,4 @@
-import { ICampSheet } from 'src/app/interfaces/persona.interface';
+import { ICampSheet } from 'src/app/interfaces/campsheet.interface';
 import { RouteData } from 'src/app/interfaces/route.interface';
 import { PersonaService } from 'src/app/services/persona.service';
 
@@ -12,22 +12,27 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CampComponent implements OnInit {
   title: string;
+  subtitle: string;
   formName: string;
   form: FormGroup;
+  totalWeight: number = 0;
+  campNames: string[] = ['tente', 'matelas', 'couverture'];
+
   get autres() {
     return <FormArray>this.form.get('autres');
   }
-  totalWeight: number;
+
   constructor(private route: ActivatedRoute, public personaService: PersonaService) { }
 
   ngOnInit(): void {
     this.route.data.subscribe((res: RouteData) => {
       this.title = res.title;
+      this.subtitle = res.subtitle;
       this.formName = res.formName;
-      this.totalWeight = 0;
 
       this.form = new FormGroup({});
       const sheetObject: ICampSheet = this.personaService.currentPersona.sheets[this.formName];
+
       for (const key in sheetObject) {
         if (key !== 'autres') {
           this.form.addControl(key, new FormGroup({}));
@@ -43,22 +48,25 @@ export class CampComponent implements OnInit {
           });
         }
       }
+
       this.updateTotalWeight();
     });
   }
 
   updateTotalWeight() {
-    this.totalWeight =
-      Number(this.form.get('tente').get('wei').value) +
-      Number(this.form.get('matelas').get('wei').value) +
-      Number(this.form.get('couverture').get('wei').value) +
-      this.form.get('autres').value.reduce((a, b) => a + b.wei, 0);
+    this.totalWeight = Number(this.form.get('tente').get('wei').value)
+      + Number(this.form.get('matelas').get('wei').value)
+      + Number(this.form.get('couverture').get('wei').value)
+      + this.form.get('autres').value.reduce((a, b) => a + b.wei, 0);
+
+    this.totalWeight = Math.round(this.totalWeight * 10) / 10;
+
     this.personaService.updatePersonas(this.formName, this.form.value);
   }
 
   addItem() {
     (this.form.get('autres') as FormArray).push(new FormGroup({ name: new FormControl(), wei: new FormControl() }));
-    this.personaService.updatePersonas(this.formName, this.form.value);
+    this.updateTotalWeight();
   }
 
   removeItem(i: number) {

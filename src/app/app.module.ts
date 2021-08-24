@@ -2,32 +2,33 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { Vibration } from '@ionic-native/vibration/ngx';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage-angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FabComponent } from './components/fab/fab.component';
 import { ArmorComponent } from './pages/armor/armor.component';
 import { CharComponent } from './pages/char/char.component';
 import { BagsComponent } from './pages/inv/bags/bags.component';
 import { CampComponent } from './pages/inv/camp/camp.component';
 import { InvComponent } from './pages/inv/inv.component';
+import { ListMultiComponent } from './pages/inv/list-multi/list-multi.component';
+import { ListComponent } from './pages/inv/list/list.component';
 import { PersonaComponent } from './pages/persona/persona.component';
+import { SkillAddComponent } from './pages/skill/skill-add/skill-add.component';
+import { SkillDetailsComponent } from './pages/skill/skill-details/skill-details.component';
+import { SkillComponent } from './pages/skill/skill.component';
 import { StatsComponent } from './pages/stats/stats.component';
 import { WeaponComponent } from './pages/weapon/weapon.component';
-import { FabComponent } from './shared/fab/fab.component';
-import { ListMultiComponent } from './shared/list-multi/list-multi.component';
-import { ListComponent } from './shared/list/list.component';
-import { SkillsDetailsComponent } from './shared/skill-desc/skill-desc.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FabComponent,
-    SkillsDetailsComponent,
+    SkillComponent,
+    SkillAddComponent,
+    SkillDetailsComponent,
     ListComponent,
     ListMultiComponent,
     PersonaComponent,
@@ -40,7 +41,7 @@ import { SkillsDetailsComponent } from './shared/skill-desc/skill-desc.component
     ArmorComponent
   ],
   imports: [BrowserModule, ReactiveFormsModule, IonicModule.forRoot({ mode: 'md' }), IonicStorageModule.forRoot(), AppRoutingModule],
-  providers: [StatusBar, SplashScreen, Vibration, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

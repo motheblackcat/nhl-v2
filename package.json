@@ -1,6 +1,6 @@
 {
   "name": "nhl",
-  "version": "2.1.7",
+  "version": "2.2",
   "author": "Morad EL HAMDOUNI",
   "homepage": "https://github.com/motheblackcat/nhl-v2",
   "scripts": {
@@ -30,14 +30,14 @@
     "zone.js": "^0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/architect": "^0.1300.2",
+    "@angular-devkit/architect": "^0.1201.1",
     "@angular-devkit/core": "~12.2.2",
     "@angular-devkit/schematics": "~12.2.2",
-    "@angular-eslint/builder": "13.0.0-alpha.0",
-    "@angular-eslint/eslint-plugin": "13.0.0-alpha.0",
-    "@angular-eslint/eslint-plugin-template": "13.0.0-alpha.0",
-    "@angular-eslint/schematics": "13.0.0-alpha.0",
-    "@angular-eslint/template-parser": "13.0.0-alpha.0",
+    "@angular-eslint/builder": "13.0.1",
+    "@angular-eslint/eslint-plugin": "13.0.1",
+    "@angular-eslint/eslint-plugin-template": "13.0.1",
+    "@angular-eslint/schematics": "13.0.1",
+    "@angular-eslint/template-parser": "13.0.1",
     "@angular/cli": "^13.0.2",
     "@angular/compiler": "~13.0.1",
     "@angular/compiler-cli": "^13.0.1",
@@ -52,7 +52,7 @@
     "cordova-android": "^9.1.0",
     "cordova-browser": "^6.0.0",
     "cordova-plugin-ionic-webview": "^5.0.0",
-    "eslint": "^8.1.0",
+    "eslint": "^8.2.0",
     "jasmine-core": "^3.9.0",
     "jasmine-spec-reporter": "~7.0.0",
     "karma": "^6.3.4",

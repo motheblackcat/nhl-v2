@@ -1,44 +1,46 @@
-<ion-content [formGroup]="form" (change)="updateSheet()">
-  <h3>sacs et transport</h3>
-  <div>
-    <label class="hint">charge max. origine / métier :</label>
-    <input type="number" step="0.5" min="0" formControlName="max" placeholder="0" class="ion-text-center w25" />
-    <label>Kg</label>
-  </div>
-  <br />
-  <div class="flex-align-center justify-between">
-    <label class="ion-text-uppercase">sacs</label>
-    <label>poids max.</label>
-  </div>
-  <br />
-  <ng-container formArrayName="bags">
-    <div class="flex-align-center ion-margin-bottom" *ngFor="let bag of bags.controls; let i = index" [formGroupName]="i">
-      <ion-icon name="close" (click)="removeItem('bags', i)" class="ion-margin-end"></ion-icon>
-      <input type="text" formControlName="name" placeholder="nom" class="w100" />
-      <input type="number" step="0.5" min="0" formControlName="max" placeholder="0" class="ion-text-center w25" />
-      <label>kg</label>
-    </div>
-  </ng-container>
-  <div class="flex-align-center" (click)="addItem('bags')">
-    <ion-icon name="add-circle-outline" class="ion-margin-end"></ion-icon>
-    <label>Ajouter un sac</label>
-  </div>
-  <br />
-  <br />
-  <div class="flex-align-center justify-between">
-    <label class="ion-text-uppercase">bourses</label>
-    <label>p. o. max.</label>
-  </div>
-  <br />
-  <ng-container formArrayName="pooches">
-    <div class="flex-align-center ion-margin-bottom" *ngFor="let pooch of pooches.controls; let i = index" [formGroupName]="i">
-      <ion-icon name="close" (click)="removeItem('pooches', i)" class="ion-margin-end"></ion-icon>
-      <input type="text" formControlName="name" placeholder="nom" class="w100" />
-      <input type="number" step="0.5" min="0" formControlName="max" placeholder="0" class="ion-text-center w25" />
-    </div>
-  </ng-container>
-  <div class="flex-align-center last" (click)="addItem('pooches')">
-    <ion-icon name="add-circle-outline" class="ion-margin-end"></ion-icon>
-    <label>Ajouter une bourse</label>
-  </div>
+<ion-header>
+  <ion-toolbar>
+    <ion-title><b>{{ title | titlecase }}</b></ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-text *ngIf="subtitle"><i>{{ subtitle }}</i></ion-text>
+  <ion-list lines="none" [formGroup]="form" (ionChange)="updateSheet()">
+    <ion-item lines="none">
+      <ion-label slot="start">Charge max. origine / métier :</ion-label>
+      <ion-input type="number" step="0.1" min="0" placeholder="0" formControlName="max"></ion-input>
+      <ion-label>Kg</ion-label>
+    </ion-item>
+    <ion-item class="ion-justify-content-between">
+      <ion-label>Sacs</ion-label>
+      <ion-label class="ion-text-end">Poids max. (Kg)</ion-label>
+    </ion-item>
+    <ng-container formArrayName="bags">
+      <ion-item *ngFor="let bag of bags.controls; let i = index" lines="none" [formGroupName]="i">
+        <ion-icon slot="start" name="trash" color="dark" (click)="removeItem('bags', i)"></ion-icon>
+        <ion-input type="text" placeholder="Nom" formControlName="name" class="ion-text-capitalize"></ion-input>
+        <ion-input class="ion-text-end" type="number" step="0.1" min="0" placeholder="0" formControlName="max"></ion-input>
+      </ion-item>
+    </ng-container>
+    <ion-item (click)="addItem('bags')">
+      <ion-icon slot="start" name="add-circle" color="dark"></ion-icon>
+      <ion-label>Ajouter un sac</ion-label>
+    </ion-item>
+    <br>
+    <ion-item class="ion-justify-content-between">
+      <ion-label>Bourses</ion-label>
+      <ion-label class="ion-text-end">P. O. max.</ion-label>
+    </ion-item>
+    <ng-container formArrayName="pooches">
+      <ion-item *ngFor="let pooch of pooches.controls; let i = index" lines="none" [formGroupName]="i">
+        <ion-icon slot="start" name="trash" color="dark" (click)="removeItem('pooches', i)"></ion-icon>
+        <ion-input type="text" placeholder="Nom" formControlName="name" class="ion-text-capitalize"></ion-input>
+        <ion-input class="ion-text-end" type="number" step="0.1" min="0" placeholder="0" formControlName="max"></ion-input>
+      </ion-item>
+    </ng-container>
+    <ion-item (click)="addItem('pooches')">
+      <ion-icon slot="start" name="add-circle" color="dark"></ion-icon>
+      <ion-label>Ajouter une bourse</ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

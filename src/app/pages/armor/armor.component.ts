@@ -1,11 +1,11 @@
-import { skillsList } from 'src/app/consts/skills-list.consts';
-import { IStatsSheet } from 'src/app/interfaces/persona.interface';
-import { RouteData } from 'src/app/interfaces/route.interface';
-import { Armor, ArmorSheet } from 'src/app/models/persona.model';
+import { ARMORS_SLOTS } from 'src/app/enums/armors.enum';
+import { STATS_NAMES } from 'src/app/enums/stats.enum';
+import { IStatSheet } from 'src/app/interfaces/statsheet.interface';
+import { Armor, ArmorSheet } from 'src/app/models/armorsheet.model';
 import { PersonaService } from 'src/app/services/persona.service';
 
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -13,96 +13,112 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './armor.component.html'
 })
 export class ArmorComponent implements OnInit {
-  title: string;
-  formName: string;
+  title: string = 'armure et protection';
+  formName: string = 'armors';
+  opens: boolean[] = [];
   form: FormGroup;
+  armorNames = [ARMORS_SLOTS.HEAD, ARMORS_SLOTS.TORSO, ARMORS_SLOTS.SHIELD, ARMORS_SLOTS.ARMS, ARMORS_SLOTS.HANDS, ARMORS_SLOTS.LEGS, ARMORS_SLOTS.FEET, ARMORS_SLOTS.RINGS, ARMORS_SLOTS.CAPES, ARMORS_SLOTS.OTHERS];
+  statsCodes: string[] = Object.keys(this.personaService.currentPersona.sheets['stats']);;
+  statsNames: string[] = [STATS_NAMES.EV, STATS_NAMES.EA, STATS_NAMES.COU, STATS_NAMES.INT, STATS_NAMES.CHA, STATS_NAMES.AD, STATS_NAMES.FO, STATS_NAMES.ATQ, STATS_NAMES.PRD];
+  prNat: number;
+  prMag: number;
+  tdm: number;
+
   get list() {
     return <FormArray>this.form.get('list');
   }
-  armorNames: String[];
-  statsNames: String[];
-  prNat: number;
-  prMag: number;
-  constructor(private route: ActivatedRoute, public personaService: PersonaService) { }
+
+  get effects() {
+    return (i: number) => this.list.at(i).get('effects') as FormArray
+  }
+
+  constructor(private route: ActivatedRoute, private fb: FormBuilder, public personaService: PersonaService) { }
 
   ngOnInit() {
-    this.route.data.subscribe((res: RouteData) => {
-      this.title = res.title;
-      this.formName = res.formName;
-      this.form = new FormGroup({});
-      this.armorNames = ['tete', 'torse', 'bouclier', 'bras', 'mains', 'jambes', 'pieds'];
-      const sheetObject: ArmorSheet = this.personaService.currentPersona.sheets[this.formName];
+    this.form = this.fb.group({ list: this.fb.array([]) });
 
-      if (sheetObject.list.length <= 0) {
-        this.armorNames.forEach(() => sheetObject.list.push(new Armor()));
-      }
+    const sheetObject: ArmorSheet = this.personaService.currentPersona.sheets[this.formName];
 
-      const tdm = !!this.personaService.currentPersona.sheets['skills'].find(
-        skill => skill.toLowerCase().trim() === skillsList[skillsList.length - 1].title.toLowerCase()
+    /** Note: Remove unused properties from old data format */
+    delete sheetObject['prNat'];
+    delete sheetObject['prMag'];
+
+    sheetObject.list.forEach((armor: Armor, index: number) => {
+      this.list.push(
+        this.fb.group({
+          type: armor.type ? armor.type : this.armorNames[index],
+          name: armor.name,
+          pr: armor.pr,
+          rup: armor.rup,
+          equiped: armor.equiped,
+          effects: this.fb.array([])
+        })
       );
 
-      this.form.addControl('tdm', new FormControl({ value: tdm, disabled: true }));
-      this.form.addControl('prNat', new FormControl(sheetObject['prNat']));
-      this.form.addControl('prMag', new FormControl(sheetObject['prMag']));
-      this.form.addControl('list', new FormArray([]));
-
-      sheetObject.list.forEach(armor => {
-        (this.form.get('list') as FormArray).push(
-          new FormGroup({
-            name: new FormControl(armor.name),
-            pr: new FormControl(armor.pr),
-            rup: new FormControl(armor.rup),
-            equiped: new FormControl(armor.equiped),
-            effects: new FormArray([])
-          })
-        );
-        const armorIndex = sheetObject.list.indexOf(armor);
-        const effects = (this.form.get('list') as FormArray).at(armorIndex).get('effects') as FormArray;
-        armor.effects.forEach(effect =>
-          effects.push(new FormGroup({ name: new FormControl(effect.name), effect: new FormControl(effect.effect) }))
-        );
-      });
-      this.statsNames = Object.keys(this.personaService.currentPersona.sheets['stats']).filter(
-        stat => stat !== 'magpsy' && stat !== 'magphy' && stat !== 'resmag'
+      const effects: FormArray = this.list.at(sheetObject.list.indexOf(armor)).get('effects') as FormArray;
+      armor.effects.forEach(effect =>
+        effects.push(this.fb.group({ name: effect.name, effect: effect.effect }))
       );
-      this.prSums();
+
+      this.opens.push(false);
     });
+
+    this.updateSheet();
   }
 
   updateSheet() {
-    this.prSums();
-  }
-
-  prSums() {
-    const sum = this.form
-      .get('list')
-      .value.filter(armor => armor.equiped)
+    const prSum = this.form
+      .get('list').value
+      .filter(armor => armor.equiped)
       .map(armor => Number(armor.pr))
       .reduce((a: number, b: number) => a + b, 0);
-    this.prNat = this.form.get('tdm').value ? sum + 1 : sum;
-    this.form.get('prNat').setValue(this.prNat);
 
-    const statsSheet: IStatsSheet = this.personaService.currentPersona.sheets['stats'];
+    this.tdm = this.personaService.currentPersona.sheets['skills'].includes('truc de mauviette (pr)') ? 1 : 0;
+    this.prNat = prSum + this.tdm;
+
+    const statsSheet: IStatSheet = this.personaService.currentPersona.sheets['stats'];
     this.prMag = Math.ceil(Number(statsSheet.cou.name + statsSheet.int.name + statsSheet.fo.name) / 3);
-    this.form.get('prMag').setValue(this.prMag);
 
     this.personaService.updatePersonas(this.formName, this.form.value);
   }
 
-  addItem(i: number) {
-    const armorPiece = (this.form.get('list') as FormArray).at(i);
-    (armorPiece.get('effects') as FormArray).push(
-      new FormGroup({
-        name: new FormControl('ev'),
-        effect: new FormControl()
-      })
-    );
+  addArmor(armor: any) {
+    if (armor.value) {
+      this.list.push(
+        this.fb.group({
+          type: armor.value,
+          name: '',
+          pr: '',
+          rup: '',
+          equiped: false,
+          effects: this.fb.array([])
+        })
+      );
+      armor.value = '';
+      this.updateSheet();
+    }
+  }
+
+  equipArmor(equiped: boolean, i: number) {
+    this.list.at(i).get('equiped').setValue(equiped ? false : true);
     this.updateSheet();
   }
 
-  removeItem(i: number, j: number) {
-    const armorPiece = (this.form.get('list') as FormArray).at(i);
-    (armorPiece.get('effects') as FormArray).removeAt(j);
+  removeArmor(i: number) {
+    this.list.removeAt(i);
+    this.opens.splice(i, 1);
+    this.updateSheet();
+  }
+
+  addEffect(i: number) {
+    const armorsList = this.list.at(i);
+    (armorsList.get('effects') as FormArray).push(this.fb.group({ name: 'ev', effect: '' }));
+    this.updateSheet();
+  }
+
+  removeEffect(i: number, j: number) {
+    const armorsList = this.list.at(i);
+    (armorsList.get('effects') as FormArray).removeAt(j);
     this.updateSheet();
   }
 }

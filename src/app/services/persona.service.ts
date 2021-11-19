@@ -1,47 +1,44 @@
-import { BehaviorSubject } from 'rxjs';
-
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 
-import { PERSONAS } from '../consts/storage.consts';
-import { IPersona, ISheets } from '../interfaces/persona.interface';
+import { IPersona, IPersonaSheet } from '../interfaces/persona.interface';
 import { PersonaSheet } from '../models/persona.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PersonaService {
-  personas$: BehaviorSubject<IPersona[]> = new BehaviorSubject<IPersona[]>([]);
-  currentPersona: IPersona;
+  personas: IPersona[] = [];
+  currentPersona: IPersona = null;
+  personasKey = 'personas';
   constructor(private store: Storage) { }
 
   getPersonas() {
-    this.store.get(PERSONAS).then(data => {
-      data ? this.personas$.next(data) : this.store.set(PERSONAS, []);
-    });
+    this.store.get(this.personasKey)
+      .then(data => data ? this.personas = [...data] : this.store.set(this.personasKey, []));
   }
 
   addPersona(personaName: string) {
     const newPersona: IPersona = { name: personaName, sheets: new PersonaSheet(personaName) };
-    const updatedPersonas: IPersona[] = [...this.personas$.value, newPersona];
-    this.personas$.next(updatedPersonas);
-    this.store.set(PERSONAS, this.personas$.value);
+    const updatedPersonas: IPersona[] = [...this.personas, newPersona];
+    this.personas = [...updatedPersonas];
+    this.store.set(this.personasKey, this.personas);
   }
 
-  updatePersonas(formName: string, personaSheet: ISheets) {
-    const currentPersonas = this.personas$.value;
+  updatePersonas(formName: string, personaSheet: IPersonaSheet) {
+    const currentPersonas = this.personas;
     const currentPersona = currentPersonas.find(pers => pers === this.currentPersona);
     currentPersona.sheets[formName] = personaSheet;
     currentPersona.name = currentPersona.sheets['char'].nom;
-    this.personas$.next(currentPersonas);
-    this.store.set(PERSONAS, this.personas$.value);
+    this.personas = [...currentPersonas];
+    this.store.set(this.personasKey, this.personas);
   }
 
   removePersona(persona: IPersona) {
-    const updatedPersonas = this.personas$.value;
+    const updatedPersonas = this.personas;
     updatedPersonas.splice(updatedPersonas.indexOf(persona), 1);
-    this.personas$.next(updatedPersonas);
-    this.store.set(PERSONAS, this.personas$.value);
+    this.personas = [...updatedPersonas];
+    this.store.set(this.personasKey, this.personas);
   }
 
   defaultOrder(): number {

@@ -11,7 +11,7 @@ log.txt
 *.sublime-workspace
 .vscode/
 npm-debug.log*
-
+.angular/
 .idea/
 .ionic/
 .sourcemaps/
@@ -19,6 +19,7 @@ npm-debug.log*
 .tmp/
 .versions/
 coverage/
+others/
 www/
 node_modules/
 tmp/
@@ -33,6 +34,3 @@ resources/
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate
-
-*.keystore
-jarsign-zipalign.txt

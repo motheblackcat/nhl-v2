@@ -1,129 +1,37 @@
-@import '~@ionic/angular/css/core.css';
-@import '~@ionic/angular/css/normalize.css';
-@import '~@ionic/angular/css/structure.css';
-@import '~@ionic/angular/css/typography.css';
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
 
-@import '~@ionic/angular/css/padding.css';
-@import '~@ionic/angular/css/float-elements.css';
-@import '~@ionic/angular/css/text-alignment.css';
-@import '~@ionic/angular/css/text-transformation.css';
-@import '~@ionic/angular/css/flex-utils.css';
+/* Core CSS required for Ionic components to work properly */
+
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import "~@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+/* NOTE: float-elements.css produces several warnings */
+
+@import "~@ionic/angular/css/padding.css";
+// @import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+/* Custom font used in the app */
 
 @font-face {
-  font-family: 'dauphin';
-  src: url('assets/fonts/dauphin.ttf');
-}
-
-/** Global elements styling **/
-
-ion-content {
-  --padding-end: 20px;
-  --padding-start: 20px;
-}
-
-ion-icon {
-  font-size: 25px;
-  font-weight: bold;
-}
-
-h3 {
-  text-transform: uppercase;
-  font-weight: bold;
-}
-
-label,
-input {
-  text-transform: capitalize;
-}
-
-input {
-  border: 0;
-  background: none;
-}
-
-input[type='radio'] {
-  display: none;
-}
-
-select {
-  padding: 5px 10px;
-  border-radius: 5px;
-  background: none;
-
-  option {
-    font-weight: bold;
-    background-color: #dacfab;
-  }
-}
-
-/** Helper classes **/
-
-.flex-align-center {
-  display: flex;
-  align-items: center;
-}
-
-.justify-between {
-  justify-content: space-between;
-}
-
-.w100 {
-  width: 100%;
-}
-
-.w25 {
-  width: 25%;
-}
-
-.w23 {
-  width: 23%;
-}
-
-.p10 {
-  padding: 10px;
-}
-
-.alert {
-  .alert-wrapper {
-    .alert-title {
-      font-weight: bold;
-    }
-    .alert-input {
-      font-size: larger;
-    }
-    .alert-button {
-      font-weight: bold;
-      font-size: larger;
-    }
-  }
-}
-
-/** Custom style classes **/
-
-.hint {
-  font-size: 0.9em;
-  font-style: italic;
-  font-weight: normal;
-}
-
-.selected {
-  color: black;
-}
-
-.border-shadow {
-  border: 1px solid black;
-  border-radius: 5px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-}
-
-.card {
-  border: 1px solid black;
-  border-radius: 5px;
-  padding: 10px 15px;
-  margin-bottom: 20px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-}
-
-.last {
-  margin-bottom: 75px !important;
+  font-family: "dauphin";
+  src: url("assets/fonts/dauphin.ttf");
 }

@@ -1,43 +1,44 @@
-<ion-content [formGroup]="form" (change)="updateTotalWeight()">
-  <h3>{{ title }}</h3>
-  <div class="hint ion-margin-bottom">Récup. : Récupération PV</div>
-  <ng-container *ngFor="let control of form.controls | keyvalue: personaService.defaultOrder">
-    <div *ngIf="control.key !== 'autres' && control.key !== 'totalWeight'" [formGroupName]="control.key">
-      <div class="ion-margin-bottom">
-        <label>{{ control.key }}</label>
-      </div>
-      <div class="ion-margin-bottom">
-        <div>
-          <label class="ion-margin-end">Nom:</label>
-          <input type="text" formControlName="name" placeholder="Nom" />
-        </div>
-        <div>
-          <input type="number" step="0.5" min="0" formControlName="pv" placeholder="0" class="w23" />
-          <label>PV /</label>
-          <input type="number" step="0.5" min="0" formControlName="h" placeholder="0" class="ion-text-end w23" />
-          <label class="ion-margin-start">H</label>
-          <input type="number" step="0.5" min="0" formControlName="wei" placeholder="0" class="ion-text-end w23" />
-          <label class="ion-margin-start">Kg</label>
-        </div>
-      </div>
-    </div>
-  </ng-container>
-  <br />
-  <div class="flex-align-center justify-between ion-margin-bottom">
-    <label>Nom</label>
-    <label>Poids</label>
-  </div>
-  <ng-container formArrayName="autres" *ngFor="let control of autres.controls; let i = index">
-    <div class="flex-align-center justify-between ion-margin-bottom" [formGroupName]="i">
-      <ion-icon name="close" (click)="removeItem(i)"></ion-icon>
-      <input type="text" formControlName="name" placeholder="nom" class="w100" />
-      <input type="number" step="0.5" min="0" formControlName="wei" placeholder="poids" class="ion-text-center w25" />
-    </div>
-  </ng-container>
-  <br />
-  <div class="flex-align-center ion-margin-bottom" (click)="addItem()">
-    <ion-icon name="add-circle-outline" class="ion-margin-end"></ion-icon>
-    <label>Ajouter un objet</label>
-  </div>
-  <div class="last ion-text-end">Poids total: {{ totalWeight }} Kg</div>
+<ion-header>
+  <ion-toolbar>
+    <ion-title><b>{{ title | titlecase }}</b></ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding" [formGroup]="form" (ionChange)="updateTotalWeight()">
+  <ion-text *ngIf="subtitle"><i>{{ subtitle }}</i></ion-text>
+  <ion-list>
+    <ng-container *ngFor="let campName of campNames" [formGroupName]="campName">
+      <ion-item lines="none">
+        <ion-label slot="start">{{ campName | titlecase  }}</ion-label>
+        <ion-input type="text" formControlName="name" placeholder="Nom" class="ion-text-capitalize"></ion-input>
+      </ion-item>
+      <ion-item lines="none" class="ion-text-center">
+        <ion-input type="number" min="0" placeholder="0" formControlName="pv"></ion-input>
+        <ion-label>PV</ion-label>
+        <ion-input type="number" min="0" placeholder="0" formControlName="h"></ion-input>
+        <ion-label>H</ion-label>
+        <ion-input type="number" step="0.1" min="0" placeholder="0" formControlName="wei"></ion-input>
+        <ion-label>Kg</ion-label>
+      </ion-item>
+      <br>
+    </ng-container>
+    <ion-item lines="none" class="ion-justify-content-between">
+      <ion-label>Nom</ion-label>
+      <ion-label class="ion-text-end">Poids</ion-label>
+    </ion-item>
+    <ng-container formArrayName="autres" *ngFor="let control of autres.controls; let i = index">
+      <ion-item lines="none" [formGroupName]="i">
+        <ion-icon slot="start" name="trash" color="dark" (click)="removeItem(i)"></ion-icon>
+        <ion-input placeholder="Nom" formControlName="name" class="ion-text-capitalize"></ion-input>
+        <ion-input class="ion-text-end" type="number" step="0.1" min="0" placeholder="0" formControlName="wei"></ion-input>
+        <ion-label>Kg</ion-label>
+      </ion-item>
+    </ng-container>
+    <ion-item lines="none" (click)="addItem()">
+      <ion-icon slot="start" name="add-circle" color="dark"></ion-icon>
+      <ion-label>Ajouter un objet</ion-label>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label slot="end">Poids total: {{ totalWeight }} Kg</ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

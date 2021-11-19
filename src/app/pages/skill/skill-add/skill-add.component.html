@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="modalCtrl.dismiss()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-capitalize">Ajouter une compétence</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-searchbar placeholder="Rechercher" (ionChange)="updateSearchList($event.target)"></ion-searchbar>
+  <ion-button expand="block" fill="outline" (click)="addUnlistedSkill()">
+    Ajouter une compétence non listée
+  </ion-button>
+  <ion-list lines="none">
+    <ion-item *ngFor="let skill of searchList">
+      <ion-label (click)="selectSkill(skill)" class="ion-text-capitalize">{{ skill }}</ion-label>
+      <ion-icon slot="end" name="help-circle" color="dark" (click)="showSkillDetails(skill)"></ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="modalCtrl.dismiss()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ skill ? (skill.title | titlecase) : 'Compétence non listée' }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-grid>
+    <ng-container *ngIf="!skill">
+      <ion-row>
+        <ion-col>
+          Cette compétence n'est pas listée dans l'application veuillez consulter le manuel de l'extention concernée sur le site officiel !
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <a href="http://www.penofchaos.com/warham/donjon.htm">Le site de penofchaos</a>
+        </ion-col>
+      </ion-row>
+    </ng-container>
+    <ion-row *ngIf="skill?.des">
+      <ion-col>{{ skill?.des }}</ion-col>
+    </ion-row>
+    <ion-row *ngIf="skill?.use">
+      <ion-col><b>Utilisation :</b> {{ skill?.use }}</ion-col>
+    </ion-row>
+    <ion-row *ngIf="skill?.fail">
+      <ion-col><b>Échec :</b> {{ skill?.fail }}</ion-col>
+    </ion-row>
+    <ion-row *ngIf="skill?.req">
+      <ion-col><b>Requis :</b> {{ skill?.req }}</ion-col>
+    </ion-row>
+    <ion-row *ngIf="skill?.rat">
+      <ion-col><b>Rattrapage :</b> {{ skill?.rat }}</ion-col>
+    </ion-row>
+    <ion-row *ngIf="skill?.rp">
+      <ion-col><b>Roleplay :</b> {{ skill?.rp }}</ion-col>
+    </ion-row>
+    <ion-row *ngIf="skill?.part">
+      <ion-col><b>Particularité :</b> {{ skill?.part }}</ion-col>
+    </ion-row>
+    <ion-row *ngIf="skill?.res">
+      <ion-col><b>Restrictions :</b> {{ skill?.res }}</ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,4 +1,4 @@
-import { IBagsSheet } from 'src/app/interfaces/persona.interface';
+import { IBagsSheet } from 'src/app/interfaces/bagsheet.interface';
 import { RouteData } from 'src/app/interfaces/route.interface';
 import { PersonaService } from 'src/app/services/persona.service';
 
@@ -12,19 +12,18 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class BagsComponent implements OnInit {
   title: string;
+  subtitle: string;
   formName: string;
   form: FormGroup;
-  get bags() {
-    return <FormArray>this.form.get('bags');
-  }
-  get pooches() {
-    return <FormArray>this.form.get('pooches');
-  }
+  get bags() { return <FormArray>this.form.get('bags') };
+  get pooches() { return <FormArray>this.form.get('pooches') };
+
   constructor(private route: ActivatedRoute, public personaService: PersonaService) { }
 
   ngOnInit() {
     this.route.data.subscribe((res: RouteData) => {
       this.title = res.title;
+      this.subtitle = res.subtitle;
       this.formName = res.formName;
 
       this.form = new FormGroup({});

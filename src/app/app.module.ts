@@ -40,7 +40,7 @@ import { WeaponComponent } from './pages/weapon/weapon.component';
     WeaponComponent,
     ArmorComponent
   ],
-  imports: [BrowserModule, ReactiveFormsModule, IonicModule.forRoot({ mode: 'md' }), IonicStorageModule.forRoot(), AppRoutingModule],
+  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, IonicModule.forRoot({ mode: 'md' }), IonicStorageModule.forRoot()],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent]
 })

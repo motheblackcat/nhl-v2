@@ -6,10 +6,10 @@ import { AlertController, ModalController } from '@ionic/angular';
 import { SkillDetailsComponent } from '../skill-details/skill-details.component';
 
 @Component({
-  selector: 'app-skill-add',
-  templateUrl: './skill-add.component.html'
+  selector: 'app-skill-list',
+  templateUrl: './skill-list.component.html'
 })
-export class SkillAddComponent implements OnInit {
+export class SkillListComponent implements OnInit {
   skillsList = skillsList;
   searchList = [];
 

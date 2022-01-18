@@ -6,8 +6,8 @@ import { FormArray, FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 
-import { SkillAddComponent } from './skill-add/skill-add.component';
 import { SkillDetailsComponent } from './skill-details/skill-details.component';
+import { SkillListComponent } from './skill-list/skill-list.component';
 
 @Component({
   selector: 'app-skill',
@@ -33,7 +33,7 @@ export class SkillComponent implements OnInit {
 
   async showSkillList(): Promise<void> {
     const modal = await this.modalCtrl.create({
-      component: SkillAddComponent
+      component: SkillListComponent
     });
 
     modal.onDidDismiss().then((res: { data: string, role: any }) => {

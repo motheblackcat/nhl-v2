@@ -16,8 +16,8 @@ import { InvComponent } from './pages/inv/inv.component';
 import { ListMultiComponent } from './pages/inv/list-multi/list-multi.component';
 import { ListComponent } from './pages/inv/list/list.component';
 import { PersonaComponent } from './pages/persona/persona.component';
-import { SkillAddComponent } from './pages/skill/skill-add/skill-add.component';
 import { SkillDetailsComponent } from './pages/skill/skill-details/skill-details.component';
+import { SkillListComponent } from './pages/skill/skill-list/skill-list.component';
 import { SkillComponent } from './pages/skill/skill.component';
 import { StatsComponent } from './pages/stats/stats.component';
 import { WeaponComponent } from './pages/weapon/weapon.component';
@@ -27,7 +27,7 @@ import { WeaponComponent } from './pages/weapon/weapon.component';
     AppComponent,
     FabComponent,
     SkillComponent,
-    SkillAddComponent,
+    SkillListComponent,
     SkillDetailsComponent,
     ListComponent,
     ListMultiComponent,

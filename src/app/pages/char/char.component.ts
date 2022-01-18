@@ -3,7 +3,6 @@ import { PersonaService } from 'src/app/services/persona.service';
 
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-char',
@@ -13,7 +12,7 @@ export class CharComponent implements OnInit {
   title: string = 'profil';
   formName: string = 'char';
   form: FormGroup;
-  constructor(private route: ActivatedRoute, public personaService: PersonaService) { }
+  constructor(public personaService: PersonaService) { }
 
   ngOnInit() {
     this.form = new FormGroup({});

@@ -1,5 +1,4 @@
 import { Route } from 'src/app/interfaces/route.interface';
-import { PersonaService } from 'src/app/services/persona.service';
 
 import { Component, OnInit } from '@angular/core';
 import { Router, RoutesRecognized } from '@angular/router';
@@ -13,7 +12,7 @@ export class FabComponent implements OnInit {
   icon: string;
   display: boolean = false;
 
-  constructor(private router: Router, private personaService: PersonaService) { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     this.router.config.filter(route => route.data).forEach(route => this.routes.push({ path: `/${route.path}`, icon: route.data.icon }));

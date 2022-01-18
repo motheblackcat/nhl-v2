@@ -56,7 +56,7 @@
             <ion-select slot="start" interface="popover" formControlName="name">
               <ion-select-option *ngFor="let stat of statsNames; let i = index" [value]="statsCodes[i]">{{ stat }}</ion-select-option>
             </ion-select>
-            <ion-input type="number" placeholder="0" formControlName="effect"></ion-input>
+            <ion-input placeholder="0" formControlName="effect"></ion-input>
             <ion-icon slot="end" name="trash" color="dark" (click)="removeEffect(i, j)"></ion-icon>
           </ion-item>
         </ng-container>

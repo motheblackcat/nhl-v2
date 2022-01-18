@@ -6,7 +6,7 @@ import { PersonaService } from 'src/app/services/persona.service';
 
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-armor',
@@ -15,14 +15,14 @@ import { ActivatedRoute } from '@angular/router';
 export class ArmorComponent implements OnInit {
   title: string = 'armure et protection';
   formName: string = 'armors';
-  opens: boolean[] = [];
-  form: FormGroup;
-  armorNames = [ARMORS_SLOTS.HEAD, ARMORS_SLOTS.TORSO, ARMORS_SLOTS.SHIELD, ARMORS_SLOTS.ARMS, ARMORS_SLOTS.HANDS, ARMORS_SLOTS.LEGS, ARMORS_SLOTS.FEET, ARMORS_SLOTS.RINGS, ARMORS_SLOTS.CAPES, ARMORS_SLOTS.OTHERS];
-  statsCodes: string[] = Object.keys(this.personaService.currentPersona.sheets['stats']);;
-  statsNames: string[] = [STATS_NAMES.EV, STATS_NAMES.EA, STATS_NAMES.COU, STATS_NAMES.INT, STATS_NAMES.CHA, STATS_NAMES.AD, STATS_NAMES.FO, STATS_NAMES.ATQ, STATS_NAMES.PRD];
+  tdm: number = 0;
   prNat: number;
   prMag: number;
-  tdm: number;
+  form: FormGroup;
+  opens: boolean[] = [];
+  armorNames: string[] = [ARMORS_SLOTS.HEAD, ARMORS_SLOTS.TORSO, ARMORS_SLOTS.SHIELD, ARMORS_SLOTS.ARMS, ARMORS_SLOTS.HANDS, ARMORS_SLOTS.LEGS, ARMORS_SLOTS.FEET, ARMORS_SLOTS.RINGS, ARMORS_SLOTS.CAPES, ARMORS_SLOTS.OTHERS];
+  statsNames: string[] = [STATS_NAMES.EV, STATS_NAMES.EA, STATS_NAMES.COU, STATS_NAMES.INT, STATS_NAMES.CHA, STATS_NAMES.AD, STATS_NAMES.FO, STATS_NAMES.ATQ, STATS_NAMES.PRD];
+  statsCodes: string[] = Object.keys(this.personaService.currentPersona.sheets['stats']);;
 
   get list() {
     return <FormArray>this.form.get('list');
@@ -32,7 +32,7 @@ export class ArmorComponent implements OnInit {
     return (i: number) => this.list.at(i).get('effects') as FormArray
   }
 
-  constructor(private route: ActivatedRoute, private fb: FormBuilder, public personaService: PersonaService) { }
+  constructor(private fb: FormBuilder, private router: Router, private personaService: PersonaService) { }
 
   ngOnInit() {
     this.form = this.fb.group({ list: this.fb.array([]) });
@@ -67,14 +67,15 @@ export class ArmorComponent implements OnInit {
   }
 
   updateSheet() {
-    const prSum = this.form
+    this.prNat = this.form
       .get('list').value
       .filter(armor => armor.equiped)
       .map(armor => Number(armor.pr))
       .reduce((a: number, b: number) => a + b, 0);
 
-    this.tdm = this.personaService.currentPersona.sheets['skills'].includes('truc de mauviette (pr)') ? 1 : 0;
-    this.prNat = prSum + this.tdm;
+    this.router.events.subscribe(() => {
+      this.tdm = this.personaService.currentPersona.sheets['skills'].includes('truc de mauviette (pr)') ? 1 : 0;
+    });
 
     const statsSheet: IStatSheet = this.personaService.currentPersona.sheets['stats'];
     this.prMag = Math.ceil(Number(statsSheet.cou.name + statsSheet.int.name + statsSheet.fo.name) / 3);

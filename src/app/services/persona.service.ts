@@ -3,6 +3,7 @@ import { Storage } from '@ionic/storage-angular';
 
 import { IPersona, IPersonaSheet } from '../interfaces/persona.interface';
 import { PersonaSheet } from '../models/persona.model';
+import { FileService } from './file.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +12,24 @@ export class PersonaService {
   personas: IPersona[] = [];
   currentPersona: IPersona = null;
   personasKey = 'personas';
-  constructor(private store: Storage) { }
 
+  constructor(private fileService: FileService, private store: Storage) { }
+
+  /** 
+   * Get personas data from local storage or create empty personas data.
+   * Create a persona txt file with the file service
+  */
   getPersonas() {
     this.store.get(this.personasKey)
-      .then(data => data ? this.personas = [...data] : this.store.set(this.personasKey, []));
+      .then(data => {
+        if (data) {
+          this.personas = [...data]
+          const personaData = JSON.stringify(this.personas);
+          this.fileService.writeFile(personaData);
+        } else {
+          this.store.set(this.personasKey, [])
+        }
+      }).catch(err => console.error('ERROR TO RETREIVE DATA FROM LOCAL STORAGE', err));
   }
 
   addPersona(personaName: string) {

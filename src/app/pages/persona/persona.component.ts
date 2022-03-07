@@ -14,6 +14,7 @@ export class PersonaComponent implements OnInit {
 
   ngOnInit() {
     this.personaService.getPersonas();
+    console.warn('NG ON INIT CALLED')
   }
 
   selectPersona(persona: IPersona) {

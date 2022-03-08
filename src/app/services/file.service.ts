@@ -17,12 +17,14 @@ export class FileService {
     const writeFileResult = await Filesystem.writeFile({
       path: this.fileName,
       data: personaData,
-      directory: Directory.Documents,
-      encoding: Encoding.UTF8,
+      directory: Directory.Data,
+      encoding: Encoding.UTF8
     });
-    console.log('file created', writeFileResult);
   };
 
+  /**
+   * Read existing file with the capacitor filesystem
+   */
   async readFile() {
     const readFileResult = await Filesystem.readFile({
       path: this.fileName,

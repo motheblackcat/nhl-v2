@@ -8,14 +8,17 @@ import { IWeapon } from './weapons.interface';
 
 /** 
  * Represents one character
- * @param name name used in the persona list
- * @param sheets contain all the persona's sheets
+ * @member name: the name used in the persona list
+ * @member sheets: contain all the persona's sheets
  */
 export interface IPersona {
   name: string;
   sheets: IPersonaSheet;
 }
 
+/**
+ * Container for all the subsheets interfaces
+ */
 export interface IPersonaSheet {
   char: ICharSheet;
   stats: IStatSheet;

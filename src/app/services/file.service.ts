@@ -6,6 +6,7 @@ import { Directory, Encoding, Filesystem } from '@capacitor/filesystem';
 })
 export class FileService {
   fileName = 'nhlpersonas.txt';
+  directory = Directory.Data;
 
   constructor() { }
 
@@ -17,7 +18,7 @@ export class FileService {
     const writeFileResult = await Filesystem.writeFile({
       path: this.fileName,
       data: personaData,
-      directory: Directory.Data,
+      directory: this.directory,
       encoding: Encoding.UTF8
     });
   };
@@ -28,8 +29,7 @@ export class FileService {
   async readFile() {
     const readFileResult = await Filesystem.readFile({
       path: this.fileName,
-      directory: Directory.Documents
+      directory: this.directory
     });
-    console.log('file read', readFileResult.data);
   }
 }

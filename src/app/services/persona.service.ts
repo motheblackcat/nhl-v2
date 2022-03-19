@@ -16,7 +16,7 @@ export class PersonaService {
 
   constructor(private fileService: FileService, private store: Storage, private toastService: ToastService) { }
 
-  /** 
+  /**
    * Get personas data from local storage or create empty personas data.
    * Additionally create a persona txt file with the file service.
   */

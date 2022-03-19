@@ -9,7 +9,7 @@ export class ToastService {
   constructor(private toastController: ToastController) { }
 
   /**
-   * Show a toast notification with predifined parameters
+   * Show a toast notification with predefined parameters
    * @param msg the message to be displayed
    */
   async showToast(msg: string) {

@@ -4,7 +4,7 @@ import { Weapon } from 'src/app/models/weapon.model';
 import { PersonaService } from 'src/app/services/persona.service';
 
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
+import { UntypedFormArray, UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -15,19 +15,19 @@ export class WeaponComponent implements OnInit {
   title: string = 'armement et baston';
   formName: string = 'weapons';
   opens: boolean[] = [];
-  form: FormArray;
+  form: UntypedFormArray;
   statsCodes: string[] = Object.keys(this.personaService.currentPersona.sheets['stats']);;
   statsNames: string[] = [STATS_NAMES.EV, STATS_NAMES.EA, STATS_NAMES.COU, STATS_NAMES.INT, STATS_NAMES.CHA, STATS_NAMES.AD, STATS_NAMES.FO, STATS_NAMES.ATQ, STATS_NAMES.PRD];
   weaponNames: string[] = [WEAPONS_SLOTS.MAIN, WEAPONS_SLOTS.SUB, WEAPONS_SLOTS.EXTRA];
 
   get effects() {
-    return (i: number) => this.form.at(i).get('effects') as FormArray
+    return (i: number) => this.form.at(i).get('effects') as UntypedFormArray
   }
 
-  constructor(private route: ActivatedRoute, private fb: FormBuilder, public personaService: PersonaService) { }
+  constructor(private route: ActivatedRoute, private fb: UntypedFormBuilder, public personaService: PersonaService) { }
 
   ngOnInit() {
-    this.form = new FormArray([]);
+    this.form = new UntypedFormArray([]);
     const sheetObject: Weapon[] = this.personaService.currentPersona.sheets[this.formName];
 
     sheetObject.forEach((weapon: Weapon, index: number) => {
@@ -43,7 +43,7 @@ export class WeaponComponent implements OnInit {
       );
 
       const weaponIndex = sheetObject.indexOf(weapon).toString();
-      const effects = this.form.get(weaponIndex).get('effects') as FormArray;
+      const effects = this.form.get(weaponIndex).get('effects') as UntypedFormArray;
 
       weapon.effects.forEach(effect =>
         effects.push(this.fb.group({ name: effect.name, effect: effect.effect }))
@@ -88,12 +88,12 @@ export class WeaponComponent implements OnInit {
   }
 
   addEffect(i: number) {
-    (this.form.at(i).get('effects') as FormArray).push(this.fb.group({ name: 'ev', effect: '' }));
+    (this.form.at(i).get('effects') as UntypedFormArray).push(this.fb.group({ name: 'ev', effect: '' }));
     this.updateSheet();
   }
 
   removeEffect(i: number, j: number) {
-    (this.form.at(i).get('effects') as FormArray).removeAt(j);
+    (this.form.at(i).get('effects') as UntypedFormArray).removeAt(j);
     this.updateSheet();
   }
 }

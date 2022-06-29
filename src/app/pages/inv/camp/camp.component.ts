@@ -3,7 +3,7 @@ import { RouteData } from 'src/app/interfaces/route.interface';
 import { PersonaService } from 'src/app/services/persona.service';
 
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormArray, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -14,12 +14,12 @@ export class CampComponent implements OnInit {
   title: string;
   subtitle: string;
   formName: string;
-  form: FormGroup;
+  form: UntypedFormGroup;
   totalWeight: number = 0;
   campNames: string[] = ['tente', 'matelas', 'couverture'];
 
   get autres() {
-    return <FormArray>this.form.get('autres');
+    return <UntypedFormArray>this.form.get('autres');
   }
 
   constructor(private route: ActivatedRoute, public personaService: PersonaService) { }
@@ -30,21 +30,21 @@ export class CampComponent implements OnInit {
       this.subtitle = res.subtitle;
       this.formName = res.formName;
 
-      this.form = new FormGroup({});
+      this.form = new UntypedFormGroup({});
       const sheetObject: ICampSheet = this.personaService.currentPersona.sheets[this.formName];
 
       for (const key in sheetObject) {
         if (key !== 'autres') {
-          this.form.addControl(key, new FormGroup({}));
+          this.form.addControl(key, new UntypedFormGroup({}));
           for (const prop in sheetObject[key]) {
             if (prop) {
-              (this.form.get(key) as FormGroup).addControl(prop, new FormControl(sheetObject[key][prop]));
+              (this.form.get(key) as UntypedFormGroup).addControl(prop, new UntypedFormControl(sheetObject[key][prop]));
             }
           }
         } else {
-          this.form.addControl(key, new FormArray([]));
+          this.form.addControl(key, new UntypedFormArray([]));
           sheetObject[key].forEach(other => {
-            (this.form.get(key) as FormArray).push(new FormGroup({ name: new FormControl(other.name), wei: new FormControl(other.wei) }));
+            (this.form.get(key) as UntypedFormArray).push(new UntypedFormGroup({ name: new UntypedFormControl(other.name), wei: new UntypedFormControl(other.wei) }));
           });
         }
       }
@@ -65,12 +65,12 @@ export class CampComponent implements OnInit {
   }
 
   addItem() {
-    (this.form.get('autres') as FormArray).push(new FormGroup({ name: new FormControl(), wei: new FormControl() }));
+    (this.form.get('autres') as UntypedFormArray).push(new UntypedFormGroup({ name: new UntypedFormControl(), wei: new UntypedFormControl() }));
     this.updateTotalWeight();
   }
 
   removeItem(i: number) {
-    (this.form.get('autres') as FormArray).removeAt(i);
+    (this.form.get('autres') as UntypedFormArray).removeAt(i);
     this.updateTotalWeight();
   }
 }

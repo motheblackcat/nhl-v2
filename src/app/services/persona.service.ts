@@ -25,9 +25,8 @@ export class PersonaService {
       .then(data => {
         if (data) {
           this.personas = [...data]
-          const personaData = JSON.stringify(this.personas);
-          this.fileService.writeFile(personaData);
-          this.toastService.showToast('Un fichier texte des personnages a été crée en cas de pépin !');
+          this.fileService.writeFile(this.personas);
+          this.toastService.showToast('Les données on été enregistrées dans le dossier Documents en cas de pépin !');
         } else {
           this.store.set(this.personasKey, [])
         }

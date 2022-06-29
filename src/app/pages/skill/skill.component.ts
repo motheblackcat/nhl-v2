@@ -2,7 +2,7 @@ import { skillsList } from 'src/app/consts/skills-list.consts';
 import { PersonaService } from 'src/app/services/persona.service';
 
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl } from '@angular/forms';
+import { UntypedFormArray, UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 
@@ -16,18 +16,18 @@ import { SkillListComponent } from './skill-list/skill-list.component';
 export class SkillComponent implements OnInit {
   title: string = 'compétences';
   formName: string = 'skills';
-  form: FormArray;
+  form: UntypedFormArray;
   useSelect: boolean;
   skillsList = skillsList;
 
   constructor(private route: ActivatedRoute, private modalCtrl: ModalController, private personaService: PersonaService) { }
 
   ngOnInit() {
-    this.form = new FormArray([]);
+    this.form = new UntypedFormArray([]);
     const sheetObject: string[] = this.personaService.currentPersona.sheets[this.formName];
 
     sheetObject.forEach(skill => {
-      this.form.push(new FormControl(skill));
+      this.form.push(new UntypedFormControl(skill));
     });
   }
 
@@ -38,7 +38,7 @@ export class SkillComponent implements OnInit {
 
     modal.onDidDismiss().then((res: { data: string, role: any }) => {
       if (res.data) {
-        this.form.push(new FormControl(res.data));
+        this.form.push(new UntypedFormControl(res.data));
         this.personaService.updatePersonas(this.formName, this.form.value);
       }
     });

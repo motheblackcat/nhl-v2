@@ -5,7 +5,7 @@ import { Armor, ArmorSheet } from 'src/app/models/armorsheet.model';
 import { PersonaService } from 'src/app/services/persona.service';
 
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -18,21 +18,21 @@ export class ArmorComponent implements OnInit {
   tdm: number = 0;
   prNat: number;
   prMag: number;
-  form: FormGroup;
+  form: UntypedFormGroup;
   opens: boolean[] = [];
   armorNames: string[] = [ARMORS_SLOTS.HEAD, ARMORS_SLOTS.TORSO, ARMORS_SLOTS.SHIELD, ARMORS_SLOTS.ARMS, ARMORS_SLOTS.HANDS, ARMORS_SLOTS.LEGS, ARMORS_SLOTS.FEET, ARMORS_SLOTS.RINGS, ARMORS_SLOTS.CAPES, ARMORS_SLOTS.OTHERS];
   statsNames: string[] = [STATS_NAMES.EV, STATS_NAMES.EA, STATS_NAMES.COU, STATS_NAMES.INT, STATS_NAMES.CHA, STATS_NAMES.AD, STATS_NAMES.FO, STATS_NAMES.ATQ, STATS_NAMES.PRD];
   statsCodes: string[] = Object.keys(this.personaService.currentPersona.sheets['stats']);;
 
   get list() {
-    return <FormArray>this.form.get('list');
+    return <UntypedFormArray>this.form.get('list');
   }
 
   get effects() {
-    return (i: number) => this.list.at(i).get('effects') as FormArray
+    return (i: number) => this.list.at(i).get('effects') as UntypedFormArray
   }
 
-  constructor(private fb: FormBuilder, private router: Router, private personaService: PersonaService) { }
+  constructor(private fb: UntypedFormBuilder, private router: Router, private personaService: PersonaService) { }
 
   ngOnInit() {
     this.form = this.fb.group({ list: this.fb.array([]) });
@@ -55,7 +55,7 @@ export class ArmorComponent implements OnInit {
         })
       );
 
-      const effects: FormArray = this.list.at(sheetObject.list.indexOf(armor)).get('effects') as FormArray;
+      const effects: UntypedFormArray = this.list.at(sheetObject.list.indexOf(armor)).get('effects') as UntypedFormArray;
       armor.effects.forEach(effect =>
         effects.push(this.fb.group({ name: effect.name, effect: effect.effect }))
       );
@@ -113,13 +113,13 @@ export class ArmorComponent implements OnInit {
 
   addEffect(i: number) {
     const armorsList = this.list.at(i);
-    (armorsList.get('effects') as FormArray).push(this.fb.group({ name: 'ev', effect: '' }));
+    (armorsList.get('effects') as UntypedFormArray).push(this.fb.group({ name: 'ev', effect: '' }));
     this.updateSheet();
   }
 
   removeEffect(i: number, j: number) {
     const armorsList = this.list.at(i);
-    (armorsList.get('effects') as FormArray).removeAt(j);
+    (armorsList.get('effects') as UntypedFormArray).removeAt(j);
     this.updateSheet();
   }
 }

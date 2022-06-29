@@ -2,7 +2,7 @@ import { ICharSheet } from 'src/app/interfaces/charsheet.interface';
 import { PersonaService } from 'src/app/services/persona.service';
 
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-char',
@@ -11,16 +11,16 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class CharComponent implements OnInit {
   title: string = 'profil';
   formName: string = 'char';
-  form: FormGroup;
+  form: UntypedFormGroup;
   constructor(public personaService: PersonaService) { }
 
   ngOnInit() {
-    this.form = new FormGroup({});
+    this.form = new UntypedFormGroup({});
     const sheetObject: ICharSheet = this.personaService.currentPersona.sheets[this.formName];
 
     for (const key in sheetObject) {
       if (key) {
-        this.form.addControl(key, new FormControl(sheetObject[key]));
+        this.form.addControl(key, new UntypedFormControl(sheetObject[key]));
       }
     }
   }

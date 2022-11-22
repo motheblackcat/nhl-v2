@@ -26,7 +26,6 @@ export class PersonaService {
         if (data) {
           this.personas = [...data]
           this.fileService.writeFile(this.personas);
-          this.fileService.downloadFile(this.personas);
           this.toastService.showToast('Les données on été enregistrées dans le dossier Documents en cas de pépin !');
         } else {
           this.store.set(this.personasKey, [])

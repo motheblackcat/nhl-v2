@@ -36,11 +36,16 @@ export class FileService {
   }
 
   /**
-   * Create a text file and trigger download for browsers
+   * TODO: 
+   * 1 - Use Capacitor FileSystem
+   * 2 - Check for platform
+   * 3 - Format file
+   * 4 - Import file
+   * Create a text file and trigger download for browsers without capacitor FileSystem
    */
-  downloadFile(data: any) {
-    const file = new File([JSON.stringify(data)], 'nhl');
+  exportFile(data: any) {
     // Create a link and set the URL using `createObjectURL`
+    const file = new File([JSON.stringify(data)], 'nhl.txt');
     const link = document.createElement("a");
     link.style.display = "none";
     link.href = URL.createObjectURL(file);
@@ -50,8 +55,7 @@ export class FileService {
     document.body.appendChild(link);
     link.click();
 
-    // To make this work on Firefox we need to wait
-    // a little while before removing it.
+    // To make this work on Firefox we need to wait a little while before removing it.
     setTimeout(() => {
       URL.revokeObjectURL(link.href);
       link.parentNode.removeChild(link);

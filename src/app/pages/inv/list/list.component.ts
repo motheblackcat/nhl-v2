@@ -2,7 +2,7 @@ import { RouteData } from 'src/app/interfaces/route.interface';
 import { PersonaService } from 'src/app/services/persona.service';
 
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl } from '@angular/forms';
+import { UntypedFormArray, UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -14,7 +14,7 @@ export class ListComponent implements OnInit {
   subtitle: string;
   placeholder: string;
   formName: string;
-  form: FormArray;
+  form: UntypedFormArray;
 
   constructor(private route: ActivatedRoute, public personaService: PersonaService) { }
 
@@ -25,16 +25,16 @@ export class ListComponent implements OnInit {
       this.placeholder = res.placeholder;
       this.formName = res.formName;
 
-      this.form = new FormArray([]);
+      this.form = new UntypedFormArray([]);
       const sheetObject: string[] = this.personaService.currentPersona.sheets[this.formName] ? this.personaService.currentPersona.sheets[this.formName] : [];
 
-      sheetObject.forEach(skill => this.form.push(new FormControl(skill)));
+      sheetObject.forEach(skill => this.form.push(new UntypedFormControl(skill)));
     });
   }
 
   addItem(item: any) {
     if (item.value) {
-      this.form.push(new FormControl(item.value));
+      this.form.push(new UntypedFormControl(item.value));
       item.value = '';
       this.personaService.updatePersonas(this.formName, this.form.value);
     }

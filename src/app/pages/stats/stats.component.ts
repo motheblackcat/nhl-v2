@@ -5,7 +5,7 @@ import { IStatSheet } from 'src/app/interfaces/statsheet.interface';
 import { PersonaService } from 'src/app/services/persona.service';
 
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -15,7 +15,7 @@ import { ActivatedRoute } from '@angular/router';
 export class StatsComponent implements OnInit {
   title: string = 'statistiques';
   formName: string = 'stats';
-  form: FormGroup;
+  form: UntypedFormGroup;
   magPhy = 0;
   magPsy = 0;
   resMag = 0;
@@ -24,7 +24,7 @@ export class StatsComponent implements OnInit {
   constructor(private route: ActivatedRoute, public personaService: PersonaService) { }
 
   ngOnInit() {
-    this.form = new FormGroup({});
+    this.form = new UntypedFormGroup({});
     const sheetObject: IStatSheet = this.personaService.currentPersona.sheets[this.formName];
 
     /** Note: Removed unused props from old data format - could be readded for text export */
@@ -33,9 +33,9 @@ export class StatsComponent implements OnInit {
     delete sheetObject['resmag'];
 
     for (const key in sheetObject) {
-      this.form.addControl(key, new FormGroup({
-        name: new FormControl(sheetObject[key]['name']),
-        effect: new FormControl(Number(sheetObject[key]['effect']))
+      this.form.addControl(key, new UntypedFormGroup({
+        name: new UntypedFormControl(sheetObject[key]['name']),
+        effect: new UntypedFormControl(Number(sheetObject[key]['effect']))
       }));
     }
 

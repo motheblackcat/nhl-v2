@@ -6,11 +6,19 @@ import { IEffect } from './effect.interface';
 import { IStatSheet } from './statsheet.interface';
 import { IWeapon } from './weapons.interface';
 
+/** 
+ * Represents one character
+ * @member name: the name used in the persona list
+ * @member sheets: contain all the persona's sheets
+ */
 export interface IPersona {
   name: string;
   sheets: IPersonaSheet;
 }
 
+/**
+ * Container for all the subsheets interfaces
+ */
 export interface IPersonaSheet {
   char: ICharSheet;
   stats: IStatSheet;

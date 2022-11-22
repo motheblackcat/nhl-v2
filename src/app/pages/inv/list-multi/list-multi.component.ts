@@ -3,7 +3,7 @@ import { RouteData } from 'src/app/interfaces/route.interface';
 import { PersonaService } from 'src/app/services/persona.service';
 
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormArray, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -16,7 +16,7 @@ export class ListMultiComponent implements OnInit {
   nameLabel: string;
   effectLabel: string;
   formName: string;
-  form: FormArray;
+  form: UntypedFormArray;
 
   constructor(private route: ActivatedRoute, public personaService: PersonaService) { }
 
@@ -28,11 +28,11 @@ export class ListMultiComponent implements OnInit {
       this.effectLabel = res.effectLabel;
       this.formName = res.formName;
 
-      this.form = new FormArray([]);
+      this.form = new UntypedFormArray([]);
       const sheetObject: IEffect[] = this.personaService.currentPersona.sheets[this.formName] ? this.personaService.currentPersona.sheets[this.formName] : [];
 
       sheetObject.forEach(item => {
-        this.form.push(new FormGroup({ name: new FormControl(item.name), effect: new FormControl(item.effect) }));
+        this.form.push(new UntypedFormGroup({ name: new UntypedFormControl(item.name), effect: new UntypedFormControl(item.effect) }));
       });
     });
   }
@@ -42,7 +42,7 @@ export class ListMultiComponent implements OnInit {
   }
 
   addItem() {
-    this.form.push(new FormGroup({ name: new FormControl(), effect: new FormControl() }));
+    this.form.push(new UntypedFormGroup({ name: new UntypedFormControl(), effect: new UntypedFormControl() }));
     this.personaService.updatePersonas(this.formName, this.form.value);
   }
 

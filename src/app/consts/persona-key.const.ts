@@ -1,0 +1,1 @@
+export const PERSONA_KEY = 'personas';

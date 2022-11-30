@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 
+import { PERSONA_KEY } from '../consts/persona-key.const';
 import { IPersona, IPersonaSheet } from '../interfaces/persona.interface';
 import { PersonaSheet } from '../models/persona.model';
-import { FileService } from './file.service';
-import { ToastService } from './toast.service';
+import { TOASTER_COLOR, ToastService } from './toast.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,25 +12,18 @@ import { ToastService } from './toast.service';
 export class PersonaService {
   personas: IPersona[] = [];
   currentPersona: IPersona = null;
-  personasKey = 'personas';
 
-  constructor(private fileService: FileService, private store: Storage, private toastService: ToastService) { }
+  constructor(private store: Storage, private toastService: ToastService) { }
 
   /**
-   * Get personas data from local storage or create empty personas data.
-   * Additionally create a persona txt file with the file service.
+   * Get personas data from local storage or create empty personas data in the storage.
   */
   getPersonas() {
-    this.store.get(this.personasKey)
-      .then(data => {
-        if (data) {
-          this.personas = [...data]
-          this.fileService.writeFile(this.personas);
-          this.toastService.showToast('Les données on été enregistrées dans le dossier Documents en cas de pépin !');
-        } else {
-          this.store.set(this.personasKey, [])
-        }
-      }).catch(err => this.toastService.showToast(`Une erreur s\'est produite: ${err}`));
+    this.store.get(PERSONA_KEY)
+      .then((data: IPersona[]) => {
+        data ? this.personas = data : this.store.set(PERSONA_KEY, []);
+      })
+      .catch(err => this.toastService.showToast(`Une erreur s\'est produite: ${err}`, TOASTER_COLOR.DANGER));
   }
 
   /**
@@ -41,7 +34,7 @@ export class PersonaService {
     const newPersona: IPersona = { name: personaName, sheets: new PersonaSheet(personaName) };
     const updatedPersonas: IPersona[] = [...this.personas, newPersona];
     this.personas = [...updatedPersonas];
-    this.store.set(this.personasKey, this.personas);
+    this.store.set(PERSONA_KEY, this.personas);
   }
 
   /**
@@ -55,7 +48,7 @@ export class PersonaService {
     currentPersona.sheets[formName] = formValue;
     currentPersona.name = currentPersona.sheets['char'].nom;
     this.personas = [...currentPersonas];
-    this.store.set(this.personasKey, this.personas);
+    this.store.set(PERSONA_KEY, this.personas);
   }
 
   /**
@@ -66,7 +59,7 @@ export class PersonaService {
     const updatedPersonas = this.personas;
     updatedPersonas.splice(updatedPersonas.indexOf(persona), 1);
     this.personas = [...updatedPersonas];
-    this.store.set(this.personasKey, this.personas);
+    this.store.set(PERSONA_KEY, this.personas);
   }
 
   /**

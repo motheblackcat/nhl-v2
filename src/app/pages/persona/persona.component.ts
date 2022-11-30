@@ -1,4 +1,5 @@
 import { IPersona } from 'src/app/interfaces/persona.interface';
+import { FileService } from 'src/app/services/file.service';
 import { PersonaService } from 'src/app/services/persona.service';
 
 import { Component, OnInit } from '@angular/core';
@@ -10,7 +11,7 @@ import { AlertController } from '@ionic/angular';
   templateUrl: './persona.component.html'
 })
 export class PersonaComponent implements OnInit {
-  constructor(private alertCtrl: AlertController, private router: Router, public personaService: PersonaService) { }
+  constructor(private alertCtrl: AlertController, private router: Router, public personaService: PersonaService, private fileService: FileService) { }
 
   ngOnInit() {
     this.personaService.getPersonas();
@@ -21,7 +22,7 @@ export class PersonaComponent implements OnInit {
     this.router.navigate(['/char']);
   }
 
-  async addPersonaAlert(): Promise<any> {
+  async addPersonaAlert(): Promise<void> {
     const alert = await this.alertCtrl.create({
       header: 'Ajouter un personnage',
       inputs: [
@@ -43,7 +44,15 @@ export class PersonaComponent implements OnInit {
     await alert.present();
   }
 
-  async removePersonaAlert(persona: IPersona): Promise<any> {
+  exportFile() {
+    this.fileService.exportFile();
+  }
+
+  importFile() {
+    this.fileService.importFile();
+  }
+
+  async removePersonaAlert(persona: IPersona): Promise<void> {
     const alert = await this.alertCtrl.create({
       header: 'Supprimer un personnage',
       message: 'Etes vous sure de vouloir supprimer ce personnage ?',

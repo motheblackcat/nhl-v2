@@ -1,7 +1,8 @@
 import { skillsList } from 'src/app/consts/skills-list.consts';
+import { AlertService } from 'src/app/services/alert.service';
 
 import { Component, OnInit } from '@angular/core';
-import { AlertController, ModalController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 
 import { SkillDetailsComponent } from '../skill-details/skill-details.component';
 
@@ -13,7 +14,7 @@ export class SkillListComponent implements OnInit {
   skillsList = skillsList;
   searchList = [];
 
-  constructor(private alertCtrl: AlertController, public modalCtrl: ModalController) { }
+  constructor(private alertService: AlertService, public modalCtrl: ModalController) { }
 
   ngOnInit() {
     this.searchList = this.skillsList.map(skill => skill.title.toLowerCase());
@@ -21,11 +22,9 @@ export class SkillListComponent implements OnInit {
 
   updateSearchList(eventTarget: any) {
     this.searchList = [];
-
     this.skillsList.forEach(skill => {
       const formatedSkill: string = skill.title.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "");
       const formatedInput: string = eventTarget.value.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "");
-
       if (formatedSkill.indexOf(formatedInput) > -1) {
         this.searchList.push(skill.title.toLowerCase())
       }
@@ -33,35 +32,15 @@ export class SkillListComponent implements OnInit {
   }
 
   async addUnlistedSkill(): Promise<void> {
-    const alert = await this.alertCtrl.create({
-      header: 'Ajouter une compétence non listée',
-      inputs: [
-        {
-          name: 'skillName',
-          type: 'text',
-          placeholder: 'Nom'
-        }
-      ],
-      buttons: [
-        { text: 'Nan !' },
-        {
-          text: 'Ouais !',
-          handler: data => data.skillName ? this.selectSkill(data.skillName) : false
-        }
-      ]
-    });
-
-    await alert.present();
+    this.alertService.createAddUnlistedSkillAlert(this.modalCtrl);
   }
 
   async showSkillDetails(skillName: string): Promise<void> {
     const skill = skillsList.find(s => s.title.toLocaleLowerCase() === skillName);
-
     const modal = await this.modalCtrl.create({
       component: SkillDetailsComponent,
       componentProps: { skill }
     });
-
     return await modal.present();
   }
 

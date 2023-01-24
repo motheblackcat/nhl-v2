@@ -10,21 +10,6 @@
               color="dark"></ion-icon>
     <ion-label>Créer un personnage</ion-label>
   </ion-item>
-  <!-- <ion-item (click)="exportFile()">
-    <ion-icon name="person-add"
-              slot="start"
-              color="dark"></ion-icon>
-    <ion-label>Exporter tout les personnages</ion-label>
-  </ion-item>
-  <ion-item (click)="importFile()">
-    <ion-icon name="person-add"
-              slot="start"
-              color="dark"></ion-icon>
-    <ion-label>Importer des personnages</ion-label>
-  </ion-item> -->
-  <!-- <ion-button (click)="addPersonaAlert()">Créer un personnage</ion-button>
-  <ion-button (click)="exportFile()">Exporter les personnages</ion-button>
-  <ion-button (click)="importFile()">Importer des personnages</ion-button> -->
   <ion-card *ngFor="let persona of personaService.personas">
     <ion-card-header>
       <ion-card-title>

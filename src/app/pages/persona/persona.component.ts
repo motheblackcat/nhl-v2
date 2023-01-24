@@ -1,17 +1,17 @@
 import { IPersona } from 'src/app/interfaces/persona.interface';
+import { AlertService } from 'src/app/services/alert.service';
 import { FileService } from 'src/app/services/file.service';
 import { PersonaService } from 'src/app/services/persona.service';
 
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-persona',
   templateUrl: './persona.component.html'
 })
 export class PersonaComponent implements OnInit {
-  constructor(private alertCtrl: AlertController, private router: Router, public personaService: PersonaService, private fileService: FileService) { }
+  constructor(private router: Router, private alertService: AlertService, private fileService: FileService, public personaService: PersonaService) { }
 
   ngOnInit() {
     this.personaService.getPersonas();
@@ -22,26 +22,12 @@ export class PersonaComponent implements OnInit {
     this.router.navigate(['/char']);
   }
 
-  async addPersonaAlert(): Promise<void> {
-    const alert = await this.alertCtrl.create({
-      header: 'Ajouter un personnage',
-      inputs: [
-        {
-          name: 'personaName',
-          type: 'text',
-          placeholder: 'Nom'
-        }
-      ],
-      buttons: [
-        { text: 'Nan !' },
-        {
-          text: 'Ouais !',
-          handler: data => data.personaName ? this.personaService.addPersona(data.personaName) : false
-        }
-      ]
-    });
+  addPersonaAlert() {
+    this.alertService.createAddPersonaAlert();
+  }
 
-    await alert.present();
+  removePersonaAlert(persona: IPersona) {
+    this.alertService.createRemovePersonaAlert(persona);
   }
 
   exportFile() {
@@ -50,21 +36,5 @@ export class PersonaComponent implements OnInit {
 
   importFile() {
     this.fileService.importFile();
-  }
-
-  async removePersonaAlert(persona: IPersona): Promise<void> {
-    const alert = await this.alertCtrl.create({
-      header: 'Supprimer un personnage',
-      message: 'Etes vous sure de vouloir supprimer ce personnage ?',
-      buttons: [
-        { text: 'Nan !' },
-        {
-          text: 'Ouais !',
-          handler: () => this.personaService.removePersona(persona)
-        }
-      ]
-    });
-
-    await alert.present();
   }
 }

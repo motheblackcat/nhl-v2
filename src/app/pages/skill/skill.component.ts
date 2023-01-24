@@ -1,4 +1,4 @@
-import { skillsList } from 'src/app/consts/skills-list.consts';
+import { SKILLS_LIST } from 'src/app/consts/skills-list.consts';
 import { PersonaService } from 'src/app/services/persona.service';
 
 import { Component, OnInit } from '@angular/core';
@@ -18,7 +18,7 @@ export class SkillComponent implements OnInit {
   formName: string = 'skills';
   form: UntypedFormArray;
   useSelect: boolean;
-  skillsList = skillsList;
+  skillsList = SKILLS_LIST;
 
   constructor(private route: ActivatedRoute, private modalCtrl: ModalController, private personaService: PersonaService) { }
 
@@ -48,7 +48,7 @@ export class SkillComponent implements OnInit {
 
   async showSkillDetails(skillName: string): Promise<void> {
     /** Note: Trim is needed for old data */
-    const skill = skillsList.find(skill => skill.title.toLowerCase() === skillName.trim().toLowerCase());
+    const skill = SKILLS_LIST.find(skill => skill.title.toLowerCase() === skillName.trim().toLowerCase());
 
     const modal = await this.modalCtrl.create({
       component: SkillDetailsComponent,

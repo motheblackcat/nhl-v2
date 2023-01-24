@@ -1,4 +1,4 @@
-import { STATS_NAMES } from 'src/app/enums/stats.enum';
+import { STATS_NAMES } from 'src/app/consts/stats-names.const';
 import { IEffect } from 'src/app/interfaces/effect.interface';
 import { IPersonaSheet } from 'src/app/interfaces/persona.interface';
 import { IStatSheet } from 'src/app/interfaces/statsheet.interface';
@@ -19,18 +19,13 @@ export class StatsComponent implements OnInit {
   magPhy = 0;
   magPsy = 0;
   resMag = 0;
-  statsNames = [STATS_NAMES.EV, STATS_NAMES.EA, STATS_NAMES.COU, STATS_NAMES.INT, STATS_NAMES.CHA, STATS_NAMES.AD, STATS_NAMES.FO, STATS_NAMES.ATQ, STATS_NAMES.PRD];
+  statsNames = STATS_NAMES;
 
   constructor(private route: ActivatedRoute, public personaService: PersonaService) { }
 
   ngOnInit() {
     this.form = new UntypedFormGroup({});
     const sheetObject: IStatSheet = this.personaService.currentPersona.sheets[this.formName];
-
-    /** Note: Removed unused props from old data format - could be readded for text export */
-    delete sheetObject['magphy'];
-    delete sheetObject['magpsy'];
-    delete sheetObject['resmag'];
 
     for (const key in sheetObject) {
       this.form.addControl(key, new UntypedFormGroup({

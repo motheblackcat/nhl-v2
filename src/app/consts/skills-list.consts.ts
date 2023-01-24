@@ -1,4 +1,4 @@
-export const skillsList = [
+export const SKILLS_LIST = [
   {
     title: 'AMBIDEXTRIE (AD)',
     des: `Pure compétence de guerrier en mêlée. À partir du niveau 2, le héros peut prendre une arme dans chaque main.

@@ -1,5 +1,5 @@
-import { ARMORS_SLOTS } from 'src/app/enums/armors.enum';
-import { STATS_NAMES } from 'src/app/enums/stats.enum';
+import { STATS_NAMES } from 'src/app/consts/stats-names.const';
+import { ArmorSlots } from 'src/app/enums/armors.enum';
 import { IStatSheet } from 'src/app/interfaces/statsheet.interface';
 import { Armor, ArmorSheet } from 'src/app/models/armorsheet.model';
 import { PersonaService } from 'src/app/services/persona.service';
@@ -20,8 +20,8 @@ export class ArmorComponent implements OnInit {
   prMag: number;
   form: UntypedFormGroup;
   opens: boolean[] = [];
-  armorNames: string[] = [ARMORS_SLOTS.HEAD, ARMORS_SLOTS.TORSO, ARMORS_SLOTS.SHIELD, ARMORS_SLOTS.ARMS, ARMORS_SLOTS.HANDS, ARMORS_SLOTS.LEGS, ARMORS_SLOTS.FEET, ARMORS_SLOTS.RINGS, ARMORS_SLOTS.CAPES, ARMORS_SLOTS.OTHERS];
-  statsNames: string[] = [STATS_NAMES.EV, STATS_NAMES.EA, STATS_NAMES.COU, STATS_NAMES.INT, STATS_NAMES.CHA, STATS_NAMES.AD, STATS_NAMES.FO, STATS_NAMES.ATQ, STATS_NAMES.PRD];
+  armorNames: string[] = [ArmorSlots.HEAD, ArmorSlots.TORSO, ArmorSlots.SHIELD, ArmorSlots.ARMS, ArmorSlots.HANDS, ArmorSlots.LEGS, ArmorSlots.FEET, ArmorSlots.RINGS, ArmorSlots.CAPES, ArmorSlots.OTHERS];
+  statsNames = STATS_NAMES;
   statsCodes: string[] = Object.keys(this.personaService.currentPersona.sheets['stats']);;
 
   get list() {

@@ -1,5 +1,5 @@
-import { STATS_NAMES } from 'src/app/enums/stats.enum';
-import { WEAPONS_SLOTS } from 'src/app/enums/weapons.enum';
+import { STATS_NAMES } from 'src/app/consts/stats-names.const';
+import { WeaponSlots } from 'src/app/enums/weapons.enum';
 import { Weapon } from 'src/app/models/weapon.model';
 import { PersonaService } from 'src/app/services/persona.service';
 
@@ -17,8 +17,8 @@ export class WeaponComponent implements OnInit {
   opens: boolean[] = [];
   form: UntypedFormArray;
   statsCodes: string[] = Object.keys(this.personaService.currentPersona.sheets['stats']);;
-  statsNames: string[] = [STATS_NAMES.EV, STATS_NAMES.EA, STATS_NAMES.COU, STATS_NAMES.INT, STATS_NAMES.CHA, STATS_NAMES.AD, STATS_NAMES.FO, STATS_NAMES.ATQ, STATS_NAMES.PRD];
-  weaponNames: string[] = [WEAPONS_SLOTS.MAIN, WEAPONS_SLOTS.SUB, WEAPONS_SLOTS.EXTRA];
+  statsNames = STATS_NAMES;
+  weaponNames: string[] = [WeaponSlots.MAIN, WeaponSlots.SUB, WeaponSlots.EXTRA];
 
   get effects() {
     return (i: number) => this.form.at(i).get('effects') as UntypedFormArray

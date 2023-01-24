@@ -1,4 +1,4 @@
-import { skillsList } from 'src/app/consts/skills-list.consts';
+import { SKILLS_LIST } from 'src/app/consts/skills-list.consts';
 import { AlertService } from 'src/app/services/alert.service';
 
 import { Component, OnInit } from '@angular/core';
@@ -11,7 +11,7 @@ import { SkillDetailsComponent } from '../skill-details/skill-details.component'
   templateUrl: './skill-list.component.html'
 })
 export class SkillListComponent implements OnInit {
-  skillsList = skillsList;
+  skillsList = SKILLS_LIST;
   searchList = [];
 
   constructor(private alertService: AlertService, public modalCtrl: ModalController) { }
@@ -36,7 +36,7 @@ export class SkillListComponent implements OnInit {
   }
 
   async showSkillDetails(skillName: string): Promise<void> {
-    const skill = skillsList.find(s => s.title.toLocaleLowerCase() === skillName);
+    const skill = SKILLS_LIST.find(s => s.title.toLocaleLowerCase() === skillName);
     const modal = await this.modalCtrl.create({
       component: SkillDetailsComponent,
       componentProps: { skill }

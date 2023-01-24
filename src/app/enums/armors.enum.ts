@@ -1,4 +1,4 @@
-export enum ARMORS_SLOTS {
+export enum ArmorSlots {
   HEAD = 'tete',
   TORSO = 'torse',
   SHIELD = 'bouclier',

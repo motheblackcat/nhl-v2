@@ -88,7 +88,7 @@ export class FileService {
   }
 
   /**
-   * TODO: Move to menu
+   * TODO: FIX (create duplicates) & Move to menu
    * Helper function called by component to check for existing file and add it to the storage
    */
   async importFile(): Promise<void> {

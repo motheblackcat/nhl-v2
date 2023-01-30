@@ -27,11 +27,20 @@ export class StatsComponent implements OnInit {
     this.form = new UntypedFormGroup({});
     const sheetObject: IStatSheet = this.personaService.currentPersona.sheets[this.formName];
 
+    //TODO: Only add the MOD Control to the EV Formgroup to respect DRY
     for (const key in sheetObject) {
-      this.form.addControl(key, new UntypedFormGroup({
-        name: new UntypedFormControl(sheetObject[key]['name']),
-        effect: new UntypedFormControl(Number(sheetObject[key]['effect']))
-      }));
+      if (key === 'ev') {
+        this.form.addControl(key, new UntypedFormGroup({
+          name: new UntypedFormControl(sheetObject[key]['name']),
+          mod: new UntypedFormControl(sheetObject[key]['mod']),
+          effect: new UntypedFormControl(Number(sheetObject[key]['effect']))
+        }));
+      } else {
+        this.form.addControl(key, new UntypedFormGroup({
+          name: new UntypedFormControl(sheetObject[key]['name']),
+          effect: new UntypedFormControl(Number(sheetObject[key]['effect']))
+        }));
+      }
     }
 
     this.route.data.subscribe(() => {

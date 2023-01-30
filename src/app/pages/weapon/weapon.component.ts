@@ -49,7 +49,7 @@ export class WeaponComponent implements OnInit {
         effects.push(this.fb.group({ name: effect.name, effect: effect.effect }))
       );
 
-      /** Todo: Hack due to weapon component not being destroyed on navigation */
+      /** TODO: Hack due to weapon component not being destroyed on navigation */
       this.opens = [];
       this.opens.push(false);
     });

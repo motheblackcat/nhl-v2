@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
+
+    namespace 'nhlv2.me'
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
         applicationId "nhlv2.me"

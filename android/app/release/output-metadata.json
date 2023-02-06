@@ -1,0 +1,20 @@
+{
+  "version": 3,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "nhlv2.me",
+  "variantName": "release",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "attributes": [],
+      "versionCode": 2205,
+      "versionName": "2.2.5",
+      "outputFile": "app-release.apk"
+    }
+  ],
+  "elementType": "File"
+}

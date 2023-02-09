@@ -23,11 +23,13 @@ export class PersonaComponent implements OnInit {
   }
 
   addPersonaAlert() {
-    this.alertService.createAddPersonaAlert();
+    const handler = data => data.personaName.trim() ? this.personaService.addPersona(data.personaName) : false;
+    this.alertService.createAlert('Ajouter un personnage', null, 'personaName', handler);
   }
 
   removePersonaAlert(persona: IPersona) {
-    this.alertService.createRemovePersonaAlert(persona);
+    const handler = () => this.personaService.removePersona(persona);
+    this.alertService.createAlert('Supprimer un personnage', 'Etes vous sure de vouloir supprimer ce personnage ?', null, handler);
   }
 
   exportFile() {

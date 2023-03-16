@@ -1,12 +1,6 @@
-
-
-
-
-
-
 import { Injectable } from '@angular/core';
 import {
-    Directory, Encoding, Filesystem, ReadFileResult, WriteFileResult
+  Directory, Encoding, Filesystem, ReadFileResult, WriteFileResult
 } from '@capacitor/filesystem';
 import { AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';

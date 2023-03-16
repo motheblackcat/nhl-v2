@@ -32,7 +32,8 @@ export class SkillListComponent implements OnInit {
   }
 
   async addUnlistedSkill(): Promise<void> {
-    this.alertService.createAddUnlistedSkillAlert(this.modalCtrl);
+    const handler = data => data.skillName.trim ? this.modalCtrl.dismiss(data.skillName) : false;
+    this.alertService.createAlert('Ajouter une compétence non listée', null, 'skillName', handler);
   }
 
   async showSkillDetails(skillName: string): Promise<void> {

@@ -21,9 +21,7 @@ export class ArmorComponent implements OnInit {
   form: UntypedFormGroup;
   opens: boolean[] = [];
   armorNames: string[] = Object.values(ArmorSlots);
-  
-  statsNames = statsObject.map(stat => stat.name);
-  statsCodes: string[] = Object.keys(this.personaService.currentPersona.sheets['stats']);;
+  statsObject = statsObject;
 
   get list() {
     return <UntypedFormArray>this.form.get('list');
@@ -84,11 +82,11 @@ export class ArmorComponent implements OnInit {
     this.personaService.updatePersonas(this.formName, this.form.value);
   }
 
-  addArmor(armor: any) {
-    if (armor.value) {
+  addArmor(event) {
+    if (event.detail.value) {
       this.list.push(
         this.fb.group({
-          type: armor.value,
+          type: event.detail.value,
           name: '',
           pr: '',
           rup: '',
@@ -96,9 +94,12 @@ export class ArmorComponent implements OnInit {
           effects: this.fb.array([])
         })
       );
-      armor.value = '';
       this.updateSheet();
     }
+  }
+
+  clearArmorSelect(armorSelect) {
+    armorSelect.value = null;
   }
 
   equipArmor(equiped: boolean, i: number) {
@@ -112,10 +113,21 @@ export class ArmorComponent implements OnInit {
     this.updateSheet();
   }
 
-  addEffect(i: number) {
-    const armorsList = this.list.at(i);
-    (armorsList.get('effects') as UntypedFormArray).push(this.fb.group({ name: 'ev', effect: '' }));
-    this.updateSheet();
+  getEffectName(code): string {
+    return statsObject.find(stat => stat.code === code).name;
+  }
+
+
+  addEffect(event, i: number) {
+    if (event.detail.value) {
+      const armorsList = this.list.at(i);
+      (armorsList.get('effects') as UntypedFormArray).push(this.fb.group({ name: event.detail.value, effect: '' }));
+      this.updateSheet();
+    }
+  }
+
+  clearEffectSelect(effectSelect) {
+    effectSelect.value = null;
   }
 
   removeEffect(i: number, j: number) {

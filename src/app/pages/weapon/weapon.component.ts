@@ -92,7 +92,7 @@ export class WeaponComponent implements OnInit {
     return statsObject.find(stat => stat.code === code).name;
   }
 
-  addEffect(event, i) {
+  addEffect(event, i: number) {
     if (event.detail.value) {
       (this.form.at(i).get('effects') as UntypedFormArray).push(this.fb.group({ name: event.detail.value, effect: '' }));
       this.updateSheet();

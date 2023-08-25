@@ -1,11 +1,10 @@
-import { STATS_NAMES } from 'src/app/consts/stats-names.const';
 import { WeaponSlots } from 'src/app/enums/weapons.enum';
 import { Weapon } from 'src/app/models/weapon.model';
 import { PersonaService } from 'src/app/services/persona.service';
 
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormArray, UntypedFormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { statsObject } from 'src/app/consts/stats-object.const';
 
 @Component({
   selector: 'app-weapon',
@@ -16,15 +15,14 @@ export class WeaponComponent implements OnInit {
   formName: string = 'weapons';
   opens: boolean[] = [];
   form: UntypedFormArray;
-  statsCodes: string[] = Object.keys(this.personaService.currentPersona.sheets['stats']);;
-  statsNames = STATS_NAMES;
-  weaponNames: string[] = [WeaponSlots.MAIN, WeaponSlots.SUB, WeaponSlots.EXTRA];
+  weaponNames: string[] = Object.values(WeaponSlots);
+  statsObject = statsObject;
 
   get effects() {
     return (i: number) => this.form.at(i).get('effects') as UntypedFormArray
   }
 
-  constructor(private route: ActivatedRoute, private fb: UntypedFormBuilder, public personaService: PersonaService) { }
+  constructor(private fb: UntypedFormBuilder, public personaService: PersonaService) { }
 
   ngOnInit() {
     this.form = new UntypedFormArray([]);
@@ -59,11 +57,11 @@ export class WeaponComponent implements OnInit {
     this.personaService.updatePersonas(this.formName, this.form.value);
   }
 
-  addWeapon(weapon: any) {
-    if (weapon.value) {
+  addWeapon(event) {
+    if (event.detail.value) {
       this.form.push(
         this.fb.group({
-          type: weapon.value,
+          type: event.detail.value,
           name: '',
           pi: '',
           rup: '',
@@ -71,9 +69,12 @@ export class WeaponComponent implements OnInit {
           effects: this.fb.array([])
         })
       );
-      weapon.value = '';
       this.updateSheet();
     }
+  }
+
+  clearWeaponSelect(weaponSelect) {
+    weaponSelect.value = null;
   }
 
   equipWeapon(equiped: boolean, i: number) {
@@ -87,9 +88,19 @@ export class WeaponComponent implements OnInit {
     this.updateSheet();
   }
 
-  addEffect(i: number) {
-    (this.form.at(i).get('effects') as UntypedFormArray).push(this.fb.group({ name: 'ev', effect: '' }));
-    this.updateSheet();
+  getEffectName(code): string {
+    return statsObject.find(stat => stat.code === code).name;
+  }
+
+  addEffect(event, i) {
+    if (event.detail.value) {
+      (this.form.at(i).get('effects') as UntypedFormArray).push(this.fb.group({ name: event.detail.value, effect: '' }));
+      this.updateSheet();
+    }
+  }
+
+  clearEffectSelect(effectSelect) {
+    effectSelect.value = null;
   }
 
   removeEffect(i: number, j: number) {

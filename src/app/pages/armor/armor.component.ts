@@ -1,4 +1,3 @@
-import { STATS_NAMES } from 'src/app/consts/stats-names.const';
 import { ArmorSlots } from 'src/app/enums/armors.enum';
 import { IStatSheet } from 'src/app/interfaces/statsheet.interface';
 import { Armor, ArmorSheet } from 'src/app/models/armorsheet.model';
@@ -7,6 +6,7 @@ import { PersonaService } from 'src/app/services/persona.service';
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { statsObject } from 'src/app/consts/stats-object.const';
 
 @Component({
   selector: 'app-armor',
@@ -20,8 +20,9 @@ export class ArmorComponent implements OnInit {
   prMag: number;
   form: UntypedFormGroup;
   opens: boolean[] = [];
-  armorNames: string[] = [ArmorSlots.HEAD, ArmorSlots.TORSO, ArmorSlots.SHIELD, ArmorSlots.ARMS, ArmorSlots.HANDS, ArmorSlots.LEGS, ArmorSlots.FEET, ArmorSlots.RINGS, ArmorSlots.CAPES, ArmorSlots.OTHERS];
-  statsNames = STATS_NAMES;
+  armorNames: string[] = Object.values(ArmorSlots);
+  
+  statsNames = statsObject.map(stat => stat.name);
   statsCodes: string[] = Object.keys(this.personaService.currentPersona.sheets['stats']);;
 
   get list() {

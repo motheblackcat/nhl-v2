@@ -1,4 +1,4 @@
-export enum StatsNames {
+export enum EnumStatsNames {
   EV = 'Energie Vitale (Ev)',
   EA = 'Energie Astrale (Ea)',
   COU = 'Courage (Cou)',

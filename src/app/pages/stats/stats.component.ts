@@ -1,4 +1,3 @@
-import { STATS_NAMES } from 'src/app/consts/stats-names.const';
 import { IEffect } from 'src/app/interfaces/effect.interface';
 import { IPersonaSheet } from 'src/app/interfaces/persona.interface';
 import { IStatSheet } from 'src/app/interfaces/statsheet.interface';
@@ -7,6 +6,7 @@ import { PersonaService } from 'src/app/services/persona.service';
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { statsObject } from 'src/app/consts/stats-object.const';
 
 @Component({
   selector: 'app-stats',
@@ -19,7 +19,7 @@ export class StatsComponent implements OnInit {
   magPhy = 0;
   magPsy = 0;
   resMag = 0;
-  statsNames = STATS_NAMES;
+  statsNames = statsObject.map(stat => stat.name);
 
   constructor(private route: ActivatedRoute, public personaService: PersonaService) { }
 

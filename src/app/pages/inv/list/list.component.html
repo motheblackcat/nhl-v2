@@ -7,12 +7,20 @@
   <ion-text *ngIf="subtitle"><i>{{ subtitle }}</i></ion-text>
   <ion-list [formGroup]="$any(form)">
     <ion-item lines="none">
-      <ion-icon slot="start" name="add-circle" color="dark" (click)="addItem(item)"></ion-icon>
-      <ion-input #item [placeholder]="placeholder" class="ion-text-capitalize" (ionBlur)="addItem(item)"></ion-input>
+      <ion-input #item
+                 [placeholder]="placeholder"
+                 class="ion-text-capitalize"
+                 (ionBlur)="addItem(item)"></ion-input>
     </ion-item>
-    <ion-item lines="none" *ngFor="let control of form.controls; let i = index" (ionChange)="updateItem()">
-      <ion-icon slot="start" name="close-circle" color="dark" (click)="deleteItem(i)"></ion-icon>
-      <ion-input [formControlName]="i" class="ion-text-capitalize"></ion-input>
+    <ion-item lines="none"
+              *ngFor="let control of form.controls; let i = index"
+              (ionChange)="updateItem()">
+      <ion-icon slot="start"
+                name="close-circle"
+                color="dark"
+                (click)="deleteItem(i)"></ion-icon>
+      <ion-input [formControlName]="i"
+                 class="ion-text-capitalize"></ion-input>
     </ion-item>
   </ion-list>
 </ion-content>

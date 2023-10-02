@@ -3,7 +3,7 @@
     <ion-title><b>{{ title | titlecase }}</b></ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content class="ion-padding">
+<ion-content class="ion-padding-horizontal">
   <ion-list [formGroup]="form"
             (change)="updateSheet()"
             (ionChange)="updateSheet()">

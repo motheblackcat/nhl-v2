@@ -152,9 +152,9 @@ export const routes: Routes = [
         component: ListMultiComponent,
         data: {
           title: 'gemmes et pierres précieuses',
-          subtitle: 'U. G. : unité goltor (Pas de blague... On déconne pas avec les gemmes !)',
+          subtitle: 'On déconne pas avec les pierres précieuses !',
           nameLabel: 'nom',
-          effectLabel: 'u. g.',
+          effectLabel: 'unité goltor',
           formName: 'gems',
           icon: 'diamond'
         }
@@ -176,7 +176,7 @@ export const routes: Routes = [
         component: ListComponent,
         data: {
           title: 'machins precieux',
-          subtitle: 'Titres particuliers, habitations, héritages et autre souvenirs...',
+          subtitle: 'Titres particuliers, habitations, héritages et autres souvenirs...',
           placeholder: 'ajouter un objet précieux.',
           formName: 'precious',
           icon: 'sparkles'

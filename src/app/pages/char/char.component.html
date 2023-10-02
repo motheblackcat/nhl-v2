@@ -4,21 +4,34 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding-horizontal">
-  <ion-list [formGroup]="form" (change)="updateSheet()" (ionChange)="updateSheet()">
+  <ion-list [formGroup]="form"
+            (change)="updateSheet()"
+            (ionChange)="updateSheet()">
     <ng-container *ngFor="let control of form.controls | keyvalue: personaService.defaultOrder">
-      <ion-item lines="none" *ngIf="control.key !== 'sexe'">
-        <ion-label slot="start" position="fixed" class="ion-text-capitalize">{{ control.key === 'pd' ? 'point de destin' : control.key }}
+      <ion-item lines="none"
+                *ngIf="control.key !== 'sexe'">
+        <ion-label slot="start"
+                   position="fixed"
+                   class="ion-text-capitalize">{{ control.key === 'pd' ? 'point de destin' : control.key }}
         </ion-label>
-        <ion-input [placeholder]="control.key === 'pd' ? 'point de destin' : control.key" [formControlName]="control.key"
-          class="ion-text-capitalize">
+        <ion-input [placeholder]="control.key === 'pd' ? 'point de destin' : control.key"
+                   [formControlName]="control.key"
+                   class="ion-text-capitalize">
         </ion-input>
       </ion-item>
-      <ion-item lines="none" *ngIf="control.key === 'sexe'">
-        <ion-label slot="start" position="fixed" class="ion-text-capitalize">sexe</ion-label>
-        <ion-icon name="male" class="ion-padding-end" [color]="control.value.value === 'male' ? 'dark' : 'medium'"
-          (click)="updateSheet('male')">
+      <ion-item lines="none"
+                *ngIf="control.key === 'sexe'">
+        <ion-label slot="start"
+                   position="fixed"
+                   class="ion-text-capitalize">sexe</ion-label>
+        <ion-icon name="male"
+                  class="ion-padding-end"
+                  [color]="control.value.value === 'male' ? 'dark' : 'medium'"
+                  (click)="updateSheet('male')">
         </ion-icon>
-        <ion-icon name="female" [color]="control.value.value === 'female' ? 'dark' : 'medium'" (click)="updateSheet('female')">
+        <ion-icon name="female"
+                  [color]="control.value.value === 'female' ? 'dark' : 'medium'"
+                  (click)="updateSheet('female')">
         </ion-icon>
       </ion-item>
     </ng-container>

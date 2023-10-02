@@ -7,21 +7,19 @@
              [formGroup]="form"
              (ionChange)="updateSheet()">
   <ion-grid>
-    <ion-row>
+    <ion-row class="ion-margin-bottom">
       <ion-col>
         <ion-note>Pr. : Points de protection</ion-note>
       </ion-col>
-    </ion-row>
-    <ion-row>
       <ion-col>
         <ion-note>Rup. : Points de rupture</ion-note>
       </ion-col>
     </ion-row>
-    <ion-row class="ion-align-items-center">
+    <ion-row>
       <ion-col size="6">Protection naturel</ion-col>
-      <ion-col>{{ prNat + tdm }}</ion-col>
-      <ion-col>
-        <ion-chip [color]="tdm ? 'success' : 'dark'">Truc de Mauviette</ion-chip>
+      <ion-col size="2">{{ prNat + tdm }}</ion-col>
+      <ion-col *ngIf="tdm">
+        <ion-note>Truc de mauviette</ion-note>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -29,28 +27,23 @@
       <ion-col>{{ prMag }}</ion-col>
     </ion-row>
   </ion-grid>
-  <ion-item lines="none">
-    <ion-icon slot="start"
-              name="add-circle"
-              color="dark"></ion-icon>
-    <ion-select #armorSelect
-                placeholder="Ajouter un emplacement"
-                interface="popover"
-                (ionChange)="addArmor($event)"
-                (ionDismiss)="clearArmorSelect(armorSelect)">
-      <ion-select-option *ngFor="let armorName of armorNames">{{ armorName | titlecase }}</ion-select-option>
-    </ion-select>
-  </ion-item>
+  <ion-select #armorSelect
+              placeholder="Ajouter un emplacement"
+              interface="popover"
+              (ionChange)="addArmor($event)"
+              (ionDismiss)="clearArmorSelect(armorSelect)">
+    <ion-select-option *ngFor="let armorName of armorNames"
+                       [value]="armorName">{{ armorName | titlecase }}</ion-select-option>
+  </ion-select>
   <ng-container formArrayName="list">
     <ion-card *ngFor="let armor of list.controls ; let i = index"
               [formGroupName]="i">
-      <ion-card-header>
+      <ion-card-header (click)="opens[i] = !opens[i]">
         <ion-card-title>
           <ion-item lines="none">
             <ion-icon [name]="opens[i] ? 'caret-down' : 'caret-forward'"
-                      color="dark"
-                      (click)="opens[i] = !opens[i]"></ion-icon>
-            <ion-label (click)="opens[i] = !opens[i]">{{ armor.get('type').value | titlecase }}</ion-label>
+                      color="dark"></ion-icon>
+            <ion-label>{{ armor.get('type').value | titlecase }}</ion-label>
             <ion-chip [color]="armor.get('equiped').value ? 'success' : 'dark'"
                       (click)="equipArmor(armor.get('equiped').value, i)">
               équipé

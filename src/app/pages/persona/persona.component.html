@@ -4,26 +4,26 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
-  <ion-item (click)="addPersonaAlert()">
-    <ion-icon name="person-add"
-              slot="start"
-              color="dark"></ion-icon>
-    <ion-label>Créer un personnage</ion-label>
-  </ion-item>
+  <ion-button expand="block"
+              fill="outline"
+              (click)="addPersonaAlert()">
+    <ion-icon slot="start"
+              name="person-add">
+    </ion-icon>
+    Créer un personnage
+  </ion-button>
+
   <ion-card *ngFor="let persona of personaService.personas">
-    <ion-card-header>
+    <ion-card-header (click)="selectPersona(persona)">
       <ion-card-title>
-        <ion-item lines="none">
-          <ion-label (click)="selectPersona(persona)">
-            <ion-text>{{ persona.name | titlecase }}</ion-text>
-            <ion-text *ngIf="persona.sheets.char.origine"> est {{ persona.sheets.char.origine | titlecase }}</ion-text>
-            <ion-text *ngIf="persona.sheets.char.niveau"> niveau {{ persona.sheets.char.niveau }}</ion-text>
-          </ion-label>
-          <ion-icon name="trash"
-                    color="dark"
-                    (click)="removePersonaAlert(persona)"></ion-icon>
-        </ion-item>
-      </ion-card-title>
+        {{ persona.name | titlecase }}
+      </ion-card-title> 
+      <ion-card-subtitle>
+        <ion-text>{{ persona.sheets.char.origine | titlecase }}</ion-text>
+        <ion-text *ngIf="persona.sheets.char.niveau"> Niveau {{ persona.sheets.char.niveau }}</ion-text>
+      </ion-card-subtitle>
     </ion-card-header>
+    <ion-button fill="clear"
+                (click)="removePersonaAlert(persona)">supprimer</ion-button>
   </ion-card>
 </ion-content>

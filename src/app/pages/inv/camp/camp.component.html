@@ -27,7 +27,7 @@
     </ion-item>
     <ng-container formArrayName="autres" *ngFor="let control of autres.controls; let i = index">
       <ion-item lines="none" [formGroupName]="i">
-        <ion-icon slot="start" name="trash" color="dark" (click)="removeItem(i)"></ion-icon>
+        <ion-icon slot="start" name="close-circle" color="dark" (click)="removeItem(i)"></ion-icon>
         <ion-input placeholder="Nom" formControlName="name" class="ion-text-capitalize"></ion-input>
         <ion-input class="ion-text-end" type="number" step="0.1" min="0" placeholder="0" formControlName="wei"></ion-input>
         <ion-label>Kg</ion-label>

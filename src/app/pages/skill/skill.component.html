@@ -9,7 +9,7 @@
   </ion-button>
   <ion-list>
     <ion-item lines="none" *ngFor="let control of form.controls; let i = index" (click)="showSkillDetails(control.value)">
-      <ion-icon slot="start" name="trash" color="dark" (click)="removeSkill(i)"></ion-icon>
+      <ion-icon slot="start" name="close-circle" color="dark" (click)="removeSkill(i)"></ion-icon>
       <ion-label class="ion-text-capitalize">{{ control.value }}</ion-label>
       <ion-icon name="help-circle" color="dark"></ion-icon>
     </ion-item>

@@ -11,7 +11,7 @@
       <ion-input #item [placeholder]="placeholder" class="ion-text-capitalize" (ionBlur)="addItem(item)"></ion-input>
     </ion-item>
     <ion-item lines="none" *ngFor="let control of form.controls; let i = index" (ionChange)="updateItem()">
-      <ion-icon slot="start" name="trash" color="dark" (click)="deleteItem(i)"></ion-icon>
+      <ion-icon slot="start" name="close-circle" color="dark" (click)="deleteItem(i)"></ion-icon>
       <ion-input [formControlName]="i" class="ion-text-capitalize"></ion-input>
     </ion-item>
   </ion-list>

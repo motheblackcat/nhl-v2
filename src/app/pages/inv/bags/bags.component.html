@@ -17,7 +17,7 @@
     </ion-item>
     <ng-container formArrayName="bags">
       <ion-item *ngFor="let bag of bags.controls; let i = index" lines="none" [formGroupName]="i">
-        <ion-icon slot="start" name="trash" color="dark" (click)="removeItem('bags', i)"></ion-icon>
+        <ion-icon slot="start" name="close-circle" color="dark" (click)="removeItem('bags', i)"></ion-icon>
         <ion-input type="text" placeholder="Nom" formControlName="name" class="ion-text-capitalize"></ion-input>
         <ion-input class="ion-text-end" type="number" step="0.1" min="0" placeholder="0" formControlName="max"></ion-input>
       </ion-item>
@@ -33,7 +33,7 @@
     </ion-item>
     <ng-container formArrayName="pooches">
       <ion-item *ngFor="let pooch of pooches.controls; let i = index" lines="none" [formGroupName]="i">
-        <ion-icon slot="start" name="trash" color="dark" (click)="removeItem('pooches', i)"></ion-icon>
+        <ion-icon slot="start" name="close-circle" color="dark" (click)="removeItem('pooches', i)"></ion-icon>
         <ion-input type="text" placeholder="Nom" formControlName="name" class="ion-text-capitalize"></ion-input>
         <ion-input class="ion-text-end" type="number" step="0.1" min="0" placeholder="0" formControlName="max"></ion-input>
       </ion-item>

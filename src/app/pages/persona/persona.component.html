@@ -1,23 +1,20 @@
 <ion-header>
   <ion-toolbar>
     <ion-title><b>Personnages</b></ion-title>
+    <ion-buttons slot="secondary">
+      <ion-button (click)="addPersonaAlert()">
+        <ion-icon slot="icon-only"
+                  name="person-add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
-  <ion-button expand="block"
-              fill="outline"
-              (click)="addPersonaAlert()">
-    <ion-icon slot="start"
-              name="person-add">
-    </ion-icon>
-    Créer un personnage
-  </ion-button>
-
   <ion-card *ngFor="let persona of personaService.personas">
     <ion-card-header (click)="selectPersona(persona)">
       <ion-card-title>
         {{ persona.name | titlecase }}
-      </ion-card-title> 
+      </ion-card-title>
       <ion-card-subtitle>
         <ion-text>{{ persona.sheets.char.origine | titlecase }}</ion-text>
         <ion-text *ngIf="persona.sheets.char.niveau"> Niveau {{ persona.sheets.char.niveau }}</ion-text>

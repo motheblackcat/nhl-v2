@@ -44,7 +44,7 @@
             <ion-label (click)="opens[i] = !opens[i]">{{ armor.get('type').value | titlecase }}</ion-label>
             <ion-chip [color]="armor.get('equiped').value ? 'success' : 'dark'"
                       (click)="equipArmor(armor.get('equiped').value, i)">
-              équipé
+              Equipé
             </ion-chip>
             <ion-icon slot="end"
                       name="close-circle"

@@ -6,22 +6,7 @@
 <ion-content class="ion-padding"
              [formGroup]="$any(form)"
              (ionChange)="updateSheet()">
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <ion-note>P. I. : Points d'impact</ion-note>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-note>Rup. : Points de rupture</ion-note>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
   <ion-item lines="none">
-    <ion-icon slot="start"
-              name="add-circle"
-              color="dark"></ion-icon>
     <ion-select #weaponSelect
                 interface="popover"
                 placeholder="Ajouter un emplacement"
@@ -30,6 +15,7 @@
       <ion-select-option *ngFor="let weaponName of weaponNames">{{ weaponName | titlecase }}</ion-select-option>
     </ion-select>
   </ion-item>
+
   <ion-card *ngFor="let weapon of form.controls; let i = index">
     <ion-card-header>
       <ion-card-title>
@@ -40,10 +26,10 @@
           <ion-label (click)="opens[i] = !opens[i]">{{ weapon.get('type').value | titlecase }}</ion-label>
           <ion-chip [color]="weapon.get('equiped').value ? 'success' : 'dark'"
                     (click)="equipWeapon(weapon.get('equiped').value, i)">
-            équipé
+            Equipé
           </ion-chip>
           <ion-icon slot="end"
-                    name="trash"
+                    name="close-circle"
                     color="dark"
                     (click)="removeWeapon(i)"></ion-icon>
         </ion-item>
@@ -53,25 +39,23 @@
                       *ngIf="opens[i]">
       <ion-list>
         <ion-item lines="none">
-          <ion-label slot="start">Nom</ion-label>
-          <ion-input placeholder="Nom"
+          <ion-input label="Nom"
+                     labelPlacement="stacked"
+                     placeholder="Nom"
                      formControlName="name"
                      class="ion-text-capitalize"></ion-input>
         </ion-item>
         <ion-item lines="none">
-          <ion-label>P. I.</ion-label>
-          <ion-input class="ion-text-center"
+          <ion-input label="Point d'Impact"
                      placeholder="1d6"
                      formControlName="pi"></ion-input>
-          <ion-label>Rup.</ion-label>
-          <ion-input class="ion-text-center"
+        </ion-item>
+        <ion-item lines="none">
+          <ion-input label="Point de Rupture"
                      placeholder="1 à 4"
                      formControlName="rup"></ion-input>
         </ion-item>
         <ion-item lines="none">
-          <ion-icon slot="start"
-                    name="add-circle"
-                    color="dark"></ion-icon>
           <ion-select #effectSelect
                       interface="popover"
                       placeholder="Ajouter un effet"
@@ -85,12 +69,11 @@
           <ion-item lines="none"
                     *ngFor="let item of effects(i).controls; let j = index"
                     [formGroupName]="j">
-            <ion-label slot="start">{{ getEffectName(item.value.name) }}</ion-label>
-            <ion-input class="ion-text-center"
+            <ion-input [label]="getEffectName(item.value.name)"
                        placeholder="0"
                        formControlName="effect"></ion-input>
             <ion-icon slot="end"
-                      name="trash"
+                      name="close-circle"
                       color="dark"
                       (click)="removeEffect(i, j)"></ion-icon>
           </ion-item>

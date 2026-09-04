@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  Directory, Encoding, Filesystem, ReadFileResult, WriteFileResult
-} from '@capacitor/filesystem';
+import { Directory, Encoding, Filesystem, ReadFileResult, WriteFileResult } from '@capacitor/filesystem';
 import { AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
 
@@ -85,33 +83,33 @@ export class FileService {
    * TODO: FIX (create duplicates) & Move to menu
    * Helper function called by component to check for existing file and add it to the storage
    */
-  async importFile(): Promise<void> {
-    this.readFile()
-      .then(async (readFileResult: ReadFileResult) => {
-        const filePersonas: IPersona[] = JSON.parse(readFileResult.data);
-        const storagePersonas: IPersona[] = await this.store.get(PERSONA_KEY);
-        let combinedPersonas: IPersona[] = [...storagePersonas];
+  // async importFile(): Promise<void> {
+  //   this.readFile()
+  //     .then(async (readFileResult: ReadFileResult) => {
+  //       const filePersonas: IPersona[] = JSON.parse(readFileResult.data);
+  //       const storagePersonas: IPersona[] = await this.store.get(PERSONA_KEY);
+  //       let combinedPersonas: IPersona[] = [...storagePersonas];
 
-        if (!storagePersonas.length) {
-          combinedPersonas = [...filePersonas];
-          this.toastService.showToast(`Les personnages du fichier txt on été importés !`, TOASTER_COLOR.SUCCESS);
-        } else {
-          filePersonas.forEach((filePersona: IPersona) => {
-            storagePersonas.forEach((storagePersona: IPersona) => {
-              if (filePersona.name !== storagePersona.name) {
-                combinedPersonas.push(filePersona);
-                this.toastService.showToast(`Les personnages du fichier txt on été importés !`, TOASTER_COLOR.SUCCESS);
-              } else {
-                this.toastService.showToast(`Pas de nouveaux personnages à importer !`, TOASTER_COLOR.WARNING);
-              }
-            })
-          });
-        }
-        this.personaService.personas = combinedPersonas;
-        this.store.set(PERSONA_KEY, combinedPersonas);
-      })
-      .catch((err: Error) => this.toastService.showToast(`Il n'y a pas de fichier à importer !`, TOASTER_COLOR.DANGER));
-  }
+  //       if (!storagePersonas.length) {
+  //         combinedPersonas = [...filePersonas];
+  //         this.toastService.showToast(`Les personnages du fichier txt on été importés !`, TOASTER_COLOR.SUCCESS);
+  //       } else {
+  //         filePersonas.forEach((filePersona: IPersona) => {
+  //           storagePersonas.forEach((storagePersona: IPersona) => {
+  //             if (filePersona.name !== storagePersona.name) {
+  //               combinedPersonas.push(filePersona);
+  //               this.toastService.showToast(`Les personnages du fichier txt on été importés !`, TOASTER_COLOR.SUCCESS);
+  //             } else {
+  //               this.toastService.showToast(`Pas de nouveaux personnages à importer !`, TOASTER_COLOR.WARNING);
+  //             }
+  //           })
+  //         });
+  //       }
+  //       this.personaService.personas = combinedPersonas;
+  //       this.store.set(PERSONA_KEY, combinedPersonas);
+  //     })
+  //     .catch((err: Error) => this.toastService.showToast(`Il n'y a pas de fichier à importer !`, TOASTER_COLOR.DANGER));
+  // }
 
   /**
    * TODO: Create a formated text file with all personas

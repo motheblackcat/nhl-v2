@@ -37,6 +37,6 @@ export class PersonaComponent implements OnInit {
   }
 
   importFile() {
-    this.fileService.importFile();
+    // this.fileService.importFile();
   }
 }

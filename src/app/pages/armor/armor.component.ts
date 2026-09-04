@@ -3,7 +3,7 @@ import { IStatSheet } from 'src/app/interfaces/statsheet.interface';
 import { Armor, ArmorSheet } from 'src/app/models/armorsheet.model';
 import { PersonaService } from 'src/app/services/persona.service';
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { statsObject } from 'src/app/consts/stats-object.const';
@@ -11,6 +11,7 @@ import { statsObject } from 'src/app/consts/stats-object.const';
 @Component({
     selector: 'app-armor',
     templateUrl: './armor.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ArmorComponent implements OnInit {

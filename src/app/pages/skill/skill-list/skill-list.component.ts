@@ -1,7 +1,7 @@
 import { SKILLS_LIST } from 'src/app/consts/skills-list.consts';
 import { AlertService } from 'src/app/services/alert.service';
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
 import { SkillDetailsComponent } from '../skill-details/skill-details.component';
@@ -9,6 +9,7 @@ import { SkillDetailsComponent } from '../skill-details/skill-details.component'
 @Component({
     selector: 'app-skill-list',
     templateUrl: './skill-list.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SkillListComponent implements OnInit {

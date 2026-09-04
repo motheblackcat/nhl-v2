@@ -1,12 +1,13 @@
 import { ICharSheet } from 'src/app/interfaces/charsheet.interface';
 import { PersonaService } from 'src/app/services/persona.service';
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 
 @Component({
     selector: 'app-char',
     templateUrl: './char.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class CharComponent implements OnInit {

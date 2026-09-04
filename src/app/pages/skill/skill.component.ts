@@ -1,7 +1,7 @@
 import { SKILLS_LIST } from 'src/app/consts/skills-list.consts';
 import { PersonaService } from 'src/app/services/persona.service';
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { UntypedFormArray, UntypedFormControl } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 
@@ -11,6 +11,7 @@ import { SkillListComponent } from './skill-list/skill-list.component';
 @Component({
     selector: 'app-skill',
     templateUrl: './skill.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SkillComponent implements OnInit {

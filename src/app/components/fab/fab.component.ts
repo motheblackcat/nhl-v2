@@ -1,11 +1,12 @@
 import { Route } from 'src/app/interfaces/route.interface';
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Router, RoutesRecognized } from '@angular/router';
 
 @Component({
     selector: 'app-fab',
     templateUrl: './fab.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class FabComponent implements OnInit {

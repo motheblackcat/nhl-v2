@@ -3,12 +3,13 @@ import { AlertService } from 'src/app/services/alert.service';
 import { FileService } from 'src/app/services/file.service';
 import { PersonaService } from 'src/app/services/persona.service';
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-persona',
     templateUrl: './persona.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class PersonaComponent implements OnInit {

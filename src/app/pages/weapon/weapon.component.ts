@@ -2,13 +2,14 @@ import { WeaponSlots } from 'src/app/enums/weapons.enum';
 import { Weapon } from 'src/app/models/weapon.model';
 import { PersonaService } from 'src/app/services/persona.service';
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { UntypedFormArray, UntypedFormBuilder } from '@angular/forms';
 import { statsObject } from 'src/app/consts/stats-object.const';
 
 @Component({
     selector: 'app-weapon',
     templateUrl: './weapon.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class WeaponComponent implements OnInit {

@@ -3,7 +3,7 @@ import { IPersonaSheet } from 'src/app/interfaces/persona.interface';
 import { IStatSheet } from 'src/app/interfaces/statsheet.interface';
 import { PersonaService } from 'src/app/services/persona.service';
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { statsObject } from 'src/app/consts/stats-object.const';
@@ -11,6 +11,7 @@ import { statsObject } from 'src/app/consts/stats-object.const';
 @Component({
     selector: 'app-stats',
     templateUrl: './stats.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class StatsComponent implements OnInit {

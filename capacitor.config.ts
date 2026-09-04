@@ -4,12 +4,11 @@ const config: CapacitorConfig = {
   appId: 'nhlv2.me',
   appName: 'Naheulbeuk - Fiche de Personnage',
   webDir: 'www',
-  bundledWebRuntime: false,
   cordova: {
     preferences: {
       ScrollEnabled: 'true',
       'android-minSdkVersion': '22',
-      'android-targetSdkVersion': '34',
+      'android-targetSdkVersion': '35',
       BackupWebStorage: 'none',
       SplashMaintainAspectRatio: 'true',
       FadeSplashScreenDuration: '300',

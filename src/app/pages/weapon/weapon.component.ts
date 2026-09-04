@@ -7,8 +7,9 @@ import { UntypedFormArray, UntypedFormBuilder } from '@angular/forms';
 import { statsObject } from 'src/app/consts/stats-object.const';
 
 @Component({
-  selector: 'app-weapon',
-  templateUrl: './weapon.component.html'
+    selector: 'app-weapon',
+    templateUrl: './weapon.component.html',
+    standalone: false
 })
 export class WeaponComponent implements OnInit {
   title: string = 'armement et baston';

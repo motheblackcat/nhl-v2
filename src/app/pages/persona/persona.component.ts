@@ -7,8 +7,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-persona',
-  templateUrl: './persona.component.html'
+    selector: 'app-persona',
+    templateUrl: './persona.component.html',
+    standalone: false
 })
 export class PersonaComponent implements OnInit {
   constructor(private router: Router, private alertService: AlertService, private fileService: FileService, public personaService: PersonaService) { }

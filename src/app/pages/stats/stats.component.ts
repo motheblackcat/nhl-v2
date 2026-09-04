@@ -9,8 +9,9 @@ import { ActivatedRoute } from '@angular/router';
 import { statsObject } from 'src/app/consts/stats-object.const';
 
 @Component({
-  selector: 'app-stats',
-  templateUrl: './stats.component.html'
+    selector: 'app-stats',
+    templateUrl: './stats.component.html',
+    standalone: false
 })
 export class StatsComponent implements OnInit {
   title: string = 'statistiques';

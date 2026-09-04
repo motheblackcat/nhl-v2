@@ -7,8 +7,9 @@ import { UntypedFormArray, UntypedFormControl, UntypedFormGroup } from '@angular
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-list-multi',
-  templateUrl: './list-multi.component.html'
+    selector: 'app-list-multi',
+    templateUrl: './list-multi.component.html',
+    standalone: false
 })
 export class ListMultiComponent implements OnInit {
   title: string;

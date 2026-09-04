@@ -7,8 +7,9 @@ import { UntypedFormArray, UntypedFormControl, UntypedFormGroup } from '@angular
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-bags',
-  templateUrl: './bags.component.html'
+    selector: 'app-bags',
+    templateUrl: './bags.component.html',
+    standalone: false
 })
 export class BagsComponent implements OnInit {
   title: string;

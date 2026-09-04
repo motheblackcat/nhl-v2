@@ -6,8 +6,9 @@ import { UntypedFormArray, UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html'
+    selector: 'app-list',
+    templateUrl: './list.component.html',
+    standalone: false
 })
 export class ListComponent implements OnInit {
   title: string;

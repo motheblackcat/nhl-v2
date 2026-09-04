@@ -3,8 +3,9 @@ import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { Route } from 'src/app/interfaces/route.interface';
 
 @Component({
-  selector: 'app-inv',
-  templateUrl: './inv.component.html'
+    selector: 'app-inv',
+    templateUrl: './inv.component.html',
+    standalone: false
 })
 export class InvComponent implements OnInit {
   routes: Route[] = [];

@@ -7,8 +7,9 @@ import { ModalController } from '@ionic/angular';
 import { SkillDetailsComponent } from '../skill-details/skill-details.component';
 
 @Component({
-  selector: 'app-skill-list',
-  templateUrl: './skill-list.component.html'
+    selector: 'app-skill-list',
+    templateUrl: './skill-list.component.html',
+    standalone: false
 })
 export class SkillListComponent implements OnInit {
   skillsList = SKILLS_LIST;

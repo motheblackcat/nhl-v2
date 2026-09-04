@@ -4,8 +4,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RoutesRecognized } from '@angular/router';
 
 @Component({
-  selector: 'app-fab',
-  templateUrl: './fab.component.html'
+    selector: 'app-fab',
+    templateUrl: './fab.component.html',
+    standalone: false
 })
 export class FabComponent implements OnInit {
   routes: Route[] = [];

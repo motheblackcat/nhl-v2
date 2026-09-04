@@ -9,8 +9,9 @@ import { Router } from '@angular/router';
 import { statsObject } from 'src/app/consts/stats-object.const';
 
 @Component({
-  selector: 'app-armor',
-  templateUrl: './armor.component.html'
+    selector: 'app-armor',
+    templateUrl: './armor.component.html',
+    standalone: false
 })
 export class ArmorComponent implements OnInit {
   title: string = 'armure et protection';

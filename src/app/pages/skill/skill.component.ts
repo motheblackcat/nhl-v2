@@ -9,8 +9,9 @@ import { SkillDetailsComponent } from './skill-details/skill-details.component';
 import { SkillListComponent } from './skill-list/skill-list.component';
 
 @Component({
-  selector: 'app-skill',
-  templateUrl: './skill.component.html'
+    selector: 'app-skill',
+    templateUrl: './skill.component.html',
+    standalone: false
 })
 export class SkillComponent implements OnInit {
   title: string = 'compétences';

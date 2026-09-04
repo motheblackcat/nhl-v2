@@ -7,8 +7,9 @@ import { UntypedFormArray, UntypedFormControl, UntypedFormGroup } from '@angular
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-camp',
-  templateUrl: './camp.component.html'
+    selector: 'app-camp',
+    templateUrl: './camp.component.html',
+    standalone: false
 })
 export class CampComponent implements OnInit {
   title: string;

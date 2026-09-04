@@ -4,11 +4,11 @@
   </ion-fab-button>
 
   <ion-fab-list side="top" id="inv">
-    <ng-container *ngFor="let route of routes">
+    @for (route of routes; track route) {
       <ion-fab-button [routerLink]="route.path" color="dark">
         <ion-icon [name]="route.icon"></ion-icon>
       </ion-fab-button>
-    </ng-container>
+    }
   </ion-fab-list>
 </ion-fab>
 <ion-router-outlet></ion-router-outlet>

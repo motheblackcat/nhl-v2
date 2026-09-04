@@ -5,52 +5,55 @@
 </ion-header>
 <ion-content class="ion-padding-horizontal">
   <ion-grid [formGroup]="form"
-            (change)="updateEffects(); updateMagStats()"
-            (ionChange)="updateEffects(); updateMagStats()">
-    <ion-row [formGroupName]="control.key"
-             *ngFor="let control of form.controls | keyvalue: personaService.defaultOrder; let i = index"
-             class="ion-align-items-center">
-      <ion-col size="4"
-               class="ion-text-nowrap">{{ statsNames[i] }}</ion-col>
-      <ion-col class="ion-text-center">
-        <ion-input type="number"
-                   placeholder="0"
-                   formControlName="name"></ion-input>
-      </ion-col>
-      <ion-col *ngIf="form.get(control.key).get('mod')"
-               class="ion-text-center">
-        <ion-input type="number"
-                   placeholder="0"
-                   formControlName="mod"></ion-input>
-      </ion-col>
-      <ion-col size="2"
-               class="ion-text-center">
-        <ion-text [color]="getEffectColor(form.get(control.key).get('effect').value)">
-          {{ getEffectValue(control.key) > 0 ? '+' : '' }}{{ getEffectValue(control.key) }}
-        </ion-text>
-      </ion-col>
-    </ion-row>
+    (change)="updateEffects(); updateMagStats()"
+    (ionChange)="updateEffects(); updateMagStats()">
+    @for (control of form.controls | keyvalue: personaService.defaultOrder; track control; let i = $index) {
+      <ion-row [formGroupName]="control.key"
+        class="ion-align-items-center">
+        <ion-col size="4"
+        class="ion-text-nowrap">{{ statsNames[i] }}</ion-col>
+        <ion-col class="ion-text-center">
+          <ion-input type="number"
+            placeholder="0"
+          formControlName="name"></ion-input>
+        </ion-col>
+        @if (form.get(control.key).get('mod')) {
+          <ion-col
+            class="ion-text-center">
+            <ion-input type="number"
+              placeholder="0"
+            formControlName="mod"></ion-input>
+          </ion-col>
+        }
+        <ion-col size="2"
+          class="ion-text-center">
+          <ion-text [color]="getEffectColor(form.get(control.key).get('effect').value)">
+            {{ getEffectValue(control.key) > 0 ? '+' : '' }}{{ getEffectValue(control.key) }}
+          </ion-text>
+        </ion-col>
+      </ion-row>
+    }
     <br>
-    <ion-row>
-      <ion-col>Magie Phy.</ion-col>
-      <ion-col size="5">
-        <ion-note>Moy. INT / AD</ion-note>
-      </ion-col>
-      <ion-col>{{ magPhy }}</ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>Magie Psy.</ion-col>
-      <ion-col size="5">
-        <ion-note>Moy. INT / CHA</ion-note>
-      </ion-col>
-      <ion-col>{{ magPsy }}</ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>Résist. Mag.</ion-col>
-      <ion-col size="5">
-        <ion-note>Moy. COU / INT / FO</ion-note>
-      </ion-col>
-      <ion-col>{{ resMag }}</ion-col>
-    </ion-row>
-  </ion-grid>
-</ion-content>
+      <ion-row>
+        <ion-col>Magie Phy.</ion-col>
+        <ion-col size="5">
+          <ion-note>Moy. INT / AD</ion-note>
+        </ion-col>
+        <ion-col>{{ magPhy }}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>Magie Psy.</ion-col>
+        <ion-col size="5">
+          <ion-note>Moy. INT / CHA</ion-note>
+        </ion-col>
+        <ion-col>{{ magPsy }}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>Résist. Mag.</ion-col>
+        <ion-col size="5">
+          <ion-note>Moy. COU / INT / FO</ion-note>
+        </ion-col>
+        <ion-col>{{ resMag }}</ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>

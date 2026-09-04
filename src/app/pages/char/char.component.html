@@ -5,33 +5,37 @@
 </ion-header>
 <ion-content class="ion-padding-horizontal">
   <ion-list [formGroup]="form"
-            (change)="updateSheet()"
-            (ionChange)="updateSheet()">
-    <ng-container *ngFor="let control of form.controls | keyvalue: personaService.defaultOrder">
-      <ion-item lines="none"
-                *ngIf="control.key !== 'sexe'">
-        <ion-input [label]="control.key === 'pd' ? 'point de destin' : control.key"
-                   labelPlacement="stacked"
-                   [placeholder]="control.key === 'pd' ? 'point de destin' : control.key"
-                   [formControlName]="control.key"
-                   class="ion-text-capitalize">
-        </ion-input>
-      </ion-item>
-      <ion-item lines="none"
-                *ngIf="control.key === 'sexe'">
-        <ion-label>
-          <p>Sexe</p>
-          <ion-icon name="male"
-                    class="ion-padding-end"
-                    [color]="control.value.value === 'male' ? 'dark' : 'medium'"
-                    (click)="updateSheet('male')">
-          </ion-icon>
-          <ion-icon name="female"
-                    [color]="control.value.value === 'female' ? 'dark' : 'medium'"
-                    (click)="updateSheet('female')">
-          </ion-icon>
-        </ion-label>
-      </ion-item>
-    </ng-container>
+    (change)="updateSheet()"
+    (ionChange)="updateSheet()">
+    @for (control of form.controls | keyvalue: personaService.defaultOrder; track control) {
+      @if (control.key !== 'sexe') {
+        <ion-item lines="none"
+          >
+          <ion-input [label]="control.key === 'pd' ? 'point de destin' : control.key"
+            labelPlacement="stacked"
+            [placeholder]="control.key === 'pd' ? 'point de destin' : control.key"
+            [formControlName]="control.key"
+            class="ion-text-capitalize">
+          </ion-input>
+        </ion-item>
+      }
+      @if (control.key === 'sexe') {
+        <ion-item lines="none"
+          >
+          <ion-label>
+            <p>Sexe</p>
+            <ion-icon name="male"
+              class="ion-padding-end"
+              [color]="control.value.value === 'male' ? 'dark' : 'medium'"
+              (click)="updateSheet('male')">
+            </ion-icon>
+            <ion-icon name="female"
+              [color]="control.value.value === 'female' ? 'dark' : 'medium'"
+              (click)="updateSheet('female')">
+            </ion-icon>
+          </ion-label>
+        </ion-item>
+      }
+    }
   </ion-list>
 </ion-content>

@@ -4,15 +4,17 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding"
-             [formGroup]="form"
-             (ionChange)="updateSheet()">
+  [formGroup]="form"
+  (ionChange)="updateSheet()">
   <ion-grid>
     <ion-row>
       <ion-col size="6">Protection Naturelle</ion-col>
       <ion-col size="2">{{ prNat + tdm }}</ion-col>
-      <ion-col *ngIf="tdm">
-        <ion-note color="success">Truc de mauviette</ion-note>
-      </ion-col>
+      @if (tdm) {
+        <ion-col>
+          <ion-note color="success">Truc de mauviette</ion-note>
+        </ion-col>
+      }
     </ion-row>
     <ion-row>
       <ion-col>Protection Magique</ion-col>
@@ -22,82 +24,91 @@
 
   <ion-item lines="none">
     <ion-select #armorSelect
-                placeholder="Ajouter un emplacement"
-                interface="popover"
-                (ionChange)="addArmor($event)"
-                (ionDismiss)="clearArmorSelect(armorSelect)">
-      <ion-select-option *ngFor="let armorName of armorNames"
-                         [value]="armorName">{{ armorName | titlecase }}</ion-select-option>
+      placeholder="Ajouter un emplacement"
+      interface="popover"
+      (ionChange)="addArmor($event)"
+      (ionDismiss)="clearArmorSelect(armorSelect)">
+      @for (armorName of armorNames; track armorName) {
+        <ion-select-option
+        [value]="armorName">{{ armorName | titlecase }}</ion-select-option>
+      }
     </ion-select>
   </ion-item>
 
   <ng-container formArrayName="list">
-    <ion-card *ngFor="let armor of list.controls ; let i = index"
-              [formGroupName]="i">
-      <ion-card-header>
-        <ion-card-title>
-          <ion-item lines="none">
-            <ion-icon slot="start"
-                      [name]="opens[i] ? 'caret-down' : 'caret-forward'"
-                      color="dark"
-                      (click)="opens[i] = !opens[i]"></ion-icon>
-            <ion-label (click)="opens[i] = !opens[i]">{{ armor.get('type').value | titlecase }}</ion-label>
-            <ion-chip [color]="armor.get('equiped').value ? 'success' : 'dark'"
-                      (click)="equipArmor(armor.get('equiped').value, i)">
-              Equipé
-            </ion-chip>
-            <ion-icon slot="end"
+    @for (armor of list.controls ; track armor; let i = $index) {
+      <ion-card
+        [formGroupName]="i">
+        <ion-card-header>
+          <ion-card-title>
+            <ion-item lines="none">
+              <ion-icon slot="start"
+                [name]="opens[i] ? 'caret-down' : 'caret-forward'"
+                color="dark"
+              (click)="opens[i] = !opens[i]"></ion-icon>
+              <ion-label (click)="opens[i] = !opens[i]">{{ armor.get('type').value | titlecase }}</ion-label>
+              <ion-chip [color]="armor.get('equiped').value ? 'success' : 'dark'"
+                (click)="equipArmor(armor.get('equiped').value, i)">
+                Equipé
+              </ion-chip>
+              <ion-icon slot="end"
+                name="close-circle"
+                color="dark"
+              (click)="removeArmor(i)"></ion-icon>
+            </ion-item>
+          </ion-card-title>
+        </ion-card-header>
+        @if (opens[i]) {
+          <ion-card-content>
+            <ion-list>
+              <ion-item lines="none">
+                <ion-input label="Nom"
+                  labelPlacement="stacked"
+                  placeholder="Nom"
+                  formControlName="name"
+                class="ion-text-capitalize"></ion-input>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-input label="Valeur de Protection"
+                  type="number"
+                  placeholder="0"
+                formControlName="pr"></ion-input>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-input label="Point de Rupture"
+                  placeholder="1 à 4"
+                formControlName="rup"></ion-input>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-select #effectSelect
+                  interface="popover"
+                  placeholder="Ajouter un effet"
+                  (ionChange)="addEffect($event, i)"
+                  (ionDismiss)="clearEffectSelect(effectSelect)">
+                  @for (stat of statsObject; track stat; let i = $index) {
+                    <ion-select-option
+                    [value]="stat.code">{{ stat.name }}</ion-select-option>
+                  }
+                </ion-select>
+              </ion-item>
+              <ng-container formArrayName="effects">
+                @for (item of effects(i).controls; track item; let j = $index) {
+                  <ion-item lines="none"
+                    [formGroupName]="j">
+                    <ion-input [label]="getEffectName(item.value.name)"
+                      placeholder="0"
+                    formControlName="effect"></ion-input>
+                    <ion-icon slot="end"
                       name="close-circle"
                       color="dark"
-                      (click)="removeArmor(i)"></ion-icon>
-          </ion-item>
-        </ion-card-title>
-      </ion-card-header>
-      <ion-card-content *ngIf="opens[i]">
-        <ion-list>
-          <ion-item lines="none">
-            <ion-input label="Nom"
-                       labelPlacement="stacked"
-                       placeholder="Nom"
-                       formControlName="name"
-                       class="ion-text-capitalize"></ion-input>
-          </ion-item>
-          <ion-item lines="none">
-            <ion-input label="Valeur de Protection"
-                       type="number"
-                       placeholder="0"
-                       formControlName="pr"></ion-input>
-          </ion-item>
-          <ion-item lines="none">
-            <ion-input label="Point de Rupture"
-                       placeholder="1 à 4"
-                       formControlName="rup"></ion-input>
-          </ion-item>
-          <ion-item lines="none">
-            <ion-select #effectSelect
-                        interface="popover"
-                        placeholder="Ajouter un effet"
-                        (ionChange)="addEffect($event, i)"
-                        (ionDismiss)="clearEffectSelect(effectSelect)">
-              <ion-select-option *ngFor="let stat of statsObject; let i = index"
-                                 [value]="stat.code">{{ stat.name }}</ion-select-option>
-            </ion-select>
-          </ion-item>
-          <ng-container formArrayName="effects">
-            <ion-item lines="none"
-                      *ngFor="let item of effects(i).controls; let j = index"
-                      [formGroupName]="j">
-              <ion-input [label]="getEffectName(item.value.name)"
-                         placeholder="0"
-                         formControlName="effect"></ion-input>
-              <ion-icon slot="end"
-                        name="close-circle"
-                        color="dark"
-                        (click)="removeEffect(i, j)"></ion-icon>
-            </ion-item>
-          </ng-container>
-        </ion-list>
-      </ion-card-content>
-    </ion-card>
+                    (click)="removeEffect(i, j)"></ion-icon>
+                  </ion-item>
+                }
+              </ng-container>
+            </ion-list>
+          </ion-card-content>
+        }
+      </ion-card>
+    }
   </ng-container>
 </ion-content>

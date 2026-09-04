@@ -10,7 +10,7 @@
 </ion-header>
 <ion-content class="ion-padding">
   <ion-grid>
-    <ng-container *ngIf="!skill">
+    @if (!skill) {
       <ion-row>
         <ion-col>
           Cette compétence n'est pas listée dans l'application veuillez consulter le manuel de l'extention concernée sur le site officiel !
@@ -21,30 +21,46 @@
           <a href="http://www.penofchaos.com/warham/donjon.htm">Le site de penofchaos</a>
         </ion-col>
       </ion-row>
-    </ng-container>
-    <ion-row *ngIf="skill?.des">
-      <ion-col>{{ skill?.des }}</ion-col>
-    </ion-row>
-    <ion-row *ngIf="skill?.use">
-      <ion-col><b>Utilisation :</b> {{ skill?.use }}</ion-col>
-    </ion-row>
-    <ion-row *ngIf="skill?.fail">
-      <ion-col><b>Échec :</b> {{ skill?.fail }}</ion-col>
-    </ion-row>
-    <ion-row *ngIf="skill?.req">
-      <ion-col><b>Requis :</b> {{ skill?.req }}</ion-col>
-    </ion-row>
-    <ion-row *ngIf="skill?.rat">
-      <ion-col><b>Rattrapage :</b> {{ skill?.rat }}</ion-col>
-    </ion-row>
-    <ion-row *ngIf="skill?.rp">
-      <ion-col><b>Roleplay :</b> {{ skill?.rp }}</ion-col>
-    </ion-row>
-    <ion-row *ngIf="skill?.part">
-      <ion-col><b>Particularité :</b> {{ skill?.part }}</ion-col>
-    </ion-row>
-    <ion-row *ngIf="skill?.res">
-      <ion-col><b>Restrictions :</b> {{ skill?.res }}</ion-col>
-    </ion-row>
+    }
+    @if (skill?.des) {
+      <ion-row>
+        <ion-col>{{ skill?.des }}</ion-col>
+      </ion-row>
+    }
+    @if (skill?.use) {
+      <ion-row>
+        <ion-col><b>Utilisation :</b> {{ skill?.use }}</ion-col>
+      </ion-row>
+    }
+    @if (skill?.fail) {
+      <ion-row>
+        <ion-col><b>Échec :</b> {{ skill?.fail }}</ion-col>
+      </ion-row>
+    }
+    @if (skill?.req) {
+      <ion-row>
+        <ion-col><b>Requis :</b> {{ skill?.req }}</ion-col>
+      </ion-row>
+    }
+    @if (skill?.rat) {
+      <ion-row>
+        <ion-col><b>Rattrapage :</b> {{ skill?.rat }}</ion-col>
+      </ion-row>
+    }
+    @if (skill?.rp) {
+      <ion-row>
+        <ion-col><b>Roleplay :</b> {{ skill?.rp }}</ion-col>
+      </ion-row>
+    }
+    @if (skill?.part) {
+      <ion-row>
+        <ion-col><b>Particularité :</b> {{ skill?.part }}</ion-col>
+      </ion-row>
+    }
+    @if (skill?.res) {
+      <ion-row>
+        <ion-col><b>Restrictions :</b> {{ skill?.res }}</ion-col>
+      </ion-row>
+    }
   </ion-grid>
 </ion-content>

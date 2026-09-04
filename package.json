@@ -67,7 +67,7 @@
     "karma-jasmine-html-reporter": "^1.7.0",
     "protractor": "^7.0.0",
     "ts-node": "~10.2.1",
-    "typescript": "5.8.3"
+    "typescript": "5.9"
   },
   "description": "A character sheet for the RPG Le Donjon de Naheulbeuk made with Ionic"
 }
